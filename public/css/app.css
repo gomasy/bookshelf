@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+#register {
+    padding: 7px;
+}
+
+#delete {
+    color: #fff;
+    background-color: #bf5329;
+}
+
+#delete:hover {
+    background-color: #954120;
+}
+
+#main tbody tr.selected {
+    background-color: #d1d1d1;
+}

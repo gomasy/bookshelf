@@ -11,7 +11,7 @@
         <link href="{{ asset('icon.png') }}" rel="icon" type="image/png">
         <link href="{{ asset('css/bootstrap.min.css?ver=3.3.7') }}" rel="stylesheet">
 @yield('css')
-        <script src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.min.js?ver=3.3.7') }}"></script>
 @yield('js')
 @if (!App::isDownForMaintenance())

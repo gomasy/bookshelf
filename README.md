@@ -4,6 +4,7 @@
 
 ## デプロイ
     $ git clone https://github.com/Gomasy/BooksManager.git .
+    $ composer install
     $ cp .env.sample .env
     $ php artisan key:generate
     $ php artisan make:migrate

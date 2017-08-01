@@ -13,7 +13,7 @@
 @endsection
 
 @section('inline-js')
-@if (config('app.locale') === 'ja')
+@if (app()->getLocale() === 'ja')
             $.extend($.fn.dataTable.defaults, {
                 'language': {
                     url: 'https://cdn.datatables.net/plug-ins/1.10.13/i18n/Japanese.json',

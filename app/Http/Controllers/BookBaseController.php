@@ -47,33 +47,36 @@ class BookBaseController extends Controller
                     $user->next_id++;
                     $user->save();
 
-                    return $this->response(200, $book);
+                    return response()->ajax(200, $book);
                 } catch (QueryException $e) {
-                    return $this->response(409, $book);
+                    return response()->ajax(409, $book);
                 }
             } else {
-                return $this->response(404);
+                return response()->ajax(404);
             }
         } else {
-            return $this->response(422, $validation->errors()->all());
+            return response()->ajax(422, $validation->errors()->all());
         }
     }
 
 
     public function delete(Request $request)
     {
-        $validation = Validator::make($request->all(), [ 'id' => 'required|integer' ]);
+        $validation = Validator::make($request->all(), [
+            'id' => [ 'required', 'integer' ],
+        ]);
+
         if ($validation->passes()) {
             $book = Book::search($request->id);
             if ($book->count()) {
                 $book->delete();
 
-                return $this->response();
+                return response()->ajax();
             } else {
-                return $this->response(404);
+                return response()->ajax(404);
             }
         } else {
-            return $this->response(422, $validation->errors()->all());
+            return response()->ajax(422, $validation->errors()->all());
         }
     }
 }

@@ -18,8 +18,12 @@ class BookBaseController extends Controller
         $this->middleware('auth');
     }
 
-    protected function response(int $status = 200, array $data = NULL) {
-        return response([ 'status' => $status, 'data' => $data ], $status);
+    public function getHeader()
+    {
+        return [
+            'id' => Auth::user()['next_id'],
+            'user_id' => Auth::id(),
+        ];
     }
 
     public function index(Request $request)
@@ -37,7 +41,7 @@ class BookBaseController extends Controller
             $book = NDL::query($request->code);
             if (isset($book)) {
                 try {
-                    Book::create(Book::formatter($book));
+                    Book::create(array_merge($this->getHeader(), $book));
 
                     $user = Auth::user();
                     $user->next_id++;

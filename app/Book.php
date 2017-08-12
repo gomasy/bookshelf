@@ -32,14 +32,6 @@ class Book extends Model
         });
     }
 
-    public static function formatter(array $book)
-    {
-        return array_merge([
-            'id' => Auth::user()['next_id'],
-            'user_id' => Auth::id(),
-        ], $book);
-    }
-
     public function scopeCurrentUser(Builder $query)
     {
         return $query->get([ 'id', 'title', 'title_ruby', 'volume', 'authors', 'isbn', 'jpno', 'published_date', 'ndl_url' ]);

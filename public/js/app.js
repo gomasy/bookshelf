@@ -75,7 +75,7 @@ $(document).ready(function() {
                 var f = {
                     404: function() { $.notify($messages.not_exist[0], $messages.not_exist[1]); },
                     409: function() { $.notify($messages.add.failure[0], $messages.add.failure[1]); },
-                    422: function() { validateError(result.responseJSON.data); },
+                    422: function() { validateError(result.responseJSON.code[0]); },
                 };
                 f[result.status]();
             },
@@ -106,7 +106,7 @@ function deleteBook() {
             'error': function(result) {
                 var f = {
                     404: function() { $.notify($messages.delete.failure[0], $messages.delete.failure[1]); },
-                    422: function() { validateError(result.responseJSON.data); },
+                    422: function() { validateError(result.responseJSON.id[0]); },
                 };
                 f[result.status]();
             },

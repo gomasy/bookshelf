@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Book;
 use App\Facades\NDL;
+use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookDeleteRequest;
 use App\User;
 use Auth;
 
@@ -31,52 +33,36 @@ class BookBaseController extends Controller
         return [ 'data' => Book::currentUser() ];
     }
 
-    public function create(Request $request)
+    public function create(BookCreateRequest $request)
     {
-        $validation = Validator::make($request->all(), [
-            'code' => [ 'required', 'regex:/^(.{8}|.{10}|.{13})$/' ],
-        ]);
+        $book = NDL::query($request->code);
+        if (isset($book)) {
+            try {
+                Book::create(array_merge($this->getHeader(), $book));
 
-        if ($validation->passes()) {
-            $book = NDL::query($request->code);
-            if (isset($book)) {
-                try {
-                    Book::create(array_merge($this->getHeader(), $book));
+                $user = Auth::user();
+                $user->next_id++;
+                $user->save();
 
-                    $user = Auth::user();
-                    $user->next_id++;
-                    $user->save();
-
-                    return response()->ajax(200, $book);
-                } catch (QueryException $e) {
-                    return response()->ajax(409, $book);
-                }
-            } else {
-                return response()->ajax(404);
+                return response()->ajax(200, $book);
+            } catch (QueryException $e) {
+                return response()->ajax(409, $book);
             }
         } else {
-            return response()->ajax(422, $validation->errors()->all());
+            return response()->ajax(404);
         }
     }
 
 
-    public function delete(Request $request)
+    public function delete(BookDeleteRequest $request)
     {
-        $validation = Validator::make($request->all(), [
-            'id' => [ 'required', 'integer' ],
-        ]);
+        $book = Book::search($request->id);
+        if ($book->count()) {
+            $book->delete();
 
-        if ($validation->passes()) {
-            $book = Book::search($request->id);
-            if ($book->count()) {
-                $book->delete();
-
-                return response()->ajax();
-            } else {
-                return response()->ajax(404);
-            }
+            return response()->ajax();
         } else {
-            return response()->ajax(422, $validation->errors()->all());
+            return response()->ajax(404);
         }
     }
 }

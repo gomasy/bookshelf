@@ -30,7 +30,9 @@ class BookBaseController extends Controller
 
     public function index(Request $request)
     {
-        return [ 'data' => Book::currentUser() ];
+        return response()->json([
+            'data' => Book::currentUser(),
+        ]);
     }
 
     public function create(BookCreateRequest $request)

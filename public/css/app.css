@@ -1,5 +1,34 @@
 @charset "utf-8";
 
+.button {
+    font-size: 16px;
+}
+
+#btn-login:before {
+    content: "\f090  ";
+    font-family: "FontAwesome";
+}
+
+#btn-register:before {
+    content: "\f234  ";
+    font-family: "FontAwesome";
+}
+
+#menu-account:before {
+    content: "\f2be  ";
+    font-family: "FontAwesome";
+}
+
+#menu-logout:before {
+    content: "\f08b  ";
+    font-family: "FontAwesome";
+}
+
+#brand:before {
+    content: "\f02d ";
+    font-family: "FontAwesome";
+}
+
 #register {
     padding: 7px;
 }

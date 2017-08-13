@@ -9,6 +9,8 @@
 @endif
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="{{ asset('icon.png') }}" rel="icon" type="image/png">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <link href="{{ asset('css/font-awesome.min.css?ver=4.7.0') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css?ver=3.3.7') }}" rel="stylesheet">
 @yield('css')
         <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
@@ -26,7 +28,7 @@
                 <div class="container">
                     <div class="navbar-header">
                         <!-- Branding Image -->
-                        <a class="navbar-brand" href="{{ url('/') }}">
+                        <a class="navbar-brand" id="brand" href="{{ url('/') }}">
                             {{ config('app.name', 'Laravel') }}
                         </a>
 @if (!App::isDownForMaintenance())
@@ -52,15 +54,15 @@
 
                             <!-- Authentication Links -->
 @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">{{ __('auth.login') }}</a></li>
-                            <li><a href="{{ route('register') }}">{{ __('auth.register') }}</a></li>
+                            <li><a class="button" id="btn-login" href="{{ route('login') }}">{{ __('auth.login') }}</a></li>
+                            <li><a class="button" id="btn-register" href="{{ route('register') }}">{{ __('auth.register') }}</a></li>
 @else
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
-                                        <a href="{{ route('account') }}">{{ __('account.header') }}</a>
-                                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.logout') }}</a>
+                                        <a id="menu-account" href="{{ route('account') }}">{{ __('account.header') }}</a>
+                                        <a id="menu-logout" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.logout') }}</a>
                                         <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>

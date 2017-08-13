@@ -2,7 +2,6 @@
 
 @section('css')
         <link href="{{ asset('css/dataTables.bootstrap.min.css?ver=1.10.13') }}" rel="stylesheet">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 @endsection
 
 @section('js')

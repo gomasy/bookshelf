@@ -67,15 +67,15 @@ $(document).ready(function() {
             'type': $form.attr('method'),
             'data': $form.serialize(),
             'success': function(result) {
-                addSucceeded(result.data.title);
+                $.notify($messages.add.success[0], $messages.add.success[1]);
                 $table.ajax.reload(null, false);
                 $form[0].reset();
             },
             'error': function(result) {
                 var f = {
-                    404: function() { searchFailed(); },
-                    409: function() { addFailed(result.responseJSON.data.title); },
-                    422: function() { validationFailed(result.responseJSON.data); },
+                    404: function() { $.notify($messages.not_exist[0], $messages.not_exist[1]); },
+                    409: function() { $.notify($messages.add.failure[0], $messages.add.failure[1]); },
+                    422: function() { validateError(result.responseJSON.data); },
                 };
                 f[result.status]();
             },
@@ -101,12 +101,12 @@ function deleteBook() {
             },
             'success': function(result) {
                 $table.row('.selected').remove().draw(false);
-                deleteSucceeded();
+                $.notify($messages.delete.success[0], $messages.delete.success[1]);
             },
             'error': function(result) {
                 var f = {
-                    404: function() { deleteFailed(); },
-                    422: function() { validationFailed(result.responseJSON.data); },
+                    404: function() { $.notify($messages.delete.failure[0], $messages.delete.failure[1]); },
+                    422: function() { validateError(result.responseJSON.data); },
                 };
                 f[result.status]();
             },
@@ -114,57 +114,7 @@ function deleteBook() {
     }
 }
 
-function addSucceeded(title) {
-    $.notify({
-        'icon': 'glyphicon glyphicon-ok-sign',
-        'title': $messages.add.success.title,
-        'message': $messages.add.success.message + title,
-    },{
-        'type': 'success',
-    });
-}
-
-function deleteSucceeded() {
-    $.notify({
-        'icon': 'glyphicon glyphicon-ok-sign',
-        'title': $messages.delete.success.title,
-        'message': $messages.delete.success.message,
-    },{
-        'type': 'success',
-    });
-}
-
-function addFailed(title) {
-    $.notify({
-        'icon': 'glyphicon glyphicon-warning-sign',
-        'title': $messages.add.failure.title,
-        'message': $messages.add.failure.message + title,
-    },{
-        'type': 'danger',
-    });
-}
-
-function deleteFailed() {
-    $.notify({
-        'icon': 'glyphicon glyphicon-warning-sign',
-        'title': $messages.delete.failure.title,
-        'message': $messages.delete.failure.message,
-    },{
-        'type': 'danger',
-    });
-}
-
-function searchFailed() {
-    $.notify({
-        'icon': 'glyphicon glyphicon-exclamation-sign',
-        'title': $messages.not_exist.title,
-        'message': $messages.not_exist.message,
-    },{
-        'type': 'warning',
-    });
-}
-
-function validationFailed(message) {
+function validateError(message) {
     $.notify({
         'icon': 'glyphicon glyphicon-exclamation-sign',
         'title': $messages.invalid.title,

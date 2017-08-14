@@ -67,14 +67,14 @@ $(document).ready(function() {
             'type': $form.attr('method'),
             'data': $form.serialize(),
             'success': function(result) {
-                $.notify($messages.add.success[0], $messages.add.success[1]);
+                $.notify($messages.add.success, { 'type': 'success' });
                 $table.ajax.reload(null, false);
                 $form[0].reset();
             },
             'error': function(result) {
                 var f = {
-                    404: function() { $.notify($messages.not_exist[0], $messages.not_exist[1]); },
-                    409: function() { $.notify($messages.add.failure[0], $messages.add.failure[1]); },
+                    404: function() { $.notify($messages.not_exist, { 'type': 'warning' }); },
+                    409: function() { $.notify($messages.add.failure, { 'type': 'danger' }); },
                     422: function() { validateError(result.responseJSON.code[0]); },
                 };
                 f[result.status]();
@@ -101,11 +101,11 @@ function deleteBook() {
             },
             'success': function(result) {
                 $table.row('.selected').remove().draw(false);
-                $.notify($messages.delete.success[0], $messages.delete.success[1]);
+                $.notify($messages.delete.success, { 'type': 'success' });
             },
             'error': function(result) {
                 var f = {
-                    404: function() { $.notify($messages.delete.failure[0], $messages.delete.failure[1]); },
+                    404: function() { $.notify($messages.delete.failure, { 'type': 'danger' }); },
                     422: function() { validateError(result.responseJSON.id[0]); },
                 };
                 f[result.status]();
@@ -115,11 +115,7 @@ function deleteBook() {
 }
 
 function validateError(message) {
-    $.notify({
-        'icon': 'glyphicon glyphicon-exclamation-sign',
-        'title': $messages.invalid.title,
-        'message': '<p>' + message + '</p>',
-    },{
-        'type': 'warning',
-    });
+    var $mes = $messages;
+    $mes.invalid.message = '<p>' + message + '</p>';
+    $.notify($mes.invalid, { 'type': 'warning' });
 }

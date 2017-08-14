@@ -3,49 +3,29 @@
         "rowsAlt": "国立国会図書館サーチで表示",
         "confirm": "続行しますか？",
         "add": {
-            "success": [
-                {
-                    "icon": "glyphicon glyphicon-ok-sign",
-                    "title": "<strong>成功</strong>",
-                    "message": "<p>本の登録に成功しました。</p>"
-                },
-                {
-                    "type": "success"
-                }
-            ],
-            "failure": [
-                {
-                    "icon": "glyphicon glyphicon-warning-sign",
-                    "title": "<strong>登録済み</strong>",
-                    "message": "<p>すでに登録されています。</p>"
-                },
-                {
-                    "type": "danger"
-                }
-            ]
+            "success": {
+                "icon": "glyphicon glyphicon-ok-sign",
+                "title": "<strong>成功</strong>",
+                "message": "<p>本の登録に成功しました。</p>"
+            },
+            "failure": {
+                "icon": "glyphicon glyphicon-warning-sign",
+                "title": "<strong>登録済み</strong>",
+                "message": "<p>すでに登録されています。</p>"
+            }
         },
         "delete": {
             "label": "削除",
-            "success": [
-                {
-                    "icon": "glyphicon glyphicon-ok-sign",
-                    "title": "<strong>成功</strong>",
-                    "message": "<p>選択した本を削除しました。</p>"
-                },
-                {
-                    "type": "success"
-                }
-            ],
-            "failure": [
-                {
-                    "icon": "glyphicon glyphicon-warning-sign",
-                    "title": "<strong>エラー</strong>",
-                    "message": "<p>削除に失敗しました。</p>"
-                },
-                {
-                    "type": "danger"
-                }
-            ]
+            "success": {
+                "icon": "glyphicon glyphicon-ok-sign",
+                "title": "<strong>成功</strong>",
+                "message": "<p>選択した本を削除しました。</p>"
+            },
+            "failure": {
+                "icon": "glyphicon glyphicon-warning-sign",
+                "title": "<strong>エラー</strong>",
+                "message": "<p>削除に失敗しました。</p>"
+            }
         },
         "not_exist": {
             "icon": "glyphicon glyphicon-exclamation-sign",
@@ -53,7 +33,9 @@
             "message": "<p>該当する書籍情報が見つかりません</p>"
         },
         "invalid": {
-            "title": "<strong>エラー</strong>"
+            "icon": "glyphicon glyphicon-exclamation-sign",
+            "title": "<strong>エラー</strong>",
+            "message": ""
         }
     }
 }

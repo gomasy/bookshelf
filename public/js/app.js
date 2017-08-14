@@ -115,7 +115,7 @@ function deleteBook() {
 }
 
 function validateError(message) {
-    var $mes = $messages;
-    $mes.invalid.message = '<p>' + message + '</p>';
-    $.notify($mes.invalid, { 'type': 'warning' });
+    var $mes = $messages.invalid;
+    $mes.message = '<p>' + message + '</p>';
+    $.notify($mes, { 'type': 'warning' });
 }

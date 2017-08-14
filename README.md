@@ -7,7 +7,7 @@
     $ composer install
     $ cp .env.sample .env
     $ php artisan key:generate
-    $ php artisan make:migrate
+    $ php artisan migrate
 
 ## サンプル
 [Books Manager](https://books.gomasy.jp/)

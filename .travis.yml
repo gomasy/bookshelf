@@ -1,0 +1,11 @@
+language: php
+php:
+  - 7.1
+  - nightly
+before_script:
+  - cp .env.travis .env
+  - mysql -e 'CREATE DATABASE `forge`;'
+  - composer install
+  - ./artisan migrate
+script:
+  - vendor/bin/phpunit

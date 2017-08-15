@@ -40,7 +40,7 @@
                                 <form class="form-inline my-2 my-lg-0" id="register" role="form" method="POST" action="{{ route('create') }}">
                                     <input class="form-control mr-sm-2" type="text" name="code" placeholder="{{ __('home.placeholder') }}" required>
                                     {{ csrf_field() }}
-                                    <button class="btn btn-primary my-2 my-sm-0" type="submit">{{ __('auth.register') }}</button>
+                                    <button class="btn btn-info my-2 my-sm-0" type="submit">{{ __('auth.register') }}</button>
                                     <button class="btn btn-secondary my-2 my-sm-0" type="button" onclick="jumpZXingUrl();">{{ __('home.scan') }}</button>
                                 </form>
                             </li>

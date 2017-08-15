@@ -32,11 +32,6 @@ class Book extends Model
         });
     }
 
-    public function scopeCurrentUser(Builder $query)
-    {
-        return $query->get([ 'id', 'title', 'title_ruby', 'volume', 'authors', 'isbn', 'jpno', 'published_date', 'ndl_url' ]);
-    }
-
     public function scopeSearch(Builder $query, $id)
     {
         return $query->where('id', $id);

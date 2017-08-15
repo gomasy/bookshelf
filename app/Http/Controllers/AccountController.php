@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\AccountUpdateRequest;
 use App\User;
+use Auth;
 
 class AccountController extends Controller
 {

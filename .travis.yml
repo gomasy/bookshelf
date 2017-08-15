@@ -4,6 +4,9 @@ php:
   - nightly
 before_script:
   - cp .env.travis .env
+  - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
+  - mysql -e 'SET GLOBAL innodb_file_format_max = Barracuda;'
+  - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
   - mysql -e 'CREATE DATABASE `forge`;'
   - composer install
   - ./artisan migrate

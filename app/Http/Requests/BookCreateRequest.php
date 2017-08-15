@@ -27,10 +27,7 @@ class BookCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'code' => [
-                'required',
-                'regex:/^(.{8}|.{10}|.{13})$/',
-            ],
+            'code' => [ 'required', 'regex:/^(.{8}|.{10}|.{13})$/' ],
         ];
     }
 }

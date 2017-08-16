@@ -15,8 +15,7 @@ class LoginTest extends TestCase
 
     public function testBasicTest()
     {
-        $response = $this->get('/');
-        $response->assertRedirect('/login');
+        $this->get('/')->assertRedirect('/login');
     }
 
     public function testLoggedIn()

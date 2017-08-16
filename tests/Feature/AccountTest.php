@@ -11,6 +11,8 @@ use App;
 
 class AccountTest extends TestCase
 {
+    use DatabaseMigrations;
+
     public function testBasicTest()
     {
         $response = $this->get('/account');

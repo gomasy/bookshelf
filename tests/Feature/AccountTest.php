@@ -15,14 +15,21 @@ class AccountTest extends TestCase
 
     public function testBasicTest()
     {
-        $response = $this->get('/account');
-        $response->assertRedirect('/login');
+        $this->get('/account')->assertRedirect('/login');
     }
 
     public function testLoggedIn()
     {
         $user = factory(App\User::class)->create();
-        $response = $this->actingAs($user)->get('/account');
-        $response->assertStatus(200);
+        $this->actingAs($user)->get('/account')->assertStatus(200);
+    }
+
+    public function testUpdate()
+    {
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->post('/account/update', [
+            'email' => 'example@example.com',
+            'name' => 'Example',
+        ])->assertRedirect('/');
     }
 }

@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App;
+
 class LoginTest extends TestCase
 {
     public function testBasicTest()
@@ -17,15 +19,13 @@ class LoginTest extends TestCase
 
     public function testLoggedIn()
     {
-        $user = factory(\App\User::class)->create();
-        $response = $this->actingAs($user)->get('/');
-        $response->assertStatus(200);
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->get('/')->assertStatus(200);
     }
 
     public function testLogout()
     {
-        $user = factory(\App\User::class)->create();
-        $response = $this->actingAs($user)->post('/logout');
-        $response->assertRedirect('/');
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->post('/logout')->assertRedirect('/');
     }
 }

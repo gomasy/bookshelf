@@ -7,6 +7,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
+use App;
+
 class AccountTest extends TestCase
 {
     public function testBasicTest()
@@ -17,7 +19,7 @@ class AccountTest extends TestCase
 
     public function testLoggedIn()
     {
-        $user = factory(\App\User::class)->create();
+        $user = factory(App\User::class)->create();
         $response = $this->actingAs($user)->get('/account');
         $response->assertStatus(200);
     }

@@ -25,11 +25,4 @@ class AccountTest extends TestCase
         $response = $this->actingAs($user)->get('/account');
         $response->assertStatus(200);
     }
-
-    public function testUpdate()
-    {
-        $user = factory(\App\User::class)->create();
-        $response = $this->actingAs($user)->post('/account/update');
-        $response->assertRedirect('/');
-    }
 }

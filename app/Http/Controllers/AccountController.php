@@ -19,7 +19,7 @@ class AccountController extends Controller
 
     public function index(Request $request)
     {
-        return view('account');
+        return view('account/home');
     }
 
     public function update(AccountUpdateRequest $request)

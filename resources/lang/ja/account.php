@@ -1,6 +1,11 @@
 <?php
 
 return [
-    'header' => 'アカウント設定',
+    'update' => [
+        'header' => 'アカウント設定',
+    ],
+    'delete' => [
+        'header' => 'アカウント削除の確認',
+    ],
     'submit' => '更新',
 ];

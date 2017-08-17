@@ -41,7 +41,7 @@ class BookTest extends TestCase
 
         // invalid
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '114514' ], $headers)
+            ->post('/create', [ 'code' => '' ], $headers)
             ->assertStatus(422);
     }
 
@@ -63,7 +63,7 @@ class BookTest extends TestCase
 
         // invalid
         $this->actingAs($user)
-            ->post('/delete', [ 'id' => 'chimpo' ], $headers)
+            ->post('/delete', [ 'id' => '' ], $headers)
             ->assertStatus(422);
     }
 }

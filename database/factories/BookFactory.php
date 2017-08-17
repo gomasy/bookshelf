@@ -23,7 +23,7 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
         'volume' => $faker->randomDigit,
         'authors' => $faker->name,
         'isbn' => $faker->isbn13(),
-        'jpno' => $faker->isbn10(),
+        'jpno' => $faker->ean8(),
         'published_date' => $faker->date,
         'ndl_url' => $faker->url,
     ];

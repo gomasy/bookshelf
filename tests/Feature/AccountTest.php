@@ -26,10 +26,19 @@ class AccountTest extends TestCase
 
     public function testUpdate()
     {
+        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+
+        // success
         $user = factory(App\User::class)->create();
-        $this->actingAs($user)->post('/account/update', [
-            'email' => 'example@example.com',
-            'name' => 'Example',
-        ])->assertRedirect('/');
+        $this->actingAs($user)
+            ->post('/account/update', [
+                'email' => 'example@example.com',
+                'name' => 'Example' ], $headers)
+            ->assertRedirect('/');
+
+        // invaild
+        $this->actingAs($user)
+            ->post('/account/update', [ 'email' => '' ], $headers)
+            ->assertStatus(422);
     }
 }

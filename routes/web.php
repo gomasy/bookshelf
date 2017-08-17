@@ -16,7 +16,7 @@ Route::get('/list', 'BookController@index')->name('list');
 Route::match([ 'get', 'post' ], '/create', 'BookController@create')->name('create');
 Route::post('/delete', 'BookController@delete')->name('delete');
 
-Route::group(['prefix' => 'account'], function() {
+Route::group([ 'prefix' => 'account' ], function() {
     Route::get('/', 'AccountController@index')->name('account');
     Route::post('/update', 'AccountController@update')->name('account/update');
 });

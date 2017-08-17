@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col-md-8 col-md-offset-2">
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{ __('account.update.header') }}</div>
+                            <div class="panel-heading">{{ __('account.home.header') }}</div>
                             <div class="panel-body">
                                 <form class="form-horizontal" role="form" action="{{ route('account/update') }}" method="POST">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -50,7 +50,12 @@
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
                                             {{ csrf_field() }}
-                                            <button type="submit" class="btn btn-primary">{{ __('account.submit') }}</button>
+                                            <button type="submit" class="btn btn-primary">{{ __('account.home.submit') }}</button>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-md-offset-4">
+                                            <a href="{{ route('account/delete') }}">アカウントを削除</a>
                                         </div>
                                     </div>
                                 </form>

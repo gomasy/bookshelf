@@ -19,6 +19,8 @@ Route::post('/delete', 'BookController@delete')->name('delete');
 Route::group([ 'prefix' => 'account' ], function() {
     Route::get('/', 'AccountController@index')->name('account');
     Route::post('/update', 'AccountController@update')->name('account/update');
+    Route::get('/delete', 'AccountController@delete')->name('account/delete');
+    Route::post('/delete', 'AccountController@confirm_delete');
 });
 
 Auth::routes();

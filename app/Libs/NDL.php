@@ -34,27 +34,27 @@ class NDL {
         }
     }
 
-    protected function getRequestURL($code) {
+    public function getRequestURL($code) {
         return $this->endpoint.'?'.http_build_query([
             $this->searchType($code) => $code,
         ]);
     }
 
-    protected function getChannel($code) {
+    public function getChannel($code) {
         $content = file_get_contents($this->getRequestURL($code));
         $xml = preg_replace($this->regexp[0], '', $content);
 
         return simplexml_load_string($xml)->channel;
     }
 
-    protected function getItem($channel) {
+    public function getItem($channel) {
         for ($i = 0; $i < $channel->totalResults; $i++) {
             if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate))
                 return $channel->item[$i];
         }
     }
 
-    protected function getISBN() {
+    public function getISBN() {
         foreach ($this->obj->identifier as $val) {
             switch (strlen($val)) {
                 case 13:
@@ -65,35 +65,35 @@ class NDL {
         }
     }
 
-    protected function getJPNO() {
+    public function getJPNO() {
         foreach ($this->obj->identifier as $val) {
             if (strlen($val) === 8) return $val;
         }
     }
 
-    protected function getTitle() {
+    public function getTitle() {
         return (string)$this->obj->title;
     }
 
-    protected function getTitleRuby() {
+    public function getTitleRuby() {
         return (string)$this->obj->titleTranscription;
     }
 
-    protected function getVolume() {
+    public function getVolume() {
         return (string)$this->obj->volume;
     }
 
-    protected function getAuthors() {
+    public function getAuthors() {
         $authors = rtrim((string)$this->obj->author, ',');
 
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
     }
 
-    protected function getPublishedDate() {
+    public function getPublishedDate() {
         return date('Y-m-d', strtotime((string)$this->obj->pubDate));
     }
 
-    protected function getBookUrl() {
+    public function getBookUrl() {
         return (string)$this->obj->link;
     }
 

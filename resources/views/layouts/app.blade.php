@@ -9,18 +9,13 @@
 @endif
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="{{ asset('icon.png') }}" rel="icon" type="image/png">
-        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <link href="{{ asset('css/font-awesome.min.css?ver=4.7.0') }}" rel="stylesheet">
         <link href="{{ asset('css/bootstrap.min.css?ver=3.3.7') }}" rel="stylesheet">
+        <link href="{{ asset('css/dataTables.bootstrap.min.css?ver=1.10.13') }}" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+        <script src="{{ asset('js/bundle.js') }}"></script>
 @yield('css')
-        <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
-        <script src="{{ asset('js/bootstrap.min.js?ver=3.3.7') }}"></script>
-@yield('js')
-@if (!App::isDownForMaintenance())
-        <script>
 @yield('inline-js')
-        </script>
-@endif
     </head>
     <body>
         <div id="app">

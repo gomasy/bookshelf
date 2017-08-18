@@ -1,6 +1,20 @@
+require('jquery');
+require('datatables');
+require('../../resources/asserts/js/bootstrap.min.js');
+require('../../resources/asserts/js/bootstrap-notify.min.js');
+require('../../resources/asserts/js/dataTables.bootstrap.min.js');
+
 $(document).ready(function() {
     $.getJSON('js/messages.json', function(obj) {
-        $messages = obj[document.documentElement.lang];
+        lang = document.documentElement.lang;
+        $messages = obj[lang];
+
+        if (lang != 'en') {
+            $.extend($.fn.dataTable.defaults, {
+                'language': { 'url': $messages['datatables']['url'] },
+            });
+        }
+
         $table = $('#main').DataTable({
             'columns': [
                 { 'data': 'title' },

@@ -1,26 +1,8 @@
 @extends('layouts.app')
 
-@section('css')
-        <link href="{{ asset('css/dataTables.bootstrap.min.css?ver=1.10.13') }}" rel="stylesheet">
-@endsection
-
-@section('js')
-        <script src="{{ asset('js/bootstrap-notify.min.js?ver=3.1.3') }}"></script>
-        <script src="{{ asset('js/jquery.dataTables.min.js?ver=1.10.13') }}"></script>
-        <script src="{{ asset('js/dataTables.bootstrap.min.js?ver=1.10.13') }}"></script>
-        <script src="{{ asset('js/app.js') }}"></script>
-@endsection
-
 @section('inline-js')
-@if (app()->getLocale() === 'ja')
-            $.extend($.fn.dataTable.defaults, {
-                'language': {
-                    url: 'https://cdn.datatables.net/plug-ins/1.10.13/i18n/Japanese.json',
-                },
-            });
-@endif
 @if (session('result'))
-
+        <script>
             function customFunc() {
 @if (session('result')['status'] === 200)
                 addSucceeded('{{ session('result')['data']['title'] }}');
@@ -32,6 +14,7 @@
                 validationFailed('{{ session('result')['data'][0] }}');
 @endif
             }
+        </script>
 @endif
 @endsection
 

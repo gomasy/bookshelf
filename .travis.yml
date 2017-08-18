@@ -9,6 +9,5 @@ before_script:
   - mysql -e 'CREATE DATABASE `forge`;'
   - cp .env.travis .env
   - composer install
-  - ./artisan migrate
 script:
   - ./vendor/bin/phpunit

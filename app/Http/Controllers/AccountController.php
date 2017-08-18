@@ -21,7 +21,7 @@ class AccountController extends Controller
 
     public function index(Request $request)
     {
-        return view('account/home');
+        return view('account/update');
     }
 
     public function update(AccountUpdateRequest $request)
@@ -50,7 +50,7 @@ class AccountController extends Controller
             return redirect('/');
         } else {
             return view('account/delete')
-                ->withErrors([ 'password' => __('account.delete.incorrect') ]);
+                ->withErrors([ 'password' => __('account.incorrect') ]);
         }
 
     }

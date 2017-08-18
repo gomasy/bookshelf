@@ -27,7 +27,6 @@ class RegisterTest extends TestCase
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
 
         // success
-        $this->post('/register', $data, $headers)
-            ->assertRedirect('/');
+        $this->post('/register', $data, $headers)->assertRedirect('/');
     }
 }

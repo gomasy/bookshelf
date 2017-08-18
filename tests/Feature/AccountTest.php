@@ -29,14 +29,17 @@ class AccountTest extends TestCase
     public function testUpdate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $data = [
+            'email' => 'example@example.com',
+            'name' => 'Example',
+        ];
 
         // success
         $user = factory(App\User::class)->create();
         $this->actingAs($user)
-            ->post('/account/update', [
-                'email' => 'example@example.com',
-                'name' => 'Example' ], $headers)
+            ->post('/account/update', $data, $headers)
             ->assertRedirect('/');
+        $this->assertDatabaseHas('users', $data);
 
         // invaild
         $this->actingAs($user)
@@ -54,6 +57,7 @@ class AccountTest extends TestCase
         $this->actingAs($user)
             ->post('/account/delete', [ 'password' => $password ], $headers)
             ->assertRedirect('/');
+        $this->assertDatabaseMissing('users', [ 'id' => 1 ]);
 
         // fail
         $user = factory(App\User::class)->create();

@@ -28,5 +28,6 @@ class RegisterTest extends TestCase
 
         // success
         $this->post('/register', $data, $headers)->assertRedirect('/');
+        $this->assertDatabaseHas('users', [ 'id' => 1 ]);
     }
 }

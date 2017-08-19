@@ -1,5 +1,6 @@
 BooksManager
 ============
+[![License](https://img.shields.io/github/license/Gomasy/BooksManager.svg)]()
 [![Build Status](https://travis-ci.org/Gomasy/BooksManager.svg?branch=master)](https://travis-ci.org/Gomasy/BooksManager)
 
 ## これなに？

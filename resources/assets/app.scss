@@ -3,6 +3,7 @@
 $font-name: "FontAwesome";
 
 .button { font-size: 16px; }
+#register { padding: 7px; }
 #delete { color: #fff; background-color: #bf5329; }
 #delete:hover { background-color: #954120; }
 #main tbody tr.selected { background-color: #d1d1d1; }
@@ -13,4 +14,3 @@ $font-name: "FontAwesome";
 #menu-account:before { content: "\f2be  "; font-family: $font-name; }
 #menu-logout:before { content: "\f08b  "; font-family: $font-name; }
 #brand:before { content: "\f02d "; font-family: $font-name; }
-#register { padding: 7px; }

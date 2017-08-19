@@ -1,7 +1,7 @@
 require('jquery');
 require('datatables');
 require('../../resources/asserts/js/bootstrap.min.js');
-require('../../resources/asserts/js/bootstrap-notify.min.js');
+require('bootstrap-notify');
 require('../../resources/asserts/js/dataTables.bootstrap.min.js');
 
 $(document).ready(function() {
@@ -41,7 +41,32 @@ $(document).ready(function() {
                 $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '">' + data.title + '</a>');
             },
             'drawCallback': function(settings) {
-                $('.pagination').append('<li class="paginate_button disabled" id="main_delete"><a href="#" id="delete" aria-controls="main" onclick="return false;">' + $messages.delete.label + '</a></li>');
+                $('.pagination').append('<li class="paginate_button disabled" id="main_delete"><a href="#" id="delete" aria-controls="main">' + $messages.delete.label + '</a></li>');
+                $('#delete').on('click', function() {
+                    if (window.confirm($messages.confirm)) {
+                        var bookId = $table.row('.selected').data().id;
+
+                        $.ajax({
+                            'url': 'delete',
+                            'type': 'POST',
+                            'data': {
+                                'id': bookId,
+                                '_token': document.head.querySelector('meta[name="csrf-token"]').content,
+                            },
+                            'success': function(result) {
+                                $table.row('.selected').remove().draw(false);
+                                $.notify($messages.delete.success, { 'type': 'success' });
+                            },
+                            'error': function(result) {
+                                var f = {
+                                    404: function() { $.notify($messages.delete.failure, { 'type': 'danger' }); },
+                                    422: function() { validateError(result.responseJSON.id[0]); },
+                                };
+                                f[result.status]();
+                            },
+                        });
+                    }
+                });
             },
         });
 
@@ -60,14 +85,12 @@ $(document).ready(function() {
         if ($(this).hasClass('selected')) {
             $(this).removeClass('selected');
             $('#main_delete').addClass('disabled');
-            $('#delete').attr('onclick', 'return false;');
         } else {
             $table.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
 
             if ($table.row('.selected').data() != null) {
                 $('#main_delete').removeClass('disabled');
-                $('#delete').attr('onclick', 'deleteBook(); return false;');
             }
         }
     });
@@ -95,38 +118,12 @@ $(document).ready(function() {
             },
         });
     });
+
+    $('#scan').on('click', function() {
+        var url = location.origin + '/create?code={CODE}&_token=' + document.head.querySelector('meta[name="csrf-token"]').content;
+        location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
+    });
 });
-
-function jumpZXingUrl() {
-    var url = location.origin + '/create?code={CODE}&_token=' + document.head.querySelector('meta[name="csrf-token"]').content;
-    location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
-}
-
-function deleteBook() {
-    if (window.confirm($messages.confirm)) {
-        var bookId = $table.row('.selected').data().id;
-
-        $.ajax({
-            'url': 'delete',
-            'type': 'POST',
-            'data': {
-                'id': bookId,
-                '_token': document.head.querySelector('meta[name="csrf-token"]').content,
-            },
-            'success': function(result) {
-                $table.row('.selected').remove().draw(false);
-                $.notify($messages.delete.success, { 'type': 'success' });
-            },
-            'error': function(result) {
-                var f = {
-                    404: function() { $.notify($messages.delete.failure, { 'type': 'danger' }); },
-                    422: function() { validateError(result.responseJSON.id[0]); },
-                };
-                f[result.status]();
-            },
-        });
-    }
-}
 
 function validateError(message) {
     var $mes = $messages.invalid;

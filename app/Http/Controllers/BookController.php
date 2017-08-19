@@ -17,7 +17,6 @@ class BookController extends BookBaseController
     {
         $result = parent::create($request);
 
-        return $request->ajax() ? $result :
-            redirect('/')->with('result', $result->getOriginalContent());
+        return $request->ajax() ? $result : redirect('/')->with('result', $result);
     }
 }

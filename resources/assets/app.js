@@ -1,11 +1,13 @@
 require('jquery');
-require('datatables');
-require('../../resources/asserts/js/bootstrap.min.js');
+require('datatables.net-bs');
+require('bootstrap-sass');
 require('bootstrap-notify');
-require('../../resources/asserts/js/dataTables.bootstrap.min.js');
+require('font-awesome/scss/font-awesome.scss');
+require('./app.scss');
+require('./dataTables.bootstrap.scss');
 
 $(document).ready(function() {
-    $.getJSON('js/messages.json', function(obj) {
+    $.getJSON('messages.json', function(obj) {
         lang = document.documentElement.lang;
         $messages = obj[lang];
 
@@ -43,7 +45,7 @@ $(document).ready(function() {
             'drawCallback': function(settings) {
                 $('.pagination').append('<li class="paginate_button disabled" id="main_delete"><a href="#" id="delete" aria-controls="main">' + $messages.delete.label + '</a></li>');
                 $('#delete').on('click', function() {
-                    if (window.confirm($messages.confirm)) {
+                    if (!($('#main_delete').hasClass('disabled')) && window.confirm($messages.confirm)) {
                         var bookId = $table.row('.selected').data().id;
 
                         $.ajax({
@@ -70,7 +72,7 @@ $(document).ready(function() {
             },
         });
 
-        if (typeof customFunc == 'function') customFunc();
+        if (typeof showResult == 'function') showResult();
     });
 
     $.notifyDefaults({
@@ -95,7 +97,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#register').on('submit', function(event) {
+    $('#register').on('submit', function() {
         event.preventDefault();
 
         var $form = $(this);

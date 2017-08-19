@@ -3,8 +3,8 @@ require('datatables.net-bs');
 require('bootstrap-sass');
 require('bootstrap-notify');
 require('font-awesome/scss/font-awesome.scss');
-require('./app.scss');
 require('./dataTables.bootstrap.scss');
+require('./app.scss');
 
 $(document).ready(function() {
     $.getJSON('messages.json', function(obj) {

@@ -1,49 +1,16 @@
-@charset "utf-8";
-
 @import "./bootstrap.css";
 
-.button {
-    font-size: 16px;
-}
+$font-name: "FontAwesome";
 
-#btn-login:before {
-    content: "\f090  ";
-    font-family: "FontAwesome";
-}
+.button { font-size: 16px; }
+#delete { color: #fff; background-color: #bf5329; }
+#delete:hover { background-color: #954120; }
+#main tbody tr.selected { background-color: #d1d1d1; }
 
-#btn-register:before {
-    content: "\f234  ";
-    font-family: "FontAwesome";
-}
-
-#menu-account:before {
-    content: "\f2be  ";
-    font-family: "FontAwesome";
-}
-
-#menu-logout:before {
-    content: "\f08b  ";
-    font-family: "FontAwesome";
-}
-
-#brand:before {
-    content: "\f02d ";
-    font-family: "FontAwesome";
-}
-
-#register {
-    padding: 7px;
-}
-
-#delete {
-    color: #fff;
-    background-color: #bf5329;
-}
-
-#delete:hover {
-    background-color: #954120;
-}
-
-#main tbody tr.selected {
-    background-color: #d1d1d1;
-}
+// FontAwesome
+#btn-login:before { content: "\f090  "; font-family: $font-name; }
+#btn-register:before { content: "\f234  "; font-family: $font-name; }
+#menu-account:before { content: "\f2be  "; font-family: $font-name; }
+#menu-logout:before { content: "\f08b  "; font-family: $font-name; }
+#brand:before { content: "\f02d "; font-family: $font-name; }
+#register { padding: 7px; }

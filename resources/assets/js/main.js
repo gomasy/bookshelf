@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $.getJSON('messages.json', function(obj) {
+    $.getJSON('assets/messages.json', function(obj) {
         lang = document.documentElement.lang;
         $messages = obj[lang];
 

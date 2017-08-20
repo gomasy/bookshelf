@@ -4,12 +4,15 @@ BooksManager
 [![Build Status](https://travis-ci.org/Gomasy/BooksManager.svg?branch=master)](https://travis-ci.org/Gomasy/BooksManager)
 
 ## これなに？
-シンプルな蔵書管理ツール  
+シンプルな蔵書管理ツール
 
 ## 必要なもの
-php >= 7.1  
-composer (php dependency manager)  
-npm (nodejs package manager)
+* php >= 7.1
+* composer (php dependency manager)
+* npm (nodejs package manager)
+* Database (MySQL / PostgreSQL / MSSQL)
+* MTA (なくてもいいけど一部機能が動作しません)
+* Linux サーバを自力で運用できる程度の知識
 
 ## デプロイ
     $ git clone https://github.com/Gomasy/BooksManager.git .

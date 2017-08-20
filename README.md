@@ -5,7 +5,11 @@ BooksManager
 
 ## これなに？
 シンプルな蔵書管理ツール  
-動作には PHP7.x + Composer + DB(MySQL or PostgreSQL or MSSQL) が必要となります。  
+
+## 必要なもの
+php >= 7.1  
+composer (php dependency manager)  
+npm (nodejs package manager)
 
 ## デプロイ
     $ git clone https://github.com/Gomasy/BooksManager.git .

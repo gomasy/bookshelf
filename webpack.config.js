@@ -4,8 +4,8 @@ const path = require('path');
 module.exports = {
     entry: './resources/assets/app.js',
     output: {
-        filename: 'bundle.js',
-        path: path.resolve(__dirname + '/public'),
+        filename: './assets/bundle.js',
+        path: path.join(__dirname, '/public'),
     },
     module: {
         rules: [
@@ -16,7 +16,7 @@ module.exports = {
             {
                 test: /\.(woff2?|ttf|eot|svg)(\?v=[\d.]+|\?[\s\S]+)?$/,
                 use: [
-                    { loader: 'file-loader?name=/[name].[ext]' },
+                    { loader: 'file-loader?name=/assets/[name].[ext]' },
                 ],
             },
         ],

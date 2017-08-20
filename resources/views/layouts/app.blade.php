@@ -9,7 +9,7 @@
 @endif
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="{{ asset('icon.png') }}" rel="icon" type="image/png">
-        <script src="{{ asset('bundle.js') }}"></script>
+        <script src="{{ asset('assets/bundle.js') }}"></script>
 @yield('inline-js')
     </head>
     <body>

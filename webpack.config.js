@@ -2,13 +2,9 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-    entry: {
-        'bundle.js': './resources/assets/js/app.js',
-        'icon.png': './resources/assets/icon.png',
-        'messages.json': './resources/assets/messages.json',
-    },
+    entry: './resources/assets/js/app.js',
     output: {
-        filename: './assets/[name]',
+        filename: './assets/bundle.js',
         path: path.join(__dirname, '/public'),
     },
     module: {

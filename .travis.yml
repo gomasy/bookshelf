@@ -9,5 +9,7 @@ before_script:
   - mysql -e 'CREATE DATABASE `forge`;'
   - cp .env.travis .env
   - composer install
+  - npm install
+  - npm run build
 script:
-  - ./vendor/bin/phpunit
+  - composer test

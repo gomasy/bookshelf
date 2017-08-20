@@ -8,7 +8,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif
         <title>{{ config('app.name', 'Laravel') }}</title>
-        <link href="{{ asset('icon.png') }}" rel="icon" type="image/png">
+        <link href="{{ asset('assets/icon.png') }}" rel="icon" type="image/png">
         <script src="{{ asset('assets/bundle.js') }}"></script>
 @yield('inline-js')
     </head>

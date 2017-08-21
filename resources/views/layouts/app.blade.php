@@ -10,7 +10,7 @@
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="{{ asset('assets/icon.png') }}" rel="icon" type="image/png">
         <script src="{{ asset('assets/bundle.js') }}"></script>
-@yield('inline-js')
+@yield('js')
     </head>
     <body>
         <div id="app">

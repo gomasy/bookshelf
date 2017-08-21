@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('inline-js')
+@section('js')
 @if (session('result'))
         <script>
             function showResult() {

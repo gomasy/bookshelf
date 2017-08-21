@@ -7,8 +7,9 @@ require('./main.js');
 
 // scss
 require('font-awesome/scss/font-awesome.scss');
-require('../scss/app.scss');
+require('../scss/bootstrap/bootstrap.scss');
 require('../scss/dataTables.bootstrap.scss');
+require('../scss/app.scss');
 
 // other
 require('../icon.png');

@@ -6,13 +6,13 @@
             function showResult() {
                 var bookTitle = '{{ session('result')->getOriginalContent()['data']['title'] }}';
 @if (session('result')->status() === 200)
-                addSucceeded(bookTitle + ' is registered.');
+                alert(bookTitle + ' is registered.');
 @elseif (session('result')->status() === 404)
                 alert('no book were found.');
 @elseif (session('result')->status() === 409)
-                addFailed(bookTitle + ' is already registered.');
+                alert(bookTitle + ' is already registered.');
 @elseif (session('result')->status() === 422)
-                validationFailed('{{ session('result')->getOriginalContent()['code'][0] }}');
+                alert('{{ session('result')->getOriginalContent()['code'][0] }}');
 @endif
             }
         </script>

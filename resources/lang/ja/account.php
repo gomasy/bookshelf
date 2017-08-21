@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'incorrect' => 'パスワードが違います',
+    'incorrect' => 'パスワードが違います。',
     'update' => [
         'header' => 'アカウント設定',
         'submit' => '更新',

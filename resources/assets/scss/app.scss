@@ -1,14 +1,20 @@
-$font-name: "FontAwesome";
-
 .button { font-size: 16px; }
 #register { padding: 7px; }
-#delete { color: #fff; background-color: #bf5329; }
-#delete:hover { background-color: #954120; }
+#delete {
+    color: #fff;
+    background-color: #bf5329;
+    &:hover { background-color: #954120; }
+}
 #main tbody tr.selected { background-color: #d1d1d1; }
 
 // FontAwesome
-#btn-login:before { content: "\f090  "; font-family: $font-name; }
-#btn-register:before { content: "\f234  "; font-family: $font-name; }
-#menu-account:before { content: "\f2be  "; font-family: $font-name; }
-#menu-logout:before { content: "\f08b  "; font-family: $font-name; }
-#brand:before { content: "\f02d "; font-family: $font-name; }
+@mixin icon($content) {
+    content: "#{$content}  ";
+    font-family: "FontAwesome";
+}
+
+#brand:before { @include icon("\f02d"); }
+#btn-login:before { @include icon("\f090"); }
+#btn-register:before { @include icon("\f234"); }
+#menu-account:before { @include icon("\f2be"); }
+#menu-logout:before { @include icon("\f08b"); }

@@ -1,7 +1,8 @@
 {
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "build": "webpack",
+    "watch": "webpack --watch"
   },
   "devDependencies": {
     "bootstrap-notify": "^3.1.3",

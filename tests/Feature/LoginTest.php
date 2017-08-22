@@ -22,14 +22,8 @@ class LoginTest extends TestCase
 
     public function testLoggedIn()
     {
-        $user = [
-            'email' => 'example@example.com',
-            'name' => 'Example',
-            'password' => 'testtest',
-        ];
-
-        factory(App\User::class)->create($user);
-        $this->post('/login', $user)->assertRedirect('/');
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->get('/')->assertStatus(200);
     }
 
     public function testLogout()

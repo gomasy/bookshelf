@@ -34,6 +34,16 @@ class BookTest extends TestCase
             ->post('/create', [ 'code' => '9784873115382' ], $headers)
             ->assertStatus(200);
 
+        // success (isbn10)
+        $this->actingAs($user)
+            ->post('/create', [ 'code' => '9784873115146' ], $headers)
+            ->assertStatus(200);
+
+        // dups
+        $this->actingAs($user)
+            ->post('/create', [ 'code' => '4873115388' ], $headers)
+            ->assertStatus(409);
+
         // not found
         $this->actingAs($user)
             ->post('/create', [ 'code' => '0000000000000' ], $headers)

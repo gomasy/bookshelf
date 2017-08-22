@@ -4,15 +4,8 @@
 @if (session('result'))
         <script>
             function showResult() {
-                var bookTitle = '{{ session('result')->getOriginalContent()['data']['title'] }}';
-@if (session('result')->status() === 200)
-                alert(bookTitle + ' is registered.');
-@elseif (session('result')->status() === 404)
+@if (session('result')->status() === 404)
                 alert('no book were found.');
-@elseif (session('result')->status() === 409)
-                alert(bookTitle + ' is already registered.');
-@elseif (session('result')->status() === 422)
-                alert('{{ session('result')->getOriginalContent()['code'][0] }}');
 @endif
             }
         </script>

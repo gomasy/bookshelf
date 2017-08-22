@@ -16,15 +16,14 @@ $factory->define(App\Book::class, function (Faker\Generator $faker) {
     $user = factory(App\User::class)->create();
 
     return [
-        'id' => $user->next_id,
-        'user_id' => $user->id,
-        'title' => $faker->title,
-        'title_ruby' => $faker->title,
-        'volume' => $faker->randomDigit,
-        'authors' => $faker->name,
-        'isbn' => $faker->isbn13(),
-        'jpno' => $faker->ean8(),
+        'id'             => $user->next_id,
+        'user_id'        => $user->id,
+        'title'          => $faker->title,
+        'volume'         => $faker->randomDigit,
+        'authors'        => $faker->name,
+        'isbn'           => $faker->isbn13(),
+        'jpno'           => $faker->ean8(),
         'published_date' => $faker->date,
-        'ndl_url' => $faker->url,
+        'ndl_url'        => $faker->url,
     ];
 });

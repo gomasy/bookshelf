@@ -56,10 +56,8 @@ class NDL {
     public function getISBN() {
         foreach ($this->obj->identifier as $val) {
             switch (strlen($val)) {
-                case 13:
-                    return $val;
-                case 10:
-                    return $this->isbn10to13($val);
+                case 13: return $val;
+                case 10: return $this->isbn10to13($val);
             }
         }
     }
@@ -94,12 +92,9 @@ class NDL {
 
     protected function searchType($num) {
         switch (strlen($num)) {
-            case 8:
-                return 'jpno';
-            case 10:
-                return 'isbn';
-            case 13:
-                return 'isbn';
+            case 8: return 'jpno';
+            case 10: return 'isbn';
+            case 13: return 'isbn';
         }
     }
 

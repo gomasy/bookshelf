@@ -23,7 +23,6 @@ class NDL {
         if (isset($this->obj)) {
             return [
                 'title'          => $this->getTitle(),
-                'title_ruby'     => $this->getTitleRuby(),
                 'volume'         => $this->getVolume(),
                 'authors'        => $this->getAuthors(),
                 'isbn'           => $this->getISBN(),
@@ -73,10 +72,6 @@ class NDL {
 
     public function getTitle() {
         return (string)$this->obj->title;
-    }
-
-    public function getTitleRuby() {
-        return (string)$this->obj->titleTranscription;
     }
 
     public function getVolume() {

@@ -39,7 +39,6 @@
                                 <thead>
                                     <tr>
                                         <th>{{ __('home.title') }}</th>
-                                        <th>{{ __('home.title_ruby') }}</th>
                                         <th>{{ __('home.volume') }}</th>
                                         <th>{{ __('home.authors') }}</th>
                                         <th>{{ __('home.isbn') }}</th>

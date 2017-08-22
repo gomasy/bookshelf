@@ -14,7 +14,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'id', 'user_id', 'title', 'title_ruby', 'volume', 'authors', 'isbn', 'jpno', 'published_date', 'ndl_url' ];
+    protected $fillable = [ 'id', 'user_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'published_date', 'ndl_url' ];
 
     /**
      * Indicates if the model should be timestamped.

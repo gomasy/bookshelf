@@ -4,7 +4,6 @@ return [
     'placeholder' => 'ISBN or JP番号',
     'scan' => '読み取る',
     'title' => 'タイトル',
-    'title_ruby' => 'タイトルよみ',
     'volume' => '巻号',
     'authors' => '著者等',
     'isbn' => 'ISBN',

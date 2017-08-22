@@ -12,7 +12,6 @@ $(document).ready(function() {
         $table = $('#main').DataTable({
             'columns': [
                 { 'data': 'title' },
-                { 'data': 'title_ruby' },
                 { 'data': 'volume' },
                 { 'data': 'authors' },
                 { 'data': 'isbn' },
@@ -21,11 +20,11 @@ $(document).ready(function() {
                 { 'data': 'ndl_url' },
             ],
             'columnDefs': [
-                { 'visible': false, 'targets': 1 },
-                { 'visible': false, 'targets': 5 },
-                { 'visible': false, 'targets': 7 },
+                { 'visible': false, 'targets': 3 },
+                { 'visible': false, 'targets': 4 },
+                { 'visible': false, 'targets': 6 },
             ],
-            'order': [[ 0, 'asc' ], [ 6, 'asc' ]],
+            'order': [[ 0, 'asc' ], [ 5, 'asc' ]],
             'lengthMenu': [ 10, 20, 30, 50, 100, 200 ],
             'displayLength': 100,
             'scrollY': true,

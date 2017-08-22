@@ -36,7 +36,7 @@ class BookTest extends TestCase
 
         // success (isbn10)
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '4873115140' ], $headers)
+            ->post('/create', [ 'code' => '4000801139' ], $headers)
             ->assertStatus(200);
 
         // dups

@@ -16,12 +16,20 @@ class LoginTest extends TestCase
     public function testBasicTest()
     {
         $this->get('/')->assertRedirect('/login');
+        $this->get('/', [ 'X-Requested-With' => 'XMLHttpRequest' ])
+            ->assertStatus(401);
     }
 
     public function testLoggedIn()
     {
-        $user = factory(App\User::class)->create();
-        $this->actingAs($user)->get('/')->assertStatus(200);
+        $user = [
+            'email' => 'example@example.com',
+            'name' => 'Example',
+            'password' => 'testtest',
+        ];
+
+        factory(App\User::class)->create($user);
+        $this->post('/login', $user)->assertRedirect('/');
     }
 
     public function testLogout()

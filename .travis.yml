@@ -1,6 +1,7 @@
 language: php
 php:
   - 7.1
+  - 7.2
   - nightly
 install:
   - composer install
@@ -14,5 +15,5 @@ before_script:
   - cp .env.travis .env
 script:
   - composer test
-after_success:
+after_script:
   - composer coveralls

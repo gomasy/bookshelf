@@ -15,10 +15,11 @@ class NDL {
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
-    protected $obj;
+    protected $obj, $code;
 
     public function query($code) {
-        $this->obj = $this->getItem($this->getChannel($code));
+        $this->code = $code;
+        $this->obj = $this->getItem($this->getChannel());
 
         if (isset($this->obj)) {
             return [
@@ -33,14 +34,14 @@ class NDL {
         }
     }
 
-    public function getRequestURL($code) {
+    public function getRequestURL() {
         return $this->endpoint.'?'.http_build_query([
-            $this->searchType($code) => $code,
+            $this->searchType($this->code) => $this->code,
         ]);
     }
 
-    public function getChannel($code) {
-        $content = file_get_contents($this->getRequestURL($code));
+    public function getChannel() {
+        $content = file_get_contents($this->getRequestURL());
         $xml = preg_replace($this->regexp[0], '', $content);
 
         return simplexml_load_string($xml)->channel;

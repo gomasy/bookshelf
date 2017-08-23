@@ -54,18 +54,23 @@ class NDL {
     }
 
     public function getISBN() {
+        $isbn = NULL;
         foreach ($this->obj->identifier as $val) {
             switch (strlen($val)) {
-                case 13: return $val;
-                case 10: return $this->isbn10to13($val);
+                case 13: $isbn = $val; break;
+                case 10: $isbn = $this->isbn10to13($val); break;
             }
         }
+
+        return $isbn;
     }
 
     public function getJPNO() {
-        foreach ($this->obj->identifier as $val) {
-            if (strlen($val) === 8) return $val;
-        }
+        $jpno = NULL;
+        foreach ($this->obj->identifier as $val)
+            if (strlen($val) === 8) $jpno = $val;
+
+        return $jpno;
     }
 
     public function getTitle() {
@@ -91,11 +96,14 @@ class NDL {
     }
 
     protected function searchType($num) {
+        $type = 'any';
         switch (strlen($num)) {
-            case 8: return 'jpno';
-            case 10: return 'isbn';
-            case 13: return 'isbn';
+            case 8: $type = 'jpno'; break;
+            case 10: $type = 'isbn'; break;
+            case 13: $type = 'isbn'; break;
         }
+
+        return $type;
     }
 
     public function isbn10to13($isbn) {

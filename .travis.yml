@@ -15,5 +15,5 @@ before_script:
   - cp .env.travis .env
 script:
   - composer test
-after_success:
+after_script:
   - composer coveralls

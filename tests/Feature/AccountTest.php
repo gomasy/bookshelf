@@ -22,8 +22,14 @@ class AccountTest extends TestCase
     public function testLoggedIn()
     {
         $user = factory(App\User::class)->create();
-        $this->actingAs($user)->get('/account')->assertStatus(200);
-        $this->actingAs($user)->get('/account/delete')->assertStatus(200);
+
+        $response = $this->actingAs($user)->get('/account');
+        $response->assertViewIs('account.update');
+        $response->assertStatus(200);
+
+        $response = $this->actingAs($user)->get('/account/delete');
+        $response->assertViewIs('account.delete');
+        $response->assertStatus(200);
     }
 
     public function testUpdate()

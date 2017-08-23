@@ -13,7 +13,9 @@ class RegisterTest extends TestCase
 
     public function testBasicTest()
     {
-        $this->get('/register')->assertStatus(200);
+        $response = $this->get('/register');
+        $response->assertViewIs('auth.register');
+        $response->assertStatus(200);
     }
 
     public function testRegister()

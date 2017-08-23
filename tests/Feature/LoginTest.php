@@ -20,10 +20,19 @@ class LoginTest extends TestCase
             ->assertStatus(401);
     }
 
+    public function testLoginForm()
+    {
+        $response = $this->get('/login');
+        $response->assertViewIs('auth.login');
+        $response->assertStatus(200);
+    }
+
     public function testLoggedIn()
     {
         $user = factory(App\User::class)->create();
-        $this->actingAs($user)->get('/')->assertStatus(200);
+        $response = $this->actingAs($user)->get('/');
+        $response->assertViewIs('home');
+        $response->assertStatus(200);
     }
 
     public function testLogout()

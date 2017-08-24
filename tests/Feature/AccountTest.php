@@ -32,6 +32,12 @@ class AccountTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testRedirect()
+    {
+        $user = factory(App\User::class)->create();
+        $this->actingAs($user)->get('/login')->assertRedirect('/');
+    }
+
     public function testUpdate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];

@@ -15,11 +15,10 @@ class NDL {
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
-    protected $obj, $code;
+    protected $obj;
 
     public function query($code) {
-        $this->code = $code;
-        $this->obj = $this->getItem($this->getChannel());
+        $this->obj = $this->getItem($this->getRequestURL($code));
 
         if (isset($this->obj)) {
             return [
@@ -34,20 +33,21 @@ class NDL {
         }
     }
 
-    public function getRequestURL() {
+    protected function getRequestURL($code) {
         return $this->endpoint.'?'.http_build_query([
-            $this->searchType($this->code) => $this->code,
+            $this->searchType($code) => $code,
         ]);
     }
 
-    public function getChannel() {
-        $content = file_get_contents($this->getRequestURL());
+    protected function getChannel($url) {
+        $content = file_get_contents($url);
         $xml = preg_replace($this->regexp[0], '', $content);
 
         return simplexml_load_string($xml)->channel;
     }
 
-    public function getItem($channel) {
+    public function getItem($url) {
+        $channel = $this->getChannel($url);
         for ($i = 0; $i < $channel->totalResults; $i++) {
             if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate))
                 return $channel->item[$i];

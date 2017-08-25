@@ -6,6 +6,7 @@ php:
 install:
   - composer install
   - npm install
+after_install:
   - npm run build
 before_script:
   - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'

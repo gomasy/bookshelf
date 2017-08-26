@@ -27,26 +27,29 @@ class BookTest extends TestCase
     public function testCreate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $codes = [ '9784873115382', '4000801139', '4873115388', '0000000000000' ];
         $user = factory(App\User::class)->create();
 
         // success
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '9784873115382' ], $headers)
+            ->post('/create', [ 'code' => $codes[0] ], $headers)
             ->assertStatus(200);
+        $this->assertDatabaseHas('books', [ 'isbn' => $codes[0] ]);
 
         // success (isbn10)
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '4000801139' ], $headers)
+            ->post('/create', [ 'code' => $codes[1] ], $headers)
             ->assertStatus(200);
+        $this->assertDatabaseHas('books', [ 'isbn' => '978'.substr($codes[1], 0, -1).'3' ]);
 
         // dups
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '4873115388' ], $headers)
+            ->post('/create', [ 'code' => $codes[2] ], $headers)
             ->assertStatus(409);
 
         // not found
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '0000000000000' ], $headers)
+            ->post('/create', [ 'code' => $codes[3] ], $headers)
             ->assertStatus(404);
 
         // invalid
@@ -63,8 +66,9 @@ class BookTest extends TestCase
 
         // success
         $this->actingAs($user)
-            ->post('/delete', [ 'id' => $book->id + 1 ], $headers)
+            ->post('/delete', [ 'id' => '1' ], $headers)
             ->assertStatus(200);
+        $this->assertDatabaseMissing('books', [ 'id' => '1' ]);
 
         // not found
         $this->actingAs($user)

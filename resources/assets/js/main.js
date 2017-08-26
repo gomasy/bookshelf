@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         return data;
     };
-    var vaildErr = function(context) {
+    var validErr = function(context) {
         var $msg = $messages.invalid;
         $msg.message = '<p>' + context + '</p>';
         $.notify($msg, { type: 'warning' });

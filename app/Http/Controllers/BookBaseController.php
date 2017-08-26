@@ -58,7 +58,7 @@ class BookBaseController extends Controller
     {
         $book = Book::find($request->id);
         $book->title = $request->title;
-        $book->volume = $request->volume;
+        $book->volume = $request->volume ?? '';
         $book->authors = $request->authors;
         $book->published_date = $request->published_date;
         $book->save();

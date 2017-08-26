@@ -77,7 +77,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-2 control-label">出版日</label>
                                     <div class="col-sm-9">
-                                        <input class="form-control" id="input-pubdate" type="text" name="published_date" value="" pattern="\d{4}-\d{2}-\d{2}" required>
+                                        <input class="form-control" id="input-published_date" type="text" name="published_date" value="" pattern="\d{4}-\d{2}-\d{2}" required>
                                     </div>
                                 </div>
                             </div>

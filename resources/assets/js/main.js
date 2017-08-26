@@ -1,4 +1,31 @@
 $(document).ready(function() {
+    var $table, $messages;
+    var isSelected = function() {
+        return !($('#main_delete').hasClass('disabled'));
+    };
+    var getSelectedRow = function() {
+        return $table.row('.selected').data();
+    };
+    var createPostData = function(form, id) {
+        var data = form.serialize();
+        data += '&id=' + id;
+
+        return data;
+    };
+    var vaildErr = function(context) {
+        var $msg = $messages.invalid;
+        $msg.message = '<p>' + context + '</p>';
+        $.notify($msg, { type: 'warning' });
+    };
+
+    $.notifyDefaults({
+        placement: {
+            from: 'bottom',
+            align: 'right',
+        },
+        mouse_over: 'pause',
+    });
+
     $.getJSON('assets/messages.json', function(obj) {
         lang = document.documentElement.lang;
         $messages = obj[lang];
@@ -38,12 +65,12 @@ $(document).ready(function() {
                 $('.pagination').append('<li class="paginate_button disabled" id="main_delete"><a href="#" id="btn-delete" data-toggle="modal" data-target="#modal-delete">' + $messages.delete.label + '</a></li>');
                 $('#btn-edit').on('click', function() {
                     if (!isSelected()) return false;
-                    var bookAry = $table.row('.selected').data();
 
-                    $('#input-title').val(bookAry['title']);
-                    $('#input-volume').val(bookAry['volume']);
-                    $('#input-authors').val(bookAry['authors']);
-                    $('#input-pubdate').val(bookAry['published_date']);
+                    var obj = getSelectedRow();
+                    for (var key in obj) {
+                        var entity = '#input-' + key;
+                        $(entity).val(obj[key]);
+                    }
                 });
                 $('#btn-delete').on('click', function() {
                     if (!isSelected()) return false;
@@ -54,22 +81,16 @@ $(document).ready(function() {
         if (typeof showResult == 'function') showResult();
     });
 
-    $.notifyDefaults({
-        placement: {
-            from: 'bottom',
-            align: 'right',
-        },
-        mouse_over: 'pause',
-    });
-
     $('#main tbody').on('click', 'tr', function() {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
+        var $rows = $(this);
+
+        if ($rows.hasClass('selected')) {
+            $rows.removeClass('selected');
             $('#main_edit').addClass('disabled');
             $('#main_delete').addClass('disabled');
         } else {
             $table.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
+            $rows.addClass('selected');
 
             if ($table.row('.selected').data() != null) {
                 $('#main_edit').removeClass('disabled');
@@ -78,7 +99,7 @@ $(document).ready(function() {
         }
     });
 
-    $('#form-register').submit(function(event) {
+    $('#form-register').on('submit', function(event) {
         event.preventDefault();
 
         var $form = $(this);
@@ -95,21 +116,21 @@ $(document).ready(function() {
                 var f = {
                     404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
                     409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
-                    422: function() { validateError(result.responseJSON.code[0]); },
+                    422: function() { validErr(result.responseJSON.code[0]); },
                 };
                 f[result.status]();
             },
         });
     });
 
-    $('#form-edit').submit(function(event) {
+    $('#form-edit').on('submit', function(event) {
         event.preventDefault();
 
         var $form = $('#form-edit');
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
-            data: generatePostData($form, getSelectedRow($table).id),
+            data: createPostData($form, getSelectedRow($table).id),
             success: function(result) {
                 $('#modal-edit').modal('hide');
                 $table.ajax.reload(null, false);
@@ -118,14 +139,14 @@ $(document).ready(function() {
         });
     });
 
-    $('#form-delete').submit(function(event) {
+    $('#form-delete').on('submit', function(event) {
         event.preventDefault();
 
         var $form = $('#form-delete');
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
-            data: generatePostData($form, getSelectedRow($table).id),
+            data: createPostData($form, getSelectedRow($table).id),
             success: function(result) {
                 $('#modal-delete').modal('hide');
                 $table.row('.selected').remove().draw(false);
@@ -134,36 +155,15 @@ $(document).ready(function() {
             error: function(result) {
                 var f = {
                     404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
-                    422: function() { validateError(result.responseJSON.id[0]); },
+                    422: function() { validErr(result.responseJSON.id[0]); },
                 };
                 f[result.status]();
             },
         });
     });
 
-    $('#btn-scan').click(function() {
+    $('#btn-scan').on('click', function() {
         var url = location.origin + '/create?code={CODE}&_token=' + document.head.querySelector('meta[name="csrf-token"]').content;
         location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
     });
 });
-
-function isSelected() {
-    return !($('#main_delete').hasClass('disabled'));
-}
-
-function getSelectedRow(table) {
-    return table.row('.selected').data();
-}
-
-function generatePostData(form, id) {
-    var data = form.serialize();
-    data += '&id=' + id;
-
-    return data;
-}
-
-function validateError(message) {
-    var $mes = $messages.invalid;
-    $mes.message = '<p>' + message + '</p>';
-    $.notify($mes, { type: 'warning' });
-}

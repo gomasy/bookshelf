@@ -6,9 +6,9 @@ $(document).ready(function() {
     var getSelectedRow = function() {
         return $table.row('.selected').data();
     };
-    var createPostData = function(form, id) {
+    var createPostData = function(form) {
         var data = form.serialize();
-        data += '&id=' + id;
+        data += '&id=' + getSelectedRow().id;
 
         return data;
     };
@@ -27,7 +27,7 @@ $(document).ready(function() {
     });
 
     $.getJSON('assets/messages.json', function(obj) {
-        lang = document.documentElement.lang;
+        var lang = document.documentElement.lang;
         $messages = obj[lang];
 
         if (lang != 'en') {
@@ -123,11 +123,11 @@ $(document).ready(function() {
     $('#form-edit').on('submit', function(event) {
         event.preventDefault();
 
-        var $form = $('#form-edit');
+        var $form = $(this);
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
-            data: createPostData($form, getSelectedRow($table).id),
+            data: createPostData($form),
             success: function(result) {
                 $('#modal-edit').modal('hide');
                 $table.ajax.reload(null, false);
@@ -139,11 +139,11 @@ $(document).ready(function() {
     $('#form-delete').on('submit', function(event) {
         event.preventDefault();
 
-        var $form = $('#form-delete');
+        var $form = $(this);
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
-            data: createPostData($form, getSelectedRow($table).id),
+            data: createPostData($form),
             success: function(result) {
                 $('#modal-delete').modal('hide');
                 $table.row('.selected').remove().draw(false);

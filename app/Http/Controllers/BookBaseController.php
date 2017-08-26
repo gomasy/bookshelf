@@ -45,8 +45,6 @@ class BookBaseController extends Controller
                 $user = Auth::user();
                 $user->next_id++;
                 $user->save();
-
-                return response()->ajax(200, $book);
             } catch (QueryException $e) {
                 return response()->ajax(409, $book);
             }
@@ -61,8 +59,6 @@ class BookBaseController extends Controller
         $book = Book::search($request->id);
         if ($book->count()) {
             $book->delete();
-
-            return response()->ajax();
         } else {
             return response()->ajax(404);
         }

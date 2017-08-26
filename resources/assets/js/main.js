@@ -67,10 +67,7 @@ $(document).ready(function() {
                     if (!isSelected()) return false;
 
                     var obj = getSelectedRow();
-                    for (var key in obj) {
-                        var entity = '#input-' + key;
-                        $(entity).val(obj[key]);
-                    }
+                    for (var key in obj) $('#input-' + key).val(obj[key]);
                 });
                 $('#btn-delete').on('click', function() {
                     if (!isSelected()) return false;

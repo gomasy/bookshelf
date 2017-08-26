@@ -39,9 +39,6 @@
             "icon": "glyphicon glyphicon-exclamation-sign",
             "title": "<strong>エラー</strong>",
             "message": ""
-        },
-        "datatables": {
-            "url": "https://cdn.datatables.net/plug-ins/1.10.13/i18n/Japanese.json"
         }
     }
 }

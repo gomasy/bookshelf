@@ -32,7 +32,7 @@ $(document).ready(function() {
 
         if (lang != 'en') {
             $.extend($.fn.dataTable.defaults, {
-                language: { url: $messages['datatables']['url'] },
+                language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
             });
         }
 

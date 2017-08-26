@@ -1,9 +1,16 @@
+$btn-text-color: #fff;
+
 .button { font-size: 16px; }
-#register { padding: 7px; }
-#delete {
-    color: #fff;
-    background-color: #bf5329;
-    &:hover { background-color: #954120; }
+#form-register { padding: 7px; }
+#btn-delete {
+    color: $btn-text-color;
+    background-color: #e74c3c;
+    &:hover { background-color: #d62c1a; }
+}
+#btn-edit {
+    color: $btn-text-color;
+    background-color: #3498db;
+    &:hover { background-color: #217dbb; }
 }
 #main tbody tr.selected { background-color: #d1d1d1; }
 

@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index')->name('home');
 Route::get('/list', 'BookController@index')->name('list');
 Route::match([ 'get', 'post' ], '/create', 'BookController@create')->name('create');
+Route::post('/edit', 'BookController@edit')->name('edit');
 Route::post('/delete', 'BookController@delete')->name('delete');
 
 Route::group([ 'prefix' => 'account' ], function() {

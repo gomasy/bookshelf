@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Validator;
 use App\Book;
 use App\Facades\NDL;
 use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookEditRequest;
 use App\Http\Requests\BookDeleteRequest;
 use App\User;
 use Auth;
@@ -53,6 +54,15 @@ class BookBaseController extends Controller
         }
     }
 
+    public function edit(BookEditRequest $request)
+    {
+        $book = Book::find($request->id);
+        $book->title = $request->title;
+        $book->volume = $request->volume;
+        $book->authors = $request->authors;
+        $book->published_date = $request->published_date;
+        $book->save();
+    }
 
     public function delete(BookDeleteRequest $request)
     {

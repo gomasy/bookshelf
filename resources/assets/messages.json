@@ -27,6 +27,9 @@
                 "message": "<p>削除に失敗しました。</p>"
             }
         },
+        "edit": {
+            "label": "編集"
+        },
         "not_exist": {
             "icon": "glyphicon glyphicon-exclamation-sign",
             "title": "<strong>該当なし</strong>",

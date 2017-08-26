@@ -30,7 +30,7 @@ $(document).ready(function() {
         var lang = document.documentElement.lang;
         $messages = obj[lang];
 
-        if (lang != 'en') {
+        if (lang == 'ja') {
             $.extend($.fn.dataTable.defaults, {
                 language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
             });

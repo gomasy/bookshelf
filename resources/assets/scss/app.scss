@@ -4,13 +4,13 @@ $btn-text-color: #fff;
 #form-register { padding: 7px; }
 #btn-delete {
     color: $btn-text-color;
-    background-color: #e74c3c;
-    &:hover { background-color: #d62c1a; }
+    background-color: #bf5329;
+    &:hover { background-color: #954120; }
 }
 #btn-edit {
     color: $btn-text-color;
-    background-color: #3498db;
-    &:hover { background-color: #217dbb; }
+    background-color: #8eb4cb;
+    &:hover { background-color: #708ea1; }
 }
 #main tbody tr.selected { background-color: #d1d1d1; }
 

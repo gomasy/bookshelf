@@ -31,7 +31,7 @@ class LoginTest extends TestCase
     {
         $user = factory(App\User::class)->create();
         $response = $this->actingAs($user)->get('/');
-        $response->assertViewIs('home');
+        $response->assertViewIs('dashboard');
         $response->assertStatus(200);
     }
 

@@ -24,7 +24,7 @@ class CreateBooksTable extends Migration
             $table->string('authors');
             $table->char('isbn', 13)->nullable();
             $table->char('jpno', 10)->nullable();
-            $table->char('published_date', 10);
+            $table->date('published_date');
             $table->string('ndl_url');
             $table->primary([ 'id', 'user_id' ]);
             $table->unique([ 'user_id', 'isbn' ]);

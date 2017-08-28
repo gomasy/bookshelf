@@ -1,10 +1,11 @@
-const webpack = require('webpack');
 const path = require('path');
+const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
     entry: './resources/assets/js/app.js',
     output: {
-        filename: './assets/bundle.js',
+        filename: './assets/app.[hash].js',
         path: path.join(__dirname, '/public'),
     },
     module: {
@@ -30,6 +31,9 @@ module.exports = {
             jquery: 'jquery',
             jQuery: 'jquery',
             'window.jQuery': 'jquery',
+        }),
+        new ManifestPlugin({
+            fileName: '/assets/manifest.json',
         }),
     ],
 };

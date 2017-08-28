@@ -54,7 +54,7 @@ $(document).ready(function() {
             deferRender: true,
             ajax: 'list',
             rowCallback: function(row, data, index) {
-                $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '">' + data.title + '</a>');
+                $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
             },
             drawCallback: function(settings) {
                 $('.pagination').append('<li class="paginate_button disabled" id="main_edit"><a href="#" id="btn-edit" data-toggle="modal" data-target="#modal-edit">' + $messages.edit.label + '</a></li>');

@@ -34,8 +34,6 @@
                                         <th>{{ __('home.title') }}</th>
                                         <th>{{ __('home.volume') }}</th>
                                         <th>{{ __('home.authors') }}</th>
-                                        <th>{{ __('home.isbn') }}</th>
-                                        <th>{{ __('home.jpno') }}</th>
                                         <th>{{ __('home.published_date') }}</th>
                                         <th>{{ __('home.ndl_url') }}</th>
                                     </tr>

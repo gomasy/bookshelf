@@ -9,7 +9,7 @@
 @endif
         <title>{{ config('app.name', 'Laravel') }}</title>
         <link href="{{ asset('assets/icon.png') }}" rel="icon" type="image/png">
-        <script src="{{ asset(substr(json_decode(file_get_contents('./assets/manifest.json'), true)['main.js'], 2)) }}"></script>
+        <script src="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['main.js'], 2)) }}"></script>
 @yield('js')
     </head>
     <body>

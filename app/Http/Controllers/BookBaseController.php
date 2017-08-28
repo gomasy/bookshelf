@@ -31,9 +31,7 @@ class BookBaseController extends Controller
 
     public function index(Request $request)
     {
-        return response()->json([
-            'data' => Book::get(),
-        ]);
+        return response()->ajax(Book::get());
     }
 
     public function create(BookCreateRequest $request)
@@ -41,16 +39,19 @@ class BookBaseController extends Controller
         $book = NDL::query($request->code);
         if (isset($book)) {
             try {
-                Book::create(array_merge($this->getHeader(), $book));
+                $book = array_merge($this->getHeader(), $book);
+                Book::create($book);
 
                 $user = Auth::user();
                 $user->next_id++;
                 $user->save();
+
+                return response()->ajax($book);
             } catch (QueryException $e) {
-                return response()->ajax(409, $book);
+                return response()->ajax($book, 409);
             }
         } else {
-            return response()->ajax(404);
+            return response(NULL, 404);
         }
     }
 
@@ -62,6 +63,8 @@ class BookBaseController extends Controller
         $book->authors = $request->authors;
         $book->published_date = $request->published_date;
         $book->save();
+
+        return response()->ajax($book);
     }
 
     public function delete(BookDeleteRequest $request)
@@ -70,7 +73,7 @@ class BookBaseController extends Controller
         if ($book->count()) {
             $book->delete();
         } else {
-            return response()->ajax(404);
+            return response(NULL, 404);
         }
     }
 }

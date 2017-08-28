@@ -105,9 +105,9 @@ $(document).ready(function() {
             type: $form.attr('method'),
             data: $form.serialize(),
             success: function(result) {
-                $.notify($messages.add.success, { type: 'success' });
-                $table.ajax.reload(null, false);
+                $table.row.add(result.data).draw(false);
                 $form[0].reset();
+                $.notify($messages.add.success, { type: 'success' });
             },
             error: function(result) {
                 var f = {
@@ -130,7 +130,8 @@ $(document).ready(function() {
             data: createPostData($form),
             success: function(result) {
                 $('#modal-edit').modal('hide');
-                $table.ajax.reload(null, false);
+                $table.row('.selected').remove();
+                $table.row.add(result.data).draw(false);
                 $form[0].reset();
             },
         });

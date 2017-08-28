@@ -13,7 +13,7 @@ class ResponseMacroServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Response::macro('ajax', function($status = 200, $data = NULL) {
+        Response::macro('ajax', function($data = NULL, $status = 200) {
             return response([ 'data' => $data ], $status);
         });
     }

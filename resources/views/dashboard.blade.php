@@ -15,10 +15,10 @@
 @section('navbar')
                             <li class="nav-item">
                                 <form class="form-inline my-2 my-lg-0" id="form-register" role="form" method="POST" action="{{ route('create') }}">
-                                    <input class="form-control mr-sm-2" type="text" name="code" placeholder="{{ __('home.placeholder') }}" required>
+                                    <input class="form-control mr-sm-2" type="text" name="code" placeholder="{{ __('dashboard.placeholder') }}" required>
                                     {{ csrf_field() }}
                                     <button class="btn btn-info my-2 my-sm-0" type="submit">{{ __('auth.register') }}</button>
-                                    <button class="btn btn-secondary my-2 my-sm-0" id="btn-scan" type="button">{{ __('home.scan') }}</button>
+                                    <button class="btn btn-secondary my-2 my-sm-0" id="btn-scan" type="button">{{ __('dashboard.scan') }}</button>
                                 </form>
                             </li>
 @endsection
@@ -31,11 +31,11 @@
                             <table class="table table-hover table-striped" id="main">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('home.title') }}</th>
-                                        <th>{{ __('home.volume') }}</th>
-                                        <th>{{ __('home.authors') }}</th>
-                                        <th>{{ __('home.published_date') }}</th>
-                                        <th>{{ __('home.ndl_url') }}</th>
+                                        <th>{{ __('dashboard.title') }}</th>
+                                        <th>{{ __('dashboard.volume') }}</th>
+                                        <th>{{ __('dashboard.authors') }}</th>
+                                        <th>{{ __('dashboard.published_date') }}</th>
+                                        <th>{{ __('dashboard.ndl_url') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -43,6 +43,11 @@
                             </table>
                         </div>
                     </div>
+                </div>
+                <div class="footer">
+@foreach (__('dashboard.credits') as $context)
+                    {!! $context !!}<br>
+@endforeach
                 </div>
             </div>
 

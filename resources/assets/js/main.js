@@ -3,7 +3,7 @@ $(document).ready(function() {
     var btnName = [ 'edit', 'delete' ];
 
     var isSelected = function() {
-        return !($('#main_delete').hasClass('disabled'));
+        return !($('#main_' + btnName[0]).hasClass('disabled'));
     };
     var getSelectedRow = function() {
         return $table.row('.selected').data();

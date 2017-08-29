@@ -1,5 +1,7 @@
 $(document).ready(function() {
     var $table, $messages;
+    var btnName = [ 'edit', 'delete' ];
+
     var isSelected = function() {
         return !($('#main_delete').hasClass('disabled'));
     };
@@ -57,14 +59,20 @@ $(document).ready(function() {
                 $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
             },
             drawCallback: function(settings) {
-                $('.pagination').append('<li class="paginate_button disabled" id="main_edit"><a href="#" id="btn-edit" data-toggle="modal" data-target="#modal-edit">' + $messages.edit.label + '</a></li>');
-                $('.pagination').append('<li class="paginate_button disabled" id="main_delete"><a href="#" id="btn-delete" data-toggle="modal" data-target="#modal-delete">' + $messages.delete.label + '</a></li>');
+                var btnElem = function(name) {
+                    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + eval('$messages.' + name + '.label') + '</a></li>';
+                };
+                btnName.forEach(function(name) {
+                    $('.pagination').append(btnElem(name));
+                });
+
                 $('#btn-edit').on('click', function() {
                     if (!isSelected()) return false;
 
                     var obj = getSelectedRow();
                     for (var key in obj) $('#input-' + key).val(obj[key]);
                 });
+
                 $('#btn-delete').on('click', function() {
                     if (!isSelected()) return false;
                 });
@@ -79,15 +87,18 @@ $(document).ready(function() {
 
         if ($rows.hasClass('selected')) {
             $rows.removeClass('selected');
-            $('#main_edit').addClass('disabled');
-            $('#main_delete').addClass('disabled');
+
+            btnName.forEach(function(name) {
+                $('#main_' + name).addClass('disabled');
+            });
         } else {
             $table.$('tr.selected').removeClass('selected');
             $rows.addClass('selected');
 
             if ($table.row('.selected').data() != null) {
-                $('#main_edit').removeClass('disabled');
-                $('#main_delete').removeClass('disabled');
+                btnName.forEach(function(name) {
+                    $('#main_' + name).removeClass('disabled');
+                });
             }
         }
     });

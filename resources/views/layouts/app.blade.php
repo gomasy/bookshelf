@@ -18,8 +18,8 @@
                 <div class="container">
                     <div class="navbar-header">
                         <!-- Branding Image -->
-                        <a class="navbar-brand" id="brand" href="{{ url('/') }}">
-                            {{ config('app.name', 'Laravel') }}
+                        <a class="navbar-brand" id="brand" href="{{ route('home') }}">
+                            {{ config('app.name') }}
                         </a>
 @if (!App::isDownForMaintenance())
 

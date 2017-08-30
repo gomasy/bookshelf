@@ -7,7 +7,7 @@
 @if (!App::isDownForMaintenance())
         <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name') }}</title>
         <link href="{{ asset('assets/icon.png') }}" rel="icon" type="image/png">
         <script src="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['main.js'], 2)) }}"></script>
 @yield('js')

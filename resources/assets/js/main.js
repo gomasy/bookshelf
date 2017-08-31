@@ -100,8 +100,8 @@ $(document).ready(function() {
             });
         } else {
             $('tr.selected').removeClass('selected');
-
             $row.addClass('selected');
+
             if ($table.row('.selected').data() != null) {
                 btnName.forEach(function(name) {
                     $('#main_' + name).removeClass('disabled');

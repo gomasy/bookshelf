@@ -65,7 +65,7 @@ $(document).ready(function() {
             rowCallback: function(row, data, index) {
                 $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
             },
-            drawCallback: function(settings) {
+            drawCallback: function() {
                 var btnElem = function(name) {
                     return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + eval('$messages.' + name + '.label') + '</a></li>';
                 };

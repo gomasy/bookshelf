@@ -28,9 +28,7 @@ module.exports = {
         }),
         new webpack.ProvidePlugin({
             $: 'jquery',
-            jquery: 'jquery',
             jQuery: 'jquery',
-            'window.jQuery': 'jquery',
         }),
         new ManifestPlugin({
             fileName: '/assets/manifest.json',

@@ -14,9 +14,16 @@ $(document).ready(function() {
 
         return data;
     };
-    var validErr = function(context) {
+    var validErr = function(errors) {
         var $msg = $messages.invalid;
-        $msg.message = '<p>' + context + '</p>';
+        $msg.message = '<p>';
+        for (key in errors) {
+            errors[key].forEach(function(error) {
+                $msg.message += error + '<br>';
+            });
+        }
+        $msg.message += '</p>';
+
         $.notify($msg, { type: 'warning' });
     };
 
@@ -120,7 +127,7 @@ $(document).ready(function() {
                 var f = {
                     404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
                     409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
-                    422: function() { validErr(result.responseJSON.code[0]); },
+                    422: function() { validErr(result.responseJSON); },
                 };
                 f[result.status]();
             },
@@ -141,6 +148,9 @@ $(document).ready(function() {
                 $table.row.add(result.data).draw(false);
                 $form[0].reset();
             },
+            error: function(result) {
+                if (result.status == 422) validErr(result.responseJSON);
+            }
         });
     });
 
@@ -160,7 +170,7 @@ $(document).ready(function() {
             error: function(result) {
                 var f = {
                     404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
-                    422: function() { validErr(result.responseJSON.id[0]); },
+                    422: function() { validErr(result.responseJSON); },
                 };
                 f[result.status]();
             },

@@ -99,7 +99,7 @@ $(document).ready(function() {
                 $('#main_' + name).addClass('disabled');
             });
         } else {
-            $table.$('tr.selected').removeClass('selected');
+            $('tr.selected').removeClass('selected');
             $rows.addClass('selected');
 
             if ($table.row('.selected').data() != null) {

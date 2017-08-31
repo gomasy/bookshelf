@@ -90,18 +90,18 @@ $(document).ready(function() {
     });
 
     $('#main tbody').on('click', 'tr', function() {
-        var $rows = $(this);
+        var $row = $(this);
 
-        if ($rows.hasClass('selected')) {
-            $rows.removeClass('selected');
+        if ($row.hasClass('selected')) {
+            $row.removeClass('selected');
 
             btnName.forEach(function(name) {
                 $('#main_' + name).addClass('disabled');
             });
         } else {
             $('tr.selected').removeClass('selected');
-            $rows.addClass('selected');
 
+            $row.addClass('selected');
             if ($table.row('.selected').data() != null) {
                 btnName.forEach(function(name) {
                     $('#main_' + name).removeClass('disabled');

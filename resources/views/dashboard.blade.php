@@ -31,11 +31,11 @@
                             <table class="table table-hover table-striped" id="main">
                                 <thead>
                                     <tr>
-                                        <th>{{ __('dashboard.title') }}</th>
-                                        <th>{{ __('dashboard.volume') }}</th>
-                                        <th>{{ __('dashboard.authors') }}</th>
-                                        <th>{{ __('dashboard.published_date') }}</th>
-                                        <th>{{ __('dashboard.ndl_url') }}</th>
+                                        <th>{{ __('validation.attributes.title') }}</th>
+                                        <th>{{ __('validation.attributes.volume') }}</th>
+                                        <th>{{ __('validation.attributes.authors') }}</th>
+                                        <th>{{ __('validation.attributes.published_date') }}</th>
+                                        <th>{{ __('validation.attributes.ndl_url') }}</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -55,30 +55,30 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>編集</h4>
+                            <h4>{{ __('dashboard.edit') }}</h4>
                         </div>
                         <form class="form-horizontal" id="form-edit" role="form" action="{{ route('edit') }}" method="POST">
                             <div class="modal-body">
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">タイトル</label>
+                                    <label class="col-sm-2 control-label">{{ __('validation.attributes.title') }}</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" id="input-title" type="text" name="title" value="" maxlength="255" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">巻号</label>
+                                    <label class="col-sm-2 control-label">{{ __('validation.attributes.volume') }}</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" id="input-volume" type="text" name="volume" value="" maxlength="255">
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">著者等</label>
+                                    <label class="col-sm-2 control-label">{{ __('validation.attributes.authors') }}</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" id="input-authors" type="text" name="authors" value="" maxlength="255" required>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-sm-2 control-label">出版日</label>
+                                    <label class="col-sm-2 control-label">{{ __('validation.attributes.published_date') }}</label>
                                     <div class="col-sm-9">
                                         <input class="form-control" id="input-published_date" type="date" name="published_date" value="" required>
                                     </div>
@@ -86,8 +86,8 @@
                             </div>
                             <div class="modal-footer">
                                 {{ csrf_field() }}
-                                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                                <button type="submit" class="btn btn-info" id="btn-edit-confirm">決定</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('dashboard.cancel') }}</button>
+                                <button type="submit" class="btn btn-info" id="btn-edit-confirm">{{ __('dashboard.ok') }}</button>
                             </div>
                         </form>
                     </div>
@@ -98,16 +98,16 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>削除</h4>
+                            <h4>{{ __('dashboard.delete') }}</h4>
                         </div>
                         <div class="modal-body">
-                            続行します、よろしいですか？
+                            {{ __('dashboard.confirm') }}
                         </div>
                         <div class="modal-footer">
                             <form id="form-delete" role="form" action="{{ route('delete') }}" method="POST">
                                 {{ csrf_field() }}
-                                <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
-                                <button type="submit" class="btn btn-danger" id="btn-delete-confirm">続行</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('dashboard.cancel') }}</button>
+                                <button type="submit" class="btn btn-danger" id="btn-delete-confirm">{{ __('dashboard.ok') }}</button>
                             </form>
                         </div>
                     </div>

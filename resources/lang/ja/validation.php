@@ -117,11 +117,21 @@ return [
     */
 
     'attributes' => [
+        // account
         'name' => '名前',
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'password-confirm' => 'パスワード確認',
+
+        // register book
         'code' => '入力コード',
+
+        // edit book
+        'title' => 'タイトル',
+        'volume' => '巻号',
+        'authors' => '著者等',
+        'published_date' => '出版日',
+        'ndl_url' => 'URL',
     ],
 
 ];

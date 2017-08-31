@@ -28,7 +28,12 @@
             }
         },
         "edit": {
-            "label": "編集"
+            "label": "編集",
+            "failure": {
+                "icon": "glyphicon glyphicon-warning-sign",
+                "title": "<strong>エラー</strong>",
+                "message": ""
+            }
         },
         "not_exist": {
             "icon": "glyphicon glyphicon-exclamation-sign",

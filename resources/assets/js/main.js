@@ -28,11 +28,13 @@ $(document).ready(function() {
     };
 
     $.notifyDefaults({
+        alow_dismiss: true,
+        newest_on_top: true,
+        mouse_over: 'pause',
         placement: {
             from: 'bottom',
             align: 'right',
         },
-        mouse_over: 'pause',
     });
 
     $.getJSON('assets/messages.json', function(obj) {

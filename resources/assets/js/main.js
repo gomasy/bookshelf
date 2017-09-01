@@ -88,7 +88,7 @@ $(document).ready(function() {
             },
         });
 
-        if (typeof showResult == 'function') showResult();
+        if (typeof showResult == 'function') showResult($.notify, $messages);
     });
 
     $('#main tbody').on('click', 'tr', function() {

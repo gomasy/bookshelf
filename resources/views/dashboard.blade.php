@@ -3,9 +3,9 @@
 @section('js')
 @if (session('result'))
         <script>
-            function showResult() {
+            function showResult(provider, messages) {
 @if (session('result')->status() === 404)
-                alert('no book were found.');
+                provider(messages.not_exist, { type: 'warning' });
 @endif
             }
         </script>

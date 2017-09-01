@@ -48,7 +48,7 @@
                             <li><a class="button" id="btn-register" href="{{ route('register') }}">{{ __('auth.register') }}</a></li>
 @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
+                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li>
                                         <a id="menu-account" href="{{ route('account') }}">{{ __('account.update.header') }}</a>

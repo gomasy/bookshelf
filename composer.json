@@ -48,7 +48,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "test": "@php -dzend_extension=xdebug.so $(which phpunit)",
+        "test": "phpunit",
         "coveralls": "coveralls"
     },
     "config": {

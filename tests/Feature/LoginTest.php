@@ -4,14 +4,13 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App;
 
 class LoginTest extends TestCase
 {
-    use DatabaseMigrations;
+    use RefreshDatabase;
 
     public function testBasicTest()
     {

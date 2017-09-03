@@ -43,10 +43,11 @@
 @yield('navbar')
 
                             <!-- Authentication Links -->
-@if (Auth::guest())
+@guest
                             <li><a class="button" id="btn-login" href="{{ route('login') }}">{{ __('auth.login') }}</a></li>
                             <li><a class="button" id="btn-register" href="{{ route('register') }}">{{ __('auth.register') }}</a></li>
-@else
+@endguest
+@auth
                             <li class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
@@ -59,7 +60,7 @@
                                     </li>
                                 </ul>
                             </li>
-@endif
+@endauth
                         </ul>
 @endif
                     </div>

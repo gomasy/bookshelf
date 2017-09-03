@@ -6,7 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App;
+use App\Book;
+use App\User;
 
 class BookTest extends TestCase
 {
@@ -14,8 +15,8 @@ class BookTest extends TestCase
 
     public function testIndex()
     {
-        $book = factory(App\Book::class)->create();
-        $user = App\User::find($book->user_id);
+        $book = factory(Book::class)->create();
+        $user = User::find($book->user_id);
 
         $response = $this->actingAs($user)
             ->get('/list', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
@@ -26,7 +27,7 @@ class BookTest extends TestCase
     public function testCreate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
 
         // success
         $this->actingAs($user)
@@ -66,8 +67,8 @@ class BookTest extends TestCase
             'authors' => 'Example',
             'published_date' => '1970-01-01',
         ];
-        $book = factory(App\Book::class)->create();
-        $user = App\User::find($book->user_id);
+        $book = factory(Book::class)->create();
+        $user = User::find($book->user_id);
 
         // success
         $this->actingAs($user)
@@ -79,8 +80,8 @@ class BookTest extends TestCase
     public function testDelete()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $book = factory(App\Book::class)->create();
-        $user = App\User::find($book->user_id);
+        $book = factory(Book::class)->create();
+        $user = User::find($book->user_id);
 
         // success
         $this->actingAs($user)

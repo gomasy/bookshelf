@@ -1,8 +1,9 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Book as Book;
-use App\User as User;
+use App\Book;
+use App\User;
+
 /*
 |--------------------------------------------------------------------------
 | Model Factories

@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App;
+use App\User;
 
 class LoginTest extends TestCase
 {
@@ -28,7 +28,7 @@ class LoginTest extends TestCase
 
     public function testLoggedIn()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $response = $this->actingAs($user)->get('/');
         $response->assertViewIs('dashboard');
         $response->assertStatus(200);
@@ -36,7 +36,7 @@ class LoginTest extends TestCase
 
     public function testLogout()
     {
-        $user = factory(App\User::class)->create();
+        $user = factory(User::class)->create();
         $this->actingAs($user)->post('/logout')->assertRedirect('/');
     }
 }

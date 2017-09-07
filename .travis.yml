@@ -9,7 +9,6 @@ install:
   - npm run build
 before_script:
   - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
-  - mysql -e 'SET GLOBAL innodb_file_format_max = Barracuda;'
   - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
   - mysql -e 'CREATE DATABASE `forge`;'
   - cp .env.travis .env

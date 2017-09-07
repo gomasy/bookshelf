@@ -1,8 +1,6 @@
 <?php
 
 use Faker\Generator as Faker;
-use App\Book;
-use App\User;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,9 +13,8 @@ use App\User;
 |
 */
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
-$factory->define(Book::class, function (Faker $faker) {
-    $user = factory(User::class)->create();
+$factory->define(\App\Book::class, function (Faker $faker) {
+    $user = factory(\App\User::class)->create();
 
     return [
         'id'             => $user->next_id,

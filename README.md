@@ -32,4 +32,4 @@ BooksManager
     $ php artisan migrate
 
 ## サンプル
-[Books Manager](https://books.gomasy.jp/) (https://books.gomasy.jp/)
+* https://books.gomasy.jp/

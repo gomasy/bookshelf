@@ -6,11 +6,9 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-use App\Http\Requests\AccountDeleteRequest;
-use App\Http\Requests\AccountUpdateRequest;
+use App\Http\Requests\AccountDeleteRequest as DeleteRequest;
+use App\Http\Requests\AccountUpdateRequest as UpdateRequest;
 use App\User;
-use Auth;
-use Hash;
 
 class AccountController extends Controller
 {
@@ -24,12 +22,12 @@ class AccountController extends Controller
         return view('account/update');
     }
 
-    public function update(AccountUpdateRequest $request)
+    public function update(UpdateRequest $request)
     {
         $configs = $request->has('password') ?
             $request->all() : $request->except('password');
 
-        $user = User::find(Auth::id());
+        $user = User::find(\Auth::id());
         $user->fill($configs);
         $user->save();
 
@@ -41,11 +39,11 @@ class AccountController extends Controller
         return view('account/delete');
     }
 
-    public function confirm_delete(AccountDeleteRequest $request)
+    public function confirm_delete(DeleteRequest $request)
     {
-        if (Hash::check($request->password, Auth::user()['password'])) {
-            User::find(Auth::id())->delete();
-            Auth::logout();
+        if (\Hash::check($request->password, \Auth::user()['password'])) {
+            User::find(\Auth::id())->delete();
+            \Auth::logout();
 
             return redirect('/');
         } else {

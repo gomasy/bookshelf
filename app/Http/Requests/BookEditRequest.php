@@ -24,6 +24,8 @@ class BookEditRequest extends FormRequest
      */
     public function rules()
     {
+        $this->sanitize();
+
         return [
             'title' => [ 'required', 'max:255' ],
             'volume' => [ 'max:255' ],
@@ -35,5 +37,13 @@ class BookEditRequest extends FormRequest
                 'before:' . date('Y-m-d', strtotime('+1 day')),
             ],
         ];
+    }
+
+    public function sanitize()
+    {
+        $input = $this->all();
+        $input['volume'] = $input['volume'] ?? '';
+
+        $this->replace($input);
     }
 }

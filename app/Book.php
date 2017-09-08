@@ -5,8 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-use Auth;
-
 class Book extends Model
 {
     /**
@@ -28,7 +26,7 @@ class Book extends Model
         parent::boot();
 
         static::addGlobalScope('user_id', function(Builder $builder) {
-            $builder->where('user_id', Auth::id());
+            $builder->where('user_id', \Auth::id());
         });
     }
 

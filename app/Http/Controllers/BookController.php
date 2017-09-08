@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests\BookCreateRequest;
+use App\Http\Requests\BookCreateRequest as CreateRequest;
 
 class BookController extends BookBaseController
 {
@@ -13,7 +13,7 @@ class BookController extends BookBaseController
         return $request->ajax() ? parent::index($request) : redirect('/');
     }
 
-    public function create(BookCreateRequest $request)
+    public function create(CreateRequest $request)
     {
         $result = parent::create($request);
 

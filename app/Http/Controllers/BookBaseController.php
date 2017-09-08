@@ -8,11 +8,10 @@ use Illuminate\Support\Facades\Validator;
 
 use App\Book;
 use App\Facades\NDL;
-use App\Http\Requests\BookCreateRequest;
-use App\Http\Requests\BookEditRequest;
-use App\Http\Requests\BookDeleteRequest;
+use App\Http\Requests\BookCreateRequest as CreateRequest;
+use App\Http\Requests\BookEditRequest as EditRequest;
+use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\User;
-use Auth;
 
 class BookBaseController extends Controller
 {
@@ -24,8 +23,8 @@ class BookBaseController extends Controller
     public function getHeader()
     {
         return [
-            'id' => Auth::user()['next_id'],
-            'user_id' => Auth::id(),
+            'id' => \Auth::user()['next_id'],
+            'user_id' => \Auth::id(),
         ];
     }
 
@@ -34,7 +33,7 @@ class BookBaseController extends Controller
         return response()->ajax(Book::get());
     }
 
-    public function create(BookCreateRequest $request)
+    public function create(CreateRequest $request)
     {
         $book = NDL::query($request->code);
         if (isset($book)) {
@@ -42,7 +41,7 @@ class BookBaseController extends Controller
                 $book = array_merge($this->getHeader(), $book);
                 Book::create($book);
 
-                $user = Auth::user();
+                $user = \Auth::user();
                 $user->next_id++;
                 $user->save();
 
@@ -55,19 +54,15 @@ class BookBaseController extends Controller
         }
     }
 
-    public function edit(BookEditRequest $request)
+    public function edit(EditRequest $request)
     {
         $book = Book::find($request->id);
-        $book->title = $request->title;
-        $book->volume = $request->volume ?? '';
-        $book->authors = $request->authors;
-        $book->published_date = $request->published_date;
-        $book->save();
+        $book->fill($request->all())->save();
 
         return response()->ajax($book);
     }
 
-    public function delete(BookDeleteRequest $request)
+    public function delete(DeleteRequest $request)
     {
         $book = Book::search($request->id);
         if ($book->count()) {

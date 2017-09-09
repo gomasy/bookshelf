@@ -55,7 +55,7 @@
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-6 col-md-offset-4">
-                                            <a href="{{ route('account/delete') }}">アカウントを削除</a>
+                                            <a href="{{ route('account/delete') }}">{{ __('account.delete.link') }}</a>
                                         </div>
                                     </div>
                                 </form>

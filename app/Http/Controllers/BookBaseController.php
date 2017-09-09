@@ -65,10 +65,6 @@ class BookBaseController extends Controller
     public function delete(DeleteRequest $request)
     {
         $book = Book::search($request->id);
-        if ($book->count()) {
-            $book->delete();
-        } else {
-            return response(NULL, 404);
-        }
+        $book->count() ? $book->delete() : return response(NULL, 404);
     }
 }

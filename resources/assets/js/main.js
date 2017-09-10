@@ -14,11 +14,11 @@ $(document).ready(function() {
 
         return data;
     };
-    var validErr = function(errors) {
+    var validErr = function(res) {
         var $msg = $messages.invalid;
         $msg.message = '<p>';
-        for (key in errors) {
-            errors[key].forEach(function(error) {
+        for (key in res.errors) {
+            res.errors[key].forEach(function(error) {
                 $msg.message += error + '<br>';
             });
         }

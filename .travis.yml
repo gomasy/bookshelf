@@ -6,13 +6,13 @@ php:
 install:
   - composer install
   - npm install
-  - npm run build
 before_script:
   - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
   - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
   - mysql -e 'CREATE DATABASE `forge`;'
   - ln -s .env.travis .env
 script:
+  - npm run build
   - composer test
 after_script:
   - composer coveralls

@@ -64,12 +64,12 @@ $(document).ready(function() {
             scrollY: true,
             deferRender: true,
             ajax: 'list',
-            rowCallback: function(row, data, index) {
+            rowCallback: function(row, data) {
                 $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
             },
             drawCallback: function() {
                 var btnElem = function(name) {
-                    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + eval('$messages.' + name + '.label') + '</a></li>';
+                    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + $messages[name].label + '</a></li>';
                 };
                 btnName.forEach(function(name) {
                     $('.pagination').append(btnElem(name));

@@ -99,17 +99,14 @@ $(document).ready(function() {
 
     $('#main tbody').on('click', 'tr', function() {
         var $row = $(this);
-
         if ($row.hasClass('selected')) {
             $row.removeClass('selected');
-
             btnName.forEach(function(name) {
                 $('#main_' + name).addClass('disabled');
             });
         } else {
             $('tr.selected').removeClass('selected');
             $row.addClass('selected');
-
             if ($table.row('.selected').data() != null) {
                 btnName.forEach(function(name) {
                     $('#main_' + name).removeClass('disabled');

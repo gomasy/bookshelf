@@ -8,17 +8,14 @@ $(document).ready(function() {
     var getSelectedRow = function() {
         return $table.row('.selected').data();
     };
-    var createPostData = function($form) {
+    var sendRequest = function(success, error, $form, id) {
         var data = $form.serialize();
-        data += '&id=' + getSelectedRow().id;
+        if (id) data += '&id=' + getSelectedRow().id;
 
-        return data;
-    };
-    var sendRequest = function($form, success, error) {
         $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
-            data: createPostData($form),
+            data: data,
             success: success,
             error: error,
         });
@@ -123,10 +120,11 @@ $(document).ready(function() {
 
     $('#form-register').on('submit', function(event) {
         event.preventDefault();
-        sendRequest($(this),
+        var $form = $(this);
+        sendRequest(
             function(result) {
                 $table.row.add(result.data).draw(false);
-                $(this)[0].reset();
+                $form[0].reset();
                 $.notify($messages.add.success, { type: 'success' });
             },
             function(result) {
@@ -136,26 +134,27 @@ $(document).ready(function() {
                     422: function() { validErr(result.responseJSON); },
                 };
                 f[result.status]();
-            });
+            }, $form);
     });
 
     $('#form-edit').on('submit', function(event) {
         event.preventDefault();
-        sendRequest($(this),
+        var $form = $(this);
+        sendRequest(
             function(result) {
                 $('#modal-edit').modal('hide');
                 $table.row('.selected').remove();
                 $table.row.add(result.data).draw(false);
-                $(this)[0].reset();
+                $form[0].reset();
             },
             function(result) {
                 if (result.status == 422) validErr(result.responseJSON);
-            });
+            }, $form, true);
     });
 
     $('#form-delete').on('submit', function(event) {
         event.preventDefault();
-        sendRequest($(this),
+        sendRequest(
             function(result) {
                 $('#modal-delete').modal('hide');
                 $table.row('.selected').remove().draw(false);
@@ -167,7 +166,7 @@ $(document).ready(function() {
                     422: function() { validErr(result.responseJSON); },
                 };
                 f[result.status]();
-            });
+            }, $(this), true);
     });
 
     $('#btn-scan').on('click', function() {

@@ -6,11 +6,12 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Book;
-use App\Facades\NDL;
 use App\Http\Requests\BookCreateRequest as CreateRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
+
+use App\Book;
+use App\Facades\NDL;
 use App\User;
 
 class BookBaseController extends Controller

@@ -31,7 +31,7 @@ module.exports = {
             jQuery: 'jquery',
         }),
         new ManifestPlugin({
-            fileName: '/assets/manifest.json',
+            fileName: './assets/manifest.json',
         }),
     ],
 };

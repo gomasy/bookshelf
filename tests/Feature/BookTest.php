@@ -48,7 +48,7 @@ class BookTest extends TestCase
 
         // not found
         $this->actingAs($user)
-            ->post('/create', [ 'code' => '0000000000000' ], $headers)
+            ->post('/create', [ 'code' => '1234567890123' ], $headers)
             ->assertStatus(404);
 
         // invalid

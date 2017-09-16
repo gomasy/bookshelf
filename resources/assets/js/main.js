@@ -1,4 +1,14 @@
 $(document).ready(function() {
+    var lang = document.documentElement.lang;
+    $messages = require('../messages.json')[lang];
+
+    if (typeof showResult == 'function') showResult($.notify, $messages);
+    if (lang == 'ja') {
+        $.extend($.fn.dataTable.defaults, {
+            language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
+        });
+    }
+
     var $table, $messages;
     var btnName = [ 'edit', 'delete' ];
 
@@ -8,16 +18,14 @@ $(document).ready(function() {
     var getSelectedRow = function() {
         return $table.row('.selected').data();
     };
-    var sendRequest = function(success, error, $form, id) {
+    var sendRequest = function($form, hasId) {
         var data = $form.serialize();
-        if (id) data += '&id=' + getSelectedRow().id;
+        if (hasId) data += '&id=' + getSelectedRow().id;
 
-        $.ajax({
+        return $.ajax({
             url: $form.attr('action'),
             type: $form.attr('method'),
             data: data,
-            success: success,
-            error: error,
         });
     };
     var validErr = function(res) {
@@ -43,58 +51,45 @@ $(document).ready(function() {
         },
     });
 
-    $.getJSON('assets/messages.json', function(obj) {
-        var lang = document.documentElement.lang;
-        $messages = obj[lang];
-
-        if (lang == 'ja') {
-            $.extend($.fn.dataTable.defaults, {
-                language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
+    $table = $('#main').DataTable({
+        columns: [
+            { data: 'title' },
+            { data: 'volume' },
+            { data: 'authors' },
+            { data: 'published_date' },
+            { data: 'ndl_url' },
+        ],
+        columnDefs: [
+            { visible: false, targets: 4 },
+        ],
+        order: [[ 0, 'asc' ], [ 3, 'asc' ]],
+        lengthMenu: [ 10, 20, 30, 50, 100, 200 ],
+        displayLength: 100,
+        scrollY: true,
+        deferRender: true,
+        ajax: 'list',
+        rowCallback: function(row, data) {
+            $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
+        },
+        drawCallback: function() {
+            var btnElem = function(name) {
+                return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + $messages[name].label + '</a></li>';
+            };
+            btnName.forEach(function(name) {
+                $('.pagination').append(btnElem(name));
             });
-        }
 
-        $table = $('#main').DataTable({
-            columns: [
-                { data: 'title' },
-                { data: 'volume' },
-                { data: 'authors' },
-                { data: 'published_date' },
-                { data: 'ndl_url' },
-            ],
-            columnDefs: [
-                { visible: false, targets: 4 },
-            ],
-            order: [[ 0, 'asc' ], [ 3, 'asc' ]],
-            lengthMenu: [ 10, 20, 30, 50, 100, 200 ],
-            displayLength: 100,
-            scrollY: true,
-            deferRender: true,
-            ajax: 'list',
-            rowCallback: function(row, data) {
-                $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
-            },
-            drawCallback: function() {
-                var btnElem = function(name) {
-                    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + $messages[name].label + '</a></li>';
-                };
-                btnName.forEach(function(name) {
-                    $('.pagination').append(btnElem(name));
-                });
+            $('#btn-edit').on('click', function() {
+                if (!isSelected()) return false;
 
-                $('#btn-edit').on('click', function() {
-                    if (!isSelected()) return false;
+                var obj = getSelectedRow();
+                for (var key in obj) $('#input-' + key).val(obj[key]);
+            });
 
-                    var obj = getSelectedRow();
-                    for (var key in obj) $('#input-' + key).val(obj[key]);
-                });
-
-                $('#btn-delete').on('click', function() {
-                    if (!isSelected()) return false;
-                });
-            },
-        });
-
-        if (typeof showResult == 'function') showResult($.notify, $messages);
+            $('#btn-delete').on('click', function() {
+                if (!isSelected()) return false;
+            });
+        },
     });
 
     $('#main tbody').on('click', 'tr', function() {
@@ -118,52 +113,58 @@ $(document).ready(function() {
     $('#form-register').on('submit', function(event) {
         event.preventDefault();
         var $form = $(this);
-        sendRequest(
-            function(result) {
-                $table.row.add(result.data).draw(false);
-                $form[0].reset();
-                $.notify($messages.add.success, { type: 'success' });
-            },
-            function(result) {
-                var f = {
-                    404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
-                    409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
-                    422: function() { validErr(result.responseJSON); },
-                };
-                f[result.status]();
-            }, $form);
+        var $ajax = sendRequest($form);
+
+        $ajax.done(function(result) {
+            $table.row.add(result.data).draw(false);
+            $form[0].reset();
+            $.notify($messages.add.success, { type: 'success' });
+        });
+
+        $ajax.fail(function(result) {
+            var f = {
+                404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
+                409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
+                422: function() { validErr(result.responseJSON); },
+            };
+            f[result.status]();
+        });
     });
 
     $('#form-edit').on('submit', function(event) {
         event.preventDefault();
         var $form = $(this);
-        sendRequest(
-            function(result) {
-                $('#modal-edit').modal('hide');
-                $table.row('.selected').remove();
-                $table.row.add(result.data).draw(false);
-                $form[0].reset();
-            },
-            function(result) {
-                if (result.status == 422) validErr(result.responseJSON);
-            }, $form, true);
+        var $ajax = sendRequest($form, true);
+
+        $ajax.done(function(result) {
+            $('#modal-edit').modal('hide');
+            $table.row('.selected').remove();
+            $table.row.add(result.data).draw(false);
+            $form[0].reset();
+        });
+
+        $ajax.fail(function(result) {
+            result.status == 422 && validErr(result.responseJSON);
+        });
     });
 
     $('#form-delete').on('submit', function(event) {
         event.preventDefault();
-        sendRequest(
-            function(result) {
-                $('#modal-delete').modal('hide');
-                $table.row('.selected').remove().draw(false);
-                $.notify($messages.delete.success, { type: 'success' });
-            },
-            function(result) {
-                var f = {
-                    404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
-                    422: function() { validErr(result.responseJSON); },
-                };
-                f[result.status]();
-            }, $(this), true);
+        var $ajax = sendRequest($(this), true);
+
+        $ajax.done(function(result) {
+            $('#modal-delete').modal('hide');
+            $table.row('.selected').remove().draw(false);
+            $.notify($messages.delete.success, { type: 'success' });
+        });
+
+        $ajax.fail(function(result) {
+            var f = {
+                404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
+                422: function() { validErr(result.responseJSON); },
+            };
+            f[result.status]();
+        });
     });
 
     $('#btn-scan').on('click', function() {

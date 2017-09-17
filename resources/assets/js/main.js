@@ -112,16 +112,17 @@ $(document).ready(function() {
 
     $('#form-register').on('submit', function(event) {
         event.preventDefault();
-        var $form = $(this);
-        var $ajax = sendRequest($form);
 
-        $ajax.done(function(result) {
+        var $form = $(this);
+        var $req = sendRequest($form);
+
+        $req.done(function(result) {
             $table.row.add(result.data).draw(false);
             $form[0].reset();
             $.notify($messages.add.success, { type: 'success' });
         });
 
-        $ajax.fail(function(result) {
+        $req.fail(function(result) {
             var f = {
                 404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
                 409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
@@ -133,32 +134,34 @@ $(document).ready(function() {
 
     $('#form-edit').on('submit', function(event) {
         event.preventDefault();
-        var $form = $(this);
-        var $ajax = sendRequest($form, true);
 
-        $ajax.done(function(result) {
+        var $form = $(this);
+        var $req = sendRequest($form, true);
+
+        $req.done(function(result) {
             $('#modal-edit').modal('hide');
             $table.row('.selected').remove();
             $table.row.add(result.data).draw(false);
             $form[0].reset();
         });
 
-        $ajax.fail(function(result) {
+        $req.fail(function(result) {
             result.status == 422 && validErr(result.responseJSON);
         });
     });
 
     $('#form-delete').on('submit', function(event) {
         event.preventDefault();
-        var $ajax = sendRequest($(this), true);
 
-        $ajax.done(function(result) {
+        var $req = sendRequest($(this), true);
+
+        $req.done(function(result) {
             $('#modal-delete').modal('hide');
             $table.row('.selected').remove().draw(false);
             $.notify($messages.delete.success, { type: 'success' });
         });
 
-        $ajax.fail(function(result) {
+        $req.fail(function(result) {
             var f = {
                 404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
                 422: function() { validErr(result.responseJSON); },

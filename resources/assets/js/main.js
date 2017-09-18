@@ -1,16 +1,15 @@
 $(document).ready(function() {
+    var btnName = [ 'edit', 'delete' ];
     var lang = document.documentElement.lang;
-    $messages = require('../messages.json')[lang];
+    var messages = require('../messages.json')[lang];
+    var $table;
 
-    if (typeof showResult == 'function') showResult($.notify, $messages);
+    if (typeof showResult == 'function') showResult($.notify, messages);
     if (lang == 'ja') {
         $.extend($.fn.dataTable.defaults, {
             language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
         });
     }
-
-    var $table, $messages;
-    var btnName = [ 'edit', 'delete' ];
 
     var isSelected = function() {
         return !($('#main_' + btnName[0]).hasClass('disabled'));
@@ -29,16 +28,16 @@ $(document).ready(function() {
         });
     };
     var validErr = function(res) {
-        var $msg = $messages.invalid;
-        $msg.message = '<p>';
+        var msg = messages.invalid;
+        msg.message = '<p>';
         for (key in res.errors) {
             res.errors[key].forEach(function(error) {
-                $msg.message += error + '<br>';
+                msg.message += error + '<br>';
             });
         }
-        $msg.message += '</p>';
+        msg.message += '</p>';
 
-        $.notify($msg, { type: 'warning' });
+        $.notify(msg, { type: 'warning' });
     };
 
     $.notifyDefaults({
@@ -69,11 +68,11 @@ $(document).ready(function() {
         deferRender: true,
         ajax: 'list',
         rowCallback: function(row, data) {
-            $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + $messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
+            $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
         },
         drawCallback: function() {
             var btnElem = function(name) {
-                return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + $messages[name].label + '</a></li>';
+                return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + messages[name].label + '</a></li>';
             };
             btnName.forEach(function(name) {
                 $('.pagination').append(btnElem(name));
@@ -119,13 +118,13 @@ $(document).ready(function() {
         $req.done(function(result) {
             $table.row.add(result.data).draw(false);
             $form[0].reset();
-            $.notify($messages.add.success, { type: 'success' });
+            $.notify(messages.add.success, { type: 'success' });
         });
 
         $req.fail(function(result) {
             var f = {
-                404: function() { $.notify($messages.not_exist, { type: 'warning' }); },
-                409: function() { $.notify($messages.add.failure, { type: 'danger' }); },
+                404: function() { $.notify(messages.not_exist, { type: 'warning' }); },
+                409: function() { $.notify(messages.add.failure, { type: 'danger' }); },
                 422: function() { validErr(result.responseJSON); },
             };
             f[result.status]();
@@ -158,12 +157,12 @@ $(document).ready(function() {
         $req.done(function(result) {
             $('#modal-delete').modal('hide');
             $table.row('.selected').remove().draw(false);
-            $.notify($messages.delete.success, { type: 'success' });
+            $.notify(messages.delete.success, { type: 'success' });
         });
 
         $req.fail(function(result) {
             var f = {
-                404: function() { $.notify($messages.delete.failure, { type: 'danger' }); },
+                404: function() { $.notify(messages.delete.failure, { type: 'danger' }); },
                 422: function() { validErr(result.responseJSON); },
             };
             f[result.status]();

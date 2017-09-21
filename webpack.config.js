@@ -1,5 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
 
 module.exports = {
@@ -30,6 +31,9 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
+        new CleanWebpackPlugin(
+            path.join(__dirname, '/public/assets/*'),
+        ),
         new ManifestPlugin({
             fileName: './assets/manifest.json',
         }),

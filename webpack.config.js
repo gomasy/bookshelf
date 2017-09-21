@@ -31,9 +31,9 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
-        new CleanWebpackPlugin(
+        new CleanWebpackPlugin([
             path.join(__dirname, '/public/assets/*'),
-        ),
+        ]),
         new ManifestPlugin({
             fileName: './assets/manifest.json',
         }),

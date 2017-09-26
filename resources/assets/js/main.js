@@ -4,13 +4,6 @@ $(document).ready(function() {
     var messages = require('../messages.json')[lang];
     var $table;
 
-    if (typeof showResult == 'function') showResult($.notify, messages);
-    if (lang == 'ja') {
-        $.extend($.fn.dataTable.defaults, {
-            language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
-        });
-    }
-
     var isSelected = function() {
         return !($('#main_' + btnName[0]).hasClass('disabled'));
     };
@@ -49,6 +42,13 @@ $(document).ready(function() {
             align: 'right',
         },
     });
+
+    if (typeof showResult == 'function') showResult($.notify, messages);
+    if (lang == 'ja') {
+        $.extend($.fn.dataTable.defaults, {
+            language: { url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json' },
+        });
+    }
 
     $table = $('#main').DataTable({
         columns: [

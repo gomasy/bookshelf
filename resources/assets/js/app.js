@@ -1,16 +1,16 @@
 // js
-require('jquery');
-require('bootstrap-sass');
-require('bootstrap-notify');
-require('datatables.net-bs');
-require('./main.js');
+import 'jquery';
+import 'bootstrap-sass';
+import 'bootstrap-notify';
+import 'datatables.net-bs';
+import './main.js';
 
 // scss
-require('font-awesome/scss/font-awesome.scss');
-require('../scss/bootstrap/bootstrap.scss');
-require('../scss/datatables.scss');
-require('../scss/app.scss');
+import 'font-awesome/scss/font-awesome.scss';
+import '../scss/bootstrap/bootstrap.scss';
+import '../scss/datatables.scss';
+import '../scss/app.scss';
 
 // other
-require('../icon.png');
-require('../messages.json');
+import '../icon.png';
+import '../messages.json';

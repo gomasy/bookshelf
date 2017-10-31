@@ -133,9 +133,18 @@ $(document).ready(() => {
 
         $req.fail(result => {
             const f = {
-                404: () => { $.notify(messages.not_exist, { type: 'warning' }); },
-                409: () => { $.notify(messages.add.failure, { type: 'danger' }); },
-                422: () => { showFormatError(result.responseJSON); },
+                404: () => {
+                    $.notify(messages.not_exist, { type: 'warning' });
+                },
+                409: () => {
+                    $.notify(messages.add.failure, { type: 'danger' });
+                },
+                422: () => {
+                    showFormatError(result.responseJSON);
+                },
+                500: () => {
+                    $.notify(messages.internal_error, { type: 'danger' });
+                },
             };
             f[result.status]();
         });
@@ -153,7 +162,15 @@ $(document).ready(() => {
         });
 
         $req.fail(result => {
-            result.status == 422 && showFormatError(result.responseJSON);
+            const f = {
+                422: () => {
+                    showFormatError(result.responseJSON);
+                },
+                500: () => {
+                    $.notify(messages.internal_error, { type: 'danger' });
+                },
+            };
+            f[result.status]();
         });
     });
 
@@ -169,8 +186,15 @@ $(document).ready(() => {
 
         $req.fail(result => {
             const f = {
-                404: () => { $.notify(messages.delete.failure, { type: 'danger' }); },
-                422: () => { showFormatError(result.responseJSON); },
+                404: () => {
+                    $.notify(messages.delete.failure, { type: 'danger' });
+                },
+                422: () => {
+                    showFormatError(result.responseJSON);
+                },
+                500: () => {
+                    $.notify(message.internal_error, { type: 'danger' });
+                },
             };
             f[result.status]();
         });

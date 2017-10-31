@@ -44,6 +44,11 @@
             "icon": "glyphicon glyphicon-exclamation-sign",
             "title": "<strong>エラー</strong>",
             "message": ""
+        },
+        "internal_error": {
+            "icon": "glyphicon glyphicon-exclamation-sign",
+            "title": "<strong>エラー</strong>",
+            "message": "<p>内部エラーが発生しました。</p>"
         }
     }
 }

@@ -14,7 +14,7 @@ use App\Book;
 use App\Facades\NDL;
 use App\User;
 
-class BookBaseController extends Controller
+class BookActionController extends Controller
 {
     public function __construct()
     {

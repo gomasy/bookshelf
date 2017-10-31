@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests\BookCreateRequest as CreateRequest;
 
-class BookController extends BookBaseController
+class BookController extends BookActionController
 {
     public function index(Request $request)
     {

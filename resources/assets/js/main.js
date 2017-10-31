@@ -102,8 +102,8 @@ $(document).ready(() => {
         },
     });
 
-    $('#main tbody').on('click', 'tr', () => {
-        const $row = $('#main tbody tr');
+    $('#main tbody').on('click', 'tr', event => {
+        const $row = $(event.currentTarget);
 
         if ($row.hasClass('selected')) {
             $row.removeClass('selected');

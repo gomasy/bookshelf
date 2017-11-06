@@ -86,7 +86,7 @@ class BookTest extends TestCase
         // success
         $this->actingAs($user)
             ->post('/delete', [ 'id' => '1' ], $headers)
-            ->assertStatus(200);
+            ->assertStatus(204);
         $this->assertDatabaseMissing('books', [ 'id' => '1' ]);
 
         // not found

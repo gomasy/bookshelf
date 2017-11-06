@@ -31,7 +31,7 @@ class BookActionController extends Controller
 
     public function index(Request $request)
     {
-        return response()->ajax(Book::get());
+        return [ 'data' => Book::get() ];
     }
 
     public function create(CreateRequest $request)
@@ -46,9 +46,9 @@ class BookActionController extends Controller
                 $user->next_id++;
                 $user->save();
 
-                return response()->ajax($book);
+                return $book;
             } catch (QueryException $e) {
-                return response()->ajax($book, 409);
+                return response($book, 409);
             }
         } else {
             return response(NULL, 404);
@@ -60,12 +60,13 @@ class BookActionController extends Controller
         $book = Book::find($request->id);
         $book->fill($request->all())->save();
 
-        return response()->ajax($book);
+        return $book;
     }
 
     public function delete(DeleteRequest $request)
     {
         $book = Book::search($request->id);
-        return $book->count() ? $book->delete() : response(NULL, 404);
+        return $book->count() ?
+            response($book->delete(), 204) : response(NULL, 404);
     }
 }

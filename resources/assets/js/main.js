@@ -126,7 +126,7 @@ $(document).ready(() => {
         const $req = sendRequest($registerForm);
 
         $req.done(result => {
-            $table.row.add(result.data).draw(false);
+            $table.row.add(result).draw(false);
             $registerForm[0].reset();
             $.notify(messages.add.success, { type: 'success' });
         });
@@ -157,7 +157,7 @@ $(document).ready(() => {
         $req.done(result => {
             $('#modal-edit').modal('hide');
             $table.row('.selected').remove();
-            $table.row.add(result.data).draw(false);
+            $table.row.add(result).draw(false);
             $form[0].reset();
         });
 

@@ -12,16 +12,35 @@ use App\User;
 
 class AccountController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
     public function __construct()
     {
         $this->middleware('auth');
     }
 
+    /**
+     * アカウント更新画面のビューを返す。
+     *
+     * @param Request $request
+     * @return View
+     */
     public function index(Request $request)
     {
         return view('account/update');
     }
 
+    /**
+     * アカウント情報の更新を行う。
+     * UpdateRequestクラスによりバリデーションは行われているので、
+     * 無条件で/へリダイレクトする。
+     *
+     * @param UpdateRequest $request
+     * @return RedirectResponse
+     */
     public function update(UpdateRequest $request)
     {
         $configs = $request->has('password') ?
@@ -34,11 +53,26 @@ class AccountController extends Controller
         return redirect('/');
     }
 
+    /**
+     * アカウント削除の確認画面のビューを返す。
+     *
+     * @param Request $request
+     * @return View
+     */
     public function delete(Request $request)
     {
         return view('account/delete');
     }
 
+    /**
+     * 現在ログイン中のアカウントの削除を行う。
+     * 確認画面で入力されたパスワードの検証を行い、
+     * ハッシュが一致した場合は処理を実行してログアウトする。
+     * 不一致の場合はエラーメッセージを設定した確認画面を返す。
+     *
+     * @param DeleteRequest $request
+     * @return RedirectResponse|View
+     */
     public function confirm_delete(DeleteRequest $request)
     {
         if (\Hash::check($request->password, \Auth::user()['password'])) {

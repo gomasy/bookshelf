@@ -22,7 +22,7 @@ class BookController extends BookActionController
 
     /**
      * 本を登録する。
-     * XHRからのリクエストはスーパークラスのレスポンスを素通しし、
+     * XHRからのリクエストはスーパークラスのレスポンスをそのまま返し、
      * それ以外は/にリダイレクトする。
      * (ISBN読み取り機能による仕様の差異の吸収）
      *

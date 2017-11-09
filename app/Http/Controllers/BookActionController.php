@@ -11,8 +11,11 @@ use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 
 use App\Book;
-use App\Facades\NDL;
 use App\User;
+
+use Facades\ {
+    App\Libs\NDL
+};
 
 class BookActionController extends Controller
 {

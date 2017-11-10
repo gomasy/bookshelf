@@ -35,7 +35,7 @@
                                     <button type="submit" class="btn btn-block btn-primary">{{ __('auth.login') }}</button>
                                 </form>
                                 <hr>
-                                <p><a href="{{ route('password.request') }}" id="lost-btn">{{ __('passwords.forgot') }}</a></p>
+                                <p><a href="{{ route('password.request') }}">{{ __('passwords.forgot') }}</a></p>
                             </div>
                         </div>
                     </div>

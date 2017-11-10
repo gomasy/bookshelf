@@ -43,7 +43,6 @@
                                     <button type="submit" class="btn btn-block btn-primary">{{ __('account.update.submit') }}</button>
                                     <hr>
                                     <p><a href="{{ route('account/delete') }}">{{ __('account.delete.link') }}</a></p>
-                                    </div>
                                 </form>
                             </div>
                         </body>

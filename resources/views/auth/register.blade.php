@@ -42,7 +42,6 @@
                                     <hr>
                                     {{ csrf_field() }}
                                     <button type="submit" class="btn btn-block btn-primary">{{ __('auth.register') }}</button>
-                                    </div>
                                 </form>
                             </div>
                         </div>

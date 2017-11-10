@@ -43,8 +43,7 @@
                                     </div>
                                     <hr>
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-primary">{{ __('passwords.confirm') }}</button>
-                                    </div>
+                                    <button type="submit" class="btn btn-block btn-primary">{{ __('passwords.confirm') }}</button>
                                 </form>
                             </div>
                         </div>

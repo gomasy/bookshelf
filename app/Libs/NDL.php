@@ -18,7 +18,8 @@ class NDL {
     ];
     protected $obj;
 
-    public function query($code) {
+    public function query($code)
+    {
         $this->obj = $this->getItem($this->getRequestURL($code));
 
         if (isset($this->obj)) {
@@ -34,20 +35,23 @@ class NDL {
         }
     }
 
-    protected function getRequestURL($code) {
+    protected function getRequestURL($code)
+    {
         return $this->endpoint.'?'.http_build_query([
             $this->searchType($code) => $code,
         ]);
     }
 
-    protected function getChannel($url) {
+    protected function getChannel($url)
+    {
         $content = file_get_contents($url);
         $xml = preg_replace($this->regexp[0], '', $content);
 
         return simplexml_load_string($xml)->channel;
     }
 
-    public function getItem($url) {
+    public function getItem($url)
+    {
         $channel = $this->getChannel($url);
         for ($i = 0; $i < $channel->totalResults; $i++) {
             if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate))
@@ -55,7 +59,8 @@ class NDL {
         }
     }
 
-    public function getISBN() {
+    public function getISBN()
+    {
         $isbn = NULL;
         foreach ($this->obj->identifier as $val) {
             switch (strlen($val)) {
@@ -67,7 +72,8 @@ class NDL {
         return $isbn;
     }
 
-    public function getJPNO() {
+    public function getJPNO()
+    {
         $jpno = NULL;
         foreach ($this->obj->identifier as $val)
             if (strlen($val) === 8) $jpno = $val;
@@ -75,29 +81,35 @@ class NDL {
         return $jpno;
     }
 
-    public function getTitle() {
+    public function getTitle()
+    {
         return (string)$this->obj->title;
     }
 
-    public function getVolume() {
+    public function getVolume()
+    {
         return (string)$this->obj->volume;
     }
 
-    public function getAuthors() {
+    public function getAuthors()
+    {
         $authors = rtrim((string)$this->obj->author, ',');
 
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
     }
 
-    public function getPublishedDate() {
+    public function getPublishedDate()
+    {
         return date('Y-m-d', strtotime((string)$this->obj->pubDate));
     }
 
-    public function getBookUrl() {
+    public function getBookUrl()
+    {
         return (string)$this->obj->link;
     }
 
-    protected function searchType($num) {
+    protected function searchType($num)
+    {
         $type = 'any';
         switch (strlen($num)) {
             case 8: $type = 'jpno'; break;
@@ -108,7 +120,8 @@ class NDL {
         return $type;
     }
 
-    public function isbn10to13($isbn) {
+    public function isbn10to13($isbn)
+    {
         $isbn13 = '978'.substr($isbn, 0, 9);
         $digit = 0;
 

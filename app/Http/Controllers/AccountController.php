@@ -43,7 +43,7 @@ class AccountController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        $configs = $request->has('password') ?
+        $configs = $request->filled('password') ?
             $request->all() : $request->except('password');
 
         $user = User::find(\Auth::id());

@@ -3,7 +3,7 @@ const messages = require('../messages.json')[lang];
 const btnName = [ 'edit', 'delete' ];
 let $table;
 
-if (lang == 'ja') {
+if (lang === 'ja') {
     $.extend($.fn.dataTable.defaults, {
         language: {
             url: '//cdn.datatables.net/plug-ins/' + $.fn.dataTable.version + '/i18n/Japanese.json'
@@ -62,7 +62,7 @@ const getButtonElement = (name, label) => {
 };
 
 $(document).ready(() => {
-    if (typeof showResult == 'function') showResult($.notify, messages);
+    if (typeof showResult === 'function') showResult($.notify, messages);
 
     $table = $('#main').DataTable({
         columns: [
@@ -113,7 +113,7 @@ $(document).ready(() => {
         } else {
             $('tr.selected').removeClass('selected');
             $row.addClass('selected');
-            if ($table.row('.selected').data() != null) {
+            if ($table.row('.selected').data() !== undefined) {
                 btnName.forEach(name => {
                     $('#main_' + name).removeClass('disabled');
                 });

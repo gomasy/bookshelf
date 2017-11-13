@@ -2,7 +2,8 @@
 /node_modules
 /public/hot
 /public/storage
-/public/hook.php
+!/public/index.php
+/public/*.php
 /storage/*.key
 /vendor
 /.idea

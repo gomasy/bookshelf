@@ -49,8 +49,8 @@
             "@php artisan package:discover"
         ],
         "test": "phpunit --colors=always",
-        "travis-test": "phpunit --coverage-clover build/clover.xml --colors=always",
-        "coveralls": "coveralls -x build/clover.xml"
+        "travis-test": "phpunit --coverage-clover build/logs/clover.xml --colors=always",
+        "coveralls": "coveralls -x build/logs/clover.xml -v"
     },
     "config": {
         "preferred-install": "dist",

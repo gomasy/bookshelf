@@ -12,6 +12,6 @@ before_script:
   - ln -s .env.travis .env
 script:
   - npm run build
-  - composer test
+  - composer travis-test
 after_script:
   - composer coveralls

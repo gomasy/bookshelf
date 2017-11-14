@@ -48,7 +48,8 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "test": "phpunit",
+        "test": "phpunit --colors=always",
+        "travis-test": "phpunit --coverage-clover build/clover.xml --colors=always",
         "coveralls": "coveralls"
     },
     "config": {

@@ -1,6 +1,5 @@
 BooksManager
 ============
-[![License](https://img.shields.io/github/license/Gomasy/BooksManager.svg)](https://github.com/Gomasy/BooksManager/blob/master/LICENSE)
 [![Build Status](https://travis-ci.org/Gomasy/BooksManager.svg?branch=master)](https://travis-ci.org/Gomasy/BooksManager)
 [![Coverage Status](https://coveralls.io/repos/github/Gomasy/BooksManager/badge.svg?branch=master)](https://coveralls.io/github/Gomasy/BooksManager?branch=master)
 [![Code Climate](https://img.shields.io/codeclimate/github/Gomasy/BooksManager.svg)](https://codeclimate.com/github/Gomasy/BooksManager)

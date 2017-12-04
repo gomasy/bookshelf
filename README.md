@@ -2,8 +2,8 @@ BooksManager
 ============
 [![Build Status](https://travis-ci.org/Gomasy/BooksManager.svg?branch=master)](https://travis-ci.org/Gomasy/BooksManager)
 [![Coverage Status](https://coveralls.io/repos/github/Gomasy/BooksManager/badge.svg?branch=master)](https://coveralls.io/github/Gomasy/BooksManager?branch=master)
-[![Code Climate](https://img.shields.io/codeclimate/github/Gomasy/BooksManager.svg)](https://codeclimate.com/github/Gomasy/BooksManager)
 [![Dependency Status](https://gemnasium.com/badges/github.com/Gomasy/BooksManager.svg)](https://gemnasium.com/github.com/Gomasy/BooksManager)
+[![Maintainability](https://api.codeclimate.com/v1/badges/52a84dc6faeb6b53f343/maintainability)](https://codeclimate.com/github/Gomasy/BooksManager/maintainability)
 
 ## これなに？
 シンプルな蔵書管理ツール

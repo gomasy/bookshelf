@@ -1,3 +1,8 @@
+// font-awesome
+@import "../../../node_modules/font-awesome/scss/variables";
+$fa-font-path: "../../../node_modules/font-awesome/fonts";
+@import "../../../node_modules/font-awesome/scss/path";
+
 // colors
 $footer-text-color: #555;
 $btn-text-color: #fff;

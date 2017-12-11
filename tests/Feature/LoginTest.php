@@ -12,13 +12,6 @@ class LoginTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testBasicTest()
-    {
-        $this->get('/')->assertRedirect('/login');
-        $this->get('/', [ 'X-Requested-With' => 'XMLHttpRequest' ])
-            ->assertStatus(401);
-    }
-
     public function testLoginForm()
     {
         $response = $this->get('/login');

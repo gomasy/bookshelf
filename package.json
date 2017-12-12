@@ -4,7 +4,7 @@
         "presets": "env"
     },
     "scripts": {
-        "build": "webpack --optimize-minimize",
+        "build": "webpack -p",
         "watch": "webpack --watch"
     },
     "devDependencies": {

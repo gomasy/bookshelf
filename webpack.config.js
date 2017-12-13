@@ -27,6 +27,9 @@ module.exports = {
         ],
     },
     plugins: [
+        new webpack.optimize.UglifyJsPlugin({
+            comments: false,
+        }),
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',

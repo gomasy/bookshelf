@@ -16,7 +16,7 @@
         "clean-webpack-plugin": "^0.1.17",
         "css-loader": "^0.28.7",
         "datatables.net-bs": "^1.10.16",
-        "file-loader": "^1.1.5",
+        "file-loader": "^1.1.6",
         "font-awesome": "^4.7.0",
         "jquery": "^3.2.1",
         "node-sass": "^4.7.2",

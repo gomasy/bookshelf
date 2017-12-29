@@ -1,7 +1,4 @@
-// font-awesome
-@import "../../../node_modules/font-awesome/scss/variables";
-$fa-font-path: "../../../node_modules/font-awesome/fonts";
-@import "../../../node_modules/font-awesome/scss/path";
+@import './datatables';
 
 // colors
 $footer-text-color: #555;
@@ -12,25 +9,12 @@ $btn-edit-color: #8eb4cb;
 $btn-edit-hover-color: #708ea1;
 $tr-selected-color: #d1d1d1;
 
-h2.top-title {
-    font-size: 40px;
-}
-
-span.lead {
-    color: #555;
-    font-size: 20px;
-}
-
 div.footer {
     margin-bottom: 15px;
     text-align: right;
     font-size: 12px;
     color: $footer-text-color;
     a { color: $footer-text-color; }
-}
-
-div#top-page {
-    text-align: center;
 }
 
 form#form-register { padding: 7px; }
@@ -48,15 +32,3 @@ a#btn-edit {
 }
 
 #main tbody tr.selected { background-color: $tr-selected-color; }
-
-// FontAwesome
-@mixin icon($content) {
-    content: "#{$content}  ";
-    font-family: "FontAwesome";
-}
-
-a#brand:before { @include icon("\f02d"); }
-a#btn-login:before { @include icon("\f090"); }
-a#btn-register:before { @include icon("\f234"); }
-a#menu-account:before { @include icon("\f2be"); }
-a#menu-logout:before { @include icon("\f08b"); }

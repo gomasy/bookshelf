@@ -2,11 +2,16 @@ const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ManifestPlugin = require('webpack-manifest-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-    entry: './resources/assets/js/app.js',
+    entry: {
+        core: './resources/assets/js/core.js',
+        dashboard: './resources/assets/js/dashboard.js',
+        home: './resources/assets/js/home.js',
+    },
     output: {
-        filename: './assets/app.[hash].js',
+        filename: './assets/[name].[hash].js',
         path: path.join(__dirname, '/public'),
     },
     module: {
@@ -18,7 +23,10 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ],
+                use: ExtractTextPlugin.extract({
+                    fallback: 'style-loader',
+                    use: [ 'css-loader', 'sass-loader' ],
+                }),
             },
             {
                 test: /\.(woff2?|ttf|eot|svg|png)(\?v=[\d.]+|\?[\s\S]+)?$/,
@@ -36,6 +44,9 @@ module.exports = {
         ]),
         new ManifestPlugin({
             fileName: './assets/manifest.json',
+        }),
+        new ExtractTextPlugin({
+            filename: './assets/[name].[hash].css',
         }),
     ],
 };

@@ -1,0 +1,18 @@
+@import './bootstrap/bootstrap';
+
+// font-awesome
+@import "../../../node_modules/font-awesome/scss/variables";
+$fa-font-path: "../../../node_modules/font-awesome/fonts";
+@import "../../../node_modules/font-awesome/scss/path";
+
+// FontAwesome
+@mixin icon($content) {
+    content: "#{$content}  ";
+    font-family: "FontAwesome";
+}
+
+a#brand:before { @include icon("\f02d"); }
+a#btn-login:before { @include icon("\f090"); }
+a#btn-register:before { @include icon("\f234"); }
+a#menu-account:before { @include icon("\f2be"); }
+a#menu-logout:before { @include icon("\f08b"); }

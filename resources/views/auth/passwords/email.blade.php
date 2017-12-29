@@ -1,5 +1,13 @@
 @extends('layouts.app')
 
+@section('css')
+        <link href="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['core.css'], 2)) }}" rel="stylesheet">
+@endsection
+
+@section('js')
+        <script src="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['core.js'], 2)) }}"></script>
+@endsection
+
 @section('content')
             <div class="container">
                 <div class="row">

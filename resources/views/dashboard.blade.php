@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
+@section('css')
+        <link href="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['dashboard.css'], 2)) }}" rel="stylesheet">
+@endsection
+
 @section('js')
+        <script src="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['dashboard.js'], 2)) }}"></script>
 @if (session('result'))
         <script>
             function showResult(provider, messages) {

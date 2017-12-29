@@ -1,3 +1,9 @@
+import 'bootstrap-notify';
+import 'datatables.net-bs';
+
+import '../js/core.js';
+import '../scss/dashboard.scss';
+
 const lang = document.documentElement.lang;
 const messages = require('../messages.json')[lang];
 const btnName = [ 'edit', 'delete' ];

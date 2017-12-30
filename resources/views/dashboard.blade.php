@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('css')
-        <link href="@asset('/assets/dashboard.min.css')" rel="stylesheet">
-@endsection
-
 @section('js')
         <script src="@asset('/assets/dashboard.min.js')"></script>
 @if (session('result'))

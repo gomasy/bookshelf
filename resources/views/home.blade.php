@@ -1,12 +1,7 @@
 @extends('layouts.app')
 
-@section('css')
-        <link href="@asset('/assets/home.min.css')" rel="stylesheet">
-        <link href="@asset('/assets/core.min.css')" rel="stylesheet">
-@endsection
-
 @section('js')
-        <script src="@asset('/assets/core.min.js')"></script>
+        <script src="@asset('/assets/home.min.js')"></script>
 @endsection
 
 @section('content')

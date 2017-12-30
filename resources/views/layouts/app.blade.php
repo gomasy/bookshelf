@@ -9,7 +9,7 @@
 @endif
         <title>{{ config('app.name') }}</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
-@yield('css')
+        <script src="@asset('/assets/core.min.js')"></script>
 @yield('js')
     </head>
     <body>

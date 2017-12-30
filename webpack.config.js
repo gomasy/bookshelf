@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -22,10 +21,7 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [ 'css-loader', 'sass-loader' ],
-                }),
+                use: [ 'style-loader', 'css-loader', 'sass-loader' ],
             },
             {
                 test: /\.(woff2?|ttf|eot|svg|png)(\?v=[\d.]+|\?[\s\S]+)?$/,
@@ -38,11 +34,12 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'core',
+            chunks: [ 'core', 'dashboard', 'home' ],
+        }),
         new CleanWebpackPlugin([
             path.join(__dirname, '/public/assets/*'),
         ]),
-        new ExtractTextPlugin({
-            filename: './assets/[name].min.css',
-        }),
     ],
 };

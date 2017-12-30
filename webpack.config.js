@@ -1,7 +1,6 @@
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
@@ -11,7 +10,7 @@ module.exports = {
         home: './resources/assets/js/home.js',
     },
     output: {
-        filename: './assets/[name].[hash].js',
+        filename: './assets/[name].min.js',
         path: path.join(__dirname, '/public'),
     },
     module: {
@@ -42,11 +41,8 @@ module.exports = {
         new CleanWebpackPlugin([
             path.join(__dirname, '/public/assets/*'),
         ]),
-        new ManifestPlugin({
-            fileName: './assets/manifest.json',
-        }),
         new ExtractTextPlugin({
-            filename: './assets/[name].[hash].css',
+            filename: './assets/[name].min.css',
         }),
     ],
 };

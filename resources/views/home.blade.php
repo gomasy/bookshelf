@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
 @section('css')
-        <link href="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['home.css'], 2)) }}" rel="stylesheet">
-        <link href="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['core.css'], 2)) }}" rel="stylesheet">
+        <link href="@asset('/assets/home.min.css')" rel="stylesheet">
+        <link href="@asset('/assets/core.min.css')" rel="stylesheet">
 @endsection
 
 @section('js')
-        <script src="{{ asset(substr(json_decode(file_get_contents(dirname(__FILE__).'/../../../public/assets/manifest.json'), true)['core.js'], 2)) }}"></script>
+        <script src="@asset('/assets/core.min.js')"></script>
 @endsection
 
 @section('content')

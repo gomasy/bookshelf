@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
+@section('title', __('account.update.title'))
+
 @section('content')
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{ __('account.update.header') }}</div>
+                            <div class="panel-heading">{{ __('account.update.title') }}</div>
                             <div class="panel-body">
                                 <form role="form" action="{{ route('account/update') }}" method="POST">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">

@@ -1,11 +1,13 @@
 @extends('layouts.app')
 
+@section('title', __('passwords.title'))
+
 @section('content')
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{ __('passwords.header') }}</div>
+                            <div class="panel-heading">{{ __('passwords.title') }}</div>
                             <div class="panel-body">
 @if (session('status'))
                                 <div class="alert alert-success">

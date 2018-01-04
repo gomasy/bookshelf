@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'title' => 'ダッシュボード',
     'placeholder' => 'ISBN or JP番号',
     'scan' => '読み取る',
     'edit' => '編集',

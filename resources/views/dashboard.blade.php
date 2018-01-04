@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('dashboard.title'))
+
 @section('js')
         <script src="@asset('/assets/dashboard.min.js')"></script>
 @if (session('result'))

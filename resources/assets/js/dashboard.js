@@ -127,7 +127,7 @@ $(document).ready(() => {
         }
     });
 
-    const $registerForm = $('#form-register').on('submit', event => {
+    const $registerForm = $('#register').on('submit', event => {
         event.preventDefault();
         const $req = sendRequest($registerForm);
 

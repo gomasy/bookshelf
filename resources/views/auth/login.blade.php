@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', __('auth.login'))
+@section('title', __('auth.sign.in'))
 
 @section('content')
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{ __('auth.login') }}</div>
+                            <div class="panel-heading">{{ __('auth.sign.in') }}</div>
                             <div class="panel-body">
                                 <form role="form" method="POST" action="{{ route('login') }}">
                                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -30,11 +30,11 @@
                                     </div>
                                     <div class="checkbox">
                                         <label>
-                                            <input type="checkbox"> {{ __('auth.remember') }}
+                                            <input type="checkbox"> {{ __('auth.sign.remember') }}
                                         </label>
                                     </div>
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-block btn-primary">{{ __('auth.login') }}</button>
+                                    <button type="submit" class="btn btn-block btn-primary">{{ __('auth.sign.in') }}</button>
                                 </form>
                                 <hr>
                                 <p><a href="{{ route('password.request') }}">{{ __('passwords.forgot') }}</a></p>

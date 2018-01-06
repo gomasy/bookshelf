@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', __('auth.register'))
+@section('title', __('auth.register.title'))
 
 @section('content')
             <div class="container">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3">
                         <div class="panel panel-default">
-                            <div class="panel-heading">{{ __('auth.register') }}</div>
+                            <div class="panel-heading">{{ __('auth.register.header') }}</div>
                             <div class="panel-body">
                                 <form role="form" method="POST" action="{{ route('register') }}">
                                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -43,7 +43,7 @@
                                     </div>
                                     <hr>
                                     {{ csrf_field() }}
-                                    <button type="submit" class="btn btn-block btn-primary">{{ __('auth.register') }}</button>
+                                    <button type="submit" class="btn btn-block btn-primary">{{ __('auth.register.title') }}</button>
                                 </form>
                             </div>
                         </div>

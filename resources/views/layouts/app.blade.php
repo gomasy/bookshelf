@@ -10,64 +10,52 @@
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
         <script src="@asset('/assets/core.min.js')"></script>
-@yield('js')
+        @yield('js')
     </head>
     <body>
-        <div id="app">
-            <nav class="navbar navbar-default navbar-static-top">
-                <div class="container">
-                    <div class="navbar-header">
-                        <!-- Branding Image -->
-                        <a class="navbar-brand" id="brand" href="{{ route('home') }}">
-                            {{ config('app.name') }}
-                        </a>
-@if (!App::isDownForMaintenance())
-
-                        <!-- Collapsed Hamburger -->
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                            <span class="sr-only">Toggle Navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                    </div>
-
-                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                        <!-- Left Side Of Navbar -->
-                        <ul class="nav navbar-nav">
-                            &nbsp;
-                        </ul>
-
-                        <!-- Right Side Of Navbar -->
-                        <ul class="nav navbar-nav navbar-right">
-@yield('navbar')
-
-                            <!-- Authentication Links -->
-@guest
-                            <li><a class="button" id="btn-login" href="{{ route('login') }}">{{ __('auth.login') }}</a></li>
-                            <li><a class="button" id="btn-register" href="{{ route('register') }}">{{ __('auth.register') }}</a></li>
-@endguest
-@auth
-                            <li class="dropdown">
-                                <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a class="menu" id="menu-account" href="{{ route('account') }}">{{ __('account.update.title') }}</a>
-                                        <a class="menu" id="menu-logout" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.logout') }}</a>
-                                        <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-@endauth
-                        </ul>
-@endif
-                    </div>
+        <div class="wrapper">
+            <nav class="active" id="sidebar">
+                <div class="sidebar-header">
+                    <h3>Books Manager</h3>
+                    <strong><i class="glyphicon glyphicon-book" aria-hidden="true"></i></strong>
                 </div>
+
+                <ul class="list-unstyled components">
+                    <li><a href="{{ route('home') }}"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
+@auth
+                    <li><a href="{{ route('account') }}"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                    <hr>
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                            {{ __('auth.sign.out') }}
+                        </a>
+                        <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+@endauth
+@guest
+                    <hr>
+                    <li><a href="{{ route('login') }}"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
+                    <li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-user"></i>{{ __('auth.register.title') }}</a></li>
+@endguest
+                </ul>
             </nav>
 
-@yield('content')
+            <div id="content">
+                <nav class="navbar navbar-default">
+                    <div class="container-fluid">
+                        <div class="navbar-header">
+                            @yield('title')
+                        </div>
+
+                        @yield('navbar')
+                    </div>
+                </nav>
+                @yield('content')
+            </div>
         </div>
     </body>
 </html>

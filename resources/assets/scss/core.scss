@@ -1,13 +1,226 @@
-@import './bootstrap/bootstrap';
+@import url(//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 
-@mixin icon($content) {
-    content: "#{$content}  ";
+body {
+    font-family: 'Poppins', sans-serif;
+    background: #fafafa;
 }
 
-a.button, a.menu, a#brand:before { font-family: "FontAwesome"; }
+p {
+    font-size: 1.1em;
+    font-weight: 300;
+    line-height: 1.7em;
+    color: #999;
+}
 
-a#brand:before { @include icon("\f02d"); }
-a#btn-login:before { @include icon("\f090"); }
-a#btn-register:before { @include icon("\f234"); }
-a#menu-account:before { @include icon("\f2be"); }
-a#menu-logout:before { @include icon("\f08b"); }
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+i, span {
+    display: inline-block;
+}
+
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.navbar {
+    padding: 15px 10px;
+    background: #fff;
+    border: none;
+    border-radius: 0;
+    margin-bottom: 40px;
+    height: 70px;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-header {
+    font-size: 18px;
+    line-height: 40px;
+    color: #777;
+}
+
+#sidebar {
+    min-width: 250px;
+    max-width: 250px;
+    background: #7386D5;
+    color: #fff;
+    transition: all 0.3s;
+
+    ul li a {
+        text-align: left;
+    }
+
+    &.active {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
+
+        .sidebar-header {
+            h3 { display: none; }
+            strong { display: block; }
+        }
+
+        ul li a {
+            padding: 20px 10px;
+            text-align: center;
+            font-size: 0.85em;
+        }
+
+        ul li a i {
+            margin-right:  0;
+            display: block;
+            font-size: 1.8em;
+            margin-bottom: 5px;
+        }
+
+        ul ul a {
+            padding: 10px !important;
+        }
+
+        a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+            top: auto;
+            bottom: 5px;
+            right: 50%;
+            transform: translateX(50%);
+        }
+    }
+
+    .sidebar-header {
+        padding: 20px;
+        background: #6d7fcc;
+
+        strong {
+            display: none;
+            font-size: 1.8em;
+        }
+    }
+
+    ul.components {
+        padding: 10px 0;
+        border-bottom: 1px solid #47748b;
+
+        hr {
+            width: 50%;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            border-top: 1px solid #47748b;
+        }
+    }
+
+    ul li a {
+        padding: 10px;
+        font-size: 1.1em;
+        display: block;
+
+        &:hover {
+            color: #7386D5;
+            background: #fff;
+        }
+    }
+
+    ul li a i {
+        margin-right: 10px;
+    }
+
+    ul li.active > a, a[aria-expanded="true"] {
+        color: #fff;
+        background: #6d7fcc;
+    }
+}
+
+#register {
+    button { height: 40px; }
+    input {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+    content: '\e259';
+    display: block;
+    position: absolute;
+    right: 20px;
+    font-family: 'Glyphicons Halflings';
+    font-size: 0.6em;
+}
+a[aria-expanded="true"]::before {
+    content: '\e260';
+}
+
+ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #6d7fcc;
+}
+
+a.download {
+    background: #fff;
+    color: #7386D5;
+}
+
+a.article, a.article:hover {
+    background: #6d7fcc !important;
+    color: #fff !important;
+}
+
+#content {
+    padding: 20px;
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    #sidebar {
+        min-width: 80px;
+        max-width: 80px;
+        text-align: center;
+        margin-left: -80px !important;
+
+        &.active {
+            margin-left: 0 !important;
+        }
+
+        .sidebar-header {
+            h3 { display: none; }
+            strong { display: block; }
+        }
+
+        ul li a {
+            padding: 20px 10px;
+        }
+
+        ul li a span {
+            font-size: 0.85em;
+        }
+
+        ul li a i {
+            margin-right:  0;
+            display: block;
+        }
+
+        ul ul a {
+            padding: 10px !important;
+        }
+
+        ul li a i {
+            font-size: 1.3em;
+        }
+    }
+
+    a[aria-expanded="false"]::before, a[aria-expanded="true"]::before {
+        top: auto;
+        bottom: 5px;
+        right: 50%;
+        transform: translateX(50%);
+    }
+}

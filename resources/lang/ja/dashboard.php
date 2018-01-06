@@ -3,6 +3,7 @@
 return [
     'title' => 'ダッシュボード',
     'placeholder' => 'ISBN or JP番号',
+    'register' => '登録',
     'scan' => '読み取る',
     'edit' => '編集',
     'delete' => '削除',

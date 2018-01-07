@@ -17,6 +17,10 @@ div.footer {
     a { color: $footer-text-color; }
 }
 
+.dataTables_scrollHeadInner {
+    &, table { width: auto !important; }
+}
+
 a#btn-delete {
     color: $btn-text-color;
     background-color: $btn-delete-color;

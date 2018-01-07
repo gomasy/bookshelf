@@ -39,7 +39,7 @@
 @guest
                     <hr>
                     <li><a href="{{ route('login') }}"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
-                    <li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-user"></i>{{ __('auth.register.title') }}</a></li>
+                    <li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
 @endguest
                 </ul>
             </nav>

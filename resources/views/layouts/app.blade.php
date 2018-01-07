@@ -21,10 +21,10 @@
                 </div>
 
                 <ul class="list-unstyled components">
-                    <li><a href="{{ route('home') }}"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
+                    <li{!! Request::url() === route('home') ? ' class="active"' : '' !!}><a href="{{ route('home') }}"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
 @auth
-                    <li><a href="{{ route('account') }}"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                    <li{!! Request::url() === route('account') ? ' class="active"' : '' !!}><a href="{{ route('account') }}"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
                     <hr>
                     <li>
                         <a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
@@ -38,8 +38,8 @@
 @endauth
 @guest
                     <hr>
-                    <li><a href="{{ route('login') }}"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
-                    <li><a href="{{ route('register') }}"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
+                    <li{!! Request::url() === route('login') ? ' class="active"' : '' !!}><a href="{{ route('login') }}"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
+                    <li{!! Request::url() === route('register') ? ' class="active"' : '' !!}><a href="{{ route('register') }}"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
 @endguest
                 </ul>
             </nav>

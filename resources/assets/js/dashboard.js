@@ -83,7 +83,7 @@ $(document).ready(() => {
         ],
         order: [[ 0, 'asc' ], [ 3, 'asc' ]],
         lengthMenu: [ 10, 20, 30, 50, 100, 200 ],
-        displayLength: 100,
+        displayLength: 20,
         scrollY: true,
         deferRender: true,
         ajax: 'list',

@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="container" id="entrance">
+<div id="entrance">
     <h2 class="catchcopy">{{ __('home.catchcopy') }}</h2>
     <span class="lead">{{ __('home.lead') }}</span>
     <hr class="half">

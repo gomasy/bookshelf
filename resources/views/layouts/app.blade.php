@@ -14,7 +14,7 @@
     </head>
     <body>
         <div class="wrapper">
-            <nav class="active" id="sidebar">
+            <nav id="sidebar">
                 <div class="sidebar-header">
                     <h3>Books Manager</h3>
                     <strong><i class="glyphicon glyphicon-book" aria-hidden="true"></i></strong>
@@ -49,9 +49,10 @@
                     <div class="container-fluid">
                         <div class="navbar-header">
                             @yield('title')
-                        </div>
 
+                        </div>
                         @yield('navbar')
+
                     </div>
                 </nav>
                 @yield('content')

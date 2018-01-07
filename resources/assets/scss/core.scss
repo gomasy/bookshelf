@@ -36,26 +36,41 @@ div.wrapper {
         color: #fff;
         transition: all 0.3s;
 
-        ul li a {
-            display: block;
-            padding: 20px 10px;
-            font-size: 0.85em;
+        ul {
+            li {
+                a {
+                    display: block;
+                    padding: 20px 10px;
+                    font-size: 0.85em;
 
-            &:hover {
-                color: #34495e;
-                background: #fff;
+                    i {
+                        display: block;
+                        margin-bottom: 5px;
+                        font-size: 1.8em;
+                    }
+
+                    &:hover {
+                        color: #34495e;
+                        background: #fff;
+                    }
+                }
+
+                &.active > a {
+                    color: white;
+                }
             }
-        }
 
-        ul li a i {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 1.8em;
-        }
+            &.components {
+                padding: 10px 0;
+                border-bottom: 1px solid #47748b;
 
-        ul li.active > a {
-            color: #fff;
-            background: #2c3e50;
+                hr {
+                    width: 50%;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    border: inherit;
+                }
+            }
         }
 
         div.sidebar-header {
@@ -64,18 +79,6 @@ div.wrapper {
 
             h3 { display: none; }
             strong { font-size: 1.8em; }
-        }
-
-        ul.components {
-            padding: 10px 0;
-            border-bottom: 1px solid #47748b;
-
-            hr {
-                width: 50%;
-                margin-top: 10px;
-                margin-bottom: 10px;
-                border: inherit;
-            }
         }
     }
 
@@ -121,19 +124,21 @@ div#active {
             strong { display: none; }
         }
 
-        ul li a {
-            padding: 10px;
-            font-size: 1.1em;
-        }
+        ul {
+            li a {
+                padding: 10px;
+                font-size: 1.1em;
 
-        ul li a i {
-            display: inline;
-            margin-right: 10px;
-            font-size: inherit;
-        }
+                i {
+                    display: inline;
+                    margin-right: 10px;
+                    font-size: inherit;
+                }
+            }
 
-        ul.components hr {
-            width: 80%;
+            &.components hr {
+                width: 80%;
+            }
         }
     }
 

@@ -156,26 +156,28 @@ div#active {
 }
 
 @media (max-width: 768px) {
-    button.navbar-toggle { margin-top: 2px; }
-
     div.wrapper {
         div#content {
             margin-left: 0;
 
-            nav.navbar ul.nav {
-                border: 1px solid #eee;
+            nav.navbar {
+                button.navbar-toggle { margin-top: 2px; }
 
-                hr {
-                    margin-top: 10px;
-                    margin-bottom: 10px;
+                ul.nav {
+                    border: 1px solid #eee;
+
+                    hr {
+                        margin-top: 10px;
+                        margin-bottom: 10px;
+                    }
+
+                    form#register {
+                        padding: 5px;
+                        border-bottom: 1px solid #eee;
+                    }
+
+                    li.nav-hide { display: block; }
                 }
-
-                form#register {
-                    padding: 5px;
-                    border-bottom: 1px solid #eee;
-                }
-
-                li.nav-hide { display: block; }
             }
         }
 

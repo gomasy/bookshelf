@@ -158,31 +158,34 @@ div#active {
 @media (max-width: 768px) {
     button.navbar-toggle { margin-top: 2px; }
 
-    ul.nav {
-        border: 1px solid #eee;
+    div.wrapper {
+        div#content {
+            margin-left: 0;
 
-        hr {
-            margin-top: 10px;
-            margin-bottom: 10px;
+            nav.navbar ul.nav {
+                border: 1px solid #eee;
+
+                hr {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
+
+                form#register {
+                    padding: 5px;
+                    border-bottom: 1px solid #eee;
+                }
+
+                li.nav-hide { display: block; }
+            }
         }
 
-        form#register {
-            padding: 5px;
-            border-bottom: 1px solid #eee;
+        nav#sidebar {
+            margin-left: -80px;
         }
-
-        li.nav-hide { display: block !important; }
     }
 
-    nav#sidebar {
-        margin-left: -80px;
-    }
-
-    div#active nav#sidebar {
-        margin-left: -250px;
-    }
-
-    div#content {
-        margin-left: 0 !important;
+    div#active {
+        div#content { margin-left: 0; }
+        nav#sidebar { margin-left: -250px; }
     }
 }

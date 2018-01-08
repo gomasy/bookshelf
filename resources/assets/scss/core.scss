@@ -96,11 +96,18 @@ div.wrapper {
             border-radius: 0;
             height: 70px;
             box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+            z-index: 100;
 
             div.navbar-header {
                 font-size: 18px;
                 line-height: 40px;
                 color: #777;
+            }
+
+            ul.nav {
+                background: #fff;
+
+                li.nav-hide { display: none; }
             }
 
             form#register {
@@ -149,6 +156,24 @@ div#active {
 }
 
 @media (max-width: 768px) {
+    button.navbar-toggle { margin-top: 2px; }
+
+    ul.nav {
+        border: 1px solid #eee;
+
+        hr {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        form#register {
+            padding: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        li.nav-hide { display: block !important; }
+    }
+
     nav#sidebar {
         margin-left: -80px;
     }

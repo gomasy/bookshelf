@@ -50,9 +50,35 @@
                         <div class="navbar-header">
                             @yield('title')
 
+                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                                <span class="sr-only">Toggle Navigation</span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
                         </div>
-                        @yield('navbar')
 
+                        <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                            <ul class="nav navbar-right">
+                                @yield('navbar')
+
+@auth
+                                <li class="nav-item nav-hide">
+                                    <a class="button" href="{{ route('account') }}">{{ __('home.sidebar.setting') }}</a>
+                                    <a class="button" href="#">{{ __('home.sidebar.help') }}</a>
+                                    <a class="button" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.sign.out') }}</a>
+                                </li>
+@endauth
+@guest
+                                <li class="nav-item nav-hide">
+                                    <a class="button" href="{{ route('login') }}">{{ __('auth.sign.in') }}</a>
+                                </li>
+                                <li class="nav-item nav-hide">
+                                <a class="button" href="{{ route('register') }}">{{ __('auth.register.title') }}</a>
+                                </li>
+@endguest
+                            </ul>
+                        </div>
                     </div>
                 </nav>
                 @yield('content')

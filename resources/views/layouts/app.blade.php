@@ -63,18 +63,18 @@
                                 @yield('navbar')
 
 @auth
-                                <li class="nav-item nav-hide">
+                                <li class="nav-item hide">
                                     <a class="button" href="{{ route('account') }}">{{ __('home.sidebar.setting') }}</a>
                                     <a class="button" href="#">{{ __('home.sidebar.help') }}</a>
                                     <a class="button" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.sign.out') }}</a>
                                 </li>
 @endauth
 @guest
-                                <li class="nav-item nav-hide">
+                                <li class="nav-item hide">
                                     <a class="button" href="{{ route('login') }}">{{ __('auth.sign.in') }}</a>
                                 </li>
-                                <li class="nav-item nav-hide">
-                                <a class="button" href="{{ route('register') }}">{{ __('auth.register.title') }}</a>
+                                <li class="nav-item hide">
+                                    <a class="button" href="{{ route('register') }}">{{ __('auth.register.title') }}</a>
                                 </li>
 @endguest
                             </ul>

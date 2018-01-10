@@ -104,11 +104,7 @@ div.wrapper {
                 color: #777;
             }
 
-            ul.nav {
-                background: #fff;
-
-                li.nav-hide { display: none; }
-            }
+            ul.nav { background: #fff; }
 
             form#register {
                 button { height: 40px; }
@@ -171,12 +167,12 @@ div#active {
                         margin-bottom: 10px;
                     }
 
+                    li.hide { display: block !important; }
+
                     form#register {
                         padding: 5px;
                         border-bottom: 1px solid #eee;
                     }
-
-                    li.nav-hide { display: block; }
                 }
             }
         }

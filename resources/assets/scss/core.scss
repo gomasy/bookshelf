@@ -104,7 +104,11 @@ div.wrapper {
                 color: #777;
             }
 
-            ul.nav { background: #fff; }
+            ul.nav {
+                background: #fff;
+
+                li.sm { display: none; }
+            }
 
             form#register {
                 button { height: 40px; }
@@ -167,7 +171,7 @@ div#active {
                         margin-bottom: 10px;
                     }
 
-                    li.hide { display: block !important; }
+                    li.sm { display: block; }
 
                     form#register {
                         padding: 5px;

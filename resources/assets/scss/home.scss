@@ -1,21 +1,17 @@
-h2.catchcopy {
-    font-size: 40px;
-}
-
-span.lead {
-    color: #555;
-    font-size: 20px;
-}
-
-hr.half {
-    width: 100px;
-    margin: 40px auto;
-}
-
-i.icon {
-    font-size: 120px;
-}
-
 div#entrance {
     text-align: center;
+    padding-top: 20px;
+
+    h2 { font-size: 40px; }
+    i { font-size: 120px; }
+
+    hr {
+        width: 100px;
+        margin: 40px auto;
+    }
+
+    span.lead {
+        color: #555;
+        font-size: 20px;
+    }
 }

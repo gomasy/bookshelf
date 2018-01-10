@@ -64,7 +64,7 @@ const getRowLinks = (title, url) => {
 };
 
 const getButtonElement = (name, label) => {
-    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="btn-' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + label + '</a></li>';
+    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + label + '</a></li>';
 };
 
 $(document).ready(() => {
@@ -95,14 +95,14 @@ $(document).ready(() => {
                 $('.pagination').append(getButtonElement(name, messages[name].label));
             });
 
-            $('#btn-edit').on('click', () => {
+            $('#edit').on('click', () => {
                 if (!isSelected()) return false;
 
                 const obj = getSelectedRow();
                 for (const key in obj) $('#input-' + key).val(obj[key]);
             });
 
-            $('#btn-delete').on('click', () => {
+            $('#delete').on('click', () => {
                 if (!isSelected()) return false;
             });
         },

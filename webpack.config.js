@@ -7,6 +7,7 @@ module.exports = {
         core: './resources/assets/js/core.js',
         dashboard: './resources/assets/js/dashboard.js',
         home: './resources/assets/js/home.js',
+        settings: './resources/assets/js/settings.js',
     },
     output: {
         filename: './assets/[name].min.js',
@@ -36,7 +37,7 @@ module.exports = {
         }),
         new webpack.optimize.CommonsChunkPlugin({
             name: 'core',
-            chunks: [ 'core', 'dashboard', 'home' ],
+            chunks: [ 'core', 'dashboard', 'home', 'settings' ],
         }),
         new CleanWebpackPlugin([
             path.join(__dirname, '/public/assets/*'),

@@ -86,7 +86,7 @@ $(document).ready(() => {
         displayLength: 20,
         scrollY: true,
         deferRender: true,
-        ajax: 'list',
+        ajax: 'list.json',
         rowCallback: (row, data) => {
             $('td:eq(0)', row).html(getRowLinks(data.title, data.ndl_url));
         },

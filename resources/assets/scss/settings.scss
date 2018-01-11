@@ -1,0 +1,12 @@
+div#settings {
+    display: flex;
+    justify-content: center;
+
+    > div.panel { margin: 0 5px; }
+}
+
+@media screen and (max-width: 768px) {
+    div#settings {
+        display: block;
+    }
+}

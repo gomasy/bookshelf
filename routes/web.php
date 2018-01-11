@@ -11,17 +11,20 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/list', 'BookController@index')->name('list');
-Route::match([ 'get', 'post' ], '/create', 'BookController@create')->name('create');
-Route::post('/edit', 'BookController@edit')->name('edit');
-Route::post('/delete', 'BookController@delete')->name('delete');
+Route::get('/', 'HomeController@index');
+Route::get('/list.json', 'BookController@index');
+Route::match([ 'get', 'post' ], '/create', 'BookController@create');
+Route::post('/edit', 'BookController@edit');
+Route::post('/delete', 'BookController@delete');
 
-Route::group([ 'prefix' => 'account' ], function() {
-    Route::get('/', 'AccountController@index')->name('account');
-    Route::post('/update', 'AccountController@update')->name('account/update');
-    Route::get('/delete', 'AccountController@delete')->name('account/delete');
-    Route::post('/delete', 'AccountController@confirm_delete');
+Route::group([ 'prefix' => 'settings' ], function() {
+    Route::get('/', 'SettingsController@index');
+    Route::group([ 'prefix' => 'account' ], function() {
+        Route::get('/', 'AccountController@index');
+        Route::post('/update', 'AccountController@update');
+        Route::get('/delete', 'AccountController@delete');
+        Route::post('/delete', 'AccountController@confirm_delete');
+    });
 });
 
 Auth::routes();

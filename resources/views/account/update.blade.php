@@ -1,7 +1,5 @@
 @extends('settings')
 
-@section('title', __('settings.title'))
-
 @section('account')
 <div class="panel panel-default">
     <div class="panel-heading">{{ __('settings.account.update.title') }}</div>

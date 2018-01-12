@@ -1,5 +1,7 @@
 @extends('layouts.app')
 
+@section('title', __('settings.title'))
+
 @section('js')
 <script src="@asset('/assets/settings.min.js')"></script>
 @endsection

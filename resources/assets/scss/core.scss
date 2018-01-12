@@ -24,7 +24,6 @@ i, span {
 
 div.wrapper {
     display: flex;
-    align-items: stretch;
 
     nav#sidebar {
         position: fixed;
@@ -44,7 +43,7 @@ div.wrapper {
                     font-size: 0.85em;
 
                     i {
-                        display: block;
+                        display: inherit;
                         margin-bottom: 5px;
                         font-size: 1.8em;
                     }
@@ -128,7 +127,7 @@ div#active {
         text-align: left;
 
         div.sidebar-header {
-            h3 { display: block; }
+            h3 { display: inherit; }
             strong { display: none; }
         }
 
@@ -171,7 +170,7 @@ div#active {
                         margin-bottom: 10px;
                     }
 
-                    li.sm { display: block; }
+                    li.sm { display: list-item; }
 
                     form#register {
                         padding: 5px;

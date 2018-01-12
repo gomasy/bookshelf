@@ -1,0 +1,30 @@
+div#settings {
+    display: flex;
+    justify-content: center;
+
+    ul#settings-menu {
+        margin: 0;
+
+        li {
+            &:not(:last-child) { border-bottom: solid 1px #eee; }
+            &.active {
+                background: #fafafa;
+                border-left: solid 3px #795548;
+            }
+
+            a {
+                display: flex;
+                padding: 10px 15px;
+                align-items: baseline;
+            }
+
+            i { margin-right: 5px; }
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    div#settings {
+        display: block;
+    }
+}

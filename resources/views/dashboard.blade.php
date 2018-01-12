@@ -17,7 +17,7 @@
 
 @section('navbar')
 <li class="nav-item">
-    <form class="form-inline" id="register" role="form" method="POST" action="{{ route('create') }}">
+    <form class="form-inline" id="register" role="form" method="POST" action="/create">
         <input class="form-control" type="text" name="code" placeholder="{{ __('dashboard.placeholder') }}" required>
         {{ csrf_field() }}
         <button class="btn btn-info" type="submit">{{ __('dashboard.register') }}</button>
@@ -56,7 +56,7 @@
             <div class="modal-header">
                 <h4>{{ __('dashboard.edit') }}</h4>
             </div>
-            <form class="form-horizontal" id="form-edit" role="form" action="{{ route('edit') }}" method="POST">
+            <form class="form-horizontal" id="form-edit" role="form" method="POST" action="/edit">
                 <div class="modal-body">
                     <div class="form-group">
                         <label class="col-sm-2 control-label">{{ __('validation.attributes.title') }}</label>
@@ -103,7 +103,7 @@
                 {{ __('dashboard.confirm') }}
             </div>
             <div class="modal-footer">
-                <form id="form-delete" role="form" action="{{ route('delete') }}" method="POST">
+                <form id="form-delete" role="form" method="POST" action="/delete">
                     {{ csrf_field() }}
                     <button type="button" class="btn btn-default" data-dismiss="modal">{{ __('dashboard.cancel') }}</button>
                     <button type="submit" class="btn btn-danger" id="btn-delete-confirm">{{ __('dashboard.ok') }}</button>

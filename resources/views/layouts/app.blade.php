@@ -24,7 +24,7 @@
                     <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
                     <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
 @auth
-                    <li{!! Request::path() === 'settings' ? ' class="active"' : '' !!}><a href="/settings"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                    <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
                     <hr>
                     <li>
                         <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">

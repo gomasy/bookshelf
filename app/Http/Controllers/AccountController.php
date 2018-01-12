@@ -30,7 +30,7 @@ class AccountController extends Controller
      */
     public function index(Request $request)
     {
-        return view('account/update');
+        return view('account.update');
     }
 
     /**
@@ -61,7 +61,7 @@ class AccountController extends Controller
      */
     public function delete(Request $request)
     {
-        return view('account/delete');
+        return view('account.delete');
     }
 
     /**
@@ -81,8 +81,8 @@ class AccountController extends Controller
 
             return redirect('/');
         } else {
-            return view('account/delete')
-                ->withErrors([ 'password' => __('account.incorrect') ]);
+            return view('account.delete')
+                ->withErrors([ 'password' => __('settings.account.incorrect') ]);
         }
 
     }

@@ -14,19 +14,19 @@ class AccountTest extends TestCase
 
     public function testBasicTest()
     {
-        $this->get('/account')->assertRedirect('/login');
-        $this->get('/account/delete')->assertRedirect('/login');
+        $this->get('/settings/account')->assertRedirect('/login');
+        $this->get('/settings/account/delete')->assertRedirect('/login');
     }
 
     public function testLoggedIn()
     {
         $user = factory(User::class)->create();
 
-        $response = $this->actingAs($user)->get('/account');
+        $response = $this->actingAs($user)->get('/settings/account');
         $response->assertViewIs('account.update');
         $response->assertStatus(200);
 
-        $response = $this->actingAs($user)->get('/account/delete');
+        $response = $this->actingAs($user)->get('/settings/account/delete');
         $response->assertViewIs('account.delete');
         $response->assertStatus(200);
     }
@@ -48,13 +48,13 @@ class AccountTest extends TestCase
         // success
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/account/update', $data, $headers)
+            ->post('/settings/account/update', $data, $headers)
             ->assertRedirect('/');
         $this->assertDatabaseHas('users', $data);
 
         // invaild
         $this->actingAs($user)
-            ->post('/account/update', [ 'email' => '' ], $headers)
+            ->post('/settings/account/update', [ 'email' => '' ], $headers)
             ->assertStatus(422);
     }
 
@@ -66,19 +66,19 @@ class AccountTest extends TestCase
         // success
         $user = factory(User::class)->create([ 'password' => bcrypt($password) ]);
         $this->actingAs($user)
-            ->post('/account/delete', [ 'password' => $password ], $headers)
+            ->post('/settings/account/delete', [ 'password' => $password ], $headers)
             ->assertRedirect('/');
         $this->assertDatabaseMissing('users', [ 'id' => 1 ]);
 
         // fail
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/account/delete', [ 'password' => $password ], $headers)
+            ->post('/settings/account/delete', [ 'password' => $password ], $headers)
             ->assertStatus(200);
 
         // invaild
         $this->actingAs($user)
-            ->post('/account/delete', [ 'password' => '' ], $headers)
+            ->post('/settings/account/delete', [ 'password' => '' ], $headers)
             ->assertStatus(422);
     }
 }

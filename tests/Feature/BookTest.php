@@ -19,7 +19,7 @@ class BookTest extends TestCase
         $user = User::find($book->user_id);
 
         $response = $this->actingAs($user)
-            ->get('/list', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+            ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
         $response->assertJsonStructure([ 'data' => [] ]);
         $response->assertStatus(200);
     }

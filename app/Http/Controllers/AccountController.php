@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\AccountDeleteRequest as DeleteRequest;
@@ -43,11 +44,13 @@ class AccountController extends Controller
      */
     public function update(UpdateRequest $request)
     {
-        $configs = $request->filled('password') ?
-            $request->all() : $request->except('password');
+        $inputs = $request->except([ 'password', 'password_confirmation' ]);
+        if ($request->filled('password')) {
+            $inputs['password'] = Hash::make($request->password);
+        }
 
         $user = User::find(\Auth::id());
-        $user->fill($configs);
+        $user->fill($inputs);
         $user->save();
 
         return redirect('/');

@@ -52,7 +52,7 @@
         ],
         "test": "phpunit --colors=always",
         "travis-test": "phpunit --coverage-clover build/logs/clover.xml --colors=always",
-        "coveralls": "coveralls -x build/logs/clover.xml -v --ansi"
+        "coveralls": "php-coveralls -x build/logs/clover.xml -v --ansi"
     },
     "config": {
         "preferred-install": "dist",

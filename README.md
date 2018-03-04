@@ -9,7 +9,7 @@ BooksManager
 シンプルな蔵書管理ツール
 
 ## 必要なもの
-* php >= 7.1
+* php >= 7.1.3
 * composer (php dependency manager)
 * npm (nodejs package manager)
 * Database (MySQL / PostgreSQL / MSSQL)

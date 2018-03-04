@@ -2,6 +2,10 @@
 
 @section('title', __('auth.sign.in'))
 
+@section('js')
+<script src="@asset('/assets/core.min.js')"></script>
+@endsection
+
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">

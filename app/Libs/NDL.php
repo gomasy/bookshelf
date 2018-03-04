@@ -69,7 +69,7 @@ class NDL {
             }
         }
 
-        return $isbn;
+        return (string)$isbn;
     }
 
     public function getJPNO()
@@ -78,7 +78,7 @@ class NDL {
         foreach ($this->obj->identifier as $val)
             if (strlen($val) === 8) $jpno = $val;
 
-        return $jpno;
+        return (string)$jpno;
     }
 
     public function getTitle()

@@ -24,11 +24,11 @@ class AccountTest extends TestCase
 
         $response = $this->actingAs($user)->get('/settings/account');
         $response->assertViewIs('account.update');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
 
         $response = $this->actingAs($user)->get('/settings/account/delete');
         $response->assertViewIs('account.delete');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testRedirect()
@@ -39,7 +39,6 @@ class AccountTest extends TestCase
 
     public function testUpdate()
     {
-        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $data = [
             'email' => 'example@example.com',
             'name' => 'Example',
@@ -48,37 +47,36 @@ class AccountTest extends TestCase
         // success
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/settings/account/update', $data, $headers)
+            ->post('/settings/account/update', $data)
             ->assertRedirect('/');
         $this->assertDatabaseHas('users', $data);
 
         // invaild
         $this->actingAs($user)
-            ->post('/settings/account/update', [ 'email' => '' ], $headers)
-            ->assertStatus(422);
+            ->post('/settings/account/update', [ 'email' => '', 'name' => '' ])
+            ->assertSessionHasErrors([ 'email', 'name' ]);
     }
 
     public function testDelete()
     {
-        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $password = 'testpasswd';
 
         // success
         $user = factory(User::class)->create([ 'password' => bcrypt($password) ]);
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => $password ], $headers)
+            ->post('/settings/account/delete', [ 'password' => $password ])
             ->assertRedirect('/');
         $this->assertDatabaseMissing('users', [ 'id' => 1 ]);
 
         // fail
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => $password ], $headers)
-            ->assertStatus(200);
+            ->post('/settings/account/delete', [ 'password' => $password ])
+            ->assertSuccessful();
 
         // invaild
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => '' ], $headers)
-            ->assertStatus(422);
+            ->post('/settings/account/delete', [ 'password' => '' ])
+            ->assertSessionHasErrors('password');
     }
 }

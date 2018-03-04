@@ -30,14 +30,21 @@ module.exports = {
             },
         ],
     },
+    optimization: {
+        splitChunks: {
+            cacheGroups: {
+                core: {
+                    name: 'vendor',
+                    chunks: 'initial',
+                    minChunks: 2,
+                },
+            },
+        },
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',
             jQuery: 'jquery',
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'core',
-            chunks: [ 'core', 'dashboard', 'home', 'settings' ],
         }),
         new CleanWebpackPlugin([
             path.join(__dirname, '/public/assets/*'),

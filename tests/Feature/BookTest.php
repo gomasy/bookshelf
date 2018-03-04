@@ -21,7 +21,7 @@ class BookTest extends TestCase
         $response = $this->actingAs($user)
             ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
         $response->assertJsonStructure([ 'data' => [] ]);
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testCreate()
@@ -32,13 +32,13 @@ class BookTest extends TestCase
         // success
         $this->actingAs($user)
             ->post('/create', [ 'code' => '9784873115382' ], $headers)
-            ->assertStatus(200);
+            ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
         $this->actingAs($user)
             ->post('/create', [ 'code' => '4000801139' ], $headers)
-            ->assertStatus(200);
+            ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // dups
@@ -54,7 +54,7 @@ class BookTest extends TestCase
         // invalid
         $this->actingAs($user)
             ->post('/create', [ 'code' => '' ], $headers)
-            ->assertStatus(422);
+            ->assertSessionHasErrors('code');
     }
 
     public function testEdit()
@@ -73,7 +73,7 @@ class BookTest extends TestCase
         // success
         $this->actingAs($user)
             ->post('/edit', $data, $headers)
-            ->assertStatus(200);
+            ->assertSuccessful();
         $this->assertDatabaseHas('books', $data);
     }
 
@@ -97,6 +97,6 @@ class BookTest extends TestCase
         // invalid
         $this->actingAs($user)
             ->post('/delete', [ 'id' => '' ], $headers)
-            ->assertStatus(422);
+            ->assertSessionHasErrors('id');
     }
 }

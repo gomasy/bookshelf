@@ -65,6 +65,7 @@ return [
         'array'   => ':attributeは少なくとも :min 個でなければなりません。',
     ],
     'not_in'               => ':attributeは正しくありません。',
+    'not_regex'            => ':attributeのフォーマットが不正です。',
     'numeric'              => ':attributeは数字でなければなりません。',
     'present'              => ':attributeは存在しなければなりません。',
     'regex'                => ':attributeのフォーマットが不正です。',

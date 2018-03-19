@@ -40,20 +40,19 @@ class AccountTest extends TestCase
     public function testUpdate()
     {
         $password = 'testpasswd';
-        $raw_data = [
+        $data = [
             'email' => 'example@example.com',
             'name' => 'Example',
             'password' => $password,
             'password_confirmation' => $password,
         ];
-        $data = array_slice($raw_data, 0, 2);
 
         // success
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/settings/account/update', $raw_data)
+            ->post('/settings/account/update', $data)
             ->assertRedirect('/');
-        $this->assertDatabaseHas('users', $data);
+        $this->assertDatabaseHas('users', array_slice($data, 0, 2));
 
         // invaild
         $this->actingAs($user)

@@ -9,7 +9,7 @@ RUN yum -y update && \
     yum -y --enablerepo=remi-php72 install composer git mariadb-server nginx npm php-fpm php-mysql && \
     yum clean all
 
-ADD docker/my.cnf /etc/my.cnf.d/custom.cnf
+ADD docker/my.cnf /etc/my.cnf.d/addon.cnf
 ADD docker/nginx.conf /etc/nginx/nginx.conf
 ADD docker/start.sh /start.sh
 

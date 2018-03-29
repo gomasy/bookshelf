@@ -1,5 +1,5 @@
-mkdir /run/php-fpm
+#!/bin/sh
 
 mysqld_safe --basedir=/usr &
 nginx
-php-fpm --nodaemonize
+mkdir /run/php-fpm && php-fpm --nodaemonize

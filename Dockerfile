@@ -7,7 +7,9 @@ RUN yum -y update && \
     rpm -Uvh remi-release-7.rpm && \
     rm -f remi-release-7.rpm && \
     yum -y --enablerepo=remi-php72 install composer git mariadb-server nginx npm php-fpm php-mysql && \
-    yum clean all
+    yum clean all && \
+    sed -ie "s/user = apache/user = nginx/g" /etc/php-fpm.d/www.conf && \
+    sed -ie "s/group = nginx/group = nginx/g" /etc/php-fpm.d/www.conf
 
 ADD docker/my.cnf /etc/my.cnf.d/addon.cnf
 ADD docker/nginx.conf /etc/nginx/nginx.conf
@@ -20,12 +22,13 @@ RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
     git clone --depth=1 https://github.com/Gomasy/BooksManager.git /opt/books && \
     cd /opt/books && \
     cp .env.example .env && \
-    chown -R apache. . && \
+    chown -R nginx. . && \
     composer install --no-dev && \
     ./artisan key:generate && \
     ./artisan migrate && \
     (npm install || node node_modules/node-sass/scripts/install.js) && \
-    npm run build
+    npm run build && \
+    rm -rf ~/.{composer,npm}
 
 EXPOSE 80
-CMD [ "/bin/sh", "/start.sh" ]
+CMD [ "/start.sh" ]

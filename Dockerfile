@@ -9,7 +9,7 @@ RUN yum -y update && \
     yum -y --enablerepo=remi-php72 install composer git mariadb-server nginx npm php-fpm php-mysql && \
     yum clean all && \
     sed -ie "s/user = apache/user = nginx/g" /etc/php-fpm.d/www.conf && \
-    sed -ie "s/group = nginx/group = nginx/g" /etc/php-fpm.d/www.conf
+    sed -ie "s/group = apache/group = nginx/g" /etc/php-fpm.d/www.conf
 
 ADD docker/my.cnf /etc/my.cnf.d/addon.cnf
 ADD docker/nginx.conf /etc/nginx/nginx.conf

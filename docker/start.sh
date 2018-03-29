@@ -1,16 +1,11 @@
 #!/bin/sh
 
 cd /opt/books
-mysqld_safe --basedir=/usr &
-
-if [[ ! -e ".env" ]]; then
-    sleep 5
-
-    echo "CREATE DATABASE homestead; GRANT ALL ON homestead.* TO homestead@localhost IDENTIFIED BY 'secret';" | mysql -u root
-    cp .env.example .env
+if [[ ! -e ".key.lock" ]]; then
     ./artisan key:generate
-    ./artisan migrate
+    touch .key.lock
 fi
 
+mysqld_safe --basedir=/usr &
 nginx
 mkdir /run/php-fpm && php-fpm --nodaemonize

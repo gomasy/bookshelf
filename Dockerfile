@@ -13,16 +13,21 @@ RUN yum -y update && \
 
 ADD docker/my.cnf /etc/my.cnf.d/addon.cnf
 ADD docker/nginx.conf /etc/nginx/nginx.conf
-ADD docker/start.sh /start.sh
 
 RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
+    (mysqld_safe --basedir=/usr &); \
     git clone --depth=1 https://github.com/Gomasy/BooksManager.git /opt/books && \
     cd /opt/books && \
+    cp .env.example .env && \
     chown -R nginx. . && \
     composer install --no-dev && \
+    echo "CREATE DATABASE homestead; GRANT ALL ON homestead.* TO homestead@localhost IDENTIFIED BY 'secret';" | mysql -u root && \
+    ./artisan migrate && \
     (npm install || node node_modules/node-sass/scripts/install.js) && \
     npm run build && \
     rm -rf ~/.{composer,npm}
 
-EXPOSE 80
+ADD docker/start.sh /start.sh
 CMD [ "/start.sh" ]
+
+EXPOSE 80

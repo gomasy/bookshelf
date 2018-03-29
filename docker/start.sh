@@ -8,4 +8,4 @@ fi
 
 mysqld_safe --basedir=/usr &
 nginx
-mkdir /run/php-fpm && php-fpm --nodaemonize
+mkdir -p /run/php-fpm && php-fpm --nodaemonize

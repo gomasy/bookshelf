@@ -16,16 +16,10 @@ ADD docker/nginx.conf /etc/nginx/nginx.conf
 ADD docker/start.sh /start.sh
 
 RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
-    (mysqld_safe --basedir=/usr &); \
-    sleep 5 && \
-    echo "CREATE DATABASE homestead; GRANT ALL ON homestead.* TO homestead@localhost IDENTIFIED BY 'secret';" | mysql -u root && \
     git clone --depth=1 https://github.com/Gomasy/BooksManager.git /opt/books && \
     cd /opt/books && \
-    cp .env.example .env && \
     chown -R nginx. . && \
     composer install --no-dev && \
-    ./artisan key:generate && \
-    ./artisan migrate && \
     (npm install || node node_modules/node-sass/scripts/install.js) && \
     npm run build && \
     rm -rf ~/.{composer,npm}

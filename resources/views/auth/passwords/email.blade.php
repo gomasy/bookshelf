@@ -17,7 +17,7 @@
                     {{ session('status') }}
                 </div>
 @endif
-                <form  role="form" method="POST" action="{{ route('password.email') }}">
+                <form  role="form" method="POST" action="/password/email">
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email">{{ __('validation.attributes.email') }}</label>
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>

@@ -12,7 +12,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ __('auth.register.header') }}</div>
             <div class="panel-body">
-                <form role="form" method="POST" action="{{ route('register') }}">
+                <form role="form" method="POST" action="/register">
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label for="name">{{ __('validation.attributes.name') }}</label>
                         <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="foobar" required autofocus>

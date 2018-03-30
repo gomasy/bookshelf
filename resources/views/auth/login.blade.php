@@ -12,7 +12,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">{{ __('auth.sign.in') }}</div>
             <div class="panel-body">
-                <form role="form" method="POST" action="{{ route('login') }}">
+                <form role="form" method="POST" action="/login">
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email">{{ __('validation.attributes.email') }}</label>
                         <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>

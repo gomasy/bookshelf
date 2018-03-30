@@ -17,8 +17,7 @@
                     {{ session('status') }}
                 </div>
 @endif
-                <form role="form" method="POST" action="{{ route('password.request') }}">
-                    <input type="hidden" name="token" value="{{ $token }}">
+                <form role="form" method="POST" action="/password/reset">
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                         <label for="email">{{ __('validation.attributes.email') }}</label>
                         <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
@@ -46,8 +45,9 @@
                         </span>
 @endif
                     </div>
-                    <hr>
+                    <input type="hidden" name="token" value="{{ $token }}">
                     {{ csrf_field() }}
+                    <hr>
                     <button type="submit" class="btn btn-block btn-primary">{{ __('passwords.confirm') }}</button>
                 </form>
             </div>

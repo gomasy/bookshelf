@@ -1,6 +1,6 @@
 #!/bin/sh
 
-cd /opt/books
+cd /opt/BooksManager-master
 if [[ ! -e ".key.lock" ]]; then
     ./artisan key:generate
     touch .key.lock

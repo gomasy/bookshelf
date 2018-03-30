@@ -6,7 +6,7 @@ RUN yum -y update && \
     curl -O https://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
     rpm -Uvh remi-release-7.rpm && \
     rm -f remi-release-7.rpm && \
-    yum -y --enablerepo=remi-php72 install composer git mariadb-server nginx npm php-fpm php-mysql && \
+    yum -y --enablerepo=remi-php72 install composer mariadb-server nginx npm php-fpm php-mysql && \
     yum clean all && \
     sed -ie "s/user = apache/user = nginx/g" /etc/php-fpm.d/www.conf && \
     sed -ie "s/group = apache/group = nginx/g" /etc/php-fpm.d/www.conf
@@ -16,8 +16,9 @@ ADD docker/nginx.conf /etc/nginx/nginx.conf
 
 RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
     (mysqld_safe --basedir=/usr &); \
-    git clone --depth=1 https://github.com/Gomasy/BooksManager.git /opt/books && \
-    cd /opt/books && \
+    cd /opt && \
+    curl -sL https://github.com/Gomasy/BooksManager/archive/master.tar.gz | tar xvfz - && \
+    cd BooksManager-master && \
     cp .env.example .env && \
     chown -R nginx. . && \
     composer install --no-dev && \

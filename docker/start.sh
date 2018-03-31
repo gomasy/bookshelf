@@ -1,5 +1,6 @@
 #!/bin/sh
 
+mkdir -p /run/php-fpm
 cd /opt/BooksManager-master
 if [[ ! -e ".key.lock" ]]; then
     ./artisan key:generate
@@ -7,5 +8,5 @@ if [[ ! -e ".key.lock" ]]; then
 fi
 
 mysqld_safe --basedir=/usr &
+php-fpm --nodaemonize &
 nginx
-mkdir -p /run/php-fpm && php-fpm --nodaemonize

@@ -152,7 +152,7 @@ $(document).ready(() => {
                 422: () => { showFormatError(result.responseJSON); },
                 any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
             };
-            f[result.status]() ? f[result.status] : f['any']();
+            f[result.status] ? f[result.status]() : f['any']();
         });
     });
 
@@ -172,7 +172,7 @@ $(document).ready(() => {
                 422: () => { showFormatError(result.responseJSON); },
                 any: () => { $.notify(message.internal_error, { type: 'danger' }); },
             };
-            f[result.status]() ? f[result.status] : f['any']();
+            f[result.status] ? f[result.status]() : f['any']();
         });
     });
 

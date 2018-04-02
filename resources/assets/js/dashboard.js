@@ -31,13 +31,9 @@ const isSelected = () => {
     return !($('#main_' + btnName[0]).hasClass('disabled'));
 };
 
-const getSelectedRow = () => {
-    return $table.row('.selected').data();
-};
-
 const sendRequest = ($form, hasId) => {
     let data = $form.serialize();
-    if (hasId) data += '&id=' + getSelectedRow().id;
+    if (hasId) data += '&id=' + $table.row('.selected').data().id;
 
     return $.ajax({
         url: $form.attr('action'),
@@ -57,14 +53,6 @@ const showFormatError = res => {
     msg.message += '</p>';
 
     $.notify(msg, { type: 'warning' });
-};
-
-const getRowLinks = (title, url) => {
-    return '<a href="' + url + '" title="' + messages.rowsAlt + '" target="_blank">' + title + '</a>';
-};
-
-const getButtonElement = (name, label) => {
-    return '<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + label + '</a></li>';
 };
 
 $(document).ready(() => {
@@ -88,17 +76,17 @@ $(document).ready(() => {
         deferRender: true,
         ajax: 'list.json',
         rowCallback: (row, data) => {
-            $('td:eq(0)', row).html(getRowLinks(data.title, data.ndl_url));
+            $('td:eq(0)', row).html('<a href="' + data.ndl_url + '" title="' + messages.rowsAlt + '" target="_blank">' + data.title + '</a>');
         },
         drawCallback: () => {
             btnName.forEach(name => {
-                $('.pagination').append(getButtonElement(name, messages[name].label));
+                $('.pagination').append('<li class="paginate_button disabled" id="main_' + name + '"><a href="#" id="' + name + '" data-toggle="modal" data-target="#modal-' + name + '">' + messages[name].label + '</a></li>');
             });
 
             $('#edit').on('click', () => {
                 if (!isSelected()) return false;
 
-                const obj = getSelectedRow();
+                const obj = $table.row('.selected').data();
                 for (const key in obj) $('#input-' + key).val(obj[key]);
             });
 
@@ -139,20 +127,12 @@ $(document).ready(() => {
 
         $req.fail(result => {
             const f = {
-                404: () => {
-                    $.notify(messages.not_exist, { type: 'warning' });
-                },
-                409: () => {
-                    $.notify(messages.add.failure, { type: 'danger' });
-                },
-                422: () => {
-                    showFormatError(result.responseJSON);
-                },
-                500: () => {
-                    $.notify(messages.internal_error, { type: 'danger' });
-                },
+                404: () => { $.notify(messages.not_exist, { type: 'warning' }); },
+                409: () => { $.notify(messages.add.failure, { type: 'danger' }); },
+                422: () => { showFormatError(result.responseJSON); },
+                any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
             };
-            f[result.status]();
+            f[result.status] ? f[result.status]() : f['any']();
         });
     });
 
@@ -169,14 +149,10 @@ $(document).ready(() => {
 
         $req.fail(result => {
             const f = {
-                422: () => {
-                    showFormatError(result.responseJSON);
-                },
-                500: () => {
-                    $.notify(messages.internal_error, { type: 'danger' });
-                },
+                422: () => { showFormatError(result.responseJSON); },
+                any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
             };
-            f[result.status]();
+            f[result.status]() ? f[result.status] : f['any']();
         });
     });
 
@@ -192,17 +168,11 @@ $(document).ready(() => {
 
         $req.fail(result => {
             const f = {
-                404: () => {
-                    $.notify(messages.delete.failure, { type: 'danger' });
-                },
-                422: () => {
-                    showFormatError(result.responseJSON);
-                },
-                500: () => {
-                    $.notify(message.internal_error, { type: 'danger' });
-                },
+                404: () => { $.notify(messages.delete.failure, { type: 'danger' }); },
+                422: () => { showFormatError(result.responseJSON); },
+                any: () => { $.notify(message.internal_error, { type: 'danger' }); },
             };
-            f[result.status]();
+            f[result.status]() ? f[result.status] : f['any']();
         });
     });
 

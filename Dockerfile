@@ -17,8 +17,8 @@ ADD docker/nginx.conf /etc/nginx/nginx.conf
 RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
     (mysqld_safe --basedir=/usr &); \
     cd /opt && \
-    curl -sL https://github.com/Gomasy/BooksManager/archive/master.tar.gz | tar xvfz - && \
-    cd BooksManager-master && \
+    curl -sL https://github.com/Gomasy/books-manager/archive/master.tar.gz | tar xvfz - && \
+    cd books-manager-master && \
     cp .env.example .env && \
     chown -R nginx. . && \
     composer install --no-dev && \

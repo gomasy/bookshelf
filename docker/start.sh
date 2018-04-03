@@ -1,7 +1,7 @@
 #!/bin/sh
 
 mkdir -p /run/php-fpm
-cd /opt/BooksManager-master
+cd /opt/books-manager-master
 if [[ ! -e ".key.lock" ]]; then
     ./artisan key:generate
     touch .key.lock

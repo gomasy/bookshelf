@@ -6,15 +6,21 @@
 <script src="@asset('/assets/dashboard.min.js')"></script>
 @if (session('statusCode'))
 <script>
-    function showResult(provider, messages) {
-@if (session('statusCode') === 200)
-        provider(messages.add.success, { type: 'success' });
-@elseif (session('statusCode') === 404)
-        provider(messages.not_exist, { type: 'warning' });
-@elseif (session('statusCode') === 409)
-        provider(messages.add.failure, { type: 'error' });
-@endif
-    }
+function showResult(provider, messages) {
+@switch (session('statusCode'))
+    @case (200)
+    provider(messages.add.success, { type: 'success' });
+    @break
+
+    @case (404)
+    provider(messages.not_exist, { type: 'warning' });
+    @break
+
+    @case (409)
+    provider(messages.add.failure, { type: 'danger' });
+    @break
+@endswitch
+}
 </script>
 @endif
 @endsection

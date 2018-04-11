@@ -33,6 +33,8 @@ class BookController extends BookActionController
     {
         $result = parent::create($request);
 
-        return $request->ajax() ? $result : redirect('/')->with('result', $result);
+        return $request->ajax() ?
+            response($result['response'], $result['statusCode']) :
+            redirect('/')->with('statusCode', $result['statusCode']);
     }
 }

@@ -7,8 +7,12 @@
 @if (session('result'))
 <script>
     function showResult(provider, messages) {
-@if (session('result')->status() === 404)
+@if (session('statusCode') === 200)
+        provider(messages.add.success, { type: 'success' });
+@elseif (session('statusCode') === 404)
         provider(messages.not_exist, { type: 'warning' });
+@elseif (session('statusCode') === 409)
+        provider(messages.add.failure, { type: 'error' });
 @endif
     }
 </script>

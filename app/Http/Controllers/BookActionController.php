@@ -73,7 +73,7 @@ class BookActionController extends Controller
                 $user->next_id++;
                 $user->save();
 
-                return [ 'response' => $book ];
+                return [ 'response' => $book, 'statusCode' => 200 ];
             } catch (QueryException $e) {
                 return [ 'response' => $book, 'statusCode' => 409 ];
             }

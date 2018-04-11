@@ -4,7 +4,7 @@
 
 @section('js')
 <script src="@asset('/assets/dashboard.min.js')"></script>
-@if (session('result'))
+@if (session('statusCode'))
 <script>
     function showResult(provider, messages) {
 @if (session('statusCode') === 200)

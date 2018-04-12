@@ -114,16 +114,12 @@ $(document).ready(() => {
 
         if ($row.hasClass('selected')) {
             $row.removeClass('selected');
-            btnName.forEach(name => {
-                $('#main_' + name).addClass('disabled');
-            });
+            btnName.forEach(_ => $('#main_' + _).addClass('disabled'));
         } else {
             $('tr.selected').removeClass('selected');
             $row.addClass('selected');
             if ($table.row('.selected').data() !== undefined) {
-                btnName.forEach(name => {
-                    $('#main_' + name).removeClass('disabled');
-                });
+                btnName.forEach(_ => $('#main_' + _).removeClass('disabled'));
             }
         }
     });
@@ -138,7 +134,7 @@ $(document).ready(() => {
             showPopupMessage(messages.add);
         });
 
-        $req.fail(result => showPopupMessage(messages.add, result));
+        $req.fail(_ => showPopupMessage(messages.add, _));
     });
 
     const $editForm = $('#form-edit').on('submit', event => {
@@ -152,7 +148,7 @@ $(document).ready(() => {
             $form[0].reset();
         });
 
-        $req.fail(result => showPopupMessage(message.edit, result));
+        $req.fail(_ => showPopupMessage(message.edit, _));
     });
 
     const $deleteForm = $('#form-delete').on('submit', event => {
@@ -165,7 +161,7 @@ $(document).ready(() => {
             showPopupMessage(messages.delete);
         });
 
-        $req.fail(result => showPopupMessage(messages.delete, result));
+        $req.fail(_ => showPopupMessage(messages.delete, _));
     });
 
     $('#btn-scan').on('click', () => {

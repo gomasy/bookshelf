@@ -42,17 +42,30 @@ const sendRequest = ($form, hasId) => {
     });
 };
 
-const showFormatError = res => {
-    const msg = messages.invalid;
-    msg.message = '<p>';
-    for (const key in res.errors) {
-        res.errors[key].forEach(error => {
-            msg.message += error + '<br>';
-        });
-    }
-    msg.message += '</p>';
+const showPopupMessage = (message = null, result = null) => {
+    if (result != null) {
+        const f = {
+            any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
+            404: () => { $.notify(message.notfound, { type: 'warning' }); },
+            409: () => { $.notify(message.conflict, { type: 'danger' }); },
+            422: () => {
+                const errors = result.responseJSON.errors;
+                const msg = messages.invalid;
+                msg.message = '<p>';
 
-    $.notify(msg, { type: 'warning' });
+                for (const key in errors) {
+                    errors[key].forEach(error => { msg.message += error + '<br>'; });
+                }
+                msg.message += '</p>';
+
+                $.notify(msg, { type: 'warning' });
+            }
+        };
+
+        f[result.status] ? f[result.status]() : f['any']();
+    } else {
+        $.notify(message.success, { type: 'success' });
+    }
 };
 
 $(document).ready(() => {
@@ -122,18 +135,10 @@ $(document).ready(() => {
         $req.done(result => {
             $table.row.add(result).draw(false);
             $registerForm[0].reset();
-            $.notify(messages.add.success, { type: 'success' });
+            showPopupMessage(messages.add);
         });
 
-        $req.fail(result => {
-            const f = {
-                404: () => { $.notify(messages.not_exist, { type: 'warning' }); },
-                409: () => { $.notify(messages.add.failure, { type: 'danger' }); },
-                422: () => { showFormatError(result.responseJSON); },
-                any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
-            };
-            f[result.status] ? f[result.status]() : f['any']();
-        });
+        $req.fail(result => showPopupMessage(messages.add, result));
     });
 
     const $editForm = $('#form-edit').on('submit', event => {
@@ -147,13 +152,7 @@ $(document).ready(() => {
             $form[0].reset();
         });
 
-        $req.fail(result => {
-            const f = {
-                422: () => { showFormatError(result.responseJSON); },
-                any: () => { $.notify(messages.internal_error, { type: 'danger' }); },
-            };
-            f[result.status] ? f[result.status]() : f['any']();
-        });
+        $req.fail(result => showPopupMessage(message.edit, result));
     });
 
     const $deleteForm = $('#form-delete').on('submit', event => {
@@ -163,17 +162,10 @@ $(document).ready(() => {
         $req.done(result => {
             $('#modal-delete').modal('hide');
             $table.row('.selected').remove().draw(false);
-            $.notify(messages.delete.success, { type: 'success' });
+            showPopupMessage(messages.delete);
         });
 
-        $req.fail(result => {
-            const f = {
-                404: () => { $.notify(messages.delete.failure, { type: 'danger' }); },
-                422: () => { showFormatError(result.responseJSON); },
-                any: () => { $.notify(message.internal_error, { type: 'danger' }); },
-            };
-            f[result.status] ? f[result.status]() : f['any']();
-        });
+        $req.fail(result => showPopupMessage(messages.delete, result));
     });
 
     $('#btn-scan').on('click', () => {

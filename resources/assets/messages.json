@@ -8,7 +8,12 @@
                 "title": "<strong>成功</strong>",
                 "message": "<p>本の登録に成功しました。</p>"
             },
-            "failure": {
+            "notfound": {
+                "icon": "glyphicon glyphicon-exclamation-sign",
+                "title": "<strong>該当なし</strong>",
+                "message": "<p>該当する書籍情報が見つかりません</p>"
+            },
+            "conflict": {
                 "icon": "glyphicon glyphicon-warning-sign",
                 "title": "<strong>登録済み</strong>",
                 "message": "<p>すでに登録されています。</p>"
@@ -21,24 +26,14 @@
                 "title": "<strong>成功</strong>",
                 "message": "<p>選択した本を削除しました。</p>"
             },
-            "failure": {
+            "notfound": {
                 "icon": "glyphicon glyphicon-warning-sign",
                 "title": "<strong>エラー</strong>",
                 "message": "<p>削除に失敗しました。</p>"
             }
         },
         "edit": {
-            "label": "編集",
-            "failure": {
-                "icon": "glyphicon glyphicon-warning-sign",
-                "title": "<strong>エラー</strong>",
-                "message": ""
-            }
-        },
-        "not_exist": {
-            "icon": "glyphicon glyphicon-exclamation-sign",
-            "title": "<strong>該当なし</strong>",
-            "message": "<p>該当する書籍情報が見つかりません</p>"
+            "label": "編集"
         },
         "invalid": {
             "icon": "glyphicon glyphicon-exclamation-sign",

@@ -6,18 +6,18 @@
 <script src="@asset('/assets/dashboard.min.js')"></script>
 @if (session('statusCode'))
 <script>
-function showResult(provider, messages) {
+function showResult(provider, message) {
 @switch (session('statusCode'))
     @case (200)
-    provider(messages.add.success, { type: 'success' });
+    provider(message.success, { type: 'success' });
     @break
 
     @case (404)
-    provider(messages.not_exist, { type: 'warning' });
+    provider(message.notfound, { type: 'warning' });
     @break
 
     @case (409)
-    provider(messages.add.failure, { type: 'danger' });
+    provider(message.conflict, { type: 'danger' });
     @break
 @endswitch
 }

@@ -69,7 +69,7 @@ const showPopupMessage = (message = null, result = null) => {
 };
 
 $(document).ready(() => {
-    if (typeof showResult === 'function') showResult($.notify, messages);
+    if (typeof showResult === 'function') showResult($.notify, messages.add);
 
     $table = $('#main').DataTable({
         columns: [

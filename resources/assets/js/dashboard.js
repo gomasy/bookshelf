@@ -42,7 +42,7 @@ const sendRequest = ($form, hasId) => {
     });
 };
 
-const showPopupMessage = (message = null, result = null) => {
+const showPopupMessage = (message, result = null) => {
     if (result != null) {
         const f = {
             any: () => { $.notify(messages.internal_error, { type: 'danger' }); },

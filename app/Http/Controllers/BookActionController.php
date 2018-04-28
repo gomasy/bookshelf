@@ -50,7 +50,7 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
-        return [ 'data' => Book::get() ];
+        return Book::get();
     }
 
     /**

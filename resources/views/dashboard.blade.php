@@ -18,7 +18,8 @@
 @endsection
 
 @section('content')
-<div id="app"></div>
+<div id="table"></div>
+<div id="modal"></div>
 
 <div class="footer">
 @foreach (__('dashboard.credits') as $context)

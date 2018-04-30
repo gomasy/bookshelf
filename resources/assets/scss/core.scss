@@ -144,24 +144,26 @@ div#active {
 }
 
 @media screen and (max-width: 768px) {
-    div#wrapper { margin-left: 0; }
+    div#wrapper {
+        margin-left: 0;
 
-    nav.navbar {
-        button.navbar-toggle { margin-top: 2px; }
+        nav.navbar {
+            button.navbar-toggle { margin-top: 2px; }
 
-        ul.nav {
-            border: 1px solid #eee;
+            ul.nav {
+                border: 1px solid #eee;
 
-            hr {
-                margin-top: 10px;
-                margin-bottom: 10px;
-            }
+                hr {
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                }
 
-            li.sm { display: list-item; }
+                li.sm { display: list-item; }
 
-            form#register {
-                padding: 5px;
-                border-bottom: 1px solid #eee;
+                form#register {
+                    padding: 5px;
+                    border-bottom: 1px solid #eee;
+                }
             }
         }
     }

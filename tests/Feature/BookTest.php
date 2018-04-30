@@ -20,7 +20,6 @@ class BookTest extends TestCase
 
         $response = $this->actingAs($user)
             ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
-        $response->assertJsonStructure([ 'data' => [] ]);
         $response->assertSuccessful();
     }
 
@@ -85,18 +84,18 @@ class BookTest extends TestCase
 
         // success
         $this->actingAs($user)
-            ->post('/delete', [ 'id' => '1' ], $headers)
+            ->post('/delete', [ 'ids' => [ 1 ] ], $headers)
             ->assertStatus(204);
         $this->assertDatabaseMissing('books', [ 'id' => '1' ]);
 
-        // not found
+        // bad request
         $this->actingAs($user)
-            ->post('/delete', [ 'id' => '0' ], $headers)
-            ->assertStatus(404);
+            ->post('/delete', [ 'ids' => [ 0 ] ], $headers)
+            ->assertStatus(400);
 
         // invalid
         $this->actingAs($user)
-            ->post('/delete', [ 'id' => '' ], $headers)
-            ->assertSessionHasErrors('id');
+            ->post('/delete', [ 'ids' => '' ], $headers)
+            ->assertSessionHasErrors('ids');
     }
 }

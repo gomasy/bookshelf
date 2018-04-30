@@ -1,6 +1,7 @@
 @import url(//fonts.googleapis.com/css?family=Poppins:300,400,500,600,700);
 
 body {
+    display: flex;
     font-family: 'Poppins', sans-serif;
     background: #fafafa;
 }
@@ -22,100 +23,88 @@ i, span {
     display: inline-block;
 }
 
-div.wrapper {
-    display: flex;
+nav#sidebar {
+    position: fixed;
+    text-align: center;
+    min-height: 100vh;
+    min-width: 80px;
+    max-width: 80px;
+    background: #34495e;
+    color: #fff;
+    transition: all 0.3s;
 
-    nav#sidebar {
-        position: fixed;
-        text-align: center;
-        min-height: 100vh;
-        min-width: 80px;
-        max-width: 80px;
-        background: #34495e;
-        color: #fff;
-        transition: all 0.3s;
+    ul {
+        li {
+            a {
+                display: block;
+                padding: 20px 10px;
+                font-size: 0.85em;
 
-        ul {
-            li {
-                a {
-                    display: block;
-                    padding: 20px 10px;
-                    font-size: 0.85em;
-
-                    i {
-                        display: inherit;
-                        margin-bottom: 5px;
-                        font-size: 1.8em;
-                    }
-
-                    &:hover {
-                        color: #34495e;
-                        background: #fff;
-                    }
+                i {
+                    display: inherit;
+                    margin-bottom: 5px;
+                    font-size: 1.8em;
                 }
 
-                &.active > a {
-                    color: #fff;
-                    background: #2c3e50;
+                &:hover {
+                    color: #34495e;
+                    background: #fff;
                 }
             }
 
-            &.components {
-                padding: 10px 0;
-                border-bottom: 1px solid #47748b;
-
-                hr {
-                    width: 50%;
-                    margin-top: 10px;
-                    margin-bottom: 10px;
-                    border: inherit;
-                }
+            &.active > a {
+                color: #fff;
+                background: #2c3e50;
             }
         }
 
-        div.sidebar-header {
-            padding: 20px;
-            background: #2c3e50;
+        &.components {
+            padding: 10px 0;
+            border-bottom: 1px solid #47748b;
 
-            h3 { display: none; }
-            strong { font-size: 1.8em; }
+            hr {
+                width: 50%;
+                margin-top: 10px;
+                margin-bottom: 10px;
+                border: inherit;
+            }
         }
     }
 
-    div#content {
+    div.sidebar-header {
         padding: 20px;
-        margin-left: 80px;
-        width: 100%;
-        transition: all 0.3s;
+        background: #2c3e50;
 
-        nav.navbar {
-            padding: 15px 10px;
+        h3 { display: none; }
+        strong { font-size: 1.8em; }
+    }
+}
+
+div#wrapper {
+    padding: 20px;
+    margin-left: 80px;
+    width: 100%;
+    transition: all 0.3s;
+
+    nav.navbar {
+        padding: 15px 10px;
+        background: #fff;
+        border: none;
+        border-radius: 0;
+        height: 70px;
+        box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        z-index: 100;
+
+        div.navbar-header {
+            font-size: 18px;
+            line-height: 40px;
+            color: #777;
+        }
+
+        ul.nav {
             background: #fff;
-            border: none;
-            border-radius: 0;
-            height: 70px;
-            box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-            z-index: 100;
 
-            div.navbar-header {
-                font-size: 18px;
-                line-height: 40px;
-                color: #777;
-            }
-
-            ul.nav {
-                background: #fff;
-
-                li.sm { display: none; }
-            }
-
-            form#register {
-                button { height: 40px; }
-                input {
-                    width: 200px;
-                    height: 40px;
-                }
-            }
+            li.sm { display: none; }
         }
     }
 }
@@ -149,44 +138,40 @@ div#active {
         }
     }
 
-    div#content {
+    div#wrapper {
         margin-left: 250px;
     }
 }
 
 @media screen and (max-width: 768px) {
-    div.wrapper {
-        div#content {
-            margin-left: 0;
+    div#wrapper { margin-left: 0; }
 
-            nav.navbar {
-                button.navbar-toggle { margin-top: 2px; }
+    nav.navbar {
+        button.navbar-toggle { margin-top: 2px; }
 
-                ul.nav {
-                    border: 1px solid #eee;
+        ul.nav {
+            border: 1px solid #eee;
 
-                    hr {
-                        margin-top: 10px;
-                        margin-bottom: 10px;
-                    }
-
-                    li.sm { display: list-item; }
-
-                    form#register {
-                        padding: 5px;
-                        border-bottom: 1px solid #eee;
-                    }
-                }
+            hr {
+                margin-top: 10px;
+                margin-bottom: 10px;
             }
-        }
 
-        nav#sidebar {
-            margin-left: -80px;
+            li.sm { display: list-item; }
+
+            form#register {
+                padding: 5px;
+                border-bottom: 1px solid #eee;
+            }
         }
     }
 
+    nav#sidebar {
+        margin-left: -80px;
+    }
+
     div#active {
-        div#content { margin-left: 0; }
+        div#wrapper { margin-left: 0; }
         nav#sidebar { margin-left: -250px; }
     }
 }

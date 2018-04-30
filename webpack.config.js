@@ -3,6 +3,11 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm.js',
+        },
+    },
     entry: {
         core: './resources/assets/js/core.js',
         dashboard: './resources/assets/js/dashboard.js',
@@ -19,6 +24,10 @@ module.exports = {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [ 'babel-loader' ],
+            },
+            {
+                test: /\.vue$/,
+                use: [ 'vue-loader' ],
             },
             {
                 test: /\.scss$/,

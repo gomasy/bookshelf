@@ -50,7 +50,7 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
-        return [ 'data' => Book::get() ];
+        return Book::get();
     }
 
     /**
@@ -105,8 +105,11 @@ class BookActionController extends Controller
      */
     public function delete(DeleteRequest $request)
     {
-        $book = Book::search($request->id);
-        return $book->count() ?
-            response($book->delete(), 204) : response(NULL, 404);
+        foreach ($request->ids as $id) {
+            if (!($book = Book::search($id))) return response(NULL, 400);
+            $book->delete();
+        }
+
+        return response(NULL, 204);
     }
 }

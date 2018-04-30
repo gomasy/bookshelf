@@ -1,11 +1,5 @@
 // colors
 $footer-text-color: #555;
-$btn-text-color: #fff;
-$btn-delete-color: #bf5329;
-$btn-delete-hover-color: #954120;
-$btn-edit-color: #8eb4cb;
-$btn-edit-hover-color: #708ea1;
-$tr-selected-color: #d1d1d1;
 
 div.footer {
     margin-bottom: 15px;
@@ -15,25 +9,3 @@ div.footer {
 
     a { color: $footer-text-color; }
 }
-
-div.dataTables_scrollHeadInner {
-    &, table { width: auto !important; }
-}
-
-div#main_paginate {
-    a#delete {
-        color: $btn-text-color;
-        background-color: $btn-delete-color;
-
-        &:hover { background-color: $btn-delete-hover-color; }
-    }
-
-    a#edit {
-        color: $btn-text-color;
-        background-color: $btn-edit-color;
-
-        &:hover { background-color: $btn-edit-hover-color; }
-    }
-}
-
-#main tbody tr.selected { background-color: $tr-selected-color; }

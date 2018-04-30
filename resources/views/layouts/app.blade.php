@@ -60,7 +60,9 @@
 
                         <div class="collapse navbar-collapse" id="app-navbar-collapse">
                             <ul class="nav navbar-right">
-                                @yield('navbar')
+                                <li class="nav-item">
+                                    @yield('navbar')
+                                </li>
 
 @auth
                                 <li class="nav-item sm">

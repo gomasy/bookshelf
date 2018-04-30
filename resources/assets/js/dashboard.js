@@ -3,34 +3,62 @@ import '../scss/dashboard.scss';
 
 import Vue from 'vue';
 import Datatable from 'vue2-datatable-component';
-
-const _token = document.head.querySelector('meta[name="csrf-token"]').content;
+import editModal from './components/editModal.vue';
 
 Vue.use(Datatable);
 const table = new Vue({
-    el: '#table',
+    el: '#content',
+    components: { editModal },
     template: `
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <datatable v-bind="$data">
-                    <button class="btn btn-primary" :class="{ 'disabled': selection.length != 1 }" @click="edit">編集</button>
-                    <button class="btn btn-danger" :class="{ 'disabled': !selection.length }" @click="remove">削除</button>
-                </datatable>
+        <div id="content">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <datatable v-bind="$data">
+                        <button class="btn btn-primary" :class="{ 'disabled': selection.length != 1 }" data-toggle="modal" data-target="#edit-modal" @click="edit">編集</button>
+                        <button class="btn btn-danger" :class="{ 'disabled': !selection.length }" @click="remove">削除</button>
+                    </datatable>
+                </div>
+            </div>
+            <div id="modal">
+                <editModal ref="editModal" :columns="columns" :selection="selection" />
             </div>
         </div>
     `,
-    data: () => ({
+    data: {
         columns: [
-            { 'title': 'タイトル', field: 'title', sortable: true },
-            { 'title': '巻号', field: 'volume' },
-            { 'title': '著作等', field: 'authors', sortable: true },
-            { 'title': '出版日', field: 'published_date', sortable: true },
+            {
+                title: 'タイトル',
+                field: 'title',
+                sortable: true,
+                type: 'text',
+                required: true,
+            },
+            {
+                title: '巻号',
+                field: 'volume',
+                type: 'text',
+                required: false,
+            },
+            {
+                title: '著作等',
+                field: 'authors',
+                sortable: true,
+                type: 'text',
+                required: true,
+            },
+            {
+                title: '出版日',
+                field: 'published_date',
+                sortable: true,
+                type: 'date',
+                required: true,
+            },
         ],
         data: [],
         total: 0,
         selection: [],
         query: {},
-    }),
+    },
     watch: {
         query: {
             handler() {
@@ -39,7 +67,7 @@ const table = new Vue({
         },
     },
     methods: {
-        fetch: function () {
+        fetch() {
             const xhr = new XMLHttpRequest();
             xhr.open('GET', '/list.json');
             xhr.responseType = 'json';
@@ -52,16 +80,17 @@ const table = new Vue({
             });
             xhr.send();
         },
-        edit: function () {
+        edit() {
+            this.$refs.editModal.open();
         },
-        remove: function () {
+        remove() {
             const xhr = new XMLHttpRequest();
             const ids = [];
             for (let e of this.selection) ids.push(e.id);
 
             xhr.open('POST', '/delete');
             xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
-            xhr.setRequestHeader('X-CSRF-TOKEN', _token);
+            xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.addEventListener('load', event => {
                 if (event.target.status == 204) {
                     for (let id of ids) {
@@ -80,26 +109,29 @@ const table = new Vue({
 new Vue({
     el: '#register',
     template: `
-        <div class="form-inline" id="register">
-            <input class="form-control" type="text" placeholder="ISBN or JP番号" v-model="code">
-            <button class="btn btn-info" @click="create">登録</button>
-            <button class="btn btn-success">読み取る</button>
-        </div>
+        <form class="form-inline" id="register" @submit.prevent="create">
+            <input class="form-control" type="text" placeholder="ISBN or JP番号" v-model="code" required>
+            <button class="btn btn-info" type="submit">登録</button>
+            <button class="btn btn-success" type="button">読み取る</button>
+        </form>
     `,
     data: {
         code: '',
     },
     methods: {
-        create: function () {
+        create() {
             const xhr = new XMLHttpRequest();
 
             xhr.open('POST', '/create');
+            xhr.responseType = 'json';
             xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('X-CSRF-TOKEN', _token);
+            xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.addEventListener('load', event => {
                 if (event.target.status == 200) {
-                    table.fetch();
+                    table.data.push(event.target.response);
+                    table.total++;
+
                     this.code = '';
                 }
             });

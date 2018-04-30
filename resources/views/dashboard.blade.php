@@ -11,5 +11,5 @@
 @endsection
 
 @section('content')
-<div id="table"></div><div id="modal"></div><div class="footer">@foreach (__('dashboard.credits') as $context){!! $context !!}<br>@endforeach</div>
+<div id="content"></div><div id="footer">@foreach (__('dashboard.credits') as $context){!! $context !!}<br>@endforeach</div>
 @endsection

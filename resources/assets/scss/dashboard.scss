@@ -1,7 +1,15 @@
 // colors
 $footer-text-color: #555;
 
-div.footer {
+form#register {
+    button { height: 40px; }
+    input {
+        width: 200px;
+        height: 40px;
+    }
+}
+
+div#footer {
     margin-bottom: 15px;
     text-align: right;
     font-size: 12px;

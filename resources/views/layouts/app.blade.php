@@ -13,77 +13,75 @@
         @yield('js')
     </head>
     <body>
-        <div class="wrapper">
-            <nav id="sidebar">
-                <div class="sidebar-header">
-                    <h3>Books Manager</h3>
-                    <strong><i class="glyphicon glyphicon-book" aria-hidden="true"></i></strong>
-                </div>
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                <h3>Books Manager</h3>
+                <strong><i class="glyphicon glyphicon-book" aria-hidden="true"></i></strong>
+            </div>
 
-                <ul class="list-unstyled components">
-                    <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
-                    <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
+            <ul class="list-unstyled components">
+                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
+                <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
 @auth
-                    <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
-                    <hr>
-                    <li>
-                        <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                            <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
-                            {{ __('auth.sign.out') }}
-                        </a>
-                        <form id="logout-form" method="POST" action="/logout" style="display: none;">
-                            {{ csrf_field() }}
-                        </form>
-                    </li>
+                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                <hr>
+                <li>
+                    <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                        <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                        {{ __('auth.sign.out') }}
+                    </a>
+                    <form id="logout-form" method="POST" action="/logout" style="display: none;">
+                        {{ csrf_field() }}
+                    </form>
+                </li>
 @endauth
 @guest
-                    <hr>
-                    <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
-                    <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
+                <hr>
+                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
+                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
 @endguest
-                </ul>
+            </ul>
+        </nav>
+
+        <div id="wrapper">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        @yield('title')
+
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
+                            <span class="sr-only">Toggle Navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+
+                    <div class="collapse navbar-collapse" id="app-navbar-collapse">
+                        <ul class="nav navbar-right">
+                            <li class="nav-item">
+                                @yield('navbar')
+                            </li>
+
+@auth
+                            <li class="nav-item sm">
+                                <a class="button" href="/settings">{{ __('home.sidebar.setting') }}</a>
+                                <a class="button" href="#">{{ __('home.sidebar.help') }}</a>
+                                <a class="button" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.sign.out') }}</a>
+                            </li>
+@endauth
+@guest
+                            <li class="nav-item sm">
+                                <a class="button" href="/login">{{ __('auth.sign.in') }}</a>
+                                <a class="button" href="/register">{{ __('auth.register.title') }}</a>
+                            </li>
+@endguest
+                        </ul>
+                    </div>
+                </div>
             </nav>
 
-            <div id="content">
-                <nav class="navbar navbar-default">
-                    <div class="container-fluid">
-                        <div class="navbar-header">
-                            @yield('title')
-
-                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#app-navbar-collapse">
-                                <span class="sr-only">Toggle Navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-                        </div>
-
-                        <div class="collapse navbar-collapse" id="app-navbar-collapse">
-                            <ul class="nav navbar-right">
-                                <li class="nav-item">
-                                    @yield('navbar')
-                                </li>
-
-@auth
-                                <li class="nav-item sm">
-                                    <a class="button" href="/settings">{{ __('home.sidebar.setting') }}</a>
-                                    <a class="button" href="#">{{ __('home.sidebar.help') }}</a>
-                                    <a class="button" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.sign.out') }}</a>
-                                </li>
-@endauth
-@guest
-                                <li class="nav-item sm">
-                                    <a class="button" href="/login">{{ __('auth.sign.in') }}</a>
-                                    <a class="button" href="/register">{{ __('auth.register.title') }}</a>
-                                </li>
-@endguest
-                            </ul>
-                        </div>
-                    </div>
-                </nav>
-
-                @yield('content')
-            </div>
+            @yield('content')
         </div>
     </body>
 </html>

@@ -14,8 +14,8 @@ const table = new Vue({
             <div class="panel panel-default">
                 <div class="panel-body">
                     <datatable v-bind="$data">
-                        <button class="btn btn-primary" :class="{ 'disabled': selection.length != 1 }" data-toggle="modal" data-target="#edit-modal" @click="edit">編集</button>
-                        <button class="btn btn-danger" :class="{ 'disabled': !selection.length }" @click="remove">削除</button>
+                        <button class="btn btn-primary" :disabled="selection.length != 1" data-toggle="modal" data-target="#edit-modal" @click="edit">編集</button>
+                        <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
                     </datatable>
                 </div>
             </div>

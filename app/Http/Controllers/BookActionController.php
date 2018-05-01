@@ -116,6 +116,13 @@ class BookActionController extends Controller
      */
     public function delete(DeleteRequest $request)
     {
-        return response(NULL, Book::destroy($request->ids) ? 204 : 400);
+        \DB::beginTransaction();
+        try {
+            Book::destroy($request->ids);
+
+            return response(\DB::commit(), 204);
+        } catch (\Exception $e) {
+            return response(\DB::rollback(), 400);
+        }
     }
 }

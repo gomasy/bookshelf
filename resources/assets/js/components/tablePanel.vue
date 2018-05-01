@@ -61,9 +61,8 @@ export default {
             const xhr = new XMLHttpRequest();
             let url = '/list.json?';
             Object.keys(query).map(k => url += k + '=' + query[k] + '&');
-            url = url.substring(url.length - 1, -1);
 
-            xhr.open('GET', url);
+            xhr.open('GET', url.substring(url.length - 1, -1));
             xhr.responseType = 'json';
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.addEventListener('load', event => {

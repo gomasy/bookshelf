@@ -20,6 +20,7 @@ class BookTest extends TestCase
 
         $response = $this->actingAs($user)
             ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+        $response->assertJsonStructure([ 'data' => [] ]);
         $response->assertSuccessful();
     }
 

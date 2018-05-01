@@ -29,9 +29,4 @@ class Book extends Model
             $builder->where('user_id', \Auth::id());
         });
     }
-
-    public function scopeSearch(Builder $query, $id)
-    {
-        return $query->where('id', $id);
-    }
 }

@@ -44,7 +44,18 @@ class NDL {
 
     protected function getChannel($url)
     {
-        $content = file_get_contents($url);
+        $ch = curl_init($url);
+        curl_setopt_array($ch, [
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 3,
+        ]);
+
+        $retry = 0;
+        $content = curl_exec($ch);
+        while (curl_errno($ch) !== CURLE_OK && $retry < 3) {
+            $content = curl_exec($ch);
+            $retry++;
+        }
         $xml = preg_replace($this->regexp[0], '', $content);
 
         return simplexml_load_string($xml)->channel;

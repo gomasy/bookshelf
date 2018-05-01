@@ -118,11 +118,13 @@ class BookActionController extends Controller
     {
         \DB::beginTransaction();
         try {
-            Book::destroy($request->ids);
+            if(!Book::destroy($request->ids)) {
+                return response(\DB::rollback(), 400);
+            }
 
             return response(\DB::commit(), 204);
         } catch (\Exception $e) {
-            return response(\DB::rollback(), 400);
+            return response(\DB::rollback(), 500);
         }
     }
 }

@@ -50,7 +50,18 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
-        return Book::get();
+        if (isset($request->offset) && isset($request->limit)) {
+            $books = Book::offset($request->offset)
+                ->limit($request->limit)
+                ->get();
+        } else {
+            $books = Book::get();
+        }
+
+        return [
+            'data' => $books,
+            'total' => Book::count(),
+        ];
     }
 
     /**
@@ -105,11 +116,6 @@ class BookActionController extends Controller
      */
     public function delete(DeleteRequest $request)
     {
-        foreach ($request->ids as $id) {
-            if (!($book = Book::find($id))) return response(NULL, 400);
-            $book->delete();
-        }
-
-        return response(NULL, 204);
+        return response(NULL, Book::destroy($request->ids) ? 204 : 400);
     }
 }

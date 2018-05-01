@@ -1,3 +1,5 @@
+// vim:ft=javascript
+
 <template>
     <div class="modal fade" id="edit-modal">
         <div class="modal-dialog">
@@ -10,12 +12,12 @@
                         <div class="form-group" v-for="col in columns">
                             <label class="col-sm-2 control-label">{{ col.title }}</label>
                             <div class="col-sm-9">
-                                <input class="form-control" :type="col.type" :required="col.required" v-model="items[col.field]">
+                                <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required">
                             </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button class="btn btn-default" type="button" data-dismiss="modal" @click="cancel">キャンセル</button>
+                        <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
                         <button class="btn btn-info" type="submit">決定</button>
                     </div>
                 </form>
@@ -30,17 +32,13 @@ export default {
         'columns',
         'selection',
     ],
-    data: () => {
-        return {
-            items: [],
-        };
-    },
+    data: () => ({
+        items: {},
+    }),
     methods: {
         open() {
             // :thinking_face:
             this.items = JSON.parse(JSON.stringify(this.selection[0]));
-        },
-        cancel() {
         },
         submit() {
             const xhr = new XMLHttpRequest();
@@ -51,9 +49,9 @@ export default {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.addEventListener('load', event => {
                 if (event.target.status == 200) {
-                    for (let col of this.columns) {
+                    this.columns.map(col => {
                         this.selection[0][col.field] = this.items[col.field];
-                    }
+                    });
                     $('#edit-modal').modal('hide');
                 }
             });

@@ -1,5 +1,3 @@
-// vim:ft=javascript
-
 <template>
     <form class="form-inline" id="register" @submit.prevent="create">
         <input class="form-control" type="text" placeholder="ISBN or JP番号" v-model="code" required>

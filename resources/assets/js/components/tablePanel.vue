@@ -1,5 +1,3 @@
-// vim:ft=javascript
-
 <template>
     <div id="content">
         <div class="panel panel-default">

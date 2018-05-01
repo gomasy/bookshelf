@@ -1,5 +1,3 @@
-// vim:ft=javascript
-
 <template>
     <div class="modal fade" id="edit-modal">
         <div class="modal-dialog">

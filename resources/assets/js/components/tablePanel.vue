@@ -58,7 +58,9 @@ export default {
         fetch(query) {
             const xhr = new XMLHttpRequest();
             let url = '/list.json?';
-            Object.keys(query).map(k => url += k + '=' + query[k] + '&');
+            if (query != undefined) {
+                Object.keys(query).map(k => url += k + '=' + query[k] + '&');
+            }
 
             xhr.open('GET', url.substring(url.length - 1, -1));
             xhr.responseType = 'json';
@@ -90,12 +92,7 @@ export default {
             xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.addEventListener('load', event => {
                 if (event.target.status == 204) {
-                    ids.map(id => {
-                        for (let i = 0; i < this.data.length; i++) {
-                            if (this.data[i].id == id) this.data.splice(i, 1);
-                        }
-                    });
-                    this.total = this.data.length;
+                    this.fetch(this.query);
                 }
             });
             xhr.send(JSON.stringify({ ids: ids }));

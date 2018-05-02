@@ -46,7 +46,7 @@ export default {
             xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.addEventListener('load', event => {
-                if (event.target.status == 200) {
+                if (event.target.status === 200) {
                     this.columns.map(col => {
                         this.selection[0][col.field] = this.items[col.field];
                     });

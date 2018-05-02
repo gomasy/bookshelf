@@ -58,7 +58,7 @@ export default {
         fetch(query) {
             const xhr = new XMLHttpRequest();
             let url = '/list.json?';
-            if (query != undefined) {
+            if (query !== undefined) {
                 Object.keys(query).map(k => url += k + '=' + query[k] + '&');
             }
 
@@ -66,7 +66,7 @@ export default {
             xhr.responseType = 'json';
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.addEventListener('load', event => {
-                if (event.target.status == 200) {
+                if (event.target.status === 200) {
                     const result = event.target.response;
 
                     this.data = result.data;
@@ -91,7 +91,7 @@ export default {
             xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
             xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.addEventListener('load', event => {
-                if (event.target.status == 204) {
+                if (event.target.status === 204) {
                     this.fetch(this.query);
                 }
             });

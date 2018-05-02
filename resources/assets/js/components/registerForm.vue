@@ -2,7 +2,7 @@
     <form class="form-inline" id="register" @submit.prevent="create">
         <input class="form-control" type="text" placeholder="ISBN or JP番号" v-model="code" required>
         <button class="btn btn-info" type="submit">登録</button>
-        <button class="btn btn-success" type="button">読み取る</button>
+        <button class="btn btn-success" type="button" @click="reader">読み取る</button>
     </form>
 </template>
 
@@ -24,12 +24,16 @@ export default {
             xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
             xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
             xhr.addEventListener('load', event => {
-                if (event.target.status == 200) {
+                if (event.target.status === 200) {
                     this.table.create(event.target.response);
                     this.code = '';
                 }
             });
             xhr.send(JSON.stringify({ code: this.code }));
+        },
+        reader() {
+            const url = location.origin + '/create?code={CODE}&_token=' + document.head.querySelector('meta[name="csrf-token"]').content;
+            location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
         },
     },
 }

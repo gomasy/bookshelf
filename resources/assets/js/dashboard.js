@@ -25,6 +25,6 @@ new Vue({
     components: { registerForm },
     template: '<registerForm :table="table" />',
     data: () => ({
-        table: table
+        table: table,
     }),
 });

@@ -16,18 +16,18 @@
         <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>Books Manager</h3>
-                <strong><i class="glyphicon glyphicon-book" aria-hidden="true"></i></strong>
+                <strong><i class="fa fa-book" aria-hidden="true"></i></strong>
             </div>
 
             <ul class="list-unstyled components">
-                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="glyphicon glyphicon-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
-                <li><a href="#"><i class="glyphicon glyphicon-question-sign" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
+                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fa fa-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
+                <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
 @auth
-                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="glyphicon glyphicon-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
                 <hr>
                 <li>
                     <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        <i class="glyphicon glyphicon-log-out" aria-hidden="true"></i>
+                        <i class="fa fa-sign-out" aria-hidden="true"></i>
                         {{ __('auth.sign.out') }}
                     </a>
                     <form id="logout-form" method="POST" action="/logout" style="display: none;">
@@ -37,8 +37,8 @@
 @endauth
 @guest
                 <hr>
-                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="glyphicon glyphicon-log-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
-                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="glyphicon glyphicon-user" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
+                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
+                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
 @endguest
             </ul>
         </nav>

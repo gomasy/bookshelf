@@ -50,7 +50,8 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
-        $books = \DB::table('books');
+        $books = \DB::table('books')
+            ->where('user_id', \Auth::id());
 
         if (isset($request->offset) && isset($request->limit)) {
             $books = $books->offset($request->offset)

@@ -50,16 +50,19 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
+        $books = \DB::table('books');
+
         if (isset($request->offset) && isset($request->limit)) {
-            $books = Book::offset($request->offset)
-                ->limit($request->limit)
-                ->get();
-        } else {
-            $books = Book::get();
+            $books = $books->offset($request->offset)
+                ->limit($request->limit);
+        }
+
+        if (isset($request->sort) && isset($request->order)) {
+            $books = $books->orderBy($request->sort, $request->order);
         }
 
         return [
-            'data' => $books,
+            'data' => $books->get(),
             'total' => Book::count(),
         ];
     }

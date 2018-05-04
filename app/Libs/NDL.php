@@ -50,10 +50,11 @@ class NDL {
             CURLOPT_TIMEOUT => 3,
         ]);
 
-        $retry = 0;
-        $content = curl_exec($ch);
-        while (curl_errno($ch) !== CURLE_OK && $retry < 3) {
+        $retry = -1;
+        $errorNo = NULL;
+        while ($errorNo !== CURLE_OK && $retry < 3) {
             $content = curl_exec($ch);
+            $errorNo = curl_errno($ch);
             $retry++;
         }
         $xml = preg_replace($this->regexp[0], '', $content);

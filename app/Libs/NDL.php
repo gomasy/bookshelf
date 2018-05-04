@@ -12,6 +12,10 @@ namespace App\Libs;
  */
 class NDL {
     protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
+    protected $curlopt = [
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 3,
+    ];
     protected $regexp = [
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',
@@ -45,21 +49,24 @@ class NDL {
     protected function getChannel($url)
     {
         $ch = curl_init($url);
-        curl_setopt_array($ch, [
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 3,
-        ]);
+        curl_setopt_array($ch, $this->curlopt);
 
         $retry = -1;
+        $content = NULL;
         $errorNo = NULL;
         while ($errorNo !== CURLE_OK && $retry < 3) {
             $content = curl_exec($ch);
             $errorNo = curl_errno($ch);
             $retry++;
         }
-        $xml = preg_replace($this->regexp[0], '', $content);
 
-        return simplexml_load_string($xml)->channel;
+        if ($content !== NULL) {
+            $xml = preg_replace($this->regexp[0], '', $content);
+
+            return simplexml_load_string($xml)->channel;
+        } else {
+            throw new \Exception('Retry limit reached');
+        }
     }
 
     public function getItem($url)

@@ -22,7 +22,7 @@ export default {
         keyword: '',
     }),
     mounted() {
-        $(this.$el).on('shown.bs.dropdown', e => this.$refs.input.focus());
+        $(this.$el).on('shown.bs.dropdown', () => this.$refs.input.focus());
     },
     watch: {
         keyword(kw) {
@@ -37,5 +37,5 @@ export default {
             query.offset = 0;
         },
     },
-}
+};
 </script>

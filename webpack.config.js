@@ -30,6 +30,12 @@ module.exports = {
                 use: [ 'vue-loader' ],
             },
             {
+                test: /\.(js|vue)$/,
+                enforce: 'pre',
+                exclude: /node_modules/,
+                use: [ 'eslint-loader' ],
+            },
+            {
                 test: /\.scss$/,
                 use: [ 'style-loader', 'css-loader', 'sass-loader' ],
             },

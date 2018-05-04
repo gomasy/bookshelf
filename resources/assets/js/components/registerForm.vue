@@ -36,5 +36,5 @@ export default {
             location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
         },
     },
-}
+};
 </script>

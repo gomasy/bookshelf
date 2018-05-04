@@ -2,6 +2,10 @@
 
 @section('title', 'Service unavailable')
 
+@section('js')
+<script src="@asset('/assets/core.min.js')"></script>
+@endsection
+
 @section('content')
 <div class="panel panel-default">
     <div class="panel-body">

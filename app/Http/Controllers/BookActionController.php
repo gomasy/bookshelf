@@ -34,7 +34,7 @@ class BookActionController extends Controller
      *
      * @return array
      */
-    public function getHeader()
+    protected function getHeader()
     {
         return [
             'id' => \Auth::user()['next_id'],
@@ -50,8 +50,14 @@ class BookActionController extends Controller
      */
     public function index(Request $request)
     {
-        $books = \DB::table('books')
-            ->where('user_id', \Auth::id());
+        $books = \DB::table('books')->where('user_id', \Auth::id());
+
+        foreach ([ 'title', 'authors', 'published_date' ] as $column) {
+            if ($request->query($column) !== NULL) {
+                $books = $books->where($column, 'like', '%'.$request->query($column).'%');
+                $count = $books->count();
+            }
+        }
 
         if (isset($request->offset) && isset($request->limit)) {
             $books = $books->offset($request->offset)
@@ -64,7 +70,7 @@ class BookActionController extends Controller
 
         return [
             'data' => $books->get(),
-            'total' => Book::count(),
+            'total' => $count ?? Book::count(),
         ];
     }
 

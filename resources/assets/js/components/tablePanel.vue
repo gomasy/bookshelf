@@ -16,15 +16,18 @@
 
 <script>
 import editModal from './editModal.vue';
+import thFilter from './th-Filter.vue';
 
 export default {
     components: { editModal },
     data: () => ({
+        supportBackup: true,
         columns: [
             {
                 title: 'タイトル',
                 field: 'title',
                 sortable: true,
+                thComp: thFilter,
                 type: 'text',
                 required: true,
             },
@@ -38,6 +41,7 @@ export default {
                 title: '著作等',
                 field: 'authors',
                 sortable: true,
+                thComp: thFilter,
                 type: 'text',
                 required: true,
             },
@@ -45,6 +49,7 @@ export default {
                 title: '出版日',
                 field: 'published_date',
                 sortable: true,
+                thComp: thFilter,
                 type: 'date',
                 required: true,
             },

@@ -2,18 +2,18 @@
     "private": true,
     "babel": {
         "presets": [
-            [
-                "env",
-                {
-                    "modules": false
-                }
-            ],
+            [ "env", {
+                "modules": false,
+                "browsers": [
+                    "last 2 versions"
+                ]
+            }],
             "stage-3"
         ]
     },
     "scripts": {
-        "dev": "webpack -d",
         "build": "webpack -p",
+        "dev": "webpack -d",
         "watch": "webpack -d --watch"
     },
     "devDependencies": {

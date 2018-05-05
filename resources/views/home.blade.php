@@ -7,7 +7,7 @@
         <meta property="og:title" content="{{ config('app.name') }}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{{ config('app.url') }}">
-        <meta property="og:image" content="/assets/icon.png">
+        <meta property="og:image" content="{{ config('app.url') }}/assets/icon.png">
 @endsection
 
 @section('content')

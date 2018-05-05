@@ -2,7 +2,7 @@
 
 @section('title', 'Service unavailable')
 
-@section('js')
+@section('head')
 <script src="@asset('/assets/core.min.js')"></script>
 @endsection
 

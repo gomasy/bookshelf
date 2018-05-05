@@ -2,7 +2,7 @@
 
 @section('title', __('settings.account.delete.title'))
 
-@section('js')
+@section('head')
 <script src="@asset('/assets/core.min.js')"></script>
 @endsection
 

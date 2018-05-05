@@ -2,7 +2,7 @@
 
 @section('title', __('auth.register.title'))
 
-@section('js')
+@section('head')
 <script src="@asset('/assets/core.min.js')"></script>
 @endsection
 

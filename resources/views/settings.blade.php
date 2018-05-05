@@ -2,7 +2,7 @@
 
 @section('title', __('settings.title'))
 
-@section('js')
+@section('head')
 <script src="@asset('/assets/settings.min.js')"></script>
 @endsection
 

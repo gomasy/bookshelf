@@ -10,7 +10,7 @@
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
         <script src="@asset('/assets/vendor.min.js')"></script>
-        @yield('js')
+        @yield('head')
     </head>
     <body>
         <nav id="sidebar">

@@ -35,12 +35,13 @@ class BookTest extends TestCase
         $this->assertEquals(count($response->original['data']), 50);
         $this->assertEquals($response->original['total'], 50);
 
-        // title=foo
+        // title=foo, sortby=id, order=desc
         $response = $this->actingAs($user)
-            ->get('/list.json?title=foo', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+            ->get('/list.json?title=foo&sort=id&order=desc', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
         $response->assertSuccessful();
         $this->assertEquals(count($response->original['data']), 25);
         $this->assertEquals($response->original['total'], 25);
+        $this->assertEquals($response->original['data'][0]->id, 25);
 
         // title=bar, limit=50
         $response = $this->actingAs($user)

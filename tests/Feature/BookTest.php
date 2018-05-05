@@ -15,13 +15,39 @@ class BookTest extends TestCase
 
     public function testIndex()
     {
-        $book = factory(Book::class)->create();
+        $book = factory(Book::class)->create([ 'title' => 'foo' ]);
         $user = User::find($book->user_id);
 
+        for ($i = 2; $i <= 50; $i++) {
+            $data = [
+                'id' => $i,
+                'user_id' => $book->user_id,
+            ];
+            $data = array_merge($data, [ 'title' => ($i <= 25 ? 'foo' : 'bar') ]);
+
+            factory(Book::class)->create($data);
+        }
+
+        // all
         $response = $this->actingAs($user)
             ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
-        $response->assertJsonStructure([ 'data' => [] ]);
         $response->assertSuccessful();
+        $this->assertEquals(count($response->original['data']), 50);
+        $this->assertEquals($response->original['total'], 50);
+
+        // title=foo
+        $response = $this->actingAs($user)
+            ->get('/list.json?title=foo', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+        $response->assertSuccessful();
+        $this->assertEquals(count($response->original['data']), 25);
+        $this->assertEquals($response->original['total'], 25);
+
+        // title=bar, limit=50
+        $response = $this->actingAs($user)
+            ->get('/list.json?offset=0&limit=10&title=bar', [ 'X-Requested-With' => 'XMLHttpRequest'] );
+        $response->assertSuccessful();
+        $this->assertEquals(count($response->original['data']), 10);
+        $this->assertEquals($response->original['total'], 25);
     }
 
     public function testCreate()

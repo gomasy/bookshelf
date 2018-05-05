@@ -11,6 +11,10 @@
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
         <script src="@asset('/assets/vendor.min.js')"></script>
         @yield('head')
+        <meta property="og:title" content="{{ config('app.name') }} - @yield('title')">
+        <meta property="og:type" content="{{ Request::path() === '/' ? 'website' : 'article' }}">
+        <meta property="og:url" content="{{ Request::url() }}">
+        <meta property="og:image" content="{{ config('app.url') }}/assets/icon.png">
     </head>
     <body>
         <nav id="sidebar">

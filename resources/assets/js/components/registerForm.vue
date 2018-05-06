@@ -1,12 +1,16 @@
 <template>
     <form class="form-inline" id="register" @submit.prevent="create">
-        <input class="form-control" type="text" placeholder="ISBN or JP番号" v-model="code" required>
-        <button class="btn btn-info" type="submit">登録</button>
-        <button class="btn btn-success" type="button" @click="reader">読み取る</button>
+        <input class="form-control" id="code" type="text" placeholder="ISBN or JP番号" v-model="code" required>
+        <label class="control-label" id="btn-barcode">
+            <input type="file" accept="image/*" capture="environment" tabindex="-1" v-on:change="reader">
+        </label>
+        <button class="btn btn-info" type="submit">登録する</button>
     </form>
 </template>
 
 <script>
+import Quagga from 'quagga';
+
 export default {
     props: [
         'table',
@@ -31,9 +35,30 @@ export default {
             });
             xhr.send(JSON.stringify({ code: this.code }));
         },
-        reader() {
-            const url = location.origin + '/create?code={CODE}&_token=' + document.head.querySelector('meta[name="csrf-token"]').content;
-            location.href = 'http://zxing.appspot.com/scan?ret=' + escape(url);
+        reader(event) {
+            const reader = new FileReader();
+
+            reader.onload = event => {
+                Quagga.decodeSingle({
+                    src: event.target.result,
+                    readers: {
+                        format: 'ean_reader',
+                        config: {
+                            supplements: [
+                                'ean_5_reader',
+                                'ean_2_reader',
+                            ],
+                        },
+                    },
+                }, result => {
+                    if (result.codeResult) {
+                        alert('success');
+                    } else {
+                        alert('fail');
+                    }
+                });
+            };
+            reader.readAsDataURL(event.target.files[0]);
         },
     },
 };

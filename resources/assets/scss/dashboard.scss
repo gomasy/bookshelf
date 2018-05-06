@@ -2,10 +2,35 @@
 $footer-text-color: #555;
 
 form#register {
-    button { height: 40px; }
+    button {
+        height: 40px;
+    }
+
     input {
         width: 200px;
         height: 40px;
+    }
+
+    label#btn-barcode {
+        margin-left: -35px;
+        margin-right: 10px;
+        margin-top: 2px;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+
+        &:before {
+            font: lighter 25px 'FontAwesome';
+            content: '\f02a';
+        }
+
+        > input[type=file] {
+            position: absolute;
+            overflow: hidden;
+            opacity: 0;
+            width: 1px;
+            height: 1px;
+        }
     }
 }
 

@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
+        <div class="panel panel-info">
             <div class="panel-heading">{{ __('auth.register.header') }}</div>
             <div class="panel-body">
                 <form role="form" method="POST" action="/register">

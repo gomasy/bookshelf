@@ -9,7 +9,7 @@
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <div class="panel panel-default">
+        <div class="panel panel-danger">
             <div class="panel-heading">{{ __('settings.account.delete.header') }}</div>
             <div class="panel-body">
                 <form role="form" method="POST" action="/settings/account/delete">

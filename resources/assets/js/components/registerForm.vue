@@ -41,20 +41,17 @@ export default {
             reader.onload = event => {
                 Quagga.decodeSingle({
                     src: event.target.result,
-                    readers: {
-                        format: 'ean_reader',
-                        config: {
-                            supplements: [
-                                'ean_5_reader',
-                                'ean_2_reader',
-                            ],
-                        },
+                    inputStream: {
+                        size: 800,
+                    },
+                    decoder: {
+                        readers: [ 'ean_reader' ],
                     },
                 }, result => {
                     if (result.codeResult) {
-                        alert('success');
+                        this.code = result.codeResult.code;
                     } else {
-                        alert('fail');
+                        alert('read failed');
                     }
                 });
             };

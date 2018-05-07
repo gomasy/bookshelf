@@ -2,15 +2,12 @@
     "private": true,
     "babel": {
         "presets": [
-            [
-                "env",
-                {
-                    "modules": false,
-                    "browsers": [
-                        "last 2 versions"
-                    ]
-                }
-            ],
+            [ "env", {
+                "modules": false,
+                "browsers": [
+                    "last 2 versions"
+                ]
+            }],
             "stage-3"
         ]
     },

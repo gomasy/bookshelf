@@ -42,3 +42,25 @@ div#footer {
 
     a { color: $footer-text-color; }
 }
+
+
+@media screen and (max-width: 768px) {
+    form#register {
+        label#btn-barcode {
+            margin: auto;
+            width: inherit;
+            height: inherit;
+
+            &:before {
+                content: '';
+            }
+
+            > input[type=file] {
+                position: inherit;
+                opacity: 1;
+                width: inherit;
+                height: inherit;
+            }
+        }
+    }
+}

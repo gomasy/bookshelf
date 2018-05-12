@@ -11,7 +11,7 @@ Books Manager
 ## 必要なもの
 * php >= 7.1.3
 * composer (php dependency manager)
-* npm (nodejs package manager)
+* yarn (nodejs package manager)
 * Database (MySQL / PostgreSQL / MSSQL)
 * MTA (なくてもいいけど一部機能が動作しません)
 
@@ -22,8 +22,8 @@ Books Manager
     $ composer install --no-dev
 
     // Install nodejs modules and setting up a webpack.
-    $ npm install
-    $ npm run build
+    $ yarn install
+    $ yarn run build
 
     // Setting up a Laravel.
     $ cp .env.sample .env

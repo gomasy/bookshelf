@@ -5,14 +5,13 @@ php:
 - nightly
 install:
 - composer install
-- yarn install
+- yarn build
 before_script:
 - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
 - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
 - mysql -e 'CREATE DATABASE `forge`;'
 - ln -s .env.travis .env
 script:
-- yarn run build
 - composer travis-test
 after_script:
 - composer coveralls

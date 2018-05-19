@@ -3,11 +3,6 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
-    resolve: {
-        alias: {
-            vue: 'vue/dist/vue.esm.js',
-        },
-    },
     entry: {
         core: './resources/assets/js/core.js',
         dashboard: './resources/assets/js/dashboard.js',
@@ -15,8 +10,13 @@ module.exports = {
         settings: './resources/assets/js/settings.js',
     },
     output: {
-        filename: './assets/[name].min.js',
         path: path.join(__dirname, '/public'),
+        filename: './assets/[name].min.js',
+    },
+    resolve: {
+        alias: {
+            vue: 'vue/dist/vue.esm.js',
+        },
     },
     module: {
         rules: [

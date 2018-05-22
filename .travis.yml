@@ -2,7 +2,6 @@ language: php
 php:
 - 7.1
 - 7.2
-- nightly
 install:
 - composer install
 - yarn build
@@ -15,6 +14,9 @@ script:
 - composer travis-test
 after_script:
 - composer coveralls
+addons:
+  apt:
+    update: true
 notifications:
   slack:
     secure: ZdD2qUcgVfKrwiQFpLMweYiEgjR8tkkFWb21tzMLuSY7+css8MoGhGZJPbiPYpnP2DeYX6HblR7YuaJeQ0MLfDe57/01dCrMGChu7u+qukXHzuLk4EcVe06e2fD0NqB1e/n2CA24lokQoLXEXAFxN8vyzC+6Tm7CKTJ+QThzN8YmNjWp3V9y05A73jtJOcC9sCbUD5GioMBbSkl3wLbszEjMq1Zf2vdlY5K7ianpvAnIWMDWy8mHSeyNo+S9UIr3xXDvor4QZRGeZeZ0Pnb3znyLsWqhS9ohN8tRYoSQlBHGrp5/70YCygaDqHtXXYQGOrpPCkTAn/Tesl2tKNtw0yD87YbLNuULI81zX1ApFLziZSkAzW5q85pVEoWbV3io3pKEA+AsmzZamG6TuUEoNv8/E695ozKllkF2GsEI1xbW+iphkTZQfDgYdi6AqXuI5AnS/guQJazIn0r3jeSubBOmNICNa8/3PHOu/MRdygYFOk8q3MqQzXhoOOBjtKuFGDxYmbZLCP79AH+U8/T5+80A/x32IwPZxDwBuLyUj9+RU5KkZXVJnKaZIfqWAS6twxE452IdB7ADgO2533bqjdbkwzNZce/QDROV093XYSE9BFbwuhL0PQsxb5gumdRDFYUG/HZr4gi3YIp5/stHY97dOpdsDgF2IlFUqOoHdgo=

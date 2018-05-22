@@ -10,6 +10,7 @@
 /.vscode
 /.vagrant
 .env
+.php_cs.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log

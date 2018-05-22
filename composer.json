@@ -12,11 +12,12 @@
     },
     "require-dev": {
         "filp/whoops": "^2.0",
+        "friendsofphp/php-cs-fixer": "^2.11",
         "fzaninotto/faker": "^1.4",
         "mockery/mockery": "^1.0",
         "nunomaduro/collision": "^2.0",
-        "phpunit/phpunit": "^7.0",
-        "php-coveralls/php-coveralls": "^2.0"
+        "php-coveralls/php-coveralls": "^2.0",
+        "phpunit/phpunit": "^7.0"
     },
     "autoload": {
         "classmap": [
@@ -49,6 +50,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
+        "check": "php-cs-fixer fix . --diff --ansi",
         "test": "phpunit --colors=always",
         "travis-test": "phpunit --coverage-clover build/logs/clover.xml --colors=always",
         "coveralls": "php-coveralls -x build/logs/clover.xml -v --ansi"

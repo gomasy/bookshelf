@@ -12,7 +12,8 @@ class HomeTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function testBasicTest() {
+    public function testBasicTest()
+    {
         $this->get('/')->assertStatus(200);
     }
 }

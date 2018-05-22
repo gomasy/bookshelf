@@ -25,7 +25,7 @@ class Book extends Model
     {
         parent::boot();
 
-        static::addGlobalScope('user_id', function(Builder $builder) {
+        static::addGlobalScope('user_id', function (Builder $builder) {
             $builder->where('user_id', \Auth::id());
         });
     }

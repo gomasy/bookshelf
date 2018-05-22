@@ -53,7 +53,7 @@ class BookActionController extends Controller
         $books = \DB::table('books')->where('user_id', \Auth::id());
 
         foreach ([ 'title', 'authors', 'published_date' ] as $column) {
-            if ($request->query($column) !== NULL) {
+            if ($request->query($column) !== null) {
                 $books = $books->where($column, 'like', '%'.$request->query($column).'%');
                 $count = $books->count();
             }
@@ -99,7 +99,7 @@ class BookActionController extends Controller
                 return [ 'response' => $book, 'statusCode' => 409 ];
             }
         } else {
-            return [ 'response' => NULL, 'statusCode' => 404 ];
+            return [ 'response' => null, 'statusCode' => 404 ];
         }
     }
 
@@ -128,7 +128,7 @@ class BookActionController extends Controller
     {
         \DB::beginTransaction();
         try {
-            if(!Book::destroy($request->ids)) {
+            if (!Book::destroy($request->ids)) {
                 return response(\DB::rollback(), 400);
             }
 

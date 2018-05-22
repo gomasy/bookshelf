@@ -17,9 +17,9 @@ Route::match([ 'get', 'post' ], '/create', 'BookController@create');
 Route::post('/edit', 'BookController@edit');
 Route::post('/delete', 'BookController@delete');
 
-Route::group([ 'prefix' => 'settings' ], function() {
+Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');
-    Route::group([ 'prefix' => 'account' ], function() {
+    Route::group([ 'prefix' => 'account' ], function () {
         Route::get('/', 'AccountController@index');
         Route::post('/update', 'AccountController@update');
         Route::get('/delete', 'AccountController@delete');

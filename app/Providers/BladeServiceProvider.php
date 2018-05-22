@@ -14,7 +14,7 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        Blade::directive('asset', function($file) {
+        Blade::directive('asset', function ($file) {
             $file = str_replace([ "'", '"' ], '', $file);
             $path = public_path() . $file;
             $opt = file_exists($path) ? "?v=<?php echo \File::lastModified('{$path}') ?>" : '';

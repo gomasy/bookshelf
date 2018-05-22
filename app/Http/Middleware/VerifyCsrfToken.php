@@ -27,7 +27,9 @@ class VerifyCsrfToken extends Middleware
     protected function isReading($request)
     {
         foreach ($this->force as $uri) {
-            if ($request->is($uri)) return false;
+            if ($request->is($uri)) {
+                return false;
+            }
         }
 
         return parent::isReading($request);

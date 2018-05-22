@@ -10,7 +10,8 @@ namespace App\Libs;
  * This software is released under the MIT License.
  * http://opensource.org/licenses/mit-license.php
  */
-class NDL {
+class NDL
+{
     protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
     protected $curlopt = [
         CURLOPT_RETURNTRANSFER => true,
@@ -52,15 +53,15 @@ class NDL {
         curl_setopt_array($ch, $this->curlopt);
 
         $retry = -1;
-        $content = NULL;
-        $errorNo = NULL;
+        $content = null;
+        $errorNo = null;
         while ($errorNo !== CURLE_OK && $retry < 3) {
             $content = curl_exec($ch);
             $errorNo = curl_errno($ch);
             $retry++;
         }
 
-        if ($content !== NULL) {
+        if ($content !== null) {
             $xml = preg_replace($this->regexp[0], '', $content);
 
             return simplexml_load_string($xml)->channel;
@@ -73,14 +74,15 @@ class NDL {
     {
         $channel = $this->getChannel($url);
         for ($i = 0; $i < $channel->totalResults; $i++) {
-            if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate))
+            if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate)) {
                 return $channel->item[$i];
+            }
         }
     }
 
     public function getISBN()
     {
-        $isbn = NULL;
+        $isbn = null;
         foreach ($this->obj->identifier as $val) {
             switch (strlen($val)) {
                 case 13: $isbn = $val; break;
@@ -93,9 +95,12 @@ class NDL {
 
     public function getJPNO()
     {
-        $jpno = NULL;
-        foreach ($this->obj->identifier as $val)
-            if (strlen($val) === 8) $jpno = $val;
+        $jpno = null;
+        foreach ($this->obj->identifier as $val) {
+            if (strlen($val) === 8) {
+                $jpno = $val;
+            }
+        }
 
         return (string)$jpno;
     }
@@ -144,8 +149,9 @@ class NDL {
         $isbn13 = '978'.substr($isbn, 0, 9);
         $digit = 0;
 
-        for ($i = 0; $i < 12; $i++)
+        for ($i = 0; $i < 12; $i++) {
             $digit += ($i + 1) % 2 > 0 ? $isbn13[$i] * 1 : $isbn13[$i] * 3;
+        }
         $n = $digit % 10;
 
         return $n ? $isbn13.(10 - $n) : $isbn13.'0';

@@ -87,6 +87,5 @@ class AccountController extends Controller
             return view('account.delete')
                 ->withErrors([ 'password' => __('settings.account.incorrect') ]);
         }
-
     }
 }

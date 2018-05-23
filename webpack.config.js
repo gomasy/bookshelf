@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 module.exports = {
+    mode: process.env.NODE_ENV,
     entry: {
         core: './resources/assets/js/core.js',
         dashboard: './resources/assets/js/dashboard.js',

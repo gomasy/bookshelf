@@ -1,9 +1,9 @@
 {
     "private": true,
     "scripts": {
-        "build": "yarn install && webpack -p",
-        "dev": "yarn install && webpack -d",
-        "watch": "yarn install && webpack -d --watch"
+        "build": "webpack -p",
+        "dev": "webpack -d",
+        "watch": "webpack -d --watch"
     },
     "devDependencies": {
         "babel-core": "^6.26.3",

@@ -17,9 +17,12 @@ Books Manager
 ## 素でデプロイ
     $ git clone https://github.com/Gomasy/books-manager.git .
 
-    // Install php packages and nodejs modules.
+    // Install php packages.
     $ composer install --no-dev
-    $ yarn build
+
+    // Install nodejs modules and setting up a webpack.
+    $ yarn install
+    $ yarn run build
 
     // Setting up a Laravel.
     $ cp .env.sample .env

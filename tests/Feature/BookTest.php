@@ -45,7 +45,7 @@ class BookTest extends TestCase
 
         // title=bar, limit=50
         $response = $this->actingAs($user)
-            ->get('/list.json?offset=0&limit=10&title=bar', [ 'X-Requested-With' => 'XMLHttpRequest']);
+            ->get('/list.json?offset=0&limit=10&title=bar', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
         $response->assertSuccessful();
         $this->assertEquals(count($response->original['data']), 10);
         $this->assertEquals($response->original['total'], 25);

@@ -14,24 +14,4 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
     ];
-
-    /**
-     * The URIs should be forced to CSRF verification.
-     *
-     * @var array
-     */
-    protected $force = [
-        'create',
-    ];
-
-    protected function isReading($request)
-    {
-        foreach ($this->force as $uri) {
-            if ($request->is($uri)) {
-                return false;
-            }
-        }
-
-        return parent::isReading($request);
-    }
 }

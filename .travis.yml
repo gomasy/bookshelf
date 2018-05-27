@@ -11,7 +11,7 @@ before_script:
 - mysql -e 'CREATE DATABASE `forge`;'
 - ln -s .env.travis .env
 script:
-- yarn run build
+- yarn build
 - composer travis-test
 after_script:
 - composer coveralls

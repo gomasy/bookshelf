@@ -50,7 +50,7 @@
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover"
         ],
-        "check": "php-cs-fixer fix . --diff --ansi",
+        "fix": "php-cs-fixer fix . --diff --ansi",
         "test": "phpunit --colors=always",
         "travis-test": "phpunit --coverage-clover build/logs/clover.xml --colors=always",
         "coveralls": "php-coveralls -x build/logs/clover.xml -v --ansi"

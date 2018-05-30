@@ -5,7 +5,7 @@
         "watch": "NODE_ENV=development webpack --watch"
     },
     "devDependencies": {
-        "autoprefixer": "^8.5.1",
+        "autoprefixer": "^8.5.2",
         "babel-core": "^6.26.3",
         "babel-loader": "^7.1.4",
         "babel-preset-env": "^1.7.0",
@@ -26,8 +26,8 @@
         "vue": "^2.5.16",
         "vue-loader": "^14.2.2",
         "vue-template-compiler": "^2.5.16",
-        "vue2-datatable-component": "^2.3.0",
-        "webpack": "^4.9.1",
+        "vue2-datatable-component": "^2.3.1",
+        "webpack": "^4.10.2",
         "webpack-cli": "^2.1.4"
     }
 }

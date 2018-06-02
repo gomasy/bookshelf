@@ -1,12 +1,11 @@
-const autoprefixer = require('autoprefixer');
-
 module.exports = {
-    plugins: [
-        new autoprefixer({
+    plugins: {
+        'autoprefixer': {
             browsers: [
                 '> 1% in JP',
             ],
             grid: true,
-        }),
-    ],
+        },
+        'postcss-custom-media': {},
+    },
 };

@@ -11,7 +11,8 @@ main {
     color: $dark-gray;
 
     @media(--pc) {
-        height: calc(100% - 135px);
+        min-height: 550px;
+        height: calc(100% - 120px);
     }
 
     @media(--mobile) {

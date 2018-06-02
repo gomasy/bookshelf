@@ -1,14 +1,21 @@
-div#settings {
+@import './media';
+@import './variables';
+
+.settings {
     display: flex;
     justify-content: center;
 
-    ul#settings-menu {
+    @media(--mobile) {
+        display: block;
+    }
+
+    .settings-menu {
         margin: 0;
 
         li {
-            &:not(:last-child) { border-bottom: solid 1px #eee; }
+            &:not(:last-child) { border-bottom: solid 1px $light-gray; }
             &.active {
-                background: #fafafa;
+                background: $white;
                 border-left: solid 3px #795548;
             }
 
@@ -20,11 +27,5 @@ div#settings {
 
             i { margin-right: 5px; }
         }
-    }
-}
-
-@media screen and (max-width: 768px) {
-    div#settings {
-        display: block;
     }
 }

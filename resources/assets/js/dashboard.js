@@ -1,4 +1,4 @@
-import '../js/core.js';
+import '../js/general.js';
 import '../scss/dashboard.scss';
 
 import Vue from 'vue';

@@ -20,7 +20,7 @@
         <meta property="og:image" content="{{ config('app.url') }}/assets/icon.png">
     </head>
     <body>
-        <nav id="sidebar">
+        <nav class="sidebar">
             <div class="sidebar-header">
                 <h3>Books Manager</h3>
                 <strong><i class="fa fa-book" aria-hidden="true"></i></strong>
@@ -50,8 +50,8 @@
             </ul>
         </nav>
 
-        <div id="wrapper">
-            <nav class="navbar navbar-default">
+        <div class="wrapper">
+            <header class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
                         @yield('title')
@@ -86,9 +86,18 @@
                         </ul>
                     </div>
                 </div>
-            </nav>
+            </header>
 
             @yield('content')
+
+            <footer>
+                <ul class="list-unstyled">
+                    <li><a href="">運営者情報</a></li>
+                    <li><a href="">お問い合わせ</a></li>
+                    <li><a href="">プライバシーポリシー</a></li>
+                </ul>
+                <p>&copy; Books Manager 2017-{{ date('Y') }}</p>
+            </footer>
         </div>
     </body>
 </html>

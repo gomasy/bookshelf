@@ -1,7 +1,7 @@
-// colors
-$footer-text-color: #555;
+@import './media';
+@import './variables';
 
-form#register {
+#register {
     button {
         height: 40px;
     }
@@ -11,56 +11,51 @@ form#register {
         height: 40px;
     }
 
-    label#btn-barcode {
-        margin-left: -35px;
-        margin-right: 10px;
-        margin-top: 2px;
+    #btn-barcode {
+        margin: 2px 10px 0 -35px;
         width: 25px;
         height: 25px;
         cursor: pointer;
 
+        @media(--mobile) {
+            margin: auto;
+            width: inherit;
+            height: inherit;
+        }
+
         &:before {
             font: lighter 25px 'FontAwesome';
             content: '\f02a';
+
+            @media(--mobile) {
+                content: '';
+            }
         }
 
         > input[type=file] {
             position: absolute;
             overflow: hidden;
-            opacity: 0;
             width: 1px;
             height: 1px;
-        }
-    }
-}
 
-div#footer {
-    margin-bottom: 15px;
-    text-align: right;
-    font-size: 12px;
-    color: $footer-text-color;
-
-    a { color: $footer-text-color; }
-}
-
-
-@media screen and (max-width: 768px) {
-    form#register {
-        label#btn-barcode {
-            margin: auto;
-            width: inherit;
-            height: inherit;
-
-            &:before {
-                content: '';
+            @media(--pc) {
+                opacity: 1;
             }
 
-            > input[type=file] {
+            @media(--mobile) {
                 position: inherit;
-                opacity: 1;
                 width: inherit;
                 height: inherit;
             }
         }
     }
+}
+
+footer {
+    margin-bottom: 15px;
+    text-align: right;
+    font-size: 12px;
+    color: $dark-gray;
+
+    a { color: $dark-gray; }
 }

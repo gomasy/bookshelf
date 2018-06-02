@@ -3,7 +3,7 @@
 @section('title', 'Service unavailable')
 
 @section('head')
-<script src="@asset('/assets/core.min.js')"></script>
+<script src="@asset('/assets/general.min.js')"></script>
 @endsection
 
 @section('content')

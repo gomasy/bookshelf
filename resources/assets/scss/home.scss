@@ -1,17 +1,51 @@
-div#entrance {
+@import './media';
+@import './variables';
+
+.container {
+    width: 100%;
+}
+
+main {
     text-align: center;
     padding-top: 20px;
+    color: $dark-gray;
 
-    h2 { font-size: 40px; }
-    i { font-size: 120px; }
+    @media(--pc) {
+        height: calc(100% - 135px);
+    }
+
+    @media(--mobile) {
+        margin-bottom: 50px;
+    }
+
+    h2 {
+        font-size: 40px;
+        margin-bottom: 0;
+    }
+
+    h3 {
+        font-size: 20px;
+        font-weight: lighter;
+        margin-top: 10px;
+        margin-bottom: 30px;
+    }
 
     hr {
         width: 100px;
         margin: 40px auto;
     }
 
-    span.lead {
-        color: #555;
-        font-size: 20px;
+    .row {
+        h4 {
+            font-size: 24px;
+        }
+
+        i {
+            font-size: 120px;
+        }
+
+        .btn {
+            font-size: 25px;
+        }
     }
 }

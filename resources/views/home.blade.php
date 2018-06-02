@@ -7,26 +7,29 @@
 @endsection
 
 @section('content')
-<div class="container" id="entrance">
+<main class="container">
     <h2>{{ __('home.catchcopy') }}</h2>
-    <span class="lead">{{ __('home.lead') }}</span>
+    <h3>{{ __('home.lead') }}</h3>
+    <section class="row">
+        <a class="btn btn-primary" href="/register">今すぐ登録</a>
+    </section>
     <hr>
-    <div class="row">
+    <section class="row">
         <div class="col-sm-4">
             <i class="fa fa-barcode" aria-hidden="true"></i>
-            <h3>{{ __('home.row.barcode.title') }}</h3>
-            <p>{{ __('home.row.barcode.text') }}</p>
+            <h4>バーコードで登録</h4>
+            <p>ISBN コードから書籍情報を検索し登録することが可能です</p>
         </div>
         <div class="col-sm-4">
             <i class="fa fa-list" aria-hidden="true"></i>
-            <h3>{{ __('home.row.list.title') }}</h3>
-            <p>{{ __('home.row.list.text') }}</p>
+            <h4>リストで管理</h4>
+            <p>登録した書籍は一覧で管理でき、編集も可能です</p>
         </div>
         <div class="col-sm-4">
             <i class="fa fa-github" aria-hidden="true"></i>
-            <h3>{{ __('home.row.opensource.title') }}</h3>
-            <p>{{ __('home.row.opensource.text') }}</p>
+            <h4>オープンソース</h4>
+            <p>コードは公開されているので誰でも無料で利用することが可能です</p>
         </div>
-    </div>
-</div>
+    </section>
+</main>
 @endsection

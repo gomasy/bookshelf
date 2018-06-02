@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 module.exports = {
     mode: process.env.NODE_ENV,
     entry: {
-        core: './resources/assets/js/core.js',
+        general: './resources/assets/js/general.js',
         dashboard: './resources/assets/js/dashboard.js',
         home: './resources/assets/js/home.js',
         settings: './resources/assets/js/settings.js',
@@ -49,7 +49,7 @@ module.exports = {
     optimization: {
         splitChunks: {
             cacheGroups: {
-                core: {
+                general: {
                     name: 'vendor',
                     chunks: 'initial',
                     minChunks: 2,

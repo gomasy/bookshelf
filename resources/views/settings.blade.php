@@ -7,11 +7,11 @@
 @endsection
 
 @section('content')
-<div class="row" id="settings">
+<div class="row settings">
     <div class="col-lg-2 col-sm-3">
         <div class="panel panel-default">
             <div class="panel-heading">{{ __('settings.title') }}</div>
-            <ul class="list-unstyled" id="settings-menu">
+            <ul class="list-unstyled settings-menu">
                 <li{!! Request::path() === 'settings/account' ? ' class="active"' : '' !!}><a href="/settings/account"><i class="fa fa-user" aria-hidden="true"></i>{{ __('settings.account.update.title') }}</a></li>
             </ul>
         </div>

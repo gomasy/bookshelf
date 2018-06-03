@@ -6,7 +6,8 @@ RUN yum -y update && \
     curl -O https://rpms.remirepo.net/enterprise/remi-release-7.rpm && \
     rpm -Uvh remi-release-7.rpm && \
     rm -f remi-release-7.rpm && \
-    yum -y --enablerepo=remi-php72 install composer mariadb-server nginx npm php-fpm php-mysql && \
+    curl -sL https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo && \
+    yum -y --enablerepo=remi-php72 install composer mariadb-server nginx php-fpm php-mysql yarn && \
     yum clean all && \
     sed -i "s/user = apache/user = nginx/" /etc/php-fpm.d/www.conf && \
     sed -i "s/group = apache/group = nginx/" /etc/php-fpm.d/www.conf
@@ -24,9 +25,9 @@ RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
     composer install --no-dev && \
     echo "CREATE DATABASE homestead; GRANT ALL ON homestead.* TO homestead@localhost IDENTIFIED BY 'secret';" | mysql -u root && \
     ./artisan migrate && \
-    (npm install || node node_modules/node-sass/scripts/install.js) && \
-    npm run build && \
-    rm -rf ~/.{composer,npm}
+    yarn install && \
+    yarn build && \
+    rm -rf ~/.{cache,config,composer,local,yarn,yarnrc}
 
 ADD docker/start.sh /start.sh
 CMD [ "/start.sh" ]

@@ -30,6 +30,6 @@
         "vue-template-compiler": "^2.5.16",
         "vue2-datatable-component": "^2.3.1",
         "webpack": "^4.10.2",
-        "webpack-cli": "^3.0.0"
+        "webpack-cli": "^3.0.1"
     }
 }

@@ -5,7 +5,9 @@
             "browsers": [
                 "last 2 versions"
             ]
-        }],
-        "stage-3"
+        }]
+    ],
+    "plugins": [
+        "transform-object-rest-spread"
     ]
 }

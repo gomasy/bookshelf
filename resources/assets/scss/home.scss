@@ -1,23 +1,12 @@
 @import './media';
 @import './variables';
 
-.container {
-    width: 100%;
-}
-
 main {
+    flex: 1;
     text-align: center;
     padding-top: 20px;
     color: $dark-gray;
-
-    @media(--pc) {
-        min-height: 550px;
-        height: calc(100% - 120px);
-    }
-
-    @media(--mobile) {
-        margin-bottom: 50px;
-    }
+    margin-bottom: 50px;
 
     h2 {
         font-size: 40px;

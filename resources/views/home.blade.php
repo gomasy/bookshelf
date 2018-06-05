@@ -8,9 +8,9 @@
 
 @section('content')
 <main class="container">
-    <h2>{{ __('home.catchcopy') }}</h2>
-    <h3>{{ __('home.lead') }}</h3>
     <section class="row">
+        <h2>{{ __('home.catchcopy') }}</h2>
+        <h3>{{ __('home.lead') }}</h3>
         <a class="btn btn-primary" href="/register">今すぐ登録</a>
     </section>
     <hr>

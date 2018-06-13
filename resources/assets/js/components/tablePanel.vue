@@ -38,7 +38,7 @@ export default {
                 required: false,
             },
             {
-                title: '著作等',
+                title: '著者等',
                 field: 'authors',
                 sortable: true,
                 thComp: thFilter,

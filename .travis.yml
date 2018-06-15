@@ -2,7 +2,7 @@ language: php
 php:
 - 7.2
 install:
-- composer install
+- composer install --ansi
 - yarn install
 before_script:
 - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
@@ -14,8 +14,8 @@ script:
 - composer travis-test
 after_script:
 - composer coveralls
-- rm -rf build vendor
-- composer install --no-dev
+- rm -rf build vendor storage/framework/{cache,views}/*
+- composer install --no-dev --ansi
 - tar cvf build.tar.gz .
 - curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy
 addons:

@@ -1,8 +1,8 @@
 {
     "private": true,
     "scripts": {
-        "build": "NODE_ENV=production webpack --colors --optimize-minimize",
-        "watch": "NODE_ENV=development webpack --colors --watch"
+        "build": "NODE_ENV=production webpack --color --optimize-minimize",
+        "watch": "NODE_ENV=development webpack --color --watch"
     },
     "devDependencies": {
         "autoprefixer": "^8.6.2",

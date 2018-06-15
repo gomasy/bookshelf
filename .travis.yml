@@ -1,6 +1,5 @@
 language: php
 php:
-- 7.1
 - 7.2
 install:
 - composer install
@@ -15,6 +14,10 @@ script:
 - composer travis-test
 after_script:
 - composer coveralls
+- rm -rf build vendor
+- composer install --no-dev
+- tar cvf build.tar.gz .
+- curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy
 addons:
   apt:
     update: true

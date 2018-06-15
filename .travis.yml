@@ -14,7 +14,7 @@ script:
 - composer travis-test
 after_script:
 - composer coveralls
-- rm -rf build vendor storage/framework/{cache,views}/*
+- rm -rf build node_modules vendor storage/framework/{cache,views}/*
 - composer install --no-dev --ansi
 - tar cvf build.tar.gz .
 - curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy

@@ -18,6 +18,7 @@
         "eslint-plugin-vue": "^4.5.0",
         "file-loader": "^1.1.11",
         "font-awesome": "^4.7.0",
+        "glob": "^7.1.2",
         "jquery": "^3.3.1",
         "node-sass": "^4.9.0",
         "postcss-custom-media": "^6.0.0",

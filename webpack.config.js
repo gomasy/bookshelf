@@ -1,15 +1,17 @@
+const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const entries = {};
+glob.sync('./resources/assets/js/*.js').map(entry => {
+    const name = entry.match('^.+/(.+?)\\.js$')[1];
+    entries[name] = entry;
+});
+
 module.exports = {
     mode: process.env.NODE_ENV,
-    entry: {
-        general: './resources/assets/js/general.js',
-        dashboard: './resources/assets/js/dashboard.js',
-        home: './resources/assets/js/home.js',
-        settings: './resources/assets/js/settings.js',
-    },
+    entry: entries,
     output: {
         path: path.join(__dirname, '/public'),
         filename: './assets/[name].min.js',

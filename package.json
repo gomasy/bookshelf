@@ -13,7 +13,7 @@
         "bootstrap-sass": "^3.3.7",
         "clean-webpack-plugin": "^0.1.19",
         "css-loader": "^0.28.11",
-        "eslint": "^5.0.0",
+        "eslint": "^4.19.1",
         "eslint-loader": "^2.0.0",
         "eslint-plugin-vue": "^4.5.0",
         "file-loader": "^1.1.11",

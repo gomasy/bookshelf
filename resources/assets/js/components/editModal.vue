@@ -35,8 +35,7 @@ export default {
     }),
     methods: {
         open() {
-            // :thinking_face:
-            this.items = JSON.parse(JSON.stringify(this.selection[0]));
+            this.items = Object.assign({}, this.selection[0]);
         },
         submit() {
             const xhr = new XMLHttpRequest();

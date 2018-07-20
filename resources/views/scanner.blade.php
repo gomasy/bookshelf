@@ -3,7 +3,7 @@
 @section('title', __('scanner.title'))
 
 @section('head')
-<script src="@asset('/assets/scanner.min.js')"></script>
+<script defer src="@asset('/assets/scanner.min.js')"></script>
 @endsection
 
 @section('content')

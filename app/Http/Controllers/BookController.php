@@ -54,12 +54,12 @@ class BookController extends Controller
     }
 
     /**
-     * 登録済みの本の一覧を返す。
+     * 登録済みの本のリストを返す。
      *
      * @param Request $request
      * @return array
      */
-    public function index(Request $request)
+    public function list(Request $request)
     {
         $books = \DB::table('books')->where('user_id', \Auth::id());
 
@@ -71,8 +71,7 @@ class BookController extends Controller
         }
 
         if (isset($request->offset) && isset($request->limit)) {
-            $books = $books->offset($request->offset)
-                ->limit($request->limit);
+            $books = $books->offset($request->offset)->limit($request->limit);
         }
 
         if (isset($request->sort) && isset($request->order)) {

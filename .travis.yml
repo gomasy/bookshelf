@@ -12,8 +12,8 @@ before_script:
 script:
 - yarn build
 - composer travis-test
-after_script:
 - composer coveralls
+after_success:
 - rm -rf build node_modules vendor storage/framework/{cache,views}/*
 - composer install --no-dev --ansi
 - tar cvf build.tar.gz .

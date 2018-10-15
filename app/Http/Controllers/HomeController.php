@@ -13,6 +13,14 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        return \Auth::check() ? view('dashboard') : view('home');
+        if (\Auth::check()) {
+            if (\Auth::user()->hasVerifiedEmail()) {
+                return view('dashboard');
+            } else {
+                return redirect('email/verify');
+            }
+        } else {
+            return view('home');
+        }
     }
 }

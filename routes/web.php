@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->middleware('verified');
+Route::get('/', 'HomeController@index');
 Route::get('/list.json', 'BookController@list');
 Route::get('/create', 'BookController@scanner');
 Route::post('/create', 'BookController@create');

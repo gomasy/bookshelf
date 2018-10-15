@@ -22,9 +22,15 @@ class LoginTest extends TestCase
     public function testLoggedIn()
     {
         $user = factory(User::class)->create();
+
+        // ok
         $response = $this->actingAs($user)->get('/');
         $response->assertViewIs('dashboard');
         $response->assertStatus(200);
+
+        // redirect to the e-mail confirmation page
+        $user->email_verified_at = null;
+        $this->actingAs($user)->get('/')->assertRedirect('/email/verify');
     }
 
     public function testLogout()

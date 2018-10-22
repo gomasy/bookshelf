@@ -22,7 +22,7 @@ Books Manager
 
     // Install nodejs modules and setting up a webpack.
     $ yarn install
-    $ yarn run build
+    $ yarn build
 
     // Setting up a Laravel.
     $ cp .env.sample .env

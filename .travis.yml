@@ -5,7 +5,7 @@ before_install:
 - nvm install 11
 install:
 - composer install --ansi
-- yarn install
+- yarn install --pure-lockfile
 before_script:
 - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
 - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'

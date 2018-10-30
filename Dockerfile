@@ -25,7 +25,7 @@ RUN mysql_install_db --user=mysql --basedir=/usr --datadir=/var/lib/mysql && \
     composer install --no-dev && \
     echo "CREATE DATABASE homestead; GRANT ALL ON homestead.* TO homestead@localhost IDENTIFIED BY 'secret';" | mysql -u root && \
     ./artisan migrate && \
-    yarn install && \
+    yarn install --pure-lockfile && \
     yarn build && \
     rm -rf ~/.{cache,config,composer,local,yarn,yarnrc}
 

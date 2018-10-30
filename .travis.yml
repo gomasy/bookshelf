@@ -1,25 +1,22 @@
 language: php
 php:
-- 7.2
+  - 7.2
 before_install:
-- nvm install 11
+  - nvm install 11
 install:
-- composer install --ansi
-- yarn install --pure-lockfile
+  - composer install --ansi
+  - yarn install --pure-lockfile
 before_script:
-- mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
-- mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
-- mysql -e 'CREATE DATABASE `forge`;'
-- ln -s .env.travis .env
+  - mysql -e 'SET GLOBAL innodb_file_format = Barracuda;'
+  - mysql -e 'SET GLOBAL innodb_large_prefix = ON;'
+  - mysql -e 'CREATE DATABASE `forge`;'
+  - ln -s .env.travis .env
 script:
-- yarn build
-- composer travis-test
-- composer coveralls
+  - yarn build
+  - composer travis-test
+  - composer coveralls
 after_success:
-- rm -rf build node_modules vendor storage/framework/{cache,views}/*
-- composer install --no-dev --ansi
-- tar cvf build.tar.gz .
-- curl -H "X-Token:$_token" -H "X-Repo:books" -H "X-Repo-Branch:$TRAVIS_BRANCH" -F build=@build.tar.gz https://gomasy.jp/deploy
+  - '[[ $TRAVIS_BRANCH == "master" ]] && rm -rf build node_modules vendor storage/framework/{cache,views}/* && composer install --no-dev --ansi && tar cvf build.tar.gz . && curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy'
 addons:
   apt:
     update: true

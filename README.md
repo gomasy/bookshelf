@@ -21,7 +21,7 @@ Books Manager
     $ composer install --no-dev
 
     // Install nodejs modules and setting up a webpack.
-    $ yarn install
+    $ yarn install --pure-lockfile
     $ yarn build
 
     // Setting up a Laravel.

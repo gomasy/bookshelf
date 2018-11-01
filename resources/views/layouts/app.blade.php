@@ -13,7 +13,6 @@
         <script defer src="@asset('/assets/app.js')"></script>
         <!-- ogp -->
         <meta property="og:title" content="{{ config('app.name') }} - @yield('title')">
-        <meta property="og:description" content="{{ __('home.lead') }}">
         <meta property="og:type" content="{{ Request::path() === '/' ? 'website' : 'article' }}">
         <meta property="og:url" content="{{ Request::url() }}">
         <meta property="og:image" content="{{ config('app.url') }}/assets/icon.png">

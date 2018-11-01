@@ -1,8 +1,11 @@
 <template>
-    <form class="form-inline" id="register" @submit.prevent="create">
-        <input class="form-control" id="code" type="text" placeholder="ISBN or JP番号" v-model="code" required>
-        <button class="btn btn-info" type="submit">登録する</button>
-    </form>
+    <div class="navbar-buttons">
+        <form class="form-inline" id="register" @submit.prevent="create">
+            <input class="form-control" id="code" type="text" placeholder="ISBN or JP番号" v-model="code" required>
+            <button class="btn btn-info" type="submit">登録する</button>
+        </form>
+        <button data-toggle="modal" data-target="#camera-modal" class="btn btn-warning" @click="reader">読み取る</button>
+    </div>
 </template>
 
 <script>
@@ -29,6 +32,9 @@ export default {
                 }
             });
             xhr.send(JSON.stringify({ code: this.code }));
+        },
+        reader() {
+            this.table.reader();
         },
     },
 };

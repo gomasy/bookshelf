@@ -1,13 +1,47 @@
 @import './media';
 @import './variables';
 
-#register {
+.navbar-buttons {
     button {
         height: 40px;
     }
 
-    input {
-        width: 200px;
-        height: 40px;
+    #register {
+        display: inline-block;
+
+        input {
+            width: 200px;
+            height: 40px;
+        }
+    }
+}
+
+#camera-modal {
+    .modal-dialog {
+        width: 680px;
+
+        .modal-content {
+            #cameraWindow {
+                position: relative;
+                margin-left: 20px;
+                margin-top: 10px;
+                height: 490px;
+
+                video {
+                    position: absolute;
+                }
+
+                canvas {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    z-index: 10;
+                }
+            }
+
+            .modal-footer {
+                text-align: center;
+            }
+        }
     }
 }

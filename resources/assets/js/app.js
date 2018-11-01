@@ -15,13 +15,9 @@ import '../scss/settings.scss';
 
 // js
 import dashboard from './dashboard.js';
-import scanner from './scanner.js';
 
 switch (window.location.pathname) {
 case '/':
     dashboard();
-    break;
-case '/create':
-    scanner();
     break;
 }

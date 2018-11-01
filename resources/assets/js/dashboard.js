@@ -2,8 +2,8 @@ import Vue from 'vue';
 import Datatable from 'vue2-datatable-component';
 
 // components
-import tablePanel from './components/tablePanel.vue';
 import registerForm from './components/registerForm.vue';
+import tablePanel from './components/tablePanel.vue';
 
 export default function() {
     Vue.use(Datatable);
@@ -15,6 +15,9 @@ export default function() {
         methods: {
             create(entry) {
                 this.$refs.tablePanel.create(entry);
+            },
+            reader() {
+                this.$refs.tablePanel.reader();
             },
         },
     });

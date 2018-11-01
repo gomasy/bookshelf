@@ -10,16 +10,19 @@
         </div>
         <div id="modal">
             <editModal ref="editModal" :columns="columns" :selection="selection" />
+            <cameraModal ref="cameraModal" />
         </div>
     </div>
 </template>
 
 <script>
+import registerForm from './registerForm.vue';
 import editModal from './editModal.vue';
+import cameraModal from './cameraModal.vue';
 import thFilter from './th-Filter.vue';
 
 export default {
-    components: { editModal },
+    components: { registerForm, editModal, cameraModal },
     data: () => ({
         supportBackup: true,
         columns: [
@@ -87,6 +90,9 @@ export default {
         create(entry) {
             this.data.push(entry);
             this.total++;
+        },
+        reader() {
+            this.$refs.cameraModal.start();
         },
         edit() {
             this.$refs.editModal.open();

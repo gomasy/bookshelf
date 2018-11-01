@@ -43,17 +43,6 @@ class BookController extends Controller
     }
 
     /**
-     * バーコードのスキャン画面を表示する。
-     *
-     * @param Request $request
-     * @return View
-     */
-    public function scanner(Request $request)
-    {
-        return view('scanner');
-    }
-
-    /**
      * 登録済みの本のリストを返す。
      *
      * @param Request $request

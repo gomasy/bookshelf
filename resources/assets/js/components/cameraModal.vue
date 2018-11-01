@@ -1,7 +1,12 @@
 <template>
-    <div id="content">
-        <div class="panel panel-default">
-            <div id="cameraWindow"></div>
+    <div class="modal fade" id="camera-modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div id="cameraWindow"></div>
+                <div class="modal-footer">
+                    <h4>バーコードを近づけて下さい</h4>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -27,6 +32,7 @@ export default {
                 readers: [ 'ean_reader' ],
             },
             locate: true,
+            interval: null,
         },
     }),
     methods: {
@@ -37,7 +43,16 @@ export default {
                 Quagga.start();
                 Quagga.onProcessed(r => this.processed(r));
                 Quagga.onDetected(r => this.detected(r));
+
+                this.interval = setInterval(this.stop, 100);
             });
+        },
+        stop() {
+            // :thinking_face:
+            if (!$('#camera-modal').hasClass('in')) {
+                clearInterval(this.interval);
+                Quagga.stop();
+            }
         },
         processed(result) {
             if (!result) return;
@@ -65,9 +80,6 @@ export default {
         detected(result) {
             alert(result);
         },
-    },
-    mounted() {
-        this.start();
     },
 };
 </script>

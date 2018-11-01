@@ -13,7 +13,6 @@
 
 Route::get('/', 'HomeController@index');
 Route::get('/list.json', 'BookController@list');
-Route::get('/create', 'BookController@scanner');
 Route::post('/create', 'BookController@create');
 Route::post('/edit', 'BookController@edit');
 Route::post('/delete', 'BookController@delete');

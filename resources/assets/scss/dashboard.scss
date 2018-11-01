@@ -10,43 +10,4 @@
         width: 200px;
         height: 40px;
     }
-
-    #btn-barcode {
-        margin: 2px 10px 0 -35px;
-        width: 25px;
-        height: 25px;
-        cursor: pointer;
-
-        @media(--mobile) {
-            margin: auto;
-            width: inherit;
-            height: inherit;
-        }
-
-        &:before {
-            font: lighter 25px 'FontAwesome';
-            content: '\f02a';
-
-            @media(--mobile) {
-                content: '';
-            }
-        }
-
-        > input[type=file] {
-            position: absolute;
-            overflow: hidden;
-            width: 1px;
-            height: 1px;
-
-            @media(--pc) {
-                opacity: 1;
-            }
-
-            @media(--mobile) {
-                position: inherit;
-                width: inherit;
-                height: inherit;
-            }
-        }
-    }
 }

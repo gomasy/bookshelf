@@ -1,16 +1,11 @@
 <template>
     <form class="form-inline" id="register" @submit.prevent="create">
         <input class="form-control" id="code" type="text" placeholder="ISBN or JP番号" v-model="code" required>
-        <label class="control-label" id="btn-barcode">
-            <input type="file" accept="image/*" capture="environment" tabindex="-1" v-on:change="reader">
-        </label>
         <button class="btn btn-info" type="submit">登録する</button>
     </form>
 </template>
 
 <script>
-import Quagga from 'quagga';
-
 export default {
     props: [
         'table',
@@ -34,28 +29,6 @@ export default {
                 }
             });
             xhr.send(JSON.stringify({ code: this.code }));
-        },
-        reader(event) {
-            const reader = new FileReader();
-
-            reader.onload = event => {
-                Quagga.decodeSingle({
-                    src: event.target.result,
-                    inputStream: {
-                        size: 800,
-                    },
-                    decoder: {
-                        readers: [ 'ean_reader' ],
-                    },
-                }, result => {
-                    if (result.codeResult) {
-                        this.code = result.codeResult.code;
-                    } else {
-                        alert('read failed');
-                    }
-                });
-            };
-            reader.readAsDataURL(event.target.files[0]);
         },
     },
 };

@@ -16,13 +16,12 @@
 </template>
 
 <script>
-import registerForm from './registerForm.vue';
 import editModal from './editModal.vue';
 import cameraModal from './cameraModal.vue';
 import thFilter from './th-Filter.vue';
 
 export default {
-    components: { registerForm, editModal, cameraModal },
+    components: { editModal, cameraModal },
     data: () => ({
         supportBackup: true,
         columns: [

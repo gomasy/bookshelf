@@ -2,10 +2,6 @@
 
 @section('title', __('passwords.title'))
 
-@section('head')
-<script src="@asset('/assets/general.min.js')"></script>
-@endsection
-
 @section('content')
 <div class="row">
     <div class="col-md-6 col-md-offset-3">

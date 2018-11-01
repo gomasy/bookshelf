@@ -2,12 +2,8 @@
 
 @section('title', __('home.title'))
 
-@section('head')
-<script src="@asset('/assets/home.min.js')"></script>
-@endsection
-
 @section('content')
-<main class="container">
+<main class="container home">
     <section class="row">
         <h2>{{ __('home.catchcopy') }}</h2>
         <h3>{{ __('home.lead') }}</h3>

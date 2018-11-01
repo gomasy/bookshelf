@@ -10,8 +10,7 @@
         <meta property="description" content="{{ __('home.lead') }}">
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
-        <script src="@asset('/assets/vendor.min.js')"></script>
-        @yield('head')
+        <script defer src="@asset('/assets/app.js')"></script>
         <!-- ogp -->
         <meta property="og:title" content="{{ config('app.name') }} - @yield('title')">
         <meta property="og:description" content="{{ __('home.lead') }}">

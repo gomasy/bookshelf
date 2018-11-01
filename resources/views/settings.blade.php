@@ -2,13 +2,9 @@
 
 @section('title', __('settings.title'))
 
-@section('head')
-<script src="@asset('/assets/settings.min.js')"></script>
-@endsection
-
 @section('content')
-<main class="container">
-    <div class="row settings">
+<main class="container settings">
+    <div class="row">
         <div class="col-lg-2 col-sm-3">
             <div class="panel panel-default">
                 <div class="panel-heading">{{ __('settings.title') }}</div>

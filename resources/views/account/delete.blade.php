@@ -2,10 +2,6 @@
 
 @section('title', __('settings.account.delete.title'))
 
-@section('head')
-<script src="@asset('/assets/general.min.js')"></script>
-@endsection
-
 @section('content')
 <div class="container">
     <div class="row">

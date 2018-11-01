@@ -2,11 +2,13 @@
 @import './variables';
 
 .settings {
-    display: flex;
-    justify-content: center;
+    .row {
+        display: flex;
+        justify-content: center;
 
-    @media(--mobile) {
-        display: block;
+        @media(--mobile) {
+            display: block;
+        }
     }
 
     .settings-menu {

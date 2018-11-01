@@ -1,20 +1,15 @@
-const glob = require('glob');
 const path = require('path');
 const webpack = require('webpack');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const entries = {};
-glob.sync('./resources/assets/js/*.js').map(entry => {
-    const name = entry.match('^.+/(.+?)\\.js$')[1];
-    entries[name] = entry;
-});
-
 module.exports = {
     mode: process.env.NODE_ENV,
-    entry: entries,
+    entry: {
+        app: './resources/assets/js/app.js',
+    },
     output: {
         path: path.join(__dirname, '/public'),
-        filename: './assets/[name].min.js',
+        filename: './assets/[name].js',
     },
     resolve: {
         alias: {
@@ -47,17 +42,6 @@ module.exports = {
                 use: [ 'file-loader?name=/assets/[name].[ext]' ],
             },
         ],
-    },
-    optimization: {
-        splitChunks: {
-            cacheGroups: {
-                general: {
-                    name: 'vendor',
-                    chunks: 'initial',
-                    minChunks: 2,
-                },
-            },
-        },
     },
     plugins: [
         new webpack.ProvidePlugin({

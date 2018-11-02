@@ -26,10 +26,7 @@
 
 <script>
 export default {
-    props: [
-        'columns',
-        'selection',
-    ],
+    props: [ 'columns', 'selection', 'options' ],
     data: () => ({
         items: {},
     }),
@@ -38,21 +35,20 @@ export default {
             this.items = Object.assign({}, this.selection[0]);
         },
         submit() {
-            const xhr = new XMLHttpRequest();
-
-            xhr.open('POST', '/edit');
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
-            xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.addEventListener('load', event => {
-                if (event.target.status === 200) {
-                    this.columns.map(col => {
-                        this.selection[0][col.field] = this.items[col.field];
-                    });
-                    $('#edit-modal').modal('hide');
+            fetch('/edit', {
+                method: 'post',
+                headers: this.options.ajax,
+                body: JSON.stringify(this.items),
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
                 }
+
+                this.columns.map(col => {
+                    this.selection[0][col.field] = this.items[col.field];
+                });
+                $('#edit-modal').modal('hide');
             });
-            xhr.send(JSON.stringify(this.items));
         },
     },
 };

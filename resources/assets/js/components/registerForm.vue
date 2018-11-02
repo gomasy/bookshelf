@@ -10,28 +10,26 @@
 
 <script>
 export default {
-    props: [
-        'table',
-    ],
+    props: [ 'table', 'options' ],
     data: () => ({
         code: '',
     }),
     methods: {
         create() {
-            const xhr = new XMLHttpRequest();
-
-            xhr.open('POST', '/create');
-            xhr.responseType = 'json';
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
-            xhr.addEventListener('load', event => {
-                if (event.target.status === 200) {
-                    this.table.create(event.target.response);
-                    this.code = '';
+            fetch('/create', {
+                method: 'post',
+                headers: this.options.ajax,
+                body: JSON.stringify({ code: this.code }),
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
                 }
+
+                return response.json();
+            }).then(json => {
+                this.table.create(json);
+                this.code = '';
             });
-            xhr.send(JSON.stringify({ code: this.code }));
         },
         reader() {
             this.table.reader();

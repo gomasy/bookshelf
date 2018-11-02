@@ -9,7 +9,7 @@
             </div>
         </div>
         <div id="modal">
-            <editModal ref="editModal" :columns="columns" :selection="selection" />
+            <editModal ref="editModal" :columns="columns" :selection="selection" :options="options" />
             <cameraModal ref="cameraModal" />
         </div>
     </div>
@@ -21,9 +21,9 @@ import cameraModal from './cameraModal.vue';
 import thFilter from './th-Filter.vue';
 
 export default {
+    props: [ 'options' ],
     components: { editModal, cameraModal },
     data: () => ({
-        supportBackup: true,
         columns: [
             {
                 title: 'タイトル',
@@ -61,30 +61,31 @@ export default {
             },
         ],
         data: [],
-        total: 0,
-        selection: [],
         query: {},
+        selection: [],
+        supportBackup: true,
+        total: 0,
     }),
     methods: {
         fetch(query) {
-            const xhr = new XMLHttpRequest();
             let url = '/list.json?';
             if (query !== undefined) {
                 Object.keys(query).map(k => url += k + '=' + query[k] + '&');
             }
 
-            xhr.open('GET', url.substring(url.length - 1, -1));
-            xhr.responseType = 'json';
-            xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-            xhr.addEventListener('load', event => {
-                if (event.target.status === 200) {
-                    const result = event.target.response;
-
-                    this.data = result.data;
-                    this.total = result.total;
+            fetch(url.substring(url.length - 1, -1), {
+                method: 'get',
+                headers: this.options.ajax,
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
                 }
+
+                return response.json();
+            }).then(result => {
+                this.data = result.data;
+                this.total = result.total;
             });
-            xhr.send();
         },
         create(entry) {
             this.data.push(entry);
@@ -97,19 +98,20 @@ export default {
             this.$refs.editModal.open();
         },
         remove() {
-            const xhr = new XMLHttpRequest();
             const ids = [];
             this.selection.map(e => ids.push(e.id));
 
-            xhr.open('POST', '/delete');
-            xhr.setRequestHeader('Content-Type', 'application/json;charset=utf-8');
-            xhr.setRequestHeader('X-CSRF-TOKEN', document.head.querySelector('meta[name="csrf-token"]').content);
-            xhr.addEventListener('load', event => {
-                if (event.target.status === 204) {
-                    this.fetch(this.query);
+            fetch('/delete', {
+                method: 'post',
+                headers: this.options.ajax,
+                body: JSON.stringify({ ids: ids }),
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
                 }
+
+                this.fetch(this.query);
             });
-            xhr.send(JSON.stringify({ ids: ids }));
         },
     },
     watch: {

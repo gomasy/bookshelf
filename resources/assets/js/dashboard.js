@@ -5,13 +5,16 @@ import Datatable from 'vue2-datatable-component';
 import registerForm from './components/registerForm.vue';
 import tablePanel from './components/tablePanel.vue';
 
-export default function() {
+export default function(options) {
     Vue.use(Datatable);
 
     const table = new Vue({
         el: '#content',
         components: { tablePanel },
-        template: '<tablePanel ref="tablePanel" />',
+        template: '<tablePanel ref="tablePanel" :options="options" />',
+        data: () => ({
+            options: options,
+        }),
         methods: {
             create(entry) {
                 this.$refs.tablePanel.create(entry);
@@ -25,9 +28,10 @@ export default function() {
     return new Vue({
         el: '#register',
         components: { registerForm },
-        template: '<registerForm :table="table" />',
+        template: '<registerForm :table="table" :options="options" />',
         data: () => ({
             table: table,
+            options: options,
         }),
     });
 }

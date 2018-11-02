@@ -91,7 +91,7 @@ export default {
             this.data.push(entry);
             this.total++;
         },
-        reader() {
+        readerProxy() {
             this.$refs.cameraModal.start();
         },
         edit() {

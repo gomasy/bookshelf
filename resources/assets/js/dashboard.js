@@ -19,8 +19,8 @@ export default function(options) {
             create(entry) {
                 this.$refs.tablePanel.create(entry);
             },
-            reader() {
-                this.$refs.tablePanel.reader();
+            readerProxy() {
+                this.$refs.tablePanel.readerProxy();
             },
         },
     });

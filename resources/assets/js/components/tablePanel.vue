@@ -12,6 +12,7 @@
             <editModal ref="editModal" :columns="columns" :selection="selection" :options="options" />
             <cameraModal ref="cameraModal" :options="options" />
         </div>
+        <notifications position="bottom right" />
     </div>
 </template>
 
@@ -111,6 +112,11 @@ export default {
                 }
 
                 this.fetch(this.query);
+                this.$notify({
+                    type: 'success',
+                    title: '完了',
+                    text: '本の削除に成功しました',
+                });
             });
         },
     },

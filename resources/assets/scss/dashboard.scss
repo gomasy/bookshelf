@@ -45,3 +45,15 @@
         }
     }
 }
+
+.notifications {
+    span { display: block; }
+
+    .notification {
+        padding: 20px 10px;
+
+        .notification-title, .notification-content {
+            font-size: 14px;
+        }
+    }
+}

@@ -10,7 +10,7 @@
         </div>
         <div id="modal">
             <editModal ref="editModal" :columns="columns" :selection="selection" :options="options" />
-            <cameraModal ref="cameraModal" />
+            <cameraModal ref="cameraModal" :options="options" />
         </div>
     </div>
 </template>

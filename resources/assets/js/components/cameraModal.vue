@@ -15,6 +15,7 @@
 import Quagga from 'quagga';
 
 export default {
+    props: [ 'options' ],
     data: () => ({
         qgParams: {
             inputStream: {
@@ -44,15 +45,17 @@ export default {
                 Quagga.onProcessed(r => this.processed(r));
                 Quagga.onDetected(r => this.detected(r));
 
-                this.interval = setInterval(this.stop, 100);
+                this.interval = setInterval(() => {
+                    if (!$('#camera-modal').hasClass('in')) {
+                        this.stop();
+                    }
+                }, 100);
             });
         },
         stop() {
             // :thinking_face:
-            if (!$('#camera-modal').hasClass('in')) {
-                clearInterval(this.interval);
-                Quagga.stop();
-            }
+            clearInterval(this.interval);
+            Quagga.stop();
         },
         processed(result) {
             if (!result) return;
@@ -78,7 +81,24 @@ export default {
             }
         },
         detected(result) {
-            alert(result);
+            $('#camera-modal').modal('hide');
+            this.stop();
+            this.create(result.codeResult.code);
+        },
+        create(code) {
+            fetch('/create', {
+                method: 'post',
+                headers: this.options.ajax,
+                body: JSON.stringify({ code: code }),
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
+                }
+
+                return response.json();
+            }).then(json => {
+                alert(json);
+            });
         },
     },
 };

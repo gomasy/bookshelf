@@ -10,7 +10,6 @@ import '../icon.png';
 import '../scss/app.scss';
 import '../scss/dashboard.scss';
 import '../scss/home.scss';
-import '../scss/scanner.scss';
 import '../scss/settings.scss';
 
 // js

@@ -7,7 +7,7 @@
                 </div>
                 <form class="form-horizontal" @submit.prevent="submit">
                     <div class="modal-body">
-                        <div class="form-group" v-for="col in columns" :key="col.field">
+                        <div class="form-group" v-for="col in this.$parent.columns" :key="col.field">
                             <label class="col-sm-2 control-label">{{ col.title }}</label>
                             <div class="col-sm-9">
                                 <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required">
@@ -26,26 +26,25 @@
 
 <script>
 export default {
-    props: [ 'columns', 'selection', 'options' ],
     data: () => ({
         items: {},
     }),
     methods: {
         open() {
-            this.items = Object.assign({}, this.selection[0]);
+            this.items = Object.assign({}, this.$parent.selection[0]);
         },
         submit() {
             fetch('/edit', {
                 method: 'post',
-                headers: this.options.ajax,
+                headers: this.$parent.options.ajax,
                 body: JSON.stringify(this.items),
             }).then(response => {
                 if (!response.ok) {
                     throw response;
                 }
 
-                this.columns.map(col => {
-                    this.selection[0][col.field] = this.items[col.field];
+                this.$parent.columns.map(col => {
+                    this.$parent.selection[0][col.field] = this.items[col.field];
                 });
                 $('#edit-modal').modal('hide');
             });

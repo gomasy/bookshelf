@@ -15,7 +15,6 @@
 import Quagga from 'quagga';
 
 export default {
-    props: [ 'options' ],
     data: () => ({
         qgParams: {
             inputStream: {
@@ -88,16 +87,16 @@ export default {
         create(code) {
             fetch('/create', {
                 method: 'post',
-                headers: this.options.ajax,
+                headers: this.$parent.options.ajax,
                 body: JSON.stringify({ code: code }),
             }).then(response => {
+                this.$parent.notify(response);
+
                 if (!response.ok) {
                     throw response;
                 }
 
                 return response.json();
-            }).then(json => {
-                alert(json);
             });
         },
     },

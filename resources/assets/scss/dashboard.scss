@@ -5,6 +5,7 @@
     @media(--mobile) {
         display: flex;
         flex-direction: column;
+        margin: 5px;
     }
 
     button {
@@ -17,7 +18,6 @@
         @media(--mobile) {
             display: flex;
             flex-direction: column;
-            margin: 5px;
         }
 
         input {

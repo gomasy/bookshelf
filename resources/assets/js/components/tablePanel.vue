@@ -9,14 +9,16 @@
             </div>
         </div>
         <div id="modal">
-            <editModal ref="editModal" :columns="columns" :selection="selection" :options="options" />
-            <cameraModal ref="cameraModal" :options="options" />
+            <editModal ref="edit" />
+            <cameraModal ref="camera" />
         </div>
         <notifications position="bottom right" />
     </div>
 </template>
 
 <script>
+import Vue from 'vue';
+import registerForm from './registerForm.vue';
 import editModal from './editModal.vue';
 import cameraModal from './cameraModal.vue';
 import thFilter from './th-Filter.vue';
@@ -93,10 +95,10 @@ export default {
             this.total++;
         },
         readerProxy() {
-            this.$refs.cameraModal.start();
+            this.$refs.camera.start();
         },
         edit() {
-            this.$refs.editModal.open();
+            this.$refs.edit.open();
         },
         remove() {
             const ids = [];
@@ -119,6 +121,31 @@ export default {
                 });
             });
         },
+        notify(response) {
+            switch (response.status) {
+            case 200:
+                this.$notify({
+                    type: 'success',
+                    title: '完了',
+                    text: '該当する書籍の登録に成功しました',
+                });
+                break;
+            case 404:
+                this.$notify({
+                    type: 'warn',
+                    title: '見つかりません',
+                    text: '該当する書籍が見つかりませんでした',
+                });
+                break;
+            case 409:
+                this.$notify({
+                    type: 'error',
+                    title: '登録済み',
+                    text: 'その書籍は既に登録されています',
+                });
+                break;
+            }
+        },
     },
     watch: {
         query: {
@@ -127,6 +154,16 @@ export default {
             },
             deep: true,
         },
+    },
+    mounted() {
+        new Vue({
+            el: '#register',
+            components: { registerForm },
+            template: '<registerForm :table="table" />',
+            data: () => ({
+                table: this,
+            }),
+        });
     },
 };
 </script>

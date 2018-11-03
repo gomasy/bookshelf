@@ -2,6 +2,11 @@
 @import './variables';
 
 .navbar-buttons {
+    @media(--mobile) {
+        display: flex;
+        flex-direction: column;
+    }
+
     button {
         height: 40px;
     }
@@ -9,8 +14,17 @@
     #register {
         display: inline-block;
 
+        @media(--mobile) {
+            display: flex;
+            flex-direction: column;
+            margin: 5px;
+        }
+
         input {
-            width: 200px;
+            @media(--pc) {
+                width: 200px;
+            }
+
             height: 40px;
         }
     }

@@ -150,13 +150,6 @@ i, span {
                     display: list-item;
                 }
             }
-
-            #register {
-                @media(--mobile) {
-                    padding: 5px;
-                    border-bottom: 1px solid $dark-gray;
-                }
-            }
         }
     }
 

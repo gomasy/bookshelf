@@ -2,7 +2,6 @@
 @import './variables';
 
 .home {
-    flex: 1;
     text-align: center;
     padding-top: 20px;
     color: $dark-gray;
@@ -25,7 +24,7 @@
         margin: 40px auto;
     }
 
-    .row {
+    section {
         h4 {
             font-size: 24px;
         }

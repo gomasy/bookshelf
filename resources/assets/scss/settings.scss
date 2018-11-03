@@ -1,33 +1,28 @@
 @import './media';
 @import './variables';
 
-.settings {
-    .row {
-        display: flex;
-        justify-content: center;
-
-        @media(--mobile) {
-            display: block;
-        }
+.setting-menu {
+    @media(--pc) {
+        padding-right: 10px;
     }
+}
 
-    .settings-menu {
-        margin: 0;
+.setting-menu-content {
+    margin: 0;
 
-        li {
-            &:not(:last-child) { border-bottom: solid 1px $light-gray; }
-            &.active {
-                background: $white;
-                border-left: solid 3px #795548;
-            }
-
-            a {
-                display: flex;
-                padding: 10px 15px;
-                align-items: baseline;
-            }
-
-            i { margin-right: 5px; }
+    li {
+        &:not(:last-child) { border-bottom: solid 1px $light-gray; }
+        &.active {
+            background: $white;
+            border-left: solid 3px #795548;
         }
+
+        a {
+            display: flex;
+            padding: 10px 15px;
+            align-items: baseline;
+        }
+
+        i { margin-right: 5px; }
     }
 }

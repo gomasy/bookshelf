@@ -108,14 +108,23 @@ i, span {
         box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
         z-index: 100;
 
+        @media(--mobile) {
+            .container-fluid {
+                position: relative;
+
+                .navbar-collapse {
+                    position: absolute;
+                    width: 100%;
+                }
+            }
+        }
+
         .navbar-header {
             font-size: 18px;
             line-height: 40px;
             color: $dark-gray;
-        }
 
-        .navbar-toggle {
-            @media(--mobile) {
+            .navbar-toggle {
                 margin-top: 2px;
             }
         }
@@ -149,6 +158,10 @@ i, span {
                 }
             }
         }
+    }
+
+    main {
+        flex: 1;
     }
 
     footer {

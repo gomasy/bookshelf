@@ -1,11 +1,11 @@
 @extends('layouts.app')
 
-@section('title', __('dashboard.title'))
+@section('title', 'ダッシュボード')
 
 @section('navbar')
 <div id="register"></div>
 @endsection
 
 @section('content')
-<div id="content"></div>
+<main id="content"></main>
 @endsection

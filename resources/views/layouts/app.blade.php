@@ -7,7 +7,7 @@
 @if (!App::isDownForMaintenance())
         <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif
-        <meta property="description" content="{{ __('home.lead') }}">
+        <meta property="description" content="手持ちの書籍をISBNコードなどで管理し、ブラウザ上で簡単に表示・検索できるサービスです">
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
         <script defer src="@asset('/assets/app.js')"></script>
@@ -25,15 +25,15 @@
             </div>
 
             <ul class="list-unstyled components">
-                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fa fa-home" aria-hidden="true"></i>{{ __('home.title') }}</a></li>
-                <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>{{ __('home.sidebar.help') }}</a></li>
+                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fa fa-home" aria-hidden="true"></i>ホーム</a></li>
+                <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>ヘルプ</a></li>
 @auth
-                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>{{ __('home.sidebar.setting') }}</a></li>
+                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>設定</a></li>
                 <hr>
                 <li>
                     <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                         <i class="fa fa-sign-out" aria-hidden="true"></i>
-                        {{ __('auth.sign.out') }}
+                        ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="/logout" style="display: none;">
                         {{ csrf_field() }}
@@ -42,13 +42,13 @@
 @endauth
 @guest
                 <hr>
-                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>{{ __('auth.sign.in') }}</a></li>
-                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>{{ __('auth.register.title') }}</a></li>
+                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>ログイン</a></li>
+                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>登録</a></li>
 @endguest
             </ul>
         </nav>
 
-        <div class="wrapper">
+        <div class="container wrapper">
             <header class="navbar navbar-default">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -70,15 +70,15 @@
 
 @auth
                             <li class="nav-item sm">
-                                <a class="button" href="/settings">{{ __('home.sidebar.setting') }}</a>
-                                <a class="button" href="#">{{ __('home.sidebar.help') }}</a>
-                                <a class="button" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">{{ __('auth.sign.out') }}</a>
+                                <a class="button" href="/settings">設定</a>
+                                <a class="button" href="#">ヘルプ</a>
+                                <a class="button" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
                             </li>
 @endauth
 @guest
                             <li class="nav-item sm">
-                                <a class="button" href="/login">{{ __('auth.sign.in') }}</a>
-                                <a class="button" href="/register">{{ __('auth.register.title') }}</a>
+                                <a class="button" href="/login">ログイン</a>
+                                <a class="button" href="/register">登録</a>
                             </li>
 @endguest
                         </ul>

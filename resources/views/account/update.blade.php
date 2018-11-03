@@ -2,7 +2,7 @@
 
 @section('account')
 <div class="panel panel-default">
-    <div class="panel-heading">{{ __('settings.account.update.title') }}</div>
+    <div class="panel-heading">アカウント</div>
     <div class="panel-body">
         <form role="form" method="POST" action="/settings/account/update">
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -37,9 +37,9 @@
                 <input class="form-control" type="password" name="password_confirmation" value="">
             </div>
             {{ csrf_field() }}
-            <button type="submit" class="btn btn-block btn-primary">{{ __('settings.account.update.submit') }}</button>
+            <button type="submit" class="btn btn-block btn-primary">更新</button>
             <hr>
-            <p><a href="/settings/account/delete">{{ __('settings.account.delete.link') }}</a></p>
+            <p><a href="/settings/account/delete">アカウントの削除</a></p>
         </form>
     </div>
 </div>

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -29,7 +30,7 @@ class AccountController extends Controller
      * @param Request $request
      * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): object
     {
         return view('account.update');
     }
@@ -42,7 +43,7 @@ class AccountController extends Controller
      * @param UpdateRequest $request
      * @return RedirectResponse
      */
-    public function update(UpdateRequest $request)
+    public function update(UpdateRequest $request): object
     {
         $inputs = $request->except([ 'password', 'password_confirmation' ]);
         if ($request->filled('password')) {
@@ -62,7 +63,7 @@ class AccountController extends Controller
      * @param Request $request
      * @return View
      */
-    public function delete(Request $request)
+    public function delete(Request $request): object
     {
         return view('account.delete');
     }
@@ -76,7 +77,7 @@ class AccountController extends Controller
      * @param DeleteRequest $request
      * @return RedirectResponse|View
      */
-    public function confirm_delete(DeleteRequest $request)
+    public function confirm_delete(DeleteRequest $request): object
     {
         if (\Hash::check($request->password, \Auth::user()['password'])) {
             User::find(\Auth::id())->delete();

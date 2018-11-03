@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
@@ -34,7 +35,7 @@ class BookController extends Controller
      *
      * @return array
      */
-    protected function getHeader()
+    protected function getHeader(): array
     {
         return [
             'id' => \Auth::user()['next_id'],
@@ -48,7 +49,7 @@ class BookController extends Controller
      * @param Request $request
      * @return array
      */
-    public function list(Request $request)
+    public function list(Request $request): array
     {
         $books = \DB::table('books')->where('user_id', \Auth::id());
 
@@ -81,7 +82,7 @@ class BookController extends Controller
      * @param CreateRequest $request
      * @param return Book|Response
      */
-    public function create(CreateRequest $request)
+    public function create(CreateRequest $request): object
     {
         $book = NDL::query($request->code);
         if (isset($book)) {
@@ -108,7 +109,7 @@ class BookController extends Controller
      * @param EditRequest $request
      * @return Book
      */
-    public function edit(EditRequest $request)
+    public function edit(EditRequest $request): object
     {
         $book = Book::find($request->id);
         $book->fill($request->all())->save();
@@ -123,7 +124,7 @@ class BookController extends Controller
      * @param DeleteRequest $request
      * @return Response
      */
-    public function delete(DeleteRequest $request)
+    public function delete(DeleteRequest $request): object
     {
         \DB::beginTransaction();
         try {

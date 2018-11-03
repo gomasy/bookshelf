@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'パスワードリセット)
+@section('title', 'パスワードリセット')
 
 @section('content')
 <main class="password-reset">

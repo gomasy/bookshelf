@@ -48,6 +48,12 @@ module.exports = {
             },
         ],
     },
+    optimization: {
+        splitChunks: {
+            name: 'vendor',
+            chunks: 'initial',
+        },
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',

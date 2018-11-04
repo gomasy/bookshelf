@@ -16,7 +16,7 @@ script:
   - composer travis-test
   - composer coveralls
 after_success:
-  - if [[ $TRAVIS_BRANCH == 'master' ]]; then
+  - if [[ $TRAVIS_PULL_REQUEST == 'false' && $TRAVIS_BRANCH == 'master' ]]; then
       rm -rf build node_modules vendor storage/framework/{cache,views}/*;
       composer install --no-dev;
       tar cvf build.tar.gz .;

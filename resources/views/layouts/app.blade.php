@@ -11,6 +11,8 @@
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
         <script defer src="@asset('/assets/app.js')"></script>
+        @yield('head')
+
         <!-- ogp -->
         <meta property="og:title" content="{{ config('app.name') }} - @yield('title')">
         <meta property="og:type" content="{{ Request::path() === '/' ? 'website' : 'article' }}">

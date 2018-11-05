@@ -11,5 +11,5 @@
 @endsection
 
 @section('content')
-<main id="content"></main>
+<main class="dashboard" id="content"></main>
 @endsection

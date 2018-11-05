@@ -1,5 +1,5 @@
 <template>
-    <div id="content">
+    <main class="dashboard" id="content">
         <div class="panel panel-default">
             <div class="panel-body">
                 <datatable v-bind="$data">
@@ -13,7 +13,7 @@
             <cameraModal ref="camera" />
         </div>
         <notifications position="bottom right" />
-    </div>
+    </main>
 </template>
 
 <script>

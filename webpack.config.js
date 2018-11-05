@@ -49,6 +49,9 @@ module.exports = {
         ],
     },
     optimization: {
+        runtimeChunk: {
+            name: 'vendor',
+        },
         splitChunks: {
             name: 'vendor',
             chunks: 'initial',

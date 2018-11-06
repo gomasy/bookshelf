@@ -16,6 +16,7 @@ Route::get('/list.json', 'BookController@list');
 Route::post('/create', 'BookController@create');
 Route::post('/edit', 'BookController@edit');
 Route::post('/delete', 'BookController@delete');
+Route::get('/privacy-policy', 'HomeController@privacy_policy');
 
 Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');

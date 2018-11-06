@@ -24,4 +24,8 @@ class HomeController extends Controller
             return view('home');
         }
     }
+
+    public function privacy_policy() {
+        return view('privacy-policy');
+    }
 }

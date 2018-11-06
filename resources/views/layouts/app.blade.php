@@ -95,7 +95,7 @@
                 <ul class="list-unstyled">
                     <li><a href="">運営者情報</a></li>
                     <li><a href="">お問い合わせ</a></li>
-                    <li><a href="">プライバシーポリシー</a></li>
+                    <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
                 <p>&copy; Books Manager 2017-{{ date('Y') }}</p>
             </footer>

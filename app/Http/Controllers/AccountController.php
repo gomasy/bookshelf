@@ -52,6 +52,9 @@ class AccountController extends Controller
 
         $user = User::find(\Auth::id());
         $user->fill($inputs);
+        if ($user->email != $inputs['email']) {
+            $user->email_verified_at = null;
+        }
         $user->save();
 
         return redirect('/');

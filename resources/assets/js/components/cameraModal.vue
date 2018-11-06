@@ -80,9 +80,12 @@ export default {
             }
         },
         detected(result) {
-            $('#camera-modal').modal('hide');
-            this.stop();
-            this.create(result.codeResult.code);
+            const isbn = result.codeResult.code;
+            if (this.validation(isbn)) {
+                $('#camera-modal').modal('hide');
+                this.stop();
+                this.create(isbn);
+            }
         },
         create(code) {
             fetch('/create', {
@@ -98,6 +101,13 @@ export default {
 
                 return response.json();
             });
+        },
+        validation(code) {
+            if (!code.match(/^978/)) {
+                return;
+            }
+
+            return true;
         },
     },
 };

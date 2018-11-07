@@ -51,8 +51,9 @@ class AccountController extends Controller
         }
 
         $user = User::find(\Auth::id());
+        $old_email = $user->email;
         $user->fill($inputs);
-        if ($user->email != $inputs['email']) {
+        if ($old_email != $inputs['email']) {
             $user->email_verified_at = null;
         }
         $user->save();

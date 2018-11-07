@@ -85,7 +85,7 @@ export default {
                 headers: this.options.ajax,
             }).then(response => {
                 if (!response.ok) {
-                    throw response;
+                    return Promise.reject(response);
                 }
 
                 return response.json();
@@ -94,30 +94,29 @@ export default {
                 this.total = result.total;
             });
         },
-        before_create(code) {
+        before_create(code, cb) {
             fetch('/fetch?code=' + code, {
                 method: 'get',
                 headers: this.options.ajax,
-            }).then(response => {
+            }).then(async response => {
                 if (!response.ok) {
-                    throw response;
+                    return Promise.reject(response);
                 }
 
-                return response.json();
-            }).then(entry => {
-                this.$refs.addConfirm.open(entry);
-            });
+                const entry = await response.json();
+                this.$refs.addConfirm.open(entry, cb);
+            }).catch(e => this.notify(e));
         },
-        create(code) {
+        create(entry) {
             fetch('/create', {
                 method: 'post',
                 headers: this.options.ajax,
-                body: JSON.stringify({ code: code }),
+                body: JSON.stringify(entry),
             }).then(response => {
                 this.notify(response);
 
                 if (!response.ok) {
-                    throw response;
+                    return Promise.reject(response);
                 }
 
                 return response.json();
@@ -142,15 +141,10 @@ export default {
                 body: JSON.stringify({ ids: ids }),
             }).then(response => {
                 if (!response.ok) {
-                    throw response;
+                    return Promise.reject(response);
                 }
 
                 this.fetch(this.query);
-                this.$notify({
-                    type: 'success',
-                    title: '完了',
-                    text: '本の削除に成功しました',
-                });
             });
         },
         notify(response) {

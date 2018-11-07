@@ -1,7 +1,6 @@
 module.exports = {
     "env": {
         "browser": true,
-        "es6": true,
         "jquery": true,
         "node": true,
     },
@@ -13,6 +12,7 @@ module.exports = {
         "ecmaFeatures": {
             "jsx": true,
         },
+        "ecmaVersion": 2017,
         "sourceType": "module",
     },
     "rules": {

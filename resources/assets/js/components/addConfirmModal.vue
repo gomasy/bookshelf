@@ -9,7 +9,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
-                    <button class="btn btn-info" type="button" @click="create">OK</button>
+                    <button class="btn btn-info" type="button" @click="accept">OK</button>
                 </div>
             </div>
         </div>
@@ -20,14 +20,17 @@
 export default {
     data: () => ({
         items: {},
+        callback: null,
     }),
     methods: {
-        open(entry) {
+        open(entry, callback) {
             this.items = entry;
+            this.callback = callback;
             $('#add-confirm-modal').modal('show');
         },
-        create() {
-            this.$parent.create(this.items['isbn']);
+        accept() {
+            this.$parent.create(this.items);
+            this.callback();
             $('#add-confirm-modal').modal('hide');
         },
     },

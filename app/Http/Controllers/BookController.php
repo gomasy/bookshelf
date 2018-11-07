@@ -82,25 +82,17 @@ class BookController extends Controller
      * @param CreateRequest $request
      * @param return Book|Response
      */
-    public function create(CreateRequest $request): object
+    public function create(Request $request): object
     {
-        $book = NDL::query($request->code);
-        if (isset($book)) {
-            try {
-                $book = array_merge($this->getHeader(), $book);
-                Book::create($book);
+        $book = array_merge($this->getHeader(), $request->all());
 
-                $user = \Auth::user();
-                $user->next_id++;
-                $user->save();
+        if (Book::create($book)) {
+            $user = \Auth::user();
+            $user->next_id++;
+            $user->save();
 
-                return response($book);
-            } catch (QueryException $e) {
-                return response($book, 409);
-            }
+            return response($book);
         }
-
-        return response($book, 404);
     }
 
     /**
@@ -121,7 +113,10 @@ class BookController extends Controller
     {
         $book = NDL::query($request->code);
         if ($book !== null) {
-            return response($book);
+            $count = Book::where('isbn', $book['isbn'])
+                ->orWhere('jpno', $book['jpno'])->count();
+
+            return response($book, $count ? 409 : 200);
         }
 
         return response($book, 404);

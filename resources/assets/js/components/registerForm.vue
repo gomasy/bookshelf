@@ -16,7 +16,9 @@ export default {
     }),
     methods: {
         create() {
-            this.table.before_create(this.code);
+            this.table.before_create(this.code, () => {
+                this.code = '';
+            });
         },
         openReader() {
             this.table.readerProxy();

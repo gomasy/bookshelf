@@ -11,6 +11,7 @@
         <div id="modal">
             <editModal ref="edit" />
             <cameraModal ref="camera" />
+            <addConfirmModal ref="addConfirm" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -18,14 +19,17 @@
 
 <script>
 import Vue from 'vue';
+import thFilter from './th-Filter.vue';
 import registerForm from './registerForm.vue';
+
+// modal
 import editModal from './editModal.vue';
 import cameraModal from './cameraModal.vue';
-import thFilter from './th-Filter.vue';
+import addConfirmModal from './addConfirmModal.vue';
 
 export default {
     props: [ 'options' ],
-    components: { editModal, cameraModal },
+    components: { editModal, cameraModal, addConfirmModal },
     data: () => ({
         columns: [
             {
@@ -90,9 +94,37 @@ export default {
                 this.total = result.total;
             });
         },
-        create(entry) {
-            this.data.push(entry);
-            this.total++;
+        before_create(code) {
+            fetch('/fetch?code=' + code, {
+                method: 'get',
+                headers: this.options.ajax,
+            }).then(response => {
+                if (!response.ok) {
+                    throw response;
+                }
+
+                return response.json();
+            }).then(entry => {
+                this.$refs.addConfirm.open(entry);
+            });
+        },
+        create(code) {
+            fetch('/create', {
+                method: 'post',
+                headers: this.options.ajax,
+                body: JSON.stringify({ code: code }),
+            }).then(response => {
+                this.notify(response);
+
+                if (!response.ok) {
+                    throw response;
+                }
+
+                return response.json();
+            }).then(entry => {
+                this.data.push(entry);
+                this.total++;
+            });
         },
         readerProxy() {
             this.$refs.camera.start();

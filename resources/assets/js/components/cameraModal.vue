@@ -5,6 +5,7 @@
                 <div id="cameraWindow"></div>
                 <div class="modal-footer">
                     <h4>バーコードを近づけて下さい</h4>
+                    <input type="checkbox" v-model="isConfirm"> 確認する
                 </div>
             </div>
         </div>
@@ -34,6 +35,7 @@ export default {
             locate: true,
             interval: null,
         },
+        isConfirm: false,
     }),
     methods: {
         start() {
@@ -88,19 +90,7 @@ export default {
             }
         },
         create(code) {
-            fetch('/create', {
-                method: 'post',
-                headers: this.$parent.options.ajax,
-                body: JSON.stringify({ code: code }),
-            }).then(response => {
-                this.$parent.notify(response);
-
-                if (!response.ok) {
-                    throw response;
-                }
-
-                return response.json();
-            });
+            this.isConfirm ? this.$parent.before_create(code) : this.$parent.create(code);
         },
         validation(code) {
             if (!code.match(/^978/)) {

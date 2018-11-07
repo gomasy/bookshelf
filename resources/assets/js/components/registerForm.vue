@@ -16,22 +16,7 @@ export default {
     }),
     methods: {
         create() {
-            fetch('/create', {
-                method: 'post',
-                headers: this.table.options.ajax,
-                body: JSON.stringify({ code: this.code }),
-            }).then(response => {
-                this.table.notify(response);
-
-                if (!response.ok) {
-                    throw response;
-                }
-
-                return response.json();
-            }).then(json => {
-                this.table.create(json);
-                this.code = '';
-            });
+            this.table.before_create(this.code);
         },
         openReader() {
             this.table.readerProxy();

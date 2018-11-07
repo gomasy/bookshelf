@@ -98,9 +98,9 @@ class BookController extends Controller
             } catch (QueryException $e) {
                 return response($book, 409);
             }
-        } else {
-            return response(null, 404);
         }
+
+        return response($book, 404);
     }
 
     /**
@@ -115,6 +115,16 @@ class BookController extends Controller
         $book->fill($request->all())->save();
 
         return $book;
+    }
+
+    public function fetch(CreateRequest $request): object
+    {
+        $book = NDL::query($request->code);
+        if ($book !== null) {
+            return response($book);
+        }
+
+        return response($book, 404);
     }
 
     /**

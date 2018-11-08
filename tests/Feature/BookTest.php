@@ -57,31 +57,23 @@ class BookTest extends TestCase
         $user = factory(User::class)->create();
 
         // success
-        $this->actingAs($user)
-            ->post('/create', [ 'code' => '9784873115382' ], $headers)
-            ->assertSuccessful();
+        $book = $this->actingAs($user)->get('/fetch?code=9784873115382')->original;
+        $this->actingAs($user)->post('/create', $book, $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $this->actingAs($user)
-            ->post('/create', [ 'code' => '4000801139' ], $headers)
-            ->assertSuccessful();
+        $book = $this->actingAs($user)->get('/fetch?code=4000801139', $book, $headers)->original;
+        $this->actingAs($user)->post('/create', $book, $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // dups
-        $this->actingAs($user)
-            ->post('/create', [ 'code' => '4873115388' ], $headers)
-            ->assertStatus(409);
+        $this->actingAs($user)->get('/fetch?code=4873115388')->assertStatus(409);
 
         // not found
-        $this->actingAs($user)
-            ->post('/create', [ 'code' => '1234567890123' ], $headers)
-            ->assertStatus(404);
+        $this->actingAs($user)->get('/fetch?code=1234567890123', $headers)->assertStatus(404);
 
         // invalid
-        $this->actingAs($user)
-            ->post('/create', [ 'code' => '' ], $headers)
-            ->assertSessionHasErrors('code');
+        $this->actingAs($user)->get('/fetch?code=', $headers)->assertSessionHasErrors('code');
     }
 
     public function testEdit()

@@ -5,7 +5,7 @@
                 <div class="modal-header">
                 </div>
                 <div class="modal-body">
-                    {{ items }}
+                    <span v-html="body"></span>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
@@ -19,18 +19,25 @@
 <script>
 export default {
     data: () => ({
-        items: {},
+        body: '',
         callback: null,
+        items: {},
     }),
     methods: {
-        open(entry, callback) {
-            this.items = entry;
-            this.callback = callback;
+        open(items, before_cb, after_cb) {
+            this.items = items;
+            this.callback = after_cb;
+            if (typeof before_cb === 'function') {
+                this.body = before_cb(this.items);
+            }
+
             $('#add-confirm-modal').modal('show');
         },
         accept() {
-            this.$parent.create(this.items);
-            this.callback();
+            if (typeof this.callback === 'function') {
+                this.callback(this.items);
+            }
+
             $('#add-confirm-modal').modal('hide');
         },
     },

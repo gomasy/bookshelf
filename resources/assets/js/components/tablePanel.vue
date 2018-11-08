@@ -11,7 +11,7 @@
         <div id="modal">
             <editModal ref="edit" />
             <cameraModal ref="camera" />
-            <addConfirmModal ref="addConfirm" />
+            <confirmModal ref="confirm" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -25,11 +25,11 @@ import registerForm from './registerForm.vue';
 // modal
 import editModal from './editModal.vue';
 import cameraModal from './cameraModal.vue';
-import addConfirmModal from './addConfirmModal.vue';
+import confirmModal from './confirmModal.vue';
 
 export default {
     props: [ 'options' ],
-    components: { editModal, cameraModal, addConfirmModal },
+    components: { editModal, cameraModal, confirmModal },
     data: () => ({
         columns: [
             {
@@ -94,7 +94,7 @@ export default {
                 this.total = result.total;
             });
         },
-        before_create(code, cb) {
+        before_create(code, cbb, cba) {
             fetch('/fetch?code=' + code, {
                 method: 'get',
                 headers: this.options.ajax,
@@ -103,8 +103,7 @@ export default {
                     return Promise.reject(response);
                 }
 
-                const entry = await response.json();
-                this.$refs.addConfirm.open(entry, cb);
+                this.$refs.confirm.open(await response.json(), cbb, cba);
             }).catch(e => this.notify(e));
         },
         create(entry) {

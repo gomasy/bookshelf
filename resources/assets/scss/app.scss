@@ -15,7 +15,7 @@ body {
 p {
     font-size: 1.1em;
     line-height: 1.7em;
-    color: $light-gray;
+    color: $dark-gray;
 }
 
 a, a:hover, a:focus {
@@ -41,14 +41,14 @@ i, span {
         margin-left: -80px;
     }
 
-    ul {
-        li {
-            a {
+    > ul {
+        > li {
+            > a {
                 display: block;
                 padding: 20px 10px;
                 font-size: .85em;
 
-                i {
+                > i {
                     display: inherit;
                     margin-bottom: 5px;
                     font-size: 1.8em;
@@ -70,7 +70,7 @@ i, span {
             padding: 10px 0;
             border-bottom: 1px solid $blue;
 
-            hr {
+            > hr {
                 width: 50%;
                 margin: 10px auto;
                 border: inherit;
@@ -136,7 +136,7 @@ i, span {
                 border: 1px solid $white;
             }
 
-            hr {
+            > hr {
                 @media(--mobile) {
                     margin-top: 10px;
                     margin-bottom: 10px;
@@ -153,11 +153,11 @@ i, span {
         }
     }
 
-    main {
+    > main {
         flex: 1;
     }
 
-    footer {
+    > footer {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -167,16 +167,16 @@ i, span {
         font-size: 12px;
         color: $dark-gray;
 
-        a { color: $dark-gray; }
+        > a { color: $dark-gray; }
 
         ul, p {
             margin: 0;
         }
 
-        ul {
+        > ul {
             display: flex;
 
-            li {
+            > li {
                 &:not(:last-child):after {
                     content: '|';
                     margin: 0 10px;
@@ -196,23 +196,23 @@ i, span {
         }
 
         .sidebar-header {
-            h3 { display: inherit; }
-            strong { display: none; }
+            > h3 { display: inherit; }
+            > strong { display: none; }
         }
 
-        ul {
-            li a {
+        > ul {
+            > li > a {
                 padding: 10px;
                 font-size: 1.1em;
 
-                i {
+                > i {
                     display: inline;
                     margin-right: 10px;
                     font-size: inherit;
                 }
             }
 
-            &.components hr {
+            &.components > hr {
                 width: 80%;
             }
         }

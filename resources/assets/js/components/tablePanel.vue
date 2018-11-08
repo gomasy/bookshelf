@@ -133,17 +133,20 @@ export default {
         remove() {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
+            this.$refs.confirm.open(null, () => {
+                return '本当に削除しますか？';
+            }, () => {
+                fetch('/delete', {
+                    method: 'post',
+                    headers: this.options.ajax,
+                    body: JSON.stringify({ ids: ids }),
+                }).then(response => {
+                    if (!response.ok) {
+                        return Promise.reject(response);
+                    }
 
-            fetch('/delete', {
-                method: 'post',
-                headers: this.options.ajax,
-                body: JSON.stringify({ ids: ids }),
-            }).then(response => {
-                if (!response.ok) {
-                    return Promise.reject(response);
-                }
-
-                this.fetch(this.query);
+                    this.fetch(this.query);
+                });
             });
         },
         notify(response) {

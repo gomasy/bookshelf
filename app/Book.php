@@ -43,6 +43,8 @@ class Book extends Model
 
     public function getIsbn10Attribute()
     {
-        return NDL::isbn13to10($this->isbn);
+        if ($this->isbn !== null) {
+            return NDL::isbn13to10($this->isbn);
+        }
     }
 }

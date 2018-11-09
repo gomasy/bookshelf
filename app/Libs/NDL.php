@@ -29,19 +29,14 @@ class NDL
         $this->obj = $this->getItem($this->getRequestURL($code));
 
         if (isset($this->obj)) {
-            $isbn13 = $this->getISBN();
-
             return [
-                'title' => $this->getTitle(),
-                'volume' => $this->getVolume(),
-                'authors' => $this->getAuthors(),
-                'isbn' => [
-                    10 => $this->isbn13to10($isbn13),
-                    13 => $isbn13,
-                ],
-                'jpno' => $this->getJPNO(),
+                'title'          => $this->getTitle(),
+                'volume'         => $this->getVolume(),
+                'authors'        => $this->getAuthors(),
+                'isbn'           => $this->getISBN(),
+                'jpno'           => $this->getJPNO(),
                 'published_date' => $this->getPublishedDate(),
-                'ndl_url' => $this->getBookUrl(),
+                'ndl_url'        => $this->getBookUrl(),
             ];
         }
     }
@@ -150,7 +145,7 @@ class NDL
 
     public function isbn10to13(string $isbn): string
     {
-        $isbn13 = '978'.substr($isbn, 0, 9);
+        $isbn13 = '978' . substr($isbn, 0, 9);
         $digit = 0;
 
         for ($i = 0; $i < 12; $i++) {
@@ -158,7 +153,7 @@ class NDL
         }
         $n = $digit % 10;
 
-        return $n ? $isbn13.(10 - $n) : $isbn13.'0';
+        return $n ? $isbn13 . (10 - $n) : $isbn13 . '0';
     }
 
     public function isbn13to10(string $isbn): string

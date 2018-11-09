@@ -51,7 +51,7 @@ class BookController extends Controller
      */
     public function list(Request $request): array
     {
-        $books = \DB::table('books')->where('user_id', \Auth::id());
+        $books = new Book;
 
         foreach ([ 'title', 'authors', 'published_date' ] as $column) {
             if ($request->query($column) !== null) {
@@ -85,7 +85,6 @@ class BookController extends Controller
     public function create(Request $request): object
     {
         $book = array_merge($this->getHeader(), $request->all());
-        $book['isbn'] = $request->isbn['13'];
 
         if (Book::create($book)) {
             $user = \Auth::user();
@@ -113,9 +112,11 @@ class BookController extends Controller
     public function fetch(CreateRequest $request): object
     {
         $book = NDL::query($request->code);
+        $book['isbn10'] = NDL::isbn13to10($book['isbn']);
         if ($book !== null) {
-            $count = Book::where('isbn', $book['isbn']['13'])
-                ->orWhere('jpno', $book['jpno'])->count();
+            $count = Book::where('isbn', $book['isbn'])
+                ->orWhere('jpno', $book['jpno'])
+                ->count();
 
             return response($book, $count ? 409 : 200);
         }

@@ -112,8 +112,8 @@ class BookController extends Controller
     public function fetch(CreateRequest $request): object
     {
         $book = NDL::query($request->code);
-        $book['isbn10'] = NDL::isbn13to10($book['isbn']);
         if ($book !== null) {
+            $book['isbn10'] = NDL::isbn13to10($book['isbn']);
             $count = Book::where('isbn', $book['isbn'])
                 ->orWhere('jpno', $book['jpno'])
                 ->count();

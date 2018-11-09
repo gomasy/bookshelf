@@ -84,7 +84,6 @@ class BookTest extends TestCase
             'title' => 'Example',
             'volume' => 'Example',
             'authors' => 'Example',
-            'published_date' => '1970-01-01',
         ];
         $book = factory(Book::class)->create();
         $user = User::find($book->user_id);

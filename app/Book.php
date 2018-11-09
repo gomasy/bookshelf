@@ -16,7 +16,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'id', 'user_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'published_date', 'ndl_url' ];
+    protected $fillable = [ 'id', 'user_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'ndl_url' ];
 
     /**
      * The accessors to append to the model's array form.

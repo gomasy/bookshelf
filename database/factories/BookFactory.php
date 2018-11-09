@@ -24,7 +24,6 @@ $factory->define(\App\Book::class, function (Faker $faker) {
         'authors'        => $faker->name,
         'isbn'           => $faker->isbn13(),
         'jpno'           => $faker->ean8(),
-        'published_date' => $faker->date,
         'ndl_url'        => $faker->url,
     ];
 });

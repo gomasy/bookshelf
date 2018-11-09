@@ -53,7 +53,7 @@ class BookController extends Controller
     {
         $books = new Book;
 
-        foreach ([ 'title', 'authors', 'published_date' ] as $column) {
+        foreach ([ 'title', 'authors' ] as $column) {
             if ($request->query($column) !== null) {
                 $books = $books->where($column, 'like', '%'.$request->query($column).'%');
                 $count = $books->count();

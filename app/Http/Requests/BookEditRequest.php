@@ -31,12 +31,6 @@ class BookEditRequest extends FormRequest
             'title' => [ 'required', 'max:255' ],
             'volume' => [ 'max:255' ],
             'authors' => [ 'required', 'max:255' ],
-            'published_date' => [
-                'required',
-                'date_format:Y-m-d',
-                // 今日以前の日付しか許容しない
-                'before:' . date('Y-m-d', strtotime('+1 day')),
-            ],
         ];
     }
 

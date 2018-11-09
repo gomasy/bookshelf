@@ -35,7 +35,6 @@ class NDL
                 'authors'        => $this->getAuthors(),
                 'isbn'           => $this->getISBN(),
                 'jpno'           => $this->getJPNO(),
-                'published_date' => $this->getPublishedDate(),
                 'ndl_url'        => $this->getBookUrl(),
             ];
         }
@@ -119,11 +118,6 @@ class NDL
         $authors = rtrim((string)$this->obj->author, ',');
 
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
-    }
-
-    public function getPublishedDate(): string
-    {
-        return date('Y-m-d', strtotime((string)$this->obj->pubDate));
     }
 
     public function getBookUrl(): string

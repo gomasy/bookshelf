@@ -7,9 +7,9 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-use App\Http\Requests\BookCreateRequest as CreateRequest;
-use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
+use App\Http\Requests\BookEditRequest as EditRequest;
+use App\Http\Requests\BookFetchRequest as FetchRequest;
 
 use App\Book;
 use App\User;
@@ -76,10 +76,8 @@ class BookController extends Controller
 
     /**
      * 本を登録する。
-     * DB上にすでに登録されていた場合は409、
-     * 国会図書館に存在しない場合は404を返す。
      *
-     * @param CreateRequest $request
+     * @param Request $request
      * @param return Book|Response
      */
     public function create(Request $request): object
@@ -109,7 +107,15 @@ class BookController extends Controller
         return $book;
     }
 
-    public function fetch(CreateRequest $request): object
+    /**
+     * 本の情報を取得する
+     * 取得した本が既に登録されていた場合は409、
+     * 一次ソース側に存在しない場合は404を返す。
+     *
+     * @param FetchRequest $request
+     * @return Response
+     */
+    public function fetch(FetchRequest $request): object
     {
         $book = NDL::query($request->code);
         if ($book !== null) {

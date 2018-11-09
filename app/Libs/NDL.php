@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Libs;
 
@@ -28,26 +29,31 @@ class NDL
         $this->obj = $this->getItem($this->getRequestURL($code));
 
         if (isset($this->obj)) {
+            $isbn13 = $this->getISBN();
+
             return [
-                'title'          => $this->getTitle(),
-                'volume'         => $this->getVolume(),
-                'authors'        => $this->getAuthors(),
-                'isbn'           => $this->getISBN(),
-                'jpno'           => $this->getJPNO(),
+                'title' => $this->getTitle(),
+                'volume' => $this->getVolume(),
+                'authors' => $this->getAuthors(),
+                'isbn' => [
+                    10 => $this->isbn13to10($isbn13),
+                    13 => $isbn13,
+                ],
+                'jpno' => $this->getJPNO(),
                 'published_date' => $this->getPublishedDate(),
-                'ndl_url'        => $this->getBookUrl(),
+                'ndl_url' => $this->getBookUrl(),
             ];
         }
     }
 
-    protected function getRequestURL($code)
+    protected function getRequestURL(string $code): string
     {
         return $this->endpoint.'?'.http_build_query([
             $this->searchType($code) => $code,
         ]);
     }
 
-    protected function getChannel($url)
+    protected function getChannel(string $url): ?object
     {
         $ch = curl_init($url);
         curl_setopt_array($ch, $this->curlopt);
@@ -70,7 +76,7 @@ class NDL
         }
     }
 
-    public function getItem($url)
+    public function getItem(string $url)
     {
         $channel = $this->getChannel($url);
         for ($i = 0; $i < $channel->totalResults; $i++) {
@@ -80,59 +86,57 @@ class NDL
         }
     }
 
-    public function getISBN()
+    public function getISBN(): ?string
     {
-        $isbn = null;
-        foreach ($this->obj->identifier as $val) {
-            switch (strlen($val)) {
-                case 13: $isbn = $val; break;
-                case 10: $isbn = $this->isbn10to13($val); break;
+        foreach ($this->obj->identifier as $obj) {
+            if ((string)$obj['type'] === 'ISBN') {
+                $isbn = (string)$obj;
+                if (strlen($isbn) === 10) {
+                    return $this->isbn10to13($isbn);
+                }
+
+                return $isbn;
             }
         }
-
-        return (string)$isbn;
     }
 
-    public function getJPNO()
+    public function getJPNO(): ?string
     {
-        $jpno = null;
-        foreach ($this->obj->identifier as $val) {
-            if (strlen($val) === 8) {
-                $jpno = $val;
+        foreach ($this->obj->identifier as $obj) {
+            if ((string)$obj['type'] === 'JPNO') {
+                return (string)$obj;
             }
         }
-
-        return (string)$jpno;
     }
 
-    public function getTitle()
+    public function getTitle(): string
     {
         return (string)$this->obj->title;
     }
 
-    public function getVolume()
+    public function getVolume(): ?string
     {
         return (string)$this->obj->volume;
     }
 
-    public function getAuthors()
+    public function getAuthors(): string
     {
         $authors = rtrim((string)$this->obj->author, ',');
 
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
     }
 
-    public function getPublishedDate()
+    public function getPublishedDate(): string
     {
         return date('Y-m-d', strtotime((string)$this->obj->pubDate));
     }
 
-    public function getBookUrl()
+    public function getBookUrl(): string
     {
         return (string)$this->obj->link;
     }
 
-    protected function searchType($num)
+    protected function searchType($num): string
     {
         $type = 'any';
         switch (strlen($num)) {
@@ -144,7 +148,7 @@ class NDL
         return $type;
     }
 
-    public function isbn10to13($isbn)
+    public function isbn10to13(string $isbn): string
     {
         $isbn13 = '978'.substr($isbn, 0, 9);
         $digit = 0;
@@ -155,5 +159,22 @@ class NDL
         $n = $digit % 10;
 
         return $n ? $isbn13.(10 - $n) : $isbn13.'0';
+    }
+
+    public function isbn13to10(string $isbn): string
+    {
+        $isbn10 = substr($isbn, 3, -1);
+        $digit = 0;
+
+        for ($i = 0; $i < 9; $i++) {
+            $digit += $isbn10[$i] * (10 - $i);
+        }
+
+        $n = $digit % 11;
+        if ($n) {
+            $n = $n < 10 ? 11 - $n : 'X';
+        }
+
+        return $isbn10 . $n;
     }
 }

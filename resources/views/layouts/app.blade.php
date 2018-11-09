@@ -97,6 +97,7 @@
                     <li><a href="">お問い合わせ</a></li>
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
+                <p>👎 本サービスは国立国会図書館のAPIを利用しています 👎</p>
                 <p>&copy; Books Manager 2017-{{ date('Y') }}</p>
             </footer>
         </div>

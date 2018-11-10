@@ -19,8 +19,8 @@ export default {
             this.table.before_create(this.code, entry => {
                 return '<p>一件見つかりました。本当に登録しますか？</p>タイトル: ' + entry.title;
             }, result => {
-                this.code = '';
                 this.table.create(result);
+                this.code = '';
             });
         },
         openReader() {

@@ -40,7 +40,7 @@ export default {
                 body: JSON.stringify(this.items),
             }).then(response => {
                 if (!response.ok) {
-                    throw response;
+                    return Promise.reject(response);
                 }
 
                 this.$parent.columns.map(col => {

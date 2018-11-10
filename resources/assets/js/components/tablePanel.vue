@@ -71,10 +71,7 @@ export default {
                 Object.keys(query).map(k => url += k + '=' + query[k] + '&');
             }
 
-            fetch(url.substring(url.length - 1, -1), {
-                method: 'get',
-                headers: this.options.ajax,
-            }).then(response => {
+            fetch(url.substring(url.length - 1, -1)).then(response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
@@ -86,10 +83,7 @@ export default {
             });
         },
         before_create(code, cbb, cba) {
-            fetch('/fetch?code=' + code, {
-                method: 'get',
-                headers: this.options.ajax,
-            }).then(async response => {
+            fetch('/fetch?code=' + code).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }

@@ -17,4 +17,16 @@ class CreateEmailVerifiedColumn extends Migration
             $table->timestamp('email_verified_at')->nullable()->after('email');
         });
     }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('email_verified_at');
+        });
+    }
 }

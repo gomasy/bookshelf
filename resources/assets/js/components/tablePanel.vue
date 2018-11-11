@@ -23,9 +23,9 @@ import thFilter from './th-Filter.vue';
 import registerForm from './registerForm.vue';
 
 // modal
-import editModal from './editModal.vue';
-import cameraModal from './cameraModal.vue';
-import confirmModal from './confirmModal.vue';
+import editModal from './modals/editModal.vue';
+import cameraModal from './modals/cameraModal.vue';
+import confirmModal from './modals/confirmModal.vue';
 
 export default {
     props: [ 'options' ],
@@ -71,39 +71,47 @@ export default {
                 Object.keys(query).map(k => url += k + '=' + query[k] + '&');
             }
 
-            fetch(url.substring(url.length - 1, -1)).then(response => {
+            fetch(url.substring(url.length - 1, -1)).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
 
-                return response.json();
+                return await response.json();
             }).then(result => {
                 this.data = result.data;
                 this.total = result.total;
             });
         },
-        before_create(code, cbb, cba) {
+        before_create(cba, code, confirmed) {
             fetch('/fetch?code=' + code).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
 
-                this.$refs.confirm.open(await response.json(), cbb, cba);
-            }).catch(e => this.notify(e));
+                const entry = await response.json();
+                if (confirmed) {
+                    this.create(entry);
+                    cba();
+                } else {
+                    this.$refs.confirm.open(() => {
+                        return '<p>一件見つかりました。本当に登録しますか？</p>タイトル: ' + entry.title;
+                    }, cba, entry);
+                }
+            }).catch(async e => this.notify(await e));
         },
         create(entry) {
             fetch('/create', {
                 method: 'post',
                 headers: this.options.ajax,
                 body: JSON.stringify(entry),
-            }).then(response => {
-                this.notify(response);
+            }).then(async response => {
+                this.notify(await response);
 
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
 
-                return response.json();
+                return await response.json();
             }).then(entry => {
                 this.data.push(entry);
                 this.total++;
@@ -118,7 +126,7 @@ export default {
         remove() {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
-            this.$refs.confirm.open(null, () => {
+            this.$refs.confirm.open(() => {
                 return '本当に削除しますか？';
             }, () => {
                 fetch('/delete', {

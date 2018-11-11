@@ -1,5 +1,5 @@
 <template>
-    <div class="modal fade" id="add-confirm-modal">
+    <div class="modal fade" id="confirm-modal">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -21,24 +21,25 @@ export default {
     data: () => ({
         body: '',
         callback: null,
-        items: {},
+        items: null,
     }),
     methods: {
-        open(items, before_cb, after_cb) {
+        open(before_cb, after_cb, items) {
             this.items = items;
             this.callback = after_cb;
+
             if (typeof before_cb === 'function') {
                 this.body = before_cb(this.items);
             }
 
-            $('#add-confirm-modal').modal('show');
+            $('#confirm-modal').modal('show');
         },
         accept() {
             if (typeof this.callback === 'function') {
                 this.callback(this.items);
             }
 
-            $('#add-confirm-modal').modal('hide');
+            $('#confirm-modal').modal('hide');
         },
     },
 };

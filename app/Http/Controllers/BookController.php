@@ -15,6 +15,7 @@ use App\Book;
 use App\User;
 
 use Facades\ {
+    App\Libs\AmazonImages,
     App\Libs\NDL
 };
 
@@ -117,17 +118,28 @@ class BookController extends Controller
      */
     public function fetch(FetchRequest $request): object
     {
-        $book = NDL::query($request->code);
-        if ($book !== null) {
-            $book['isbn10'] = NDL::isbn13to10($book['isbn']);
-            $count = Book::where('isbn', $book['isbn'])
-                ->orWhere('jpno', $book['jpno'])
+        $book = new Book(NDL::query($request->code));
+        if ($book->title !== null) {
+            $count = Book::where('isbn', $book->isbn)
+                ->orWhere('jpno', $book->jpno)
                 ->count();
 
             return response($book, $count ? 409 : 200);
         }
 
         return response($book, 404);
+    }
+
+    /**
+     * 表紙の画像を取得する（プロキシ）
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function fetchImage(Request $request): object
+    {
+        return response(AmazonImages::fetch($request->path()))
+            ->header('Content-Type', 'image/jpeg');
     }
 
     /**

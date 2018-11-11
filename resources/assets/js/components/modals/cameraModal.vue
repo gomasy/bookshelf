@@ -90,7 +90,9 @@ export default {
             }
         },
         create(code) {
-            this.isConfirm ? this.$parent.before_create(code) : this.$parent.create(code);
+            if (this.isConfirm) {
+                alert(code);
+            }
         },
         validation(code) {
             return code.match(/^978/);

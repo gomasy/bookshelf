@@ -18,6 +18,7 @@ Route::post('/edit', 'BookController@edit');
 Route::get('/fetch', 'BookController@fetch');
 Route::post('/delete', 'BookController@delete');
 Route::get('/privacy-policy', 'HomeController@privacy_policy');
+Route::get('/images/P/{path}', 'BookController@fetchImage');
 
 Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');

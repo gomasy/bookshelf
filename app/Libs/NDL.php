@@ -3,14 +3,6 @@ declare(strict_types=1);
 
 namespace App\Libs;
 
-/**
- * The wrapper for National Diet Library. (OpenSearch)
- *
- * Copyright(c) 2017 Gomasy.
- *
- * This software is released under the MIT License.
- * http://opensource.org/licenses/mit-license.php
- */
 class NDL
 {
     protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
@@ -27,17 +19,18 @@ class NDL
     public function query($code)
     {
         $this->obj = $this->getItem($this->getRequestURL($code));
-
-        if (isset($this->obj)) {
-            return [
-                'title'          => $this->getTitle(),
-                'volume'         => $this->getVolume(),
-                'authors'        => $this->getAuthors(),
-                'isbn'           => $this->getISBN(),
-                'jpno'           => $this->getJPNO(),
-                'ndl_url'        => $this->getBookUrl(),
-            ];
+        if ($this->obj === null) {
+            return [];
         }
+
+        return [
+            'title'          => $this->getTitle(),
+            'volume'         => $this->getVolume(),
+            'authors'        => $this->getAuthors(),
+            'isbn'           => $this->getISBN(),
+            'jpno'           => $this->getJPNO(),
+            'ndl_url'        => $this->getBookUrl(),
+        ];
     }
 
     protected function getRequestURL(string $code): string

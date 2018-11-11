@@ -16,12 +16,10 @@ export default {
     }),
     methods: {
         create() {
-            this.table.before_create(this.code, entry => {
-                return '<p>一件見つかりました。本当に登録しますか？</p>タイトル: ' + entry.title;
-            }, result => {
+            this.table.before_create(result => {
                 this.table.create(result);
                 this.code = '';
-            });
+            }, this.code);
         },
         openReader() {
             this.table.readerProxy();

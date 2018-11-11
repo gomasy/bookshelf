@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 use Facades\ {
+    App\Libs\AmazonImages,
     App\Libs\NDL
 };
 
@@ -23,7 +24,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $appends = [ 'isbn10' ];
+    protected $appends = [ 'isbn10', 'images' ];
 
     /**
      * Indicates if the model should be timestamped.
@@ -45,6 +46,13 @@ class Book extends Model
     {
         if ($this->isbn !== null) {
             return NDL::isbn13to10($this->isbn);
+        }
+    }
+
+    public function getImagesAttribute()
+    {
+        if ($this->isbn10 !== null) {
+            return AmazonImages::all($this->isbn10, \Config::get('app.url'));
         }
     }
 }

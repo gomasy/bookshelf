@@ -14,7 +14,7 @@ class AmazonImages
         'large' => 'LZZZZZZZ',
     ];
 
-    public function all($isbn10, $endpoint = null)
+    public function all($isbn10, $endpoint = null): array
     {
         $url = [];
         foreach (array_keys($this->types) as $type) {
@@ -24,7 +24,7 @@ class AmazonImages
         return $url;
     }
 
-    public function single($isbn10, $type, $endpoint = null)
+    public function single($isbn10, $type, $endpoint = null): string
     {
         if ($endpoint === null) {
             $endpoint = $this->endpoint;
@@ -33,7 +33,7 @@ class AmazonImages
         return "{$endpoint}/images/P/{$isbn10}.{$this->countryCode}.{$this->types[$type]}";
     }
 
-    public function fetch($path)
+    public function fetch($path): string
     {
         return file_get_contents("{$this->endpoint}/{$path}");
     }

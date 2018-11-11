@@ -58,12 +58,12 @@ class BookTest extends TestCase
 
         // success
         $book = $this->actingAs($user)->get('/fetch?code=9784873115382')->original;
-        $this->actingAs($user)->post('/create', $book, $headers)->assertSuccessful();
+        $this->actingAs($user)->post('/create', $book->toArray(), $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $book = $this->actingAs($user)->get('/fetch?code=4000801139', $book, $headers)->original;
-        $this->actingAs($user)->post('/create', $book, $headers)->assertSuccessful();
+        $book = $this->actingAs($user)->get('/fetch?code=4000801139')->original;
+        $this->actingAs($user)->post('/create', $book->toArray(), $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // dups

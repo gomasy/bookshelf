@@ -4,8 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 </div>
-                <div class="modal-body">
-                    <span v-html="body"></span>
+                <div class="modal-body" id="confirm-body">
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
@@ -19,7 +18,6 @@
 <script>
 export default {
     data: () => ({
-        body: '',
         callback: null,
         items: null,
     }),
@@ -29,7 +27,7 @@ export default {
             this.callback = after_cb;
 
             if (typeof before_cb === 'function') {
-                this.body = before_cb(this.items);
+                before_cb(this.items);
             }
 
             $('#confirm-modal').modal('show');

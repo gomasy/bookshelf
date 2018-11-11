@@ -26,6 +26,7 @@ import registerForm from './registerForm.vue';
 import editModal from './modals/editModal.vue';
 import cameraModal from './modals/cameraModal.vue';
 import confirmModal from './modals/confirmModal.vue';
+import addConfirmBody from './modals/addConfirmBody.vue';
 
 export default {
     props: [ 'options' ],
@@ -94,7 +95,14 @@ export default {
                     cba();
                 } else {
                     this.$refs.confirm.open(() => {
-                        return '<p>一件見つかりました。本当に登録しますか？</p>タイトル: ' + entry.title;
+                        return new Vue({
+                            components: { addConfirmBody },
+                            el: '#confirm-body',
+                            template: '<addConfirmBody :book="book" />',
+                            data: () => ({
+                                book: entry,
+                            }),
+                        });
                     }, cba, entry);
                 }
             }).catch(async e => this.notify(await e));

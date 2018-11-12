@@ -19,8 +19,9 @@
 
 <script>
 import Vue from 'vue';
-import thFilter from './th-Filter.vue';
 import registerForm from './registerForm.vue';
+import thFilter from './th-Filter.vue';
+import tdImage from './td-Image.vue';
 
 // modal
 import editModal from './modals/editModal.vue';
@@ -33,6 +34,13 @@ export default {
     components: { editModal, cameraModal, confirmModal },
     data: () => ({
         columns: [
+            {
+                title: '画像',
+                field: 'images',
+                type: 'hidden',
+                tdComp: tdImage,
+                visible: false,
+            },
             {
                 title: 'タイトル',
                 field: 'title',
@@ -138,7 +146,7 @@ export default {
                     this.fetch(this.query);
                 });
             }, {
-                template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>'
+                template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
             });
         },
         notify(response) {

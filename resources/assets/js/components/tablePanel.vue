@@ -83,7 +83,7 @@ export default {
                 this.total = result.total;
             });
         },
-        before_create(cba, code, confirmed) {
+        before_create(callback, code, confirmed) {
             fetch('/fetch?code=' + code).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
@@ -92,18 +92,9 @@ export default {
                 const entry = await response.json();
                 if (confirmed) {
                     this.create(entry);
-                    cba();
+                    callback();
                 } else {
-                    this.$refs.confirm.open(() => {
-                        return new Vue({
-                            components: { addConfirmBody },
-                            el: '#confirm-body',
-                            template: '<addConfirmBody :book="book" />',
-                            data: () => ({
-                                book: entry,
-                            }),
-                        });
-                    }, cba, entry);
+                    this.$refs.confirm.open(callback, addConfirmBody, entry);
                 }
             }).catch(async e => this.notify(await e));
         },
@@ -135,8 +126,6 @@ export default {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
             this.$refs.confirm.open(() => {
-                return '本当に削除しますか？';
-            }, () => {
                 fetch('/delete', {
                     method: 'post',
                     headers: this.options.ajax,
@@ -148,6 +137,8 @@ export default {
 
                     this.fetch(this.query);
                 });
+            }, {
+                template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>'
             });
         },
         notify(response) {

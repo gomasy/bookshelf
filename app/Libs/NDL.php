@@ -16,7 +16,7 @@ class NDL
     ];
     protected $obj;
 
-    public function query($code)
+    public function query($code): array
     {
         $this->obj = $this->getItem($this->getRequestURL($code));
         if ($this->obj === null) {
@@ -61,9 +61,11 @@ class NDL
         } else {
             throw new \Exception('Retry limit reached');
         }
+
+        return null;
     }
 
-    public function getItem(string $url)
+    public function getItem(string $url): ?object
     {
         $channel = $this->getChannel($url);
         for ($i = 0; $i < $channel->totalResults; $i++) {
@@ -71,6 +73,8 @@ class NDL
                 return $channel->item[$i];
             }
         }
+
+        return null;
     }
 
     public function getISBN(): ?string
@@ -85,6 +89,8 @@ class NDL
                 return $isbn;
             }
         }
+
+        return null;
     }
 
     public function getJPNO(): ?string
@@ -94,6 +100,8 @@ class NDL
                 return (string)$obj;
             }
         }
+
+        return null;
     }
 
     public function getTitle(): string
@@ -101,7 +109,7 @@ class NDL
         return (string)$this->obj->title;
     }
 
-    public function getVolume(): ?string
+    public function getVolume(): string
     {
         return (string)$this->obj->volume;
     }
@@ -157,6 +165,6 @@ class NDL
             $n = 11 - $n;
         }
 
-        return $isbn10 . $n < 10 ? $n : 'X';
+        return $isbn10 . ($n < 10 ? $n : 'X');
     }
 }

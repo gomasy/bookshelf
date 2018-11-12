@@ -16,19 +16,24 @@
 </template>
 
 <script>
+import Vue from 'vue';
+
 export default {
     data: () => ({
         callback: null,
         items: null,
     }),
     methods: {
-        open(before_cb, after_cb, items) {
+        open(callback, confirmBody, items) {
             this.items = items;
-            this.callback = after_cb;
+            this.callback = callback;
 
-            if (typeof before_cb === 'function') {
-                before_cb(this.items);
-            }
+            new Vue({
+                components: { confirmBody },
+                el: '#confirm-body',
+                template: '<confirmBody :book="book" />',
+                data: () => ({ book: items }),
+            });
 
             $('#confirm-modal').modal('show');
         },

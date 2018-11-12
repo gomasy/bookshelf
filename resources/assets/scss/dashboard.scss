@@ -30,6 +30,22 @@
     }
 }
 
+.add-inner {
+    display: flex;
+    align-items: flex-start;
+
+    .add-text {
+        flex: 1;
+        margin-left: 20px;
+        font-size: 16px;
+        line-height: 24px;
+
+        span {
+            display: block;
+        }
+    }
+}
+
 #camera-modal {
     .modal-dialog {
         width: 680px;

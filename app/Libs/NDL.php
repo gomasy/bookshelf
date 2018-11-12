@@ -154,9 +154,9 @@ class NDL
 
         $n = $digit % 11;
         if ($n) {
-            $n = $n < 10 ? 11 - $n : 'X';
+            $n = 11 - $n;
         }
 
-        return $isbn10 . $n;
+        return $isbn10 . $n < 10 ? $n : 'X';
     }
 }

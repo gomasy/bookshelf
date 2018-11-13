@@ -175,6 +175,13 @@ export default {
                     text: 'その書籍は既に登録されています',
                 });
                 break;
+            case 422:
+                this.$notify({
+                    type: 'error',
+                    title:'入力エラー',
+                    text:'入力内容が間違っています',
+                });
+                break;
             }
         },
     },

@@ -138,8 +138,14 @@ class BookController extends Controller
      */
     public function fetchImage(Request $request): object
     {
-        return response(AmazonImages::fetch($request->path()))
-            ->header('Content-Type', 'image/jpeg');
+        preg_match('/.*\/(.+?)$/', $request->path(), $matches);
+        $image = \Cache::store('file')->get($matches[1]);
+        if ($image === null) {
+            $image = AmazonImages::fetch($request->path());
+            \Cache::store('file')->put($matches[1], $image, 1440);
+        }
+
+        return response($image)->header('Content-Type', 'image/jpeg');
     }
 
     /**

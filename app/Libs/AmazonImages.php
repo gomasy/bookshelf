@@ -54,7 +54,7 @@ class AmazonImages
         $size = getimagesizefromstring($image);
 
         if ($size[0] <= 1 || $size[1] <= 1) {
-            preg_match('/^' . preg_quote($this->path, '/') . '\d{10}\.\d{2}\.(.+?)$/', $path, $type);
+            preg_match('/^' . preg_quote($this->path, '/') . '.+\.\d{2}\.(.+?)$/', $path, $type);
 
             return $this->missing($this->sizes[array_search($type[1], $this->types)]);
         }

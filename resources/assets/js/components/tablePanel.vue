@@ -39,7 +39,6 @@ export default {
                 field: 'images',
                 type: 'hidden',
                 tdComp: tdImage,
-                visible: false,
             },
             {
                 title: 'タイトル',
@@ -80,7 +79,9 @@ export default {
                 Object.keys(query).map(k => url += k + '=' + query[k] + '&');
             }
 
-            fetch(url.substring(url.length - 1, -1)).then(async response => {
+            fetch(url.substring(url.length - 1, -1), {
+                headers: this.options.ajax,
+            }).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
@@ -92,7 +93,9 @@ export default {
             });
         },
         before_create(callback, code, confirmed) {
-            fetch('/fetch?code=' + code).then(async response => {
+            fetch('/fetch?code=' + code, {
+                headers: this.options.ajax,
+            }).then(async response => {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }

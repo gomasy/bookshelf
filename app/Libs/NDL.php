@@ -16,7 +16,7 @@ class NDL
     ];
     protected $obj;
 
-    public function query($code): array
+    public function query(string $code): array
     {
         $this->obj = $this->getItem($this->getRequestURL($code));
         if ($this->obj === null) {
@@ -126,7 +126,7 @@ class NDL
         return (string)$this->obj->link;
     }
 
-    protected function searchType($num): string
+    protected function searchType(string $num): string
     {
         $type = 'any';
         switch (strlen($num)) {

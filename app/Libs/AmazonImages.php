@@ -68,7 +68,7 @@ class AmazonImages
         imagecolorallocate($image, 200, 200, 200);
         $text_color = imagecolorallocate($image, 100, 100, 100);
         imagestring($image, $size[1][0], $size[1][1], $size[1][2], 'NO IMAGE', $text_color);
-        imagejpeg($image);
+        imagejpeg($image, null, 100);
 
         return null;
     }

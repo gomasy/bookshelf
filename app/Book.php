@@ -5,10 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-use Facades\ {
-    App\Libs\AmazonImages,
-    App\Libs\NDL
-};
+use Facades\App\Libs\AmazonImages;
+use Facades\App\Libs\NDL;
 
 class Book extends Model
 {

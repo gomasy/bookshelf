@@ -14,10 +14,8 @@ use App\Http\Requests\BookFetchRequest as FetchRequest;
 use App\Book;
 use App\User;
 
-use Facades\ {
-    App\Libs\AmazonImages,
-    App\Libs\NDL
-};
+use Facades\App\Libs\AmazonImages;
+use Facades\App\Libs\NDL;
 
 class BookController extends Controller
 {

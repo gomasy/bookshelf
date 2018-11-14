@@ -27,8 +27,8 @@ class CreatePublisherAndPriceColumn extends Migration
                     \DB::table('books')->where('id', $book->id)
                         ->where('user_id', $book->user_id)
                         ->update([
-                            'publisher' => $query['publisher'],
-                            'price' => $query['price'],
+                            'publisher' => $query['publisher'] ?? null,
+                            'price' => $query['price'] ?? null,
                         ]);
                     echo "Updated: {$book->user_id} -> {$book->title}\n";
                 }

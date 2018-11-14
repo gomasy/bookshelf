@@ -50,7 +50,9 @@ class AmazonImages
             return $this->missing($this->sizes[$matches[1]]);
         }
 
-        $image = file_get_contents("{$this->endpoint}/{$path}");
+        $image = (string)(new \GuzzleHttp\Client())
+            ->request('GET', "{$this->endpoint}/{$path}")
+            ->getBody();
         $size = getimagesizefromstring($image);
 
         if ($size[0] <= 1 || $size[1] <= 1) {

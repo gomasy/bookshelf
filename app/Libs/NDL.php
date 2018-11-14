@@ -3,18 +3,24 @@ declare(strict_types=1);
 
 namespace App\Libs;
 
+use \GuzzleHttp\Exception\ConnectException;
+
 class NDL
 {
     protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
-    protected $curlopt = [
-        CURLOPT_RETURNTRANSFER => true,
-        CURLOPT_TIMEOUT => 3,
-    ];
     protected $regexp = [
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
+    protected $client;
     protected $obj;
+
+    public function __construct()
+    {
+        $this->client = new \GuzzleHttp\Client([
+            'timeout' => 1,
+        ]);
+    }
 
     public function query(string $code): array
     {
@@ -24,34 +30,36 @@ class NDL
         }
 
         return [
-            'title'          => $this->getTitle(),
-            'volume'         => $this->getVolume(),
-            'authors'        => $this->getAuthors(),
-            'isbn'           => $this->getISBN(),
-            'jpno'           => $this->getJPNO(),
-            'ndl_url'        => $this->getBookUrl(),
+            'title'   => $this->getTitle(),
+            'volume'  => $this->getVolume(),
+            'authors' => $this->getAuthors(),
+            'isbn'    => $this->getISBN(),
+            'jpno'    => $this->getJPNO(),
+            'ndl_url' => $this->getBookUrl(),
         ];
     }
 
-    protected function getRequestURL(string $code): string
+    protected function getQueryString(string $code): string
     {
-        return $this->endpoint.'?'.http_build_query([
+        return http_build_query([
             $this->searchType($code) => $code,
         ]);
     }
 
     protected function getChannel(string $url): ?object
     {
-        $ch = curl_init($url);
-        curl_setopt_array($ch, $this->curlopt);
-
-        $retry = -1;
         $content = null;
-        $errorNo = null;
-        while ($errorNo !== CURLE_OK && $retry < 3) {
-            $content = curl_exec($ch);
-            $errorNo = curl_errno($ch);
-            $retry++;
+        $retry = 0;
+
+        while ($retry <= 3) {
+            try {
+                $content = (string)$this->client
+                    ->request('GET', $this->getQueryString())
+                    ->getBody();
+                break;
+            } catch (ConnectException $e) {
+                $retry++;
+            }
         }
 
         if ($content !== null) {

@@ -93,7 +93,7 @@
             <footer>
                 <ul class="list-unstyled">
                     <li><a href="">運営者情報</a></li>
-                    <li><a href="">お問い合わせ</a></li>
+                    <li><a href="/contact">お問い合わせ</a></li>
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
                 <p>👎 本サービスは国立国会図書館のAPIを利用しています 👎</p>

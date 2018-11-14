@@ -22,8 +22,7 @@ Route::get('/privacy-policy', 'HomeController@privacy_policy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
 
 Route::group([ 'prefix' => 'contact' ], function () {
-    Route::get('/', 'HomeController@contact');
-    Route::post('/', 'HomeController@contact');
+    Route::match([ 'get', 'post' ], '/', 'HomeController@contact');
     Route::post('/submit', 'HomeController@contact_submit');
 });
 

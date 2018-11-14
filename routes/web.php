@@ -20,6 +20,12 @@ Route::post('/delete', 'BookController@delete');
 Route::get('/privacy-policy', 'HomeController@privacy_policy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
 
+Route::group([ 'prefix' => 'contact' ], function () {
+    Route::get('/', 'HomeController@contact');
+    Route::post('/', 'HomeController@contact');
+    Route::post('/submit', 'HomeController@contact_submit');
+});
+
 Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');
     Route::group([ 'prefix' => 'account' ], function () {

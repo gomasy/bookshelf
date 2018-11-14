@@ -25,6 +25,28 @@ class HomeController extends Controller
         }
     }
 
+    public function contact(Request $request): object
+    {
+        if ($request->isMethod('get')) {
+            return view('contact.index');
+        }
+
+        return view('contact.confirm')
+            ->with('request', $request);
+    }
+
+    public function contact_submit(Request $request)
+    {
+        \Mail::send([], [], function ($message) use ($request) {
+            $message->from($request->mail)
+                ->to(\Config::get('mail.from.address'))
+                ->subject('お問い合わせ')
+                ->setBody($request->inquiry);
+        });
+
+        return redirect('/');
+    }
+
     public function privacy_policy()
     {
         return view('privacy-policy');

@@ -76,6 +76,21 @@ class BookTest extends TestCase
         $this->actingAs($user)->get('/fetch?code=', $headers)->assertSessionHasErrors('code');
     }
 
+    public function testFetchImage()
+    {
+        $user = factory(User::class)->create();
+
+        // normal
+        $response = $this->actingAs($user)->get('/images/P/4840234884.09.LZZZZZZZ');
+        $response->assertHeader('Content-Type', 'image/jpeg');
+        $response->assertStatus(200);
+
+        // missing
+        $response = $this->actingAs($user)->get('/images/P/missing.large.jpg');
+        $response->assertHeader('Content-Type', 'image/jpeg');
+        $response->assertStatus(200);
+    }
+
     public function testEdit()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];

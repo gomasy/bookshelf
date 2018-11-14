@@ -87,9 +87,9 @@ class BookController extends Controller
             $user = \Auth::user();
             $user->next_id++;
             $user->save();
-
-            return response($book);
         }
+
+        return response($book);
     }
 
     /**

@@ -81,6 +81,11 @@ class BookTest extends TestCase
         $user = factory(User::class)->create();
 
         // normal
+        $response = $this->actingAs($user)->get('/images/P/4774158798.09.LZZZZZZZ');
+        $response->assertHeader('Content-Type', 'image/jpeg');
+        $response->assertStatus(200);
+
+        // missing (normal)
         $response = $this->actingAs($user)->get('/images/P/4840234884.09.LZZZZZZZ');
         $response->assertHeader('Content-Type', 'image/jpeg');
         $response->assertStatus(200);

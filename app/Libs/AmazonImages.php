@@ -21,7 +21,7 @@ class AmazonImages
         'large'  => [ 349, 500, 5, 140, 235 ],
     ];
 
-    public function all(?string $isbn10, ?string $endpoint = null): array
+    public function all(?string $isbn10, string $endpoint): array
     {
         $url = [];
         foreach (array_keys($this->types) as $type) {
@@ -31,12 +31,8 @@ class AmazonImages
         return $url;
     }
 
-    public function single(?string $isbn10, string $type, ?string $endpoint = null): string
+    public function single(?string $isbn10, string $type, string $endpoint): string
     {
-        if ($endpoint === null) {
-            $endpoint = $this->endpoint;
-        }
-
         if ($isbn10 === null) {
             return "{$endpoint}/{$this->path}missing.{$type}.jpg";
         }

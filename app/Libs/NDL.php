@@ -18,13 +18,14 @@ class NDL
     public function __construct()
     {
         $this->client = new \GuzzleHttp\Client([
+            'base_uri' => $this->endpoint,
             'timeout' => 1,
         ]);
     }
 
     public function query(string $code): array
     {
-        $this->obj = $this->getItem($this->getRequestURL($code));
+        $this->obj = $this->getItem($code);
         if ($this->obj === null) {
             return [];
         }
@@ -41,21 +42,19 @@ class NDL
 
     protected function getQueryString(string $code): string
     {
-        return http_build_query([
+        return '?' . http_build_query([
             $this->searchType($code) => $code,
         ]);
     }
 
-    protected function getChannel(string $url): ?object
+    protected function getChannel(string $path): ?object
     {
         $content = null;
         $retry = 0;
 
         while ($retry <= 3) {
             try {
-                $content = (string)$this->client
-                    ->request('GET', $this->getQueryString())
-                    ->getBody();
+                $content = (string)$this->client->request('GET', $path)->getBody();
                 break;
             } catch (ConnectException $e) {
                 $retry++;
@@ -73,9 +72,9 @@ class NDL
         return null;
     }
 
-    public function getItem(string $url): ?object
+    public function getItem(string $code): ?object
     {
-        $channel = $this->getChannel($url);
+        $channel = $this->getChannel($this->getQueryString($code));
         for ($i = 0; $i < $channel->totalResults; $i++) {
             if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate)) {
                 return $channel->item[$i];

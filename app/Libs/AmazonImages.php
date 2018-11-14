@@ -9,16 +9,16 @@ class AmazonImages
     protected $path = 'images/P/';
     protected $countryCode = '09';
     protected $types = [
-        'thumb' => 'THUMBZZZ',
-        'small' => 'TZZZZZZZ',
+        'thumb'  => 'THUMBZZZ',
+        'small'  => 'TZZZZZZZ',
         'medium' => 'MZZZZZZZ',
-        'large' => 'LZZZZZZZ',
+        'large'  => 'LZZZZZZZ',
     ];
     protected $sizes = [
-        'thumb' => [ [ 52, 75 ], [ 2, 3, 28 ] ],
-        'small' => [ [ 77, 110 ], [ 3, 11, 45 ] ],
-        'medium' => [ [ 112, 160 ], [ 5, 22, 70 ] ],
-        'large' => [ [ 349, 500 ], [ 5, 140, 235 ] ],
+        'thumb'  => [  52,  75, 2,   3,  29 ],
+        'small'  => [  77, 110, 4,   7,  47 ],
+        'medium' => [ 112, 160, 5,  21,  72 ],
+        'large'  => [ 349, 500, 5, 140, 235 ],
     ];
 
     public function all(?string $isbn10, ?string $endpoint = null): array
@@ -44,9 +44,9 @@ class AmazonImages
         return "{$endpoint}/{$this->path}{$isbn10}.{$this->countryCode}.{$this->types[$type]}";
     }
 
-    public function fetch(string $path): ?string
+    public function fetch(string $path): string
     {
-        if (preg_match('/^' . preg_quote($this->path, '/') . 'missing\.(.+)\.jpg$/', $path, $matches)) {
+        if (preg_match('/^' . preg_quote($this->path, '/') . 'missing\.(.+?)\.jpg$/', $path, $matches)) {
             return $this->missing($this->sizes[$matches[1]]);
         }
 
@@ -62,14 +62,20 @@ class AmazonImages
         return $image;
     }
 
-    protected function missing(array $size)
+    protected function missing(array $size): string
     {
-        $image = imagecreate($size[0][0], $size[0][1]);
-        imagecolorallocate($image, 200, 200, 200);
-        $text_color = imagecolorallocate($image, 100, 100, 100);
-        imagestring($image, $size[1][0], $size[1][1], $size[1][2], 'NO IMAGE', $text_color);
-        imagejpeg($image, null, 100);
+        $canvas = imagecreate($size[0], $size[1]);
+        imagecolorallocate($canvas, 200, 200, 200);
+        $text_color = imagecolorallocate($canvas, 100, 100, 100);
+        imagestring($canvas, $size[2], $size[3], $size[4], "NO IMAGE", $text_color);
 
-        return null;
+        // 画像ストリームを変数に落とし込む
+        ob_start();
+        imagejpeg($canvas, null, 100);
+        $image = ob_get_contents();
+        imagedestroy($canvas);
+        ob_end_clean();
+
+        return $image;
     }
 }

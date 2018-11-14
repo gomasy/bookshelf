@@ -31,12 +31,14 @@ class NDL
         }
 
         return [
-            'title'   => $this->getTitle(),
-            'volume'  => $this->getVolume(),
-            'authors' => $this->getAuthors(),
-            'isbn'    => $this->getISBN(),
-            'jpno'    => $this->getJPNO(),
-            'ndl_url' => $this->getBookUrl(),
+            'title'     => $this->getTitle(),
+            'volume'    => $this->getVolume(),
+            'authors'   => $this->getAuthors(),
+            'isbn'      => $this->getISBN(),
+            'jpno'      => $this->getJPNO(),
+            'publisher' => $this->getPublisher(),
+            'price'     => $this->getPrice(),
+            'ndl_url'   => $this->getBookUrl(),
         ];
     }
 
@@ -126,6 +128,16 @@ class NDL
         $authors = rtrim((string)$this->obj->author, ',');
 
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
+    }
+
+    public function getPublisher(): ?string
+    {
+        return (string)$this->obj->publisher;
+    }
+
+    public function getPrice(): ?string
+    {
+        return (string)$this->obj->price;
     }
 
     public function getBookUrl(): string

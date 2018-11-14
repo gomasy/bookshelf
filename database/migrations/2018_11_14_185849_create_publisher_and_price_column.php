@@ -22,8 +22,8 @@ class CreatePublisherAndPriceColumn extends Migration
 
         \DB::transaction(function () {
             foreach (\DB::table('books')->get() as $book) {
-                if ($book->isbn !== null) {
-                    $query = NDL::query($book->isbn);
+                try {
+                    $query = NDL::query($book->isbn !== null ? $book->isbn : $book->jpno);
                     \DB::table('books')->where('id', $book->id)
                         ->where('user_id', $book->user_id)
                         ->update([
@@ -31,6 +31,8 @@ class CreatePublisherAndPriceColumn extends Migration
                             'price' => $query['price'] ?? null,
                         ]);
                     echo "Updated: {$book->user_id} -> {$book->title}\n";
+                } catch (\Exception $e) {
+                    echo "Errored: {$book->user_id} -> {$book->title}\n";
                 }
             }
         });

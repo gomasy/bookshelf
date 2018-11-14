@@ -25,6 +25,16 @@ class HomeController extends Controller
         }
     }
 
+    public function help(): object
+    {
+        return view('help');
+    }
+
+    public function privacy_policy(): object
+    {
+        return view('privacy-policy');
+    }
+
     public function contact(Request $request): object
     {
         if ($request->isMethod('get')) {
@@ -45,10 +55,5 @@ class HomeController extends Controller
         });
 
         return redirect('/');
-    }
-
-    public function privacy_policy()
-    {
-        return view('privacy-policy');
     }
 }

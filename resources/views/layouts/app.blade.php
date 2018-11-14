@@ -28,7 +28,7 @@
 
             <ul class="list-unstyled components">
                 <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fa fa-home" aria-hidden="true"></i>ホーム</a></li>
-                <li><a href="#"><i class="fa fa-question-circle" aria-hidden="true"></i>ヘルプ</a></li>
+                <li{!! Request::path() === 'help' ? ' class="active"' : '' !!}><a href="/help"><i class="fa fa-question-circle" aria-hidden="true"></i>ヘルプ</a></li>
 @auth
                 <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>設定</a></li>
                 <hr>

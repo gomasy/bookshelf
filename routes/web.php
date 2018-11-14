@@ -17,6 +17,7 @@ Route::post('/create', 'BookController@create');
 Route::post('/edit', 'BookController@edit');
 Route::get('/fetch', 'BookController@fetch');
 Route::post('/delete', 'BookController@delete');
+Route::get('/help', 'HomeController@help');
 Route::get('/privacy-policy', 'HomeController@privacy_policy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
 

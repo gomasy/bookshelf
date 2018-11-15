@@ -82,8 +82,8 @@ i, span {
         padding: 20px;
         background: $navy-blue;
 
-        h3 { display: none; }
-        strong { font-size: 1.8em; }
+        > h3 { display: none; }
+        > strong { font-size: 1.8em; }
     }
 }
 
@@ -165,9 +165,6 @@ i, span {
         min-height: 65px;
         margin-bottom: 10px;
         font-size: 12px;
-        color: $dark-gray;
-
-        > a { color: $dark-gray; }
 
         ul, p {
             margin: 0;

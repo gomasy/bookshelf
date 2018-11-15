@@ -17,22 +17,22 @@
     button {
         height: 40px;
     }
+}
 
-    #register {
-        display: inline-block;
+#register {
+    display: inline-block;
 
-        @media(--mobile) {
-            display: flex;
-            flex-direction: column;
+    @media(--mobile) {
+        display: flex;
+        flex-direction: column;
+    }
+
+    > input {
+        @media(--pc) {
+            width: 200px;
         }
 
-        input {
-            @media(--pc) {
-                width: 200px;
-            }
-
-            height: 40px;
-        }
+        height: 40px;
     }
 }
 
@@ -46,7 +46,7 @@
         font-size: 16px;
         line-height: 24px;
 
-        span {
+        > span {
             display: block;
         }
     }
@@ -56,42 +56,39 @@
     .modal-dialog {
         width: 680px;
 
-        .modal-content {
-            #cameraWindow {
-                position: relative;
-                margin-left: 20px;
-                margin-top: 10px;
-                height: 490px;
-
-                video {
-                    position: absolute;
-                }
-
-                canvas {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    z-index: 10;
-                }
-            }
-
-            .modal-footer {
-                text-align: center;
-            }
+        .modal-footer {
+            text-align: center;
         }
     }
 }
 
-#preview-modal {
-    .modal-dialog {
-        display: flex;
-        justify-content: center;
-        transform: unset;
+#cameraWindow {
+    position: relative;
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 490px;
+
+    > video {
+        position: absolute;
+    }
+
+    > canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 10;
     }
 }
 
+#preview-modal .modal-dialog {
+    display: flex;
+    justify-content: center;
+    transform: unset;
+    width: 0;
+}
+
 .notifications {
-    span { display: block; }
+    > span { display: block; }
 
     .notification {
         padding: 20px 10px;

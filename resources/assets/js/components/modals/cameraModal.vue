@@ -36,6 +36,7 @@ export default {
             interval: null,
         },
         isConfirm: false,
+        isCreate: false,
     }),
     methods: {
         start() {
@@ -90,7 +91,10 @@ export default {
             }
         },
         create(code) {
-            this.$parent.before_create(r => this.$parent.create(r), code, !this.isConfirm);
+            if(!this.isCreate){
+                this.$parent.before_create(r => this.$parent.create(r), code, !this.isConfirm);
+                this.isCreate = true;
+            }
         },
         validation(code) {
             return code.match(/^978/);

@@ -182,6 +182,13 @@ export default {
                     text:'入力内容が間違っています',
                 });
                 break;
+            case 500:
+                this.$notify({
+                    type:'error',
+                    title:'内部エラー',
+                    text:'不明なエラーが発生しました。',
+                });
+                break;
             }
         },
     },

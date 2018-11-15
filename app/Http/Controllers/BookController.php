@@ -51,6 +51,7 @@ class BookController extends Controller
     public function list(Request $request): array
     {
         $books = new Book;
+        $books->orderBy('id');
 
         foreach ([ 'title', 'authors' ] as $column) {
             if ($request->query($column) !== null) {

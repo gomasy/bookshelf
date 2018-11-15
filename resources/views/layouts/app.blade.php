@@ -96,7 +96,7 @@
                     <li><a href="/contact">お問い合わせ</a></li>
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
-                <p>👎 本サービスは国立国会図書館のAPIを利用しています 👎</p>
+                <p>- 本サービスは<a href="http://iss.ndl.go.jp/information/outline/">国立国会図書館のAPI</a>を利用しています -</p>
                 <p>&copy; Books Manager 2017-{{ date('Y') }}</p>
             </footer>
         </div>

@@ -130,12 +130,12 @@ class NDL
         return preg_match($this->regexp[1], $authors, $str) ? $str[1] : $authors;
     }
 
-    public function getPublisher(): ?string
+    public function getPublisher(): string
     {
         return (string)$this->obj->publisher;
     }
 
-    public function getPrice(): ?string
+    public function getPrice(): string
     {
         return (string)$this->obj->price;
     }

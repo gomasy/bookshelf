@@ -12,6 +12,7 @@
             <editModal ref="edit" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
+            <previewModal ref="preview" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -27,11 +28,12 @@ import tdImage from './td-Image.vue';
 import editModal from './modals/editModal.vue';
 import cameraModal from './modals/cameraModal.vue';
 import confirmModal from './modals/confirmModal.vue';
+import previewModal from './modals/previewModal.vue';
 import addConfirmBody from './modals/addConfirmBody.vue';
 
 export default {
     props: [ 'options' ],
-    components: { editModal, cameraModal, confirmModal },
+    components: { editModal, cameraModal, confirmModal, previewModal },
     data: () => ({
         columns: [
             {

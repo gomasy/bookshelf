@@ -1,6 +1,12 @@
 @import './media';
 @import './variables';
 
+.dashboard {
+    td > img {
+        cursor: pointer;
+    }
+}
+
 .navbar-buttons {
     @media(--mobile) {
         display: flex;
@@ -73,6 +79,14 @@
                 text-align: center;
             }
         }
+    }
+}
+
+#preview-modal {
+    .modal-dialog {
+        display: flex;
+        justify-content: center;
+        transform: unset;
     }
 }
 

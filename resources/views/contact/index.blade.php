@@ -4,7 +4,7 @@
 
 @section('content')
 <main style="text-align: center;" class="contact">
-    <form action="./" method="post">
+    <form action="/contact" method="post">
         <div style="text-align: center;">名前</div>
         <input class="form-control" type="text" name="name" size="50" required><br>
         <div style="text-align: center;">メールアドレス</div>

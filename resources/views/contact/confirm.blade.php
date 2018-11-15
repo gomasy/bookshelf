@@ -4,7 +4,7 @@
 
 @section('content')
 <h2>問合せ内容</h2>
-<form action="./submit" method="post">
+<form action="/contact/submit" method="post">
     <table class="table" border="2">
         <tr>
             <td>名前</td>

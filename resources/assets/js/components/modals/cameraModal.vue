@@ -58,6 +58,7 @@ export default {
             // :thinking_face:
             clearInterval(this.interval);
             Quagga.stop();
+            this.isCreate = false;
         },
         processed(result) {
             if (!result) return;
@@ -86,12 +87,11 @@ export default {
             const isbn = result.codeResult.code;
             if (this.validation(isbn)) {
                 $('#camera-modal').modal('hide');
-                this.stop();
                 this.create(isbn);
             }
         },
         create(code) {
-            if(!this.isCreate){
+            if (!this.isCreate) {
                 this.$parent.before_create(r => this.$parent.create(r), code, !this.isConfirm);
                 this.isCreate = true;
             }

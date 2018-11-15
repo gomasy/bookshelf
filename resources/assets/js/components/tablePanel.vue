@@ -37,7 +37,6 @@ export default {
     data: () => ({
         columns: [
             {
-                title: '画像',
                 field: 'images',
                 type: 'hidden',
                 tdComp: tdImage,
@@ -48,14 +47,11 @@ export default {
                 sortable: true,
                 thComp: thFilter,
                 thStyle: 'width: 60%',
-                type: 'text',
                 required: true,
             },
             {
                 title: '巻号',
                 field: 'volume',
-                type: 'text',
-                required: false,
                 thStyle: 'width: 20%',
             },
             {
@@ -64,8 +60,17 @@ export default {
                 sortable: true,
                 thComp: thFilter,
                 thStyle: 'width: 20%',
-                type: 'text',
                 required: true,
+            },
+            {
+                title: '出版社',
+                field: 'publisher',
+                visible: false,
+            },
+            {
+                title: '価格',
+                field: 'price',
+                visible: false,
             },
         ],
         data: [],

@@ -144,7 +144,7 @@ class BookController extends Controller
         }
 
         return response($image)
-            ->header('Cache-Control', 'max-age=604800')
+            ->header('Cache-Control', 'max-age=604800, public')
             ->header('Content-Type', 'image/jpeg');
     }
 

@@ -1,13 +1,13 @@
 {
     "presets": [
-        [ "env", {
+        [ "@babel/env", {
             "modules": false,
-            "browsers": [
-                "last 2 versions"
-            ]
+            "targets": {
+                "browsers": [
+                    "last 1 year",
+                    "ios >= 11"
+                ]
+            }
         }]
-    ],
-    "plugins": [
-        "transform-object-rest-spread"
     ]
 }

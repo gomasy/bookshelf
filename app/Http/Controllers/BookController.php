@@ -143,7 +143,9 @@ class BookController extends Controller
             \Cache::store('file')->put($key, $image, 1440);
         }
 
-        return response($image)->header('Content-Type', 'image/jpeg');
+        return response($image)
+            ->header('Cache-Control', 'max-age=604800')
+            ->header('Content-Type', 'image/jpeg');
     }
 
     /**

@@ -9,7 +9,7 @@
             <div class="panel panel-default">
                 <div class="panel-heading">設定</div>
                 <ul class="list-unstyled setting-menu-content">
-                    <li{!! Request::path() === 'settings/account' ? ' class="active"' : '' !!}><a href="/settings/account"><i class="fa fa-user" aria-hidden="true"></i>アカウント</a></li>
+                    <li{!! Request::path() === 'settings/account' ? ' class="active"' : '' !!}><a href="/settings/account"><i class="fas fa-user" aria-hidden="true"></i>アカウント</a></li>
                 </ul>
             </div>
         </div>

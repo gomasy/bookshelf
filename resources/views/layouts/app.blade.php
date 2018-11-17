@@ -23,18 +23,18 @@
         <nav class="sidebar">
             <div class="sidebar-header">
                 <h3>Books Manager</h3>
-                <strong><i class="fa fa-book" aria-hidden="true"></i></strong>
+                <strong><i class="fas fa-book" aria-hidden="true"></i></strong>
             </div>
 
             <ul class="list-unstyled components">
-                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fa fa-home" aria-hidden="true"></i>ホーム</a></li>
-                <li{!! Request::path() === 'help' ? ' class="active"' : '' !!}><a href="/help"><i class="fa fa-question-circle" aria-hidden="true"></i>ヘルプ</a></li>
+                <li{!! Request::path() === '/' ? ' class="active"' : '' !!}><a href="/"><i class="fas fa-home" aria-hidden="true"></i>ホーム</a></li>
+                <li{!! Request::path() === 'help' ? ' class="active"' : '' !!}><a href="/help"><i class="fas fa-question-circle" aria-hidden="true"></i>ヘルプ</a></li>
 @auth
-                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fa fa-cog" aria-hidden="true"></i>設定</a></li>
+                <li{!! preg_match('/^settings(\/.*)?$/', Request::path()) ? ' class="active"' : '' !!}><a href="/settings"><i class="fas fa-cog" aria-hidden="true"></i>設定</a></li>
                 <hr>
                 <li>
                     <a href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
-                        <i class="fa fa-sign-out" aria-hidden="true"></i>
+                        <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                         ログアウト
                     </a>
                     <form id="logout-form" method="POST" action="/logout" style="display: none;">
@@ -44,8 +44,8 @@
 @endauth
 @guest
                 <hr>
-                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="fa fa-sign-in" aria-hidden="true"></i>ログイン</a></li>
-                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="fa fa-user-plus" aria-hidden="true"></i>登録</a></li>
+                <li{!! Request::path() === 'login' ? ' class="active"' : '' !!}><a href="/login"><i class="fas fa-sign-in-alt" aria-hidden="true"></i>ログイン</a></li>
+                <li{!! Request::path() === 'register' ? ' class="active"' : '' !!}><a href="/register"><i class="fas fa-user-plus" aria-hidden="true"></i>登録</a></li>
 @endguest
             </ul>
         </nav>

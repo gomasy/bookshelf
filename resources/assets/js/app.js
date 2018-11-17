@@ -1,6 +1,10 @@
 import 'bootstrap-sass';
 import '../scss/vendor/_bootstrap.scss';
-import 'font-awesome/scss/font-awesome.scss';
+
+// font-awesome
+import '@fortawesome/fontawesome-free/scss/fontawesome.scss';
+import '@fortawesome/fontawesome-free/scss/solid.scss';
+import '@fortawesome/fontawesome-free/scss/brands.scss';
 
 // assets
 import '../icon.png';

@@ -5,13 +5,10 @@
             "targets": {
                 "browsers": [
                     "> 0.25% in JP",
-                    "not ie 11",
-                    "not chrome <= 50",
-                    "not safari < 10",
-                    "not android <= 4.4.4",
-                    "not ios < 10"
+                    "not android <= 4.4.4"
                 ]
-            }
+            },
+            "useBuiltIns": "usage"
         }]
     ]
 }

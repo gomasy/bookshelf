@@ -2,7 +2,8 @@ module.exports = {
     plugins: {
         'autoprefixer': {
             browsers: [
-                '> 1% in JP',
+                '> 0.25% in JP',
+                'not android <= 4.4.4',
             ],
             grid: true,
         },

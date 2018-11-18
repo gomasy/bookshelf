@@ -48,7 +48,7 @@ class HomeController extends Controller
     public function contact_submit(Request $request): object
     {
         \Mail::send([], [], function ($message) use ($request) {
-            $message->from($request->mail)
+            $message->from($request->email)
                 ->to(\Config::get('mail.from.address'))
                 ->subject('お問い合わせ')
                 ->setBody($request->inquiry);

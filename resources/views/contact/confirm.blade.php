@@ -3,34 +3,31 @@
 @section('title', 'お問い合わせ')
 
 @section('content')
-<h2>問合せ内容</h2>
-<form action="/contact/submit" method="post">
-    <table class="table" border="2">
-        <tr>
-            <td>名前</td>
-            <td style="word-wrap:break-word;">
-                {{ $request->name }}
-                <input type="hidden" name="name" value="{{ $request->name }}">
-            </td>
-        </tr>
-        <tr>
-            <td>メールアドレス</td>
-            <td style="word-wrap:break-word;">
-                {{ $request->mail }}
-                <input type="hidden" name="mail" value="{{ $request->mail }}">
-            </td>
-        </tr>
-        <tr>
-            <td>問い合わせ内容</td>
-            <td>
-                <?php $words = wordwrap($request->inquiry, 65, '<br>', true); echo $words; ?>
-                <input type="hidden" name="inquiry" value="{{ $request->inquiry }}">
-            </td>
-        </tr>
-        {{ csrf_field() }}
-    </table>
-    <div style="text-align:center;">
-        <input class="btn btn-info" type="submit" value="送信" >
+<main class="contact">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="row">
+            <div class="panel panel-warning">
+                <div class="panel-heading">送信内容の確認</div>
+                <div class="panel-body">
+                    <form action="/contact/submit" method="post">
+                        <div class="form-group">
+                            <label class="control-label">お名前</label>
+                            <input class="form-control" type="text" name="name" value="{{ $request->name }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">メールアドレス</label>
+                            <input class="form-control" type="text" name="mail" value="{{ $request->email }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label">お問い合わせ内容</label>
+                            <textarea class="form-control" name="inquiry" rows="12" disabled>{{ $request->inquiry }}</textarea>
+                        </div>
+                        {{ csrf_field() }}
+                        <input class="btn btn-info" type="submit" value="送信" >
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</form>
+</main>
 @endsection

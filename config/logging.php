@@ -1,6 +1,7 @@
 <?php
 
 use Monolog\Handler\StreamHandler;
+use Monolog\Handler\SyslogUdpHandler;
 
 return [
 
@@ -60,6 +61,16 @@ return [
             'level' => 'error',
         ],
 
+        'papertrail' => [
+            'driver'  => 'monolog',
+            'level' => 'debug',
+            'handler' => SyslogUdpHandler::class,
+            'handler_with' => [
+                'host' => env('PAPERTRAIL_URL'),
+                'port' => env('PAPERTRAIL_PORT'),
+            ],
+        ],
+
         'stderr' => [
             'driver' => 'monolog',
             'handler' => StreamHandler::class,
@@ -76,15 +87,6 @@ return [
         'errorlog' => [
             'driver' => 'errorlog',
             'level' => 'debug',
-        ],
-
-        'papertrail' => [
-            'driver'  => 'monolog',
-            'handler' => Monolog\Handler\SyslogUdpHandler::class,
-            'handler_with' => [
-                'host' => env('PAPERTRAIL_URL'),
-                'port' => env('PAPERTRAIL_PORT'),
-            ],
         ],
     ],
 

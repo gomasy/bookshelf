@@ -23,7 +23,7 @@
                             <textarea class="form-control" name="inquiry" rows="12" disabled>{{ $request->inquiry }}</textarea>
                         </div>
                         {{ csrf_field() }}
-                        <input class="btn btn-info" type="submit" value="送信" >
+                        <input class="btn btn-block btn-danger" type="submit" value="送信" >
                     </form>
                 </div>
             </div>

@@ -6,7 +6,6 @@ namespace App\Http\Controllers;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
@@ -130,10 +129,10 @@ class BookController extends Controller
                 return response($book, 409);
             }
 
-            $uuid = (string)Str::uuid();
-            \Cache::put($uuid, $book->toArray(), 5);
+            $cid = md5($book->isbn . $book->jpno);
+            \Cache::put($cid, $book->toArray(), 5);
 
-            return response($book)->header('X-Request-Id', $uuid);
+            return response($book)->header('X-Request-Id', $cid);
         }
 
         return response($book, 404);

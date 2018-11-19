@@ -22,7 +22,6 @@ export default {
                 name: 'Live',
                 type: 'LiveStream',
                 target: '#cameraWindow',
-                size: 640,
                 singleChannel: false,
             },
             locator: {

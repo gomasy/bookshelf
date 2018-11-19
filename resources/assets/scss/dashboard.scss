@@ -54,7 +54,9 @@
 
 #camera-modal {
     .modal-dialog {
-        width: 680px;
+        @media(--pc) {
+            width: 680px;
+        }
 
         .modal-footer {
             text-align: center;
@@ -64,16 +66,19 @@
 
 #cameraWindow {
     position: relative;
-    margin-left: 20px;
-    margin-top: 10px;
-    height: 490px;
+    margin: 10px;
+
+    @media(--pc) {
+        transform: rotateY(180deg);
+    }
 
     > video {
-        position: absolute;
+        width: 100%;
     }
 
     > canvas {
         position: absolute;
+        width: 100%;
         top: 0;
         left: 0;
         z-index: 10;

@@ -57,13 +57,13 @@ class BookTest extends TestCase
         $user = factory(User::class)->create();
 
         // success
-        $book = $this->actingAs($user)->get('/fetch?code=9784873115382')->original;
-        $this->actingAs($user)->post('/create', $book->toArray(), $headers)->assertSuccessful();
+        $id = $this->actingAs($user)->get('/fetch?code=9784873115382')->headers->get('X-Request-Id');
+        $this->actingAs($user)->post('/create', [ 'id' => $id ], $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $book = $this->actingAs($user)->get('/fetch?code=4000801139')->original;
-        $this->actingAs($user)->post('/create', $book->toArray(), $headers)->assertSuccessful();
+        $id = $this->actingAs($user)->get('/fetch?code=4000801139')->headers->get('X-Request-Id');
+        $this->actingAs($user)->post('/create', [ 'id' => $id ], $headers)->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // dups

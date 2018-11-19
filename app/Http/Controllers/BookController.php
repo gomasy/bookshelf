@@ -81,15 +81,20 @@ class BookController extends Controller
      */
     public function create(Request $request): object
     {
-        $book = array_merge($this->getHeader(), $request->all());
+        $book = \Cache::get($request->id);
+        if ($book) {
+            $book = array_merge($this->getHeader(), $book);
 
-        if (Book::create($book)) {
-            $user = \Auth::user();
-            $user->next_id++;
-            $user->save();
+            if (Book::create($book)) {
+                $user = \Auth::user();
+                $user->next_id++;
+                $user->save();
+            }
+
+            return response($book);
         }
 
-        return response($book);
+        return response($book, 400);
     }
 
     /**
@@ -119,10 +124,15 @@ class BookController extends Controller
         $book = new Book(NDL::query($request->code));
         if ($book->title !== null) {
             $count = Book::where('isbn', $book->isbn)
-                ->orWhere('jpno', $book->jpno)
-                ->count();
+                ->orWhere('jpno', $book->jpno)->count();
+            if ($count) {
+                return response($book, 409);
+            }
 
-            return response($book, $count ? 409 : 200);
+            $cid = md5($book->isbn . $book->jpno);
+            \Cache::put($cid, $book->toArray(), 5);
+
+            return response($book)->header('X-Request-Id', $cid);
         }
 
         return response($book, 404);
@@ -143,9 +153,10 @@ class BookController extends Controller
             \Cache::store('file')->put($key, $image, 1440);
         }
 
-        return response($image)
-            ->header('Cache-Control', 'max-age=604800, public')
-            ->header('Content-Type', 'image/jpeg');
+        return response($image)->withHeaders([
+            'Cache-Control' => 'max-age=604800, public',
+            'Content-Type' => 'image/jpeg',
+        ]);
     }
 
     /**

@@ -31,6 +31,9 @@ import confirmModal from './modals/confirmModal.vue';
 import previewModal from './modals/previewModal.vue';
 import addConfirmBody from './modals/addConfirmBody.vue';
 
+// utils
+import notify from '../utils/notify.js';
+
 export default {
     props: [ 'options' ],
     components: { editModal, cameraModal, confirmModal, previewModal },
@@ -106,21 +109,22 @@ export default {
                 if (!response.ok) {
                     return Promise.reject(response);
                 }
-
                 const entry = await response.json();
+                const reqId = response.headers.get('X-Request-Id');
+
                 if (confirmed) {
-                    this.create(entry);
+                    this.create(entry, reqId);
                     callback();
                 } else {
-                    this.$refs.confirm.open(callback, addConfirmBody, entry);
+                    this.$refs.confirm.open(callback, addConfirmBody, entry, reqId);
                 }
             }).catch(async e => this.notify(await e));
         },
-        create(entry) {
+        create(entry, reqId) {
             fetch('/create', {
                 method: 'post',
                 headers: this.options.ajax,
-                body: JSON.stringify(entry),
+                body: JSON.stringify({ 'id': reqId }),
             }).then(async response => {
                 this.notify(await response);
 
@@ -160,43 +164,7 @@ export default {
             });
         },
         notify(response) {
-            switch (response.status) {
-            case 200:
-                this.$notify({
-                    type: 'success',
-                    title: '完了',
-                    text: '該当する書籍の登録に成功しました',
-                });
-                break;
-            case 404:
-                this.$notify({
-                    type: 'warn',
-                    title: '見つかりません',
-                    text: '該当する書籍が見つかりませんでした',
-                });
-                break;
-            case 409:
-                this.$notify({
-                    type: 'error',
-                    title: '登録済み',
-                    text: 'その書籍は既に登録されています',
-                });
-                break;
-            case 422:
-                this.$notify({
-                    type: 'error',
-                    title:'入力エラー',
-                    text:'入力内容が間違っています',
-                });
-                break;
-            case 500:
-                this.$notify({
-                    type:'error',
-                    title:'内部エラー',
-                    text:'不明なエラーが発生しました。',
-                });
-                break;
-            }
+            notify(this.$notify, response);
         },
     },
     watch: {

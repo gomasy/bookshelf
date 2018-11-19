@@ -22,11 +22,13 @@ export default {
     data: () => ({
         callback: null,
         items: null,
+        options: null,
     }),
     methods: {
-        open(callback, confirmBody, items) {
+        open(callback, confirmBody, items, options) {
             this.items = items;
             this.callback = callback;
+            this.options = options;
 
             new Vue({
                 components: { confirmBody },
@@ -39,7 +41,7 @@ export default {
         },
         accept() {
             if (typeof this.callback === 'function') {
-                this.callback(this.items);
+                this.callback(this.items, this.options);
             }
 
             $('#confirm-modal').modal('hide');

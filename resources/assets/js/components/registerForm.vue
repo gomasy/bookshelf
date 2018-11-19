@@ -16,8 +16,8 @@ export default {
     }),
     methods: {
         create() {
-            this.table.before_create(result => {
-                this.table.create(result);
+            this.table.before_create((result, reqId) => {
+                this.table.create(result, reqId);
                 this.code = '';
             }, this.code);
         },

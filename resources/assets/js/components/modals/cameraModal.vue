@@ -74,11 +74,8 @@ export default {
                 });
             }
 
-            if (result.box) {
+            if (result.codeResult && result.codeResult.code && this.validation(result.codeResult.code)) {
                 Quagga.ImageDebug.drawPath(result.box, { x: 0, y: 1 }, ctx, { color: 'blue', lineWidth: 2 });
-            }
-
-            if (result.codeResult && result.codeResult.code) {
                 Quagga.ImageDebug.drawPath(result.line, {x: 'x', y: 'y'}, ctx, {color: 'red', lineWidth: 3});
             }
         },
@@ -91,7 +88,7 @@ export default {
         },
         create(code) {
             if (!this.isCreate) {
-                this.$parent.before_create(r => this.$parent.create(r), code, !this.isConfirm);
+                this.$parent.before_create((r, id) => this.$parent.create(r, id), code, !this.isConfirm);
                 this.isCreate = true;
             }
         },

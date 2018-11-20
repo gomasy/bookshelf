@@ -31,10 +31,7 @@ export class Books {
                 return Promise.reject(response);
             }
 
-            const entry = await response.json();
-            const reqId = response.headers.get('X-Request-Id');
-
-            callback(entry, reqId);
+            callback(await response.json(), response.headers.get('X-Request-Id'));
         }).catch(async e => notify(this.notify, await e));
     }
 

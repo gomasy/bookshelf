@@ -21,13 +21,12 @@
 <script>
 import Vue from 'vue';
 import registerForm from './registerForm.vue';
-import { Books } from '../books/';
 
+import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
 export default {
-    props: [ 'options' ],
     components: {
         addConfirmBody,
         cameraModal,

@@ -21,35 +21,38 @@
 <script>
 import Vue from 'vue';
 import registerForm from './registerForm.vue';
-import thFilter from './th-Filter.vue';
-import tdImage from './td-Image.vue';
 
-// modal
-import editModal from './modals/editModal.vue';
-import cameraModal from './modals/cameraModal.vue';
-import confirmModal from './modals/confirmModal.vue';
-import previewModal from './modals/previewModal.vue';
-import addConfirmBody from './modals/addConfirmBody.vue';
+import { tdImage, thFilter } from './tpanel/';
+import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
 // utils
 import notify from '../utils/notify.js';
 
 export default {
     props: [ 'options' ],
-    components: { editModal, cameraModal, confirmModal, previewModal },
+    components: {
+        addConfirmBody,
+        cameraModal,
+        confirmModal,
+        editModal,
+        previewModal,
+        tdImage,
+        thFilter,
+    },
     data: () => ({
         columns: [
             {
                 field: 'images',
                 type: 'hidden',
-                tdComp: tdImage,
+                tdComp: 'tdImage',
+                thStyle: 'width: 52px',
             },
             {
                 title: 'タイトル',
                 field: 'title',
                 sortable: true,
-                thComp: thFilter,
-                thStyle: 'width: 60%',
+                thComp: 'thFilter',
+                thStyle: 'width: 40%',
                 required: true,
             },
             {
@@ -61,14 +64,15 @@ export default {
                 title: '著者等',
                 field: 'authors',
                 sortable: true,
-                thComp: thFilter,
-                thStyle: 'width: 20%',
+                thComp: 'thFilter',
+                thStyle: 'width: 15%',
                 required: true,
             },
             {
                 title: '出版社',
                 field: 'publisher',
-                visible: false,
+                hStyle: 'width: 20%',
+                visible: true,
             },
             {
                 title: '価格',
@@ -80,6 +84,7 @@ export default {
         query: {},
         selection: [],
         pageSizeOptions: [ 10, 20, 50, 100 ],
+        supportBackup: true,
         total: 0,
     }),
     methods: {

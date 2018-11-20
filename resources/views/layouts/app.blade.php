@@ -92,7 +92,7 @@
 
             <footer>
                 <ul class="list-unstyled">
-                    <li><a href="">運営者情報</a></li>
+                    <li><a href="https://gomasy.jp/">運営者情報</a></li>
                     <li><a href="/contact">お問い合わせ</a></li>
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>

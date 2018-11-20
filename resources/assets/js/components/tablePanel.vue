@@ -21,12 +21,10 @@
 <script>
 import Vue from 'vue';
 import registerForm from './registerForm.vue';
+import { Books } from '../books/';
 
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
-
-// utils
-import notify from '../utils/notify.js';
 
 export default {
     props: [ 'options' ],
@@ -40,6 +38,7 @@ export default {
         thFilter,
     },
     data: () => ({
+        books: null,
         columns: [
             {
                 field: 'images',
@@ -89,59 +88,26 @@ export default {
     }),
     methods: {
         fetch(query) {
-            let url = '/list.json?';
-            if (query !== undefined) {
-                Object.keys(query).map(k => url += k + '=' + query[k] + '&');
-            }
-
-            fetch(url.substring(url.length - 1, -1), {
-                headers: this.options.ajax,
-            }).then(async response => {
-                if (!response.ok) {
-                    return Promise.reject(response);
-                }
-
-                return await response.json();
-            }).then(result => {
+            this.books.fetch(query, result => {
                 this.data = result.data;
                 this.total = result.total;
             });
         },
         before_create(callback, code, confirmed) {
-            fetch('/fetch?code=' + code, {
-                headers: this.options.ajax,
-            }).then(async response => {
-                if (!response.ok) {
-                    return Promise.reject(response);
-                }
-                const entry = await response.json();
-                const reqId = response.headers.get('X-Request-Id');
-
+            this.books.before_create(code, (entry, reqId) => {
                 if (confirmed) {
-                    this.create(entry, reqId);
+                    this.books.create(entry, reqId);
                     callback();
                 } else {
                     this.$refs.confirm.open(callback, addConfirmBody, entry, reqId);
                 }
-            }).catch(async e => this.notify(await e));
+            });
         },
         create(entry, reqId) {
-            fetch('/create', {
-                method: 'post',
-                headers: this.options.ajax,
-                body: JSON.stringify({ 'id': reqId }),
-            }).then(async response => {
-                this.notify(await response);
-
-                if (!response.ok) {
-                    return Promise.reject(response);
-                }
-
-                return await response.json();
-            }).then(entry => {
+            if (this.books.create(entry, reqId)) {
                 this.data.push(entry);
                 this.total++;
-            });
+            }
         },
         readerProxy() {
             this.$refs.camera.start();
@@ -152,24 +118,11 @@ export default {
         remove() {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
-            this.$refs.confirm.open(() => {
-                fetch('/delete', {
-                    method: 'post',
-                    headers: this.options.ajax,
-                    body: JSON.stringify({ ids: ids }),
-                }).then(response => {
-                    if (!response.ok) {
-                        return Promise.reject(response);
-                    }
-
-                    this.fetch(this.query);
-                });
+            this.$refs.confirm.open(items => {
+                this.books.delete(items, () => this.fetch(this.query));
             }, {
                 template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
-            });
-        },
-        notify(response) {
-            notify(this.$notify, response);
+            }, ids);
         },
     },
     watch: {
@@ -181,6 +134,7 @@ export default {
         },
     },
     mounted() {
+        this.books = new Books(this.$notify);
         new Vue({
             el: '#register',
             components: { registerForm },

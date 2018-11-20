@@ -5,6 +5,64 @@
     td > img {
         cursor: pointer;
     }
+
+    small {
+        font-size: 0;
+
+        &:after {
+            font-size: 12px;
+            content: '( ローカルの設定を使用 )';
+        }
+    }
+
+    .clearfix {
+        .dropdown-toggle > i:before {
+            content: '\f0d0';
+        }
+
+        .dropdown-menu {
+            .btn-group {
+                > .btn:first-child {
+                    font-size: 0;
+
+                    &:after {
+                        font-size: 12px;
+                        content: '適用';
+                    }
+                }
+            }
+
+            li {
+                > a { font-size: 0; }
+
+                &:last-child > a {
+                    > i:before {
+                        font-size: 14px;
+                        content: '\f1f8';
+                        padding-right: 5px;
+                    }
+
+                    &:after {
+                        font-size: 14px;
+                        content: 'ローカルの設定を削除';
+                    }
+                }
+
+                &:first-child > a {
+                    > i:before {
+                        font-size: 14px;
+                        content: '\f0c7';
+                        padding-right: 5px;
+                    }
+
+                    &:after {
+                        font-size: 14px;
+                        content: '適用して設定をローカルに保存';
+                    }
+                }
+            }
+        }
+    }
 }
 
 .navbar-buttons {

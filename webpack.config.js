@@ -1,10 +1,7 @@
-const glob = require('glob');
-const path = require('path');
 const webpack = require('webpack');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
-
+const path = require('path');
 const entries = {};
-glob.sync('./resources/assets/js/*.js').map(entry => {
+require('glob').sync('./resources/assets/js/*.js').map(entry => {
     const name = entry.match('^.+/(.+?)\\.js$')[1];
     entries[name] = entry;
 });
@@ -62,7 +59,7 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
-        new CleanWebpackPlugin([
+        new (require('clean-webpack-plugin'))([
             path.join(__dirname, '/public/assets/*'),
         ]),
     ],

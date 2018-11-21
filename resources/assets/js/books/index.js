@@ -47,7 +47,7 @@ export class Books {
                 return Promise.reject(response);
             }
 
-            return response.json();
+            return await response.json();
         });
     }
 

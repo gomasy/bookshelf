@@ -64,4 +64,18 @@ export class Books {
             callback();
         });
     }
+
+    edit(entry, callback) {
+        fetch('/edit', {
+            method: 'post',
+            headers: this.headers,
+            body: JSON.stringify(entry),
+        }).then(response => {
+            if (!response.ok) {
+                return Promise.reject(response);
+            }
+
+            callback();
+        });
+    }
 }

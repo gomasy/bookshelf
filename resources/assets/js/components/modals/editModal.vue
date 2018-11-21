@@ -25,8 +25,11 @@
 </template>
 
 <script>
+import { Books } from '../../books/';
+
 export default {
     data: () => ({
+        books: null,
         items: {},
     }),
     methods: {
@@ -34,15 +37,7 @@ export default {
             this.items = Object.assign({}, this.$parent.selection[0]);
         },
         submit() {
-            fetch('/edit', {
-                method: 'post',
-                headers: this.$parent.options.ajax,
-                body: JSON.stringify(this.items),
-            }).then(response => {
-                if (!response.ok) {
-                    return Promise.reject(response);
-                }
-
+            this.books.edit(this.items, () => {
                 this.$parent.columns.map(col => {
                     this.$parent.selection[0][col.field] = this.items[col.field];
                 });
@@ -50,5 +45,8 @@ export default {
             });
         },
     },
+    mounted() {
+        this.books = new Books(this.$notify);
+    }
 };
 </script>

@@ -11,5 +11,5 @@ import tablePanel from './components/tablePanel.vue';
 new Vue({
     el: '#content',
     components: { tablePanel },
-    template: '<tablePanel :options="options" />',
+    template: '<tablePanel />',
 });

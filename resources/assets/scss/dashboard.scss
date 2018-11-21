@@ -21,14 +21,12 @@
         }
 
         .dropdown-menu {
-            .btn-group {
-                > .btn:first-child {
-                    font-size: 0;
+            .btn-group > .btn:first-child {
+                font-size: 0;
 
-                    &:after {
-                        font-size: 12px;
-                        content: '適用';
-                    }
+                &:after {
+                    font-size: 12px;
+                    content: '適用';
                 }
             }
 

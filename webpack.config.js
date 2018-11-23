@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const entries = {};
+
 require('glob').sync('./resources/assets/js/*.js').map(entry => {
     const name = entry.match('^.+/(.+?)\\.js$')[1];
     entries[name] = entry;

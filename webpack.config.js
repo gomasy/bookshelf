@@ -2,6 +2,21 @@ const webpack = require('webpack');
 const path = require('path');
 const entries = {};
 
+if (process.argv.indexOf('-w') > 0 || process.argv.indexOf('--watch') > 0) {
+    require('browser-sync')({
+        proxy: process.env.PROXY_HOST || 'localhost',
+        files: './public/assets/*',
+        logLevel: 'silent',
+        ghostMode: {
+            clicks: false,
+            scroll: false,
+            location: false,
+            forms: false,
+        },
+        open: false,
+    });
+}
+
 require('glob').sync('./resources/assets/js/*.js').map(entry => {
     const name = entry.match('^.+/(.+?)\\.js$')[1];
     entries[name] = entry;

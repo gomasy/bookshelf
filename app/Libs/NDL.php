@@ -92,7 +92,7 @@ class NDL
             if ((string)$obj['type'] === 'ISBN') {
                 $isbn = (string)$obj;
                 if (strlen($isbn) === 10) {
-                    return $this->isbn10to13($isbn);
+                    return $this->toISBN13($isbn);
                 }
 
                 return $isbn;

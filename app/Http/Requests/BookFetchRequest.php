@@ -30,7 +30,7 @@ class BookFetchRequest extends FormRequest
     {
         parent::passesAuthorization();
 
-        if (!NDL::verifyCheckDigit($this->code)) {
+        if (!isset($this->code) || !NDL::verifyCheckDigit($this->code)) {
             throw new ValidationException($this->getValidatorInstance());
         }
 

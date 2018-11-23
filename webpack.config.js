@@ -61,6 +61,11 @@ module.exports = {
             $: 'jquery',
             jQuery: 'jquery',
         }),
+        new webpack.ProgressPlugin(percentage => {
+            if (percentage == 1) {
+                require('child_process').exec('./artisan view:clear');
+            }
+        }),
         new (require('clean-webpack-plugin'))([
             path.join(__dirname, '/public/assets/*'),
         ]),
@@ -75,11 +80,6 @@ module.exports = {
             },
             open: false,
             notify: false,
-        }),
-        new webpack.ProgressPlugin(percentage => {
-            if (percentage == 1) {
-                require('child_process').exec('./artisan view:clear');
-            }
         }),
     ],
 };

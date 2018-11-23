@@ -147,35 +147,45 @@ class NDL
 
     protected function searchType(string $num): string
     {
-        $type = 'any';
         switch (strlen($num)) {
-            case 8: $type = 'jpno'; break;
-            case 10: $type = 'isbn'; break;
-            case 13: $type = 'isbn'; break;
+            case 8:
+                return 'jpno';
+            case 10:
+                return 'isbn';
+            case 13:
+                return 'isbn';
+            default:
+                return 'any';
         }
-
-        return $type;
     }
 
-    public function isbn10to13(string $isbn): string
+    public function verifyCheckDigit(string $isbn): bool
     {
-        $isbn13 = '978' . substr($isbn, 0, 9);
-        $digit = 0;
+        switch (strlen($isbn)) {
+            case 10:
+                return $this->getCheckDigit10($isbn) === $isbn[9];
+            case 13:
+                return $this->getCheckDigit13($isbn) === $isbn[12];
+        }
 
-        for ($i = 0; $i < 12; $i++) {
-            $digit += ($i + 1) % 2 > 0 ? $isbn13[$i] * 1 : $isbn13[$i] * 3;
+        return true;
+    }
+
+    public function getCheckDigit13(string $isbn13): string
+    {
+        $digit = 0;
+        for ($i = 0; $i < strlen($isbn13) - 1; $i++) {
+            $digit += ($i + 1) % 2 ? $isbn13[$i] * 1 : $isbn13[$i] * 3;
         }
         $n = $digit % 10;
 
-        return $n ? $isbn13 . (10 - $n) : $isbn13 . '0';
+        return $n ? (string)(10 - $n) : '0';
     }
 
-    public function isbn13to10(string $isbn): string
+    public function getCheckDigit10(string $isbn10): string
     {
-        $isbn10 = substr($isbn, 3, -1);
         $digit = 0;
-
-        for ($i = 0; $i < 9; $i++) {
+        for ($i = 0; $i < strlen($isbn10) - 1; $i++) {
             $digit += $isbn10[$i] * (10 - $i);
         }
 
@@ -184,6 +194,20 @@ class NDL
             $n = 11 - $n;
         }
 
-        return $isbn10 . ($n < 10 ? $n : 'X');
+        return $n < 10 ? (string)$n : 'X';
+    }
+
+    public function toISBN13(string $isbn10): string
+    {
+        $isbn13 = '978' . substr($isbn10, 0, 9);
+
+        return $isbn13 . $this->getCheckDigit13($isbn13 . '0');
+    }
+
+    public function toISBN10(string $isbn13): string
+    {
+        $isbn10 = substr($isbn13, 3, -1);
+
+        return $isbn10 . $this->getCheckDigit10($isbn10 . '0');
     }
 }

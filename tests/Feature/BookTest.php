@@ -70,7 +70,7 @@ class BookTest extends TestCase
         $this->actingAs($user)->get('/fetch?code=4873115388')->assertStatus(409);
 
         // not found
-        $this->actingAs($user)->get('/fetch?code=1234567890123', $headers)->assertStatus(404);
+        $this->actingAs($user)->get('/fetch?code=1234567890128', $headers)->assertStatus(404);
 
         // invalid
         $this->actingAs($user)->get('/fetch?code=', $headers)->assertSessionHasErrors('code');

@@ -15,11 +15,12 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('asset', function ($file) {
-            $file = str_replace([ "'", '"' ], '', $file);
-            $path = public_path() . $file;
-            $opt = file_exists($path) ? "?v=<?php echo \File::lastModified('{$path}') ?>" : '';
+            $paths = glob(str_replace([ "'", '"' ], '', public_path($file)), GLOB_NOSORT) ?? 'about:blank';
+            usort($paths, function ($a, $b) {
+                return filemtime($a) < filemtime($b);
+            });
 
-            return $file . $opt;
+            return str_replace(public_path(), '', $paths[0] ?? 'about:blank');
         });
     }
 

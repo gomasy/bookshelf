@@ -12,7 +12,8 @@ module.exports = {
     entry: entries,
     output: {
         path: path.join(__dirname, '/public'),
-        filename: './assets/[name].js',
+        filename: './assets/[name].[hash].js',
+        hashDigestLength: 8,
     },
     resolve: {
         alias: {
@@ -74,6 +75,11 @@ module.exports = {
             },
             open: false,
             notify: false,
+        }),
+        new webpack.ProgressPlugin(percentage => {
+            if (percentage == 1) {
+                require('child_process').exec('./artisan view:clear');
+            }
         }),
     ],
 };

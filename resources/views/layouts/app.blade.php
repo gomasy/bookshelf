@@ -9,9 +9,9 @@
 @endif
         <meta property="description" content="手持ちの書籍をISBNコードなどで管理し、ブラウザ上で簡単に表示・検索できるサービスです">
         <title>{{ config('app.name') }} - @yield('title')</title>
-        <link href="@asset('/assets/icon.png')" rel="icon" type="image/png">
-        <script src="@asset('/assets/vendor.js')"></script>
-        <script defer src="@asset('/assets/app.js')"></script>
+        <link href="@asset('assets/icon.png')" rel="icon" type="image/png">
+        <script src="@asset('assets/vendor.*.js')"></script>
+        <script defer src="@asset('assets/app.*.js')"></script>
         @yield('head')
 
         <!-- ogp -->

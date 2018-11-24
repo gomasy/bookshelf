@@ -5,12 +5,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookFetchRequest as FetchRequest;
-
 use App\Book;
 use App\User;
 

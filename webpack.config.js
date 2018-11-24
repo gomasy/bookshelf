@@ -8,7 +8,6 @@ require('glob').sync('./resources/assets/js/*.js').map(entry => {
 });
 
 module.exports = {
-    mode: process.env.NODE_ENV,
     entry: entries,
     output: {
         path: path.join(__dirname, '/public'),

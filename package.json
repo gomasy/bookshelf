@@ -1,9 +1,10 @@
 {
     "private": true,
     "scripts": {
-        "build": "NODE_ENV=production webpack --progress --optimize-minimize",
-        "dev:build": "NODE_ENV=development webpack --progress",
-        "dev:start": "NODE_ENV=development webpack --progress --watch"
+        "build": "webpack -p --progress",
+        "start": "webpack -p --progress --watch",
+        "dev:build": "webpack -d --progress",
+        "dev:start": "webpack -d --progress --watch"
     },
     "devDependencies": {
         "@babel/core": "^7.1.6",

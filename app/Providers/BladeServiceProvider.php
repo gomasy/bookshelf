@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Blade;
 class BladeServiceProvider extends ServiceProvider
 {
     /**
-     * Bootstrap any application services.
+     * Bootstrap services.
      *
      * @return void
      */
@@ -25,7 +25,7 @@ class BladeServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register any application services.
+     * Register services.
      *
      * @return void
      */

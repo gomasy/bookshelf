@@ -1,4 +1,4 @@
-export default function(observer, response) {
+export default async function(observer, response) {
     switch (response.status) {
     case 200:
         observer({
@@ -25,7 +25,7 @@ export default function(observer, response) {
         observer({
             type: 'error',
             title:'入力エラー',
-            text:'入力内容が間違っています',
+            text: Object.values((await response.json()).errors)[0][0],
         });
         break;
     case 500:

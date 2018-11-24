@@ -14,9 +14,6 @@ use App\Http\Requests\BookFetchRequest as FetchRequest;
 use App\Book;
 use App\User;
 
-use Facades\App\Libs\AmazonImages;
-use Facades\App\Libs\NDL;
-
 class BookController extends Controller
 {
     /**
@@ -121,7 +118,7 @@ class BookController extends Controller
      */
     public function fetch(FetchRequest $request): object
     {
-        $book = new Book(NDL::query($request->code));
+        $book = new Book(\NDL::query($request->code));
         if ($book->title !== null) {
             $count = Book::where('isbn', $book->isbn)
                 ->orWhere('jpno', $book->jpno)->count();
@@ -149,7 +146,7 @@ class BookController extends Controller
         $key = md5($request->path());
         $image = \Cache::store('file')->get($key);
         if ($image === null) {
-            $image = AmazonImages::fetch($request->path());
+            $image = \AmazonImages::fetch($request->path());
             \Cache::store('file')->put($key, $image, 1440);
         }
 

@@ -4,8 +4,6 @@ namespace App\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 
-use Facades\App\Libs\NDL;
-
 class CorrectCheckDigit implements Rule
 {
     /**
@@ -17,7 +15,7 @@ class CorrectCheckDigit implements Rule
      */
     public function passes($attribute, $value)
     {
-        return NDL::verifyCheckDigit($value);
+        return \NDL::verifyCheckDigit($value);
     }
 
     /**

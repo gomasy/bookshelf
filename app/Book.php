@@ -5,9 +5,6 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
-use Facades\App\Libs\AmazonImages;
-use Facades\App\Libs\NDL;
-
 class Book extends Model
 {
     /**
@@ -43,12 +40,12 @@ class Book extends Model
     public function getIsbn10Attribute()
     {
         if ($this->isbn !== null) {
-            return NDL::toISBN10($this->isbn);
+            return \NDL::toISBN10($this->isbn);
         }
     }
 
     public function getImagesAttribute()
     {
-        return AmazonImages::all($this->isbn10, \Config::get('app.url'));
+        return \AmazonImages::all($this->isbn10, \Config::get('app.url'));
     }
 }

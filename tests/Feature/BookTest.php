@@ -15,6 +15,7 @@ class BookTest extends TestCase
 
     public function testIndex()
     {
+        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $book = factory(Book::class)->create([ 'title' => 'foo' ]);
         $user = User::find($book->user_id);
 
@@ -29,15 +30,14 @@ class BookTest extends TestCase
         }
 
         // all
-        $response = $this->actingAs($user)
-            ->get('/list.json', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+        $response = $this->actingAs($user)->get('/list.json', $headers);
         $response->assertSuccessful();
         $this->assertEquals(count($response->original['data']), 50);
         $this->assertEquals($response->original['total'], 50);
 
         // title=foo, sortby=id, order=desc
         $response = $this->actingAs($user)
-            ->get('/list.json?title=foo&sort=id&order=desc', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+                         ->get('/list.json?title=foo&sort=id&order=desc', $headers);
         $response->assertSuccessful();
         $this->assertEquals(count($response->original['data']), 25);
         $this->assertEquals($response->original['total'], 25);
@@ -45,7 +45,7 @@ class BookTest extends TestCase
 
         // title=bar, limit=50
         $response = $this->actingAs($user)
-            ->get('/list.json?offset=0&limit=10&title=bar', [ 'X-Requested-With' => 'XMLHttpRequest' ]);
+                         ->get('/list.json?offset=0&limit=10&title=bar', $headers);
         $response->assertSuccessful();
         $this->assertEquals(count($response->original['data']), 10);
         $this->assertEquals($response->original['total'], 25);
@@ -57,23 +57,57 @@ class BookTest extends TestCase
         $user = factory(User::class)->create();
 
         // success
-        $id = $this->actingAs($user)->get('/fetch?code=9784873115382')->headers->get('X-Request-Id');
-        $this->actingAs($user)->post('/create', [ 'id' => $id ], $headers)->assertSuccessful();
+        $id = $this->actingAs($user)
+                   ->get('/fetch?code=9784873115382')
+                   ->headers->get('X-Request-Id');
+
+        $this->actingAs($user)
+             ->post('/create', [ 'id' => $id ], $headers)
+             ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $id = $this->actingAs($user)->get('/fetch?code=4000801139')->headers->get('X-Request-Id');
-        $this->actingAs($user)->post('/create', [ 'id' => $id ], $headers)->assertSuccessful();
+        $id = $this->actingAs($user)
+                   ->get('/fetch?code=4000801139')
+                   ->headers->get('X-Request-Id');
+
+        $this->actingAs($user)
+             ->post('/create', [ 'id' => $id ], $headers)
+             ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
+        // success (jpno)
+        $id = $this->actingAs($user)
+                   ->get('/fetch?code=22222222')
+                   ->headers->get('X-Request-Id');
+
+        $this->actingAs($user)
+             ->post('/create', [ 'id' => $id ], $headers)
+             ->assertSuccessful();
+        $this->assertDatabaseHas('books', [ 'jpno' => '22222222' ]);
+
         // dups
-        $this->actingAs($user)->get('/fetch?code=4873115388')->assertStatus(409);
+        $this->actingAs($user)
+             ->get('/fetch?code=4873115388')
+             ->assertStatus(409);
 
         // not found
-        $this->actingAs($user)->get('/fetch?code=1234567890128', $headers)->assertStatus(404);
+        $this->actingAs($user)
+             ->get('/fetch?code=1234567890128', $headers)
+             ->assertStatus(404);
 
         // invalid
-        $this->actingAs($user)->get('/fetch?code=', $headers)->assertSessionHasErrors('code');
+        $this->actingAs($user)
+             ->get('/fetch?code=1234567890123', $headers)
+             ->assertSessionHasErrors('code');
+
+        $this->actingAs($user)
+             ->get('/fetch?code=', $headers)
+             ->assertSessionHasErrors('code');
+
+        $this->actingAs($user)
+             ->post('/create', [ 'X-Request-Id' => '' ], $headers)
+             ->assertStatus(400);
     }
 
     public function testFetchImage()
@@ -110,8 +144,8 @@ class BookTest extends TestCase
 
         // success
         $this->actingAs($user)
-            ->post('/edit', $data, $headers)
-            ->assertSuccessful();
+             ->post('/edit', $data, $headers)
+             ->assertSuccessful();
         $this->assertDatabaseHas('books', $data);
     }
 
@@ -123,18 +157,18 @@ class BookTest extends TestCase
 
         // success
         $this->actingAs($user)
-            ->post('/delete', [ 'ids' => [ 1 ] ], $headers)
-            ->assertStatus(204);
+             ->post('/delete', [ 'ids' => [ 1 ] ], $headers)
+             ->assertStatus(204);
         $this->assertDatabaseMissing('books', [ 'id' => '1' ]);
 
         // bad request
         $this->actingAs($user)
-            ->post('/delete', [ 'ids' => [ 0 ] ], $headers)
-            ->assertStatus(400);
+             ->post('/delete', [ 'ids' => [ 0 ] ], $headers)
+             ->assertStatus(400);
 
         // invalid
         $this->actingAs($user)
-            ->post('/delete', [ 'ids' => '' ], $headers)
-            ->assertSessionHasErrors('ids');
+             ->post('/delete', [ 'ids' => '' ], $headers)
+             ->assertSessionHasErrors('ids');
     }
 }

@@ -15,7 +15,7 @@ class BladeServiceProvider extends ServiceProvider
     public function boot()
     {
         Blade::directive('asset', function ($file) {
-            $paths = glob(str_replace([ "'", '"' ], '', public_path($file)), GLOB_NOSORT) ?? 'about:blank';
+            $paths = glob(str_replace([ "'", '"' ], '', public_path($file)), GLOB_NOSORT);
             usort($paths, function ($a, $b) {
                 return filemtime($a) < filemtime($b);
             });

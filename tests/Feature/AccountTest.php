@@ -50,14 +50,14 @@ class AccountTest extends TestCase
         // success
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/settings/account/update', $data)
-            ->assertRedirect('/');
+             ->post('/settings/account/update', $data)
+             ->assertRedirect('/');
         $this->assertDatabaseHas('users', array_slice($data, 0, 2));
 
         // invaild
         $this->actingAs($user)
-            ->post('/settings/account/update', [ 'email' => '', 'name' => '' ])
-            ->assertSessionHasErrors([ 'email', 'name' ]);
+             ->post('/settings/account/update', [ 'email' => '', 'name' => '' ])
+             ->assertSessionHasErrors([ 'email', 'name' ]);
     }
 
     public function testDelete()
@@ -67,19 +67,19 @@ class AccountTest extends TestCase
         // success
         $user = factory(User::class)->create([ 'password' => bcrypt($password) ]);
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => $password ])
-            ->assertRedirect('/');
+             ->post('/settings/account/delete', [ 'password' => $password ])
+             ->assertRedirect('/');
         $this->assertDatabaseMissing('users', [ 'id' => 1 ]);
 
         // fail
         $user = factory(User::class)->create();
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => $password ])
-            ->assertSuccessful();
+             ->post('/settings/account/delete', [ 'password' => $password ])
+             ->assertSuccessful();
 
         // invaild
         $this->actingAs($user)
-            ->post('/settings/account/delete', [ 'password' => '' ])
-            ->assertSessionHasErrors('password');
+             ->post('/settings/account/delete', [ 'password' => '' ])
+             ->assertSessionHasErrors('password');
     }
 }

@@ -17,13 +17,13 @@ $factory->define(\App\Book::class, function (Faker $faker) {
     $user = factory(\App\User::class)->create();
 
     return [
-        'id'             => $user->next_id,
-        'user_id'        => $user->id,
-        'title'          => $faker->title,
-        'volume'         => $faker->randomDigit,
-        'authors'        => $faker->name,
-        'isbn'           => $faker->isbn13(),
-        'jpno'           => $faker->ean8(),
-        'ndl_url'        => $faker->url,
+        'id'      => $user->next_id,
+        'user_id' => $user->id,
+        'title'   => $faker->title,
+        'volume'  => $faker->randomDigit,
+        'authors' => $faker->name,
+        'isbn'    => $faker->isbn13(),
+        'jpno'    => $faker->ean8(),
+        'ndl_url' => $faker->url,
     ];
 });

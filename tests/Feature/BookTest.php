@@ -7,6 +7,7 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use App\Book;
+use App\Bookshelf;
 use App\User;
 
 class BookTest extends TestCase
@@ -16,13 +17,14 @@ class BookTest extends TestCase
     public function testIndex()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $book = factory(Book::class)->create([ 'title' => 'foo' ]);
-        $user = User::find($book->user_id);
+        $user = factory(User::class)->create();
+        $shelf = Bookshelf::create([ 'user_id' => $user->id, 'name' => 'default' ]);
 
-        for ($i = 2; $i <= 50; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $data = [
                 'id' => $i,
-                'user_id' => $book->user_id,
+                'user_id' => $user->id,
+                'bookshelf_id' => $shelf->id,
             ];
             $data = array_merge($data, [ 'title' => ($i <= 25 ? 'foo' : 'bar') ]);
 
@@ -55,6 +57,7 @@ class BookTest extends TestCase
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $user = factory(User::class)->create();
+        Bookshelf::create([ 'user_id' => $user->id, 'name' => 'default' ]);
 
         // success
         $id = $this->actingAs($user)

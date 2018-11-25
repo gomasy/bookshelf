@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Bookshelf;
+
 class Book extends Model
 {
     /**
@@ -12,7 +14,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'id', 'user_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'publisher', 'price', 'ndl_url' ];
+    protected $fillable = [ 'id', 'user_id', 'bookshelf_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'publisher', 'price', 'ndl_url' ];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -42,6 +44,15 @@ class Book extends Model
         static::addGlobalScope('user_id', function (Builder $builder) {
             $builder->where('user_id', \Auth::id());
         });
+    }
+
+    public function scopeShelves(Builder $query, ?int $sid)
+    {
+        if ($sid === null) {
+            $sid = Bookshelf::default()->id;
+        }
+
+        return $query->where('bookshelf_id', $sid);
     }
 
     public function getIsbn10Attribute()

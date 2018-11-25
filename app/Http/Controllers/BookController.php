@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
@@ -10,6 +11,7 @@ use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookFetchRequest as FetchRequest;
 use App\Book;
+use App\Bookshelf;
 use App\User;
 
 class BookController extends Controller
@@ -25,8 +27,8 @@ class BookController extends Controller
     }
 
     /**
-     * リクエストがAjaxによるものなのか検証する
-     * 違う場合は404を返す
+     * リクエストがAjaxによるものなのか検証する。
+     * 違う場合は404を返す。
      *
      * @return void
      */
@@ -38,7 +40,7 @@ class BookController extends Controller
     }
 
     /**
-     * 連番IDをインクリメントする
+     * 連番IDをインクリメントする。
      *
      * @return void
      */
@@ -54,12 +56,65 @@ class BookController extends Controller
      *
      * @return array
      */
-    protected function appendHeader(array $book): array
+    protected function appendHeader(array $book, int $sid): array
     {
         return array_merge([
             'id' => \Auth::user()['next_id'],
             'user_id' => \Auth::id(),
+            'bookshelf_id' => $sid,
         ], $book);
+    }
+
+    /**
+     * 本の検索
+     *
+     * @param Request $request
+     * @param Book $books
+     * @return array
+     */
+    protected function search(Request $request, Book $books): array
+    {
+        $books = Book::shelves($request->sid);
+        foreach ([ 'title', 'authors' ] as $column) {
+            if ($request->query($column) !== null) {
+                $books = $books->where($column, 'like', '%'.$request->query($column).'%');
+                $count = $books->count();
+            }
+        }
+
+        return [ $books, $count ?? Book::count() ];
+    }
+
+    /**
+     * ページネーション処理
+     *
+     * @param Request $request
+     * @param Builder $books
+     * @return Builder
+     */
+    protected function paginate(Request $request, Builder $books): object
+    {
+        if (isset($request->offset) && isset($request->limit)) {
+            $books = $books->offset($request->offset)->limit($request->limit);
+        }
+
+        return $books;
+    }
+
+    /**
+     * ソート処理
+     *
+     * @param Request $request
+     * @param Builder $books
+     * @return Builder
+     */
+    protected function sort(Request $request, Builder $books): object
+    {
+        if (isset($request->sort) && isset($request->order)) {
+            $books = $books->orderBy($request->sort, $request->order);
+        }
+
+        return $books;
     }
 
     /**
@@ -72,25 +127,12 @@ class BookController extends Controller
     {
         $this->checkAjax($request);
 
-        $books = new Book;
-        foreach ([ 'title', 'authors' ] as $column) {
-            if ($request->query($column) !== null) {
-                $books = $books->where($column, 'like', '%'.$request->query($column).'%');
-                $count = $books->count();
-            }
-        }
-
-        if (isset($request->offset) && isset($request->limit)) {
-            $books = $books->offset($request->offset)->limit($request->limit);
-        }
-
-        if (isset($request->sort) && isset($request->order)) {
-            $books = $books->orderBy($request->sort, $request->order);
-        }
+        list($books, $count) = $this->search($request, new Book);
+        $books = $this->paginate($request, $books);
 
         return [
-            'data' => $books->get(),
-            'total' => $count ?? Book::count(),
+            'data' => $this->sort($request, $books)->get(),
+            'total' => $count,
         ];
     }
 
@@ -104,9 +146,10 @@ class BookController extends Controller
     {
         $this->checkAjax($request);
 
+        $sid = $request->sid ?? Bookshelf::default()->id;
         $book = \Cache::get($request->id);
         if ($book) {
-            if (Book::create($this->appendHeader($book))) {
+            if (Book::create($this->appendHeader($book, $sid))) {
                 $this->incrementNextId();
             }
 

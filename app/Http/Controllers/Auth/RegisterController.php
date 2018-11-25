@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Carbon\Carbon;
 
+use App\Bookshelf;
 use App\User;
 use App\Http\Controllers\Controller;
 
@@ -67,6 +68,11 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => \Hash::make($data['password']),
+        ]);
+
+        Bookshelf::create([
+            'user_id' => $user->id,
+            'name' => 'default',
         ]);
 
         if (app()->isLocal()) {

@@ -10,6 +10,6 @@ class BookshelfController extends Controller
 {
     public function list()
     {
-        return response(Bookshelf::get());
+        return Bookshelf::get();
     }
 }

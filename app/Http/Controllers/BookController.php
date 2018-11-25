@@ -128,10 +128,10 @@ class BookController extends Controller
         $this->checkAjax($request);
 
         list($books, $count) = $this->search($request, new Book);
-        $books = $this->paginate($request, $books);
+        $books = $this->sort($request, $this->paginate($request, $books));
 
         return [
-            'data' => $this->sort($request, $books)->get(),
+            'data' => $books->get(),
             'total' => $count,
         ];
     }

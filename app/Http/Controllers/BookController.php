@@ -25,16 +25,41 @@ class BookController extends Controller
     }
 
     /**
-     * 本の登録に必要な書籍番号とユーザー情報を含んだヘッダを生成する。
+     * リクエストがAjaxによるものなのか検証する
+     * 違う場合は404を返す
+     *
+     * @return void
+     */
+    protected function checkAjax(Request $request): void
+    {
+        if (!$request->ajax()) {
+            abort(404);
+        }
+    }
+
+    /**
+     * 連番IDをインクリメントする
+     *
+     * @return void
+     */
+    protected function incrementNextId(): void
+    {
+        $user = \Auth::user();
+        $user->next_id++;
+        $user->save();
+    }
+
+    /**
+     * 本の登録に必要な書籍番号とユーザー情報を含んだデータを生成する。
      *
      * @return array
      */
-    protected function getHeader(): array
+    protected function appendHeader(array $book): array
     {
-        return [
+        return array_merge([
             'id' => \Auth::user()['next_id'],
             'user_id' => \Auth::id(),
-        ];
+        ], $book);
     }
 
     /**
@@ -45,8 +70,9 @@ class BookController extends Controller
      */
     public function list(Request $request): array
     {
-        $books = new Book;
+        $this->checkAjax($request);
 
+        $books = new Book;
         foreach ([ 'title', 'authors' ] as $column) {
             if ($request->query($column) !== null) {
                 $books = $books->where($column, 'like', '%'.$request->query($column).'%');
@@ -76,20 +102,18 @@ class BookController extends Controller
      */
     public function create(Request $request): object
     {
+        $this->checkAjax($request);
+
         $book = \Cache::get($request->id);
         if ($book) {
-            $book = array_merge($this->getHeader(), $book);
-
-            if (Book::create($book)) {
-                $user = \Auth::user();
-                $user->next_id++;
-                $user->save();
+            if (Book::create($this->appendHeader($book))) {
+                $this->incrementNextId();
             }
 
             return response($book);
         }
 
-        return response($book, 400);
+        return response([], 400);
     }
 
     /**
@@ -100,6 +124,8 @@ class BookController extends Controller
      */
     public function edit(EditRequest $request): object
     {
+        $this->checkAjax($request);
+
         $book = Book::find($request->id);
         $book->fill($request->all())->save();
 
@@ -116,6 +142,8 @@ class BookController extends Controller
      */
     public function fetch(FetchRequest $request): object
     {
+        $this->checkAjax($request);
+
         $book = new Book(\NDL::query($request->code));
         if ($book->title !== null) {
             $count = Book::where('isbn', $book->isbn)
@@ -130,7 +158,7 @@ class BookController extends Controller
             return response($book)->header('X-Request-Id', $cid);
         }
 
-        return response($book, 404);
+        return response([], 404);
     }
 
     /**
@@ -163,6 +191,8 @@ class BookController extends Controller
      */
     public function delete(DeleteRequest $request): object
     {
+        $this->checkAjax($request);
+
         \DB::beginTransaction();
         try {
             if (!Book::destroy($request->ids)) {

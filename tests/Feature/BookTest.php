@@ -58,7 +58,7 @@ class BookTest extends TestCase
 
         // success
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=9784873115382')
+                   ->get('/fetch?code=9784873115382', $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -68,7 +68,7 @@ class BookTest extends TestCase
 
         // success (isbn10)
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=4000801139')
+                   ->get('/fetch?code=4000801139', $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -78,7 +78,7 @@ class BookTest extends TestCase
 
         // success (jpno)
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=22222222')
+                   ->get('/fetch?code=22222222', $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -88,7 +88,7 @@ class BookTest extends TestCase
 
         // dups
         $this->actingAs($user)
-             ->get('/fetch?code=4873115388')
+             ->get('/fetch?code=4873115388', $headers)
              ->assertStatus(409);
 
         // not found

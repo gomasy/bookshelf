@@ -48,7 +48,7 @@ class LoginController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return bool
      */
-    protected function attemptLogin(Request $request): object
+    protected function attemptLogin(Request $request): bool
     {
         if (!$this->validateReCaptcha($request)) {
             $this->reCaptchaFailed();

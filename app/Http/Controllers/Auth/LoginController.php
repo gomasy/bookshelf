@@ -50,7 +50,7 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request): bool
     {
-        if (!$this->validateReCaptcha($request)) {
+        if (!app()->runningUnitTests() && !$this->validateReCaptcha($request)) {
             $this->reCaptchaFailed();
         }
 

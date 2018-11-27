@@ -31,14 +31,4 @@ class CreateBooksTable extends Migration
             $table->unique([ 'user_id', 'jpno' ]);
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('books');
-    }
 }

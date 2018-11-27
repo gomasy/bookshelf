@@ -45,17 +45,4 @@ class CreateBookshelvesTable extends Migration
                 ->update([ 'bookshelf_id' => $bookshelf_id ]);
         }
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('bookshelf_id');
-        });
-        Schema::dropIfExists('bookshelves');
-    }
 }

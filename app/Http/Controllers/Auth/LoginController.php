@@ -1,9 +1,13 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\Controller;
+use App\Libs\ReCaptcha;
 
 class LoginController extends Controller
 {
@@ -18,7 +22,8 @@ class LoginController extends Controller
     |
     */
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers { attemptLogin as parentAttemptLogin; }
+    use ReCaptcha;
 
     /**
      * Where to redirect users after login.
@@ -35,5 +40,20 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Attempt to log the user into the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request): object
+    {
+        if (!$this->validateReCaptcha($request)) {
+            $this->reCaptchaFailed();
+        }
+
+        return $this->parentAttemptLogin($request);
     }
 }

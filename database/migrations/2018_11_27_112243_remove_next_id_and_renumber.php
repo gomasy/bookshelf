@@ -38,22 +38,4 @@ class RemoveNextIdAndRenumber extends Migration
 
         \DB::statement('ALTER TABLE `books` CHANGE `id` `id` INT UNSIGNED AUTO_INCREMENT NOT NULL;');
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('bookshelves', function (Blueprint $table) {
-            $table->integer('next_id')->unsigned()->after('user_id');
-        });
-
-        $shelves = \DB::table('bookshelves');
-        foreach ($shelves->get() as $shelf) {
-            $count = \DB::table('books')->where('bookshelf_id')->count();
-            $shelves->where('id', $shelf->id)->update([ 'next_id' => $count ]);
-        }
-    }
 }

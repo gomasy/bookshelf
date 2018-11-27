@@ -43,6 +43,7 @@
                         </div>
                         <hr>
                         {{ csrf_field() }}
+                        @include('elements/recaptcha')
                         <button type="submit" class="btn btn-block btn-primary">登録</button>
                     </form>
                 </div>

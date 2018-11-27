@@ -15,4 +15,7 @@ return [
 
     'failed' => 'メールアドレスまたはパスワードが一致しません。',
     'throttle' => 'ログイン試行回数が多すぎます。:seconds 秒後に再度お試しください。',
+    'recaptcha' => [
+        'failed' => 'reCAPTCHA が失敗しました。',
+    ],
 ];

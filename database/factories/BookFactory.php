@@ -14,16 +14,15 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(\App\Book::class, function (Faker $faker) {
-    $user = factory(\App\User::class)->create();
-
     return [
-        'id'      => $user->next_id,
-        'user_id' => $user->id,
-        'title'   => $faker->title,
-        'volume'  => $faker->randomDigit,
-        'authors' => $faker->name,
-        'isbn'    => $faker->isbn13(),
-        'jpno'    => $faker->ean8(),
-        'ndl_url' => $faker->url,
+        'bookshelf_id' => function () {
+            return factory(\App\Bookshelf::class)->create();
+        },
+        'title'        => $faker->title,
+        'volume'       => $faker->randomDigit,
+        'authors'      => $faker->name,
+        'isbn'         => $faker->isbn13(),
+        'jpno'         => $faker->ean8(),
+        'ndl_url'      => $faker->url,
     ];
 });

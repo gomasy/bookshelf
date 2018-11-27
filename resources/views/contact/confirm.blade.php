@@ -3,6 +3,7 @@
 @section('title', 'お問い合わせ')
 
 @section('content')
+<script src="https://www.google.com/recaptcha/api.js"></script>
 <main class="contact">
     <div class="col-md-8 col-md-offset-2">
         <div class="row">
@@ -22,6 +23,7 @@
                             <label class="control-label">お問い合わせ内容</label>
                             <textarea class="form-control" name="inquiry" rows="12" disabled>{{ $request->inquiry }}</textarea>
                         </div>
+                        @include('elements/recaptcha')
                         {{ csrf_field() }}
                         <input class="btn btn-block btn-danger" type="submit" value="送信" >
                     </form>

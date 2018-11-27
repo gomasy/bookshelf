@@ -40,14 +40,4 @@ class ChangeBooksTablePrimaryKey extends Migration
             $table->dropColumn('next_id');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        //
-    }
 }

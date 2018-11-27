@@ -23,7 +23,6 @@ class BookTest extends TestCase
         for ($i = 1; $i <= 50; $i++) {
             $data = [
                 'id' => $i,
-                'user_id' => $user->id,
                 'bookshelf_id' => $shelf->id,
             ];
             $data = array_merge($data, [ 'title' => ($i <= 25 ? 'foo' : 'bar') ]);
@@ -57,7 +56,7 @@ class BookTest extends TestCase
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $user = factory(User::class)->create();
-        Bookshelf::create([ 'user_id' => $user->id, 'name' => 'default' ]);
+        factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
 
         // success
         $id = $this->actingAs($user)
@@ -116,6 +115,7 @@ class BookTest extends TestCase
     public function testFetchImage()
     {
         $user = factory(User::class)->create();
+        factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
 
         // normal
         $response = $this->actingAs($user)->get('/images/P/4774158798.09.LZZZZZZZ');
@@ -136,14 +136,15 @@ class BookTest extends TestCase
     public function testEdit()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $user = factory(User::class)->create();
+        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $book = factory(Book::class)->create([ 'bookshelf_id' => $shelf->id ]);
         $data = [
-            'id' => 1,
+            'id' => $book->id,
             'title' => 'Example',
             'volume' => 'Example',
             'authors' => 'Example',
         ];
-        $book = factory(Book::class)->create();
-        $user = User::find($book->user_id);
 
         // success
         $this->actingAs($user)
@@ -155,14 +156,15 @@ class BookTest extends TestCase
     public function testDelete()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $book = factory(Book::class)->create();
-        $user = User::find($book->user_id);
+        $user = factory(User::class)->create();
+        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $book = factory(Book::class)->create([ 'bookshelf_id' => $shelf->id ]);
 
         // success
         $this->actingAs($user)
-             ->post('/delete', [ 'ids' => [ 1 ] ], $headers)
+             ->post('/delete', [ 'ids' => [ $book->id ] ], $headers)
              ->assertStatus(204);
-        $this->assertDatabaseMissing('books', [ 'id' => '1' ]);
+        $this->assertDatabaseMissing('books', [ 'id' => $book->id ]);
 
         // bad request
         $this->actingAs($user)

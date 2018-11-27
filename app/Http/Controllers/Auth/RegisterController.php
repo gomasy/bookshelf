@@ -1,13 +1,17 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Carbon\Carbon;
 
+use App\Http\Controllers\Controller;
+use App\Libs\ReCaptcha;
 use App\Bookshelf;
 use App\User;
-use App\Http\Controllers\Controller;
 
 class RegisterController extends Controller
 {
@@ -22,7 +26,7 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers;
+    use RegistersUsers, ReCaptcha;
 
     /**
      * Where to redirect users after registration.
@@ -42,12 +46,43 @@ class RegisterController extends Controller
     }
 
     /**
+     * Handle a registration request for the application.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function register(Request $request): object
+    {
+        $this->validator($request->all())->validate();
+
+        if (!app()->runningUnitTests() && !$this->validateReCaptcha($request)) {
+            $this->reCaptchaFailed();
+        }
+
+        event(new Registered($user = $this->create($request->all())));
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    protected function username(): string
+    {
+        return 'name';
+    }
+
+    /**
      * Get a validator for an incoming registration request.
      *
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function validator(array $data): object
     {
         return \Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
@@ -62,7 +97,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(array $data): object
     {
         $user = User::create([
             'name' => $data['name'],

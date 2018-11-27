@@ -37,17 +37,4 @@ class CreatePublisherAndPriceColumn extends Migration
             }
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::table('books', function (Blueprint $table) {
-            $table->dropColumn('publisher');
-            $table->dropColumn('price');
-        });
-    }
 }

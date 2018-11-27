@@ -33,6 +33,7 @@
                                 <input type="checkbox"> ログイン状態を記憶
                             </label>
                         </div>
+                        @include('elements/recaptcha')
                         {{ csrf_field() }}
                         <button type="submit" class="btn btn-block btn-primary">ログイン</button>
                     </form>

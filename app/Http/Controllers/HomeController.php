@@ -5,8 +5,17 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Libs\ReCaptcha;
+
 class HomeController extends Controller
 {
+    use ReCaptcha;
+
+    protected function username(): string
+    {
+        return 'name';
+    }
+
     /**
      * Show the application dashboard.
      *
@@ -47,6 +56,10 @@ class HomeController extends Controller
 
     public function contact_submit(Request $request): object
     {
+        if (!app()->runningUnitTests() && !$this->validateReCaptcha($request)) {
+            $this->reCaptchaFailed();
+        }
+
         \Mail::send([], [], function ($message) use ($request) {
             $message->from($request->email)
                 ->to(\Config::get('mail.from.address'))

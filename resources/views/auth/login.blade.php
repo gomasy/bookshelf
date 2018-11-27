@@ -37,9 +37,9 @@
                                 <input type="checkbox"> ログイン状態を記憶
                             </label>
                         </div>
-                        @include('elements/recaptcha')
                         {{ csrf_field() }}
-                        <button type="submit" class="btn btn-block btn-primary">ログイン</button>
+                        @include('elements/recaptcha')
+                        <!--<button type="submit" class="btn btn-block btn-primary">ログイン</button>-->
                     </form>
                     <hr>
                     <p><a href="{{ route('password.request') }}">パスワードを忘れた時は？</a></p>

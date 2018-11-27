@@ -41,9 +41,10 @@
                             <label for="password-confirm">{{ __('validation.attributes.password-confirm') }}</label>
                             <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
                         </div>
-                        <hr>
                         {{ csrf_field() }}
+                        <hr>
                         @include('elements/recaptcha')
+                        <br>
                         <button type="submit" class="btn btn-block btn-primary">登録</button>
                     </form>
                 </div>

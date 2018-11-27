@@ -3,7 +3,6 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Auth;
 
-use Illuminate\Auth\Events\Registered;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -26,7 +25,8 @@ class RegisterController extends Controller
     |
     */
 
-    use RegistersUsers, ReCaptcha;
+    use RegistersUsers { register as parentRegister; }
+    use ReCaptcha;
 
     /**
      * Where to redirect users after registration.
@@ -53,17 +53,11 @@ class RegisterController extends Controller
      */
     public function register(Request $request): object
     {
-        $this->validator($request->all())->validate();
-
         if (!app()->runningUnitTests() && !$this->validateReCaptcha($request)) {
             $this->reCaptchaFailed();
         }
 
-        event(new Registered($user = $this->create($request->all())));
-        $this->guard()->login($user);
-
-        return $this->registered($request, $user)
-                        ?: redirect($this->redirectPath());
+        return $this->parentRegister($request);
     }
 
     /**

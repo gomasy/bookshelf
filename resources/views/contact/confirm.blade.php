@@ -23,8 +23,9 @@
                             <label class="control-label">お問い合わせ内容</label>
                             <textarea class="form-control" name="inquiry" rows="12" disabled>{{ $request->inquiry }}</textarea>
                         </div>
-                        @include('elements/recaptcha')
                         {{ csrf_field() }}
+                        @include('elements/recaptcha')
+                        <br>
                         <input class="btn btn-block btn-danger" type="submit" value="送信" >
                     </form>
                 </div>

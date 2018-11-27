@@ -27,42 +27,13 @@ class BookController extends Controller
     }
 
     /**
-     * リクエストがAjaxによるものなのか検証する。
-     * 違う場合は404を返す。
-     *
-     * @return void
-     */
-    protected function checkAjax(Request $request): void
-    {
-        if (!$request->ajax()) {
-            abort(404);
-        }
-    }
-
-    /**
-     * 連番IDをインクリメントする。
-     *
-     * @return void
-     */
-    protected function incrementNextId(): void
-    {
-        $user = \Auth::user();
-        $user->next_id++;
-        $user->save();
-    }
-
-    /**
      * 本の登録に必要な書籍番号とユーザー情報を含んだデータを生成する。
      *
      * @return array
      */
     protected function appendHeader(array $book, int $sid): array
     {
-        return array_merge([
-            'id' => \Auth::user()['next_id'],
-            'user_id' => \Auth::id(),
-            'bookshelf_id' => $sid,
-        ], $book);
+        return array_merge([ 'bookshelf_id' => $sid ], $book);
     }
 
     /**
@@ -82,7 +53,7 @@ class BookController extends Controller
             }
         }
 
-        return [ $books, $count ?? Book::count() ];
+        return [ $books, $count ?? $books->count() ];
     }
 
     /**
@@ -149,11 +120,13 @@ class BookController extends Controller
         $sid = $request->sid ?? Bookshelf::default()->id;
         $book = \Cache::get($request->id);
         if ($book) {
-            if (Book::create($this->appendHeader($book, $sid))) {
-                $this->incrementNextId();
-            }
+            try {
+                Book::create($this->appendHeader($book, $sid));
 
-            return response($book);
+                return response($book);
+            } catch (QueryException $e) {
+                return response([], 500);
+            }
         }
 
         return response([], 400);
@@ -189,8 +162,9 @@ class BookController extends Controller
 
         $book = new Book(\NDL::query($request->code));
         if ($book->title !== null) {
-            $count = Book::where('isbn', $book->isbn)
-                ->orWhere('jpno', $book->jpno)->count();
+            $count = Book::shelves($request->sid)->where(function ($query) use ($book) {
+                $query->where('isbn', $book->isbn)->orWhere('jpno', $book->jpno);
+            })->count();
             if ($count) {
                 return response($book, 409);
             }
@@ -243,7 +217,7 @@ class BookController extends Controller
             }
 
             return response(\DB::commit(), 204);
-        } catch (\Exception $e) {
+        } catch (QueryException $e) {
             return response(\DB::rollback(), 500);
         }
     }

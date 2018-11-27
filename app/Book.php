@@ -14,14 +14,7 @@ class Book extends Model
      *
      * @var array
      */
-    protected $fillable = [ 'id', 'user_id', 'bookshelf_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'publisher', 'price', 'ndl_url' ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [ 'user_id' ];
+    protected $fillable = [ 'id', 'bookshelf_id', 'title', 'volume', 'authors', 'isbn', 'jpno', 'publisher', 'price', 'ndl_url' ];
 
     /**
      * The accessors to append to the model's array form.
@@ -36,15 +29,6 @@ class Book extends Model
      * @var bool
      */
     public $timestamps = false;
-
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('user_id', function (Builder $builder) {
-            $builder->where('user_id', \Auth::id());
-        });
-    }
 
     public function scopeShelves(Builder $query, ?int $sid)
     {

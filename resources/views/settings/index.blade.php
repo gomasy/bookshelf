@@ -16,7 +16,7 @@
     </div>
     <div class="col-lg-6 col-sm-6">
         <div class="setting-content row">
-            @yield('account')
+            @yield('setting-content')
         </div>
     </div>
 </main>

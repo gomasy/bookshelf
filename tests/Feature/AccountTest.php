@@ -23,11 +23,11 @@ class AccountTest extends TestCase
         $user = factory(User::class)->create();
 
         $response = $this->actingAs($user)->get('/settings/account');
-        $response->assertViewIs('account.update');
+        $response->assertViewIs('settings.account.update');
         $response->assertSuccessful();
 
         $response = $this->actingAs($user)->get('/settings/account/delete');
-        $response->assertViewIs('account.delete');
+        $response->assertViewIs('settings.account.delete');
         $response->assertSuccessful();
     }
 

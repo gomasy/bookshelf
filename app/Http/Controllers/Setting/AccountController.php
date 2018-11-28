@@ -1,10 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Setting;
 
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountDeleteRequest as DeleteRequest;
 use App\Http\Requests\AccountUpdateRequest as UpdateRequest;
 use App\User;
@@ -29,7 +30,7 @@ class AccountController extends Controller
      */
     public function index(Request $request): object
     {
-        return view('account.update');
+        return view('settings.account.update');
     }
 
     /**
@@ -66,7 +67,7 @@ class AccountController extends Controller
      */
     public function delete(Request $request): object
     {
-        return view('account.delete');
+        return view('settings.account.delete');
     }
 
     /**
@@ -86,7 +87,7 @@ class AccountController extends Controller
 
             return redirect('/');
         } else {
-            return view('account.delete')
+            return view('settings.account.delete')
                 ->withErrors([ 'password' => __('settings.account.incorrect') ]);
         }
     }

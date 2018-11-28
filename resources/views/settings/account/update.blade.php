@@ -1,6 +1,6 @@
-@extends('settings')
+@extends('settings.index')
 
-@section('account')
+@section('setting-content')
 <div class="panel panel-default">
     <div class="panel-heading">アカウント</div>
     <div class="panel-body">

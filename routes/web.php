@@ -32,11 +32,12 @@ Route::group([ 'prefix' => 'contact' ], function () {
 
 Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');
+
     Route::group([ 'prefix' => 'account' ], function () {
-        Route::get('/', 'AccountController@index');
-        Route::post('/update', 'AccountController@update');
-        Route::get('/delete', 'AccountController@delete');
-        Route::post('/delete', 'AccountController@confirm_delete');
+        Route::get('/', 'Setting\AccountController@index');
+        Route::post('/update', 'Setting\AccountController@update');
+        Route::get('/delete', 'Setting\AccountController@delete');
+        Route::post('/delete', 'Setting\AccountController@confirm_delete');
     });
 });
 

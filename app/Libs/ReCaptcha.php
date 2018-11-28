@@ -10,9 +10,10 @@ trait ReCaptcha
 {
     protected function validateReCaptcha(Request $request): bool
     {
+        preg_match('/\/\/(.+?)(:\d+)?$/', \Config::get('app.url'), $matches);
         $recaptcha = new \ReCaptcha\ReCaptcha(\Config::get('recaptcha.secret_key'));
 
-        return $recaptcha->setExpectedHostname($request->getHost())
+        return $recaptcha->setExpectedHostname($matches[1])
             ->verify($request['g-recaptcha-response'], $request->ip())
             ->isSuccess();
     }

@@ -48,6 +48,6 @@ class Book extends Model
 
     public function getImagesAttribute()
     {
-        return \AmazonImages::all($this->isbn10, \Config::get('app.url'));
+        return \AmazonImages::all($this->isbn10);
     }
 }

@@ -21,11 +21,22 @@ class AmazonImages
         'large'  => [ 349, 500, 5, 140, 235 ],
     ];
 
-    public function all(?string $isbn10, string $endpoint): array
+    protected function regexp(string $subject, string $regexpBase): string
+    {
+        if (preg_match('/^' . preg_quote($this->path, '/') . $regexpBase, $subject, $matches)) {
+            return $matches[1];
+        }
+
+        return false;
+    }
+
+    public function all(?string $isbn10, string $endpoint = ''): array
     {
         $url = [];
         foreach (array_keys($this->types) as $type) {
-            $url = array_merge($url, [ $type => $this->single($isbn10, $type, $endpoint) ]);
+            $url = array_merge($url, [
+                $type => $this->single($isbn10, $type, $endpoint),
+            ]);
         }
 
         return $url;
@@ -42,8 +53,9 @@ class AmazonImages
 
     public function fetch(string $path): string
     {
-        if (preg_match('/^' . preg_quote($this->path, '/') . 'missing\.(.+?)\.jpg$/', $path, $matches)) {
-            return $this->missing($this->sizes[$matches[1]]);
+        $size = $this->regexp($path, 'missing\.(.+?)\.jpg');
+        if ($size) {
+            return $this->missing($this->sizes[$size]);
         }
 
         $image = (string)(new \GuzzleHttp\Client())
@@ -52,9 +64,9 @@ class AmazonImages
         $size = getimagesizefromstring($image);
 
         if ($size[0] <= 1 || $size[1] <= 1) {
-            preg_match('/^' . preg_quote($this->path, '/') . '.+\.\d{2}\.(.+?)$/', $path, $type);
+            $type = $this->regexp($this->path, '.+\.\d{2}\.(.+?)');
 
-            return $this->missing($this->sizes[array_search($type[1], $this->types)]);
+            return $this->missing($this->sizes[array_search($type, $this->types)]);
         }
 
         return $image;

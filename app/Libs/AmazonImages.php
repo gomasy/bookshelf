@@ -21,13 +21,14 @@ class AmazonImages
         'large'  => [ 349, 500, 5, 140, 235 ],
     ];
 
-    protected function regexp(string $subject, string $regexpBase): string
+    protected function regexp(string $subject, string $regexpBase): ?string
     {
-        if (preg_match('/^' . preg_quote($this->path, '/') . $regexpBase, $subject, $matches)) {
+        $regexp = '/^' . preg_quote($this->path, '/') . $regexpBase . '$/';
+        if (preg_match($regexp, $subject, $matches)) {
             return $matches[1];
         }
 
-        return false;
+        return null;
     }
 
     public function all(?string $isbn10, string $endpoint = ''): array
@@ -64,7 +65,7 @@ class AmazonImages
         $size = getimagesizefromstring($image);
 
         if ($size[0] <= 1 || $size[1] <= 1) {
-            $type = $this->regexp($this->path, '.+\.\d{2}\.(.+?)');
+            $type = $this->regexp($path, '.+\.\d{2}\.(.+?)');
 
             return $this->missing($this->sizes[array_search($type, $this->types)]);
         }

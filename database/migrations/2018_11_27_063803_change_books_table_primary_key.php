@@ -24,7 +24,8 @@ class ChangeBooksTablePrimaryKey extends Migration
             $table->unique([ 'bookshelf_id', 'isbn' ]);
             $table->unique([ 'bookshelf_id', 'jpno' ]);
             $table->foreign('bookshelf_id')
-                  ->references('id')->on('bookshelves');
+                  ->references('id')->on('bookshelves')
+                  ->onDelete('cascade');
         });
 
         Schema::table('bookshelves', function (Blueprint $table) {

@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
-                    <button class="btn btn-info" type="button" @click="accept">OK</button>
+                    <button class="btn btn-info" type="button" @click="accept" ref="ok">OK</button>
                 </div>
             </div>
         </div>
@@ -38,6 +38,7 @@ export default {
             });
 
             $('#confirm-modal').modal('show');
+            this.$refs.ok.focus();
         },
         accept() {
             if (typeof this.callback === 'function') {

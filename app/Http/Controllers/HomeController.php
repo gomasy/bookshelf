@@ -39,7 +39,7 @@ class HomeController extends Controller
         return view('help');
     }
 
-    public function privacy_policy(): object
+    public function privacyPolicy(): object
     {
         return view('privacy-policy');
     }
@@ -54,7 +54,7 @@ class HomeController extends Controller
             ->with('request', $request);
     }
 
-    public function contact_submit(Request $request): object
+    public function contactSubmit(Request $request): object
     {
         if (!app()->runningUnitTests() && !$this->validateReCaptcha($request)) {
             $this->reCaptchaFailed();

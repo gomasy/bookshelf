@@ -18,7 +18,7 @@ Route::post('/edit', 'BookController@edit');
 Route::get('/fetch', 'BookController@fetch');
 Route::post('/delete', 'BookController@delete');
 Route::get('/help', 'HomeController@help');
-Route::get('/privacy-policy', 'HomeController@privacy_policy');
+Route::get('/privacy-policy', 'HomeController@privacyPolicy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
 
 Route::group([ 'prefix' => 'shelves' ], function () {
@@ -27,7 +27,7 @@ Route::group([ 'prefix' => 'shelves' ], function () {
 
 Route::group([ 'prefix' => 'contact' ], function () {
     Route::match([ 'get', 'post' ], '/', 'HomeController@contact');
-    Route::post('/submit', 'HomeController@contact_submit');
+    Route::post('/submit', 'HomeController@contactSubmit');
 });
 
 Route::group([ 'prefix' => 'settings' ], function () {
@@ -37,7 +37,7 @@ Route::group([ 'prefix' => 'settings' ], function () {
         Route::get('/', 'Setting\AccountController@index');
         Route::post('/update', 'Setting\AccountController@update');
         Route::get('/delete', 'Setting\AccountController@delete');
-        Route::post('/delete', 'Setting\AccountController@confirm_delete');
+        Route::post('/delete', 'Setting\AccountController@confirmDelete');
     });
 });
 

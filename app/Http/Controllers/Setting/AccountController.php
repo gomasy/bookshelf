@@ -79,7 +79,7 @@ class AccountController extends Controller
      * @param DeleteRequest $request
      * @return RedirectResponse|View
      */
-    public function confirm_delete(DeleteRequest $request): object
+    public function confirmDelete(DeleteRequest $request): object
     {
         if (\Hash::check($request->password, \Auth::user()['password'])) {
             User::find(\Auth::id())->delete();

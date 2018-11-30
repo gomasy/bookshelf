@@ -62,7 +62,7 @@ class HomeController extends Controller
 
         \Mail::send([], [], function ($message) use ($request) {
             $message->from($request->email)
-                ->to(\Config::get('mail.from.address'))
+                ->to(config('mail.from.address'))
                 ->subject('お問い合わせ')
                 ->setBody($request->inquiry);
         });

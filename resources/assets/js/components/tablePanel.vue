@@ -96,7 +96,7 @@ export default {
             this.books.before_create(code, (entry, reqId) => {
                 if (confirmed) {
                     this.books.create(entry, reqId);
-                    callback();
+                    callback(entry, reqId);
                 } else {
                     this.$refs.confirm.open(callback, addConfirmBody, entry, reqId);
                 }

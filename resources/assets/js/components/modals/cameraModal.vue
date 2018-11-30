@@ -35,7 +35,7 @@ export default {
             interval: null,
         },
         isConfirm: false,
-        isCreate: false,
+        created: [],
     }),
     methods: {
         start() {
@@ -82,14 +82,19 @@ export default {
         detected(result) {
             const isbn = result.codeResult.code;
             if (this.validation(isbn)) {
-                $('#camera-modal').modal('hide');
                 this.create(isbn);
             }
         },
         create(code) {
-            if (!this.isCreate) {
-                this.$parent.before_create((r, id) => this.$parent.create(r, id), code, !this.isConfirm);
-                this.isCreate = true;
+            if (this.created.indexOf(code) < 0) {
+                if (!this.isConfirm) {
+                    $('#camera-modal').modal('hide');
+                    $('#app-navbar-collapse').collapse('toggle');
+                    this.isCreate = true;
+                }
+
+                this.$parent.before_create((r, id) => this.$parent.create(r, id), code, this.isConfirm);
+                this.created.push(code);
             }
         },
         validation(code) {

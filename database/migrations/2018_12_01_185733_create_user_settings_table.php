@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
+use Carbon\Carbon;
+
 class CreateUserSettingsTable extends Migration
 {
     /**
@@ -24,5 +26,15 @@ class CreateUserSettingsTable extends Migration
                   ->onDelete('cascade');
             $table->primary('id');
         });
+
+        foreach (\DB::table('users')->get() as $user) {
+            $now = Carbon::now();
+
+            \DB::table('user_settings')->insert([
+                'id' => $user->id,
+                'created_at' => $now,
+                'updated_at' => $now,
+            ]);
+        }
     }
 }

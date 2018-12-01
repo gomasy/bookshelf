@@ -9,7 +9,7 @@
             </div>
         </div>
         <div id="modal">
-            <editModal ref="edit" />
+            <editModal ref="edit" :books="books" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
             <previewModal ref="preview" />
@@ -136,6 +136,7 @@ export default {
         },
     },
     created() {
+        this.books = new Books(this.$notify);
         this.query = Vue.ls.get('query', {});
         UserSetting.get().then(obj => {
             switch (obj.display_format) {
@@ -146,7 +147,6 @@ export default {
         });
     },
     mounted() {
-        this.books = new Books(this.$notify);
         new Vue({
             el: '#register',
             components: { registerForm },

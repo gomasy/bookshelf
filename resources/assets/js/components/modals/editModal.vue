@@ -25,11 +25,9 @@
 </template>
 
 <script>
-import { Books } from '../../books/';
-
 export default {
+    props: [ 'books' ],
     data: () => ({
-        books: null,
         items: {},
     }),
     methods: {
@@ -45,8 +43,5 @@ export default {
             });
         },
     },
-    mounted() {
-        this.books = new Books(this.$notify);
-    }
 };
 </script>

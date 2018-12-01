@@ -39,6 +39,11 @@ Route::group([ 'prefix' => 'settings' ], function () {
         Route::get('/delete', 'Setting\AccountController@delete');
         Route::post('/delete', 'Setting\AccountController@confirmDelete');
     });
+
+    Route::group([ 'prefix' => 'display' ], function () {
+        Route::get('/', 'Setting\DisplayController@index');
+        Route::post('/update', 'Setting\DisplayController@update');
+    });
 });
 
 Auth::routes([ 'verify' => true ]);

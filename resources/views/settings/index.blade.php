@@ -10,6 +10,7 @@
                 <div class="panel-heading">設定</div>
                 <ul class="list-unstyled setting-menu-content">
                     <li{!! Request::path() === 'settings/account' ? ' class="active"' : '' !!}><a href="/settings/account"><i class="fas fa-user" aria-hidden="true"></i>アカウント</a></li>
+                    <li{!! Request::path() === 'settings/display' ? ' class="active"' : '' !!}><a href="/settings/display"><i class="fas fa-eye" aria-hidden="true"></i>表示</a></li>
                 </ul>
             </div>
         </div>

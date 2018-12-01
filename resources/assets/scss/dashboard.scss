@@ -4,6 +4,7 @@
 .dashboard {
     td > img {
         cursor: pointer;
+        width: 53px;
     }
 
     small {
@@ -58,6 +59,40 @@
                         content: '適用して設定をローカルに保存';
                     }
                 }
+            }
+        }
+    }
+}
+
+.album {
+    colgroup, thead, td, .panel-body > div > .clearfix {
+        display: none;
+    }
+
+    tbody {
+        display: flex;
+        flex-wrap: wrap;
+
+        > tr > td {
+            padding: 0;
+
+            &:nth-child(2) {
+                display: block;
+            }
+
+            > img.thumb {
+                width: 53px;
+                padding: 1px;
+            }
+
+            > img.medium {
+                width: 80px;
+                padding: 3px;
+            }
+
+            > img.large {
+                width: 106px;
+                padding: 5px;
             }
         }
     }

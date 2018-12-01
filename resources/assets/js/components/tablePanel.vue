@@ -1,5 +1,5 @@
 <template>
-    <main class="dashboard" id="content">
+    <main class="dashboard" :class="viewMode" id="content">
         <div class="panel panel-default">
             <div class="panel-body">
                 <datatable v-bind="$data">
@@ -22,7 +22,7 @@
 import Vue from 'vue';
 import registerForm from './registerForm.vue';
 
-import { Books } from '../books/';
+import { Books, UserSetting } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
@@ -38,6 +38,8 @@ export default {
     },
     data: () => ({
         books: null,
+        viewMode: '',
+        imageSize: 'thumb',
         columns: [
             {
                 field: 'images',
@@ -128,9 +130,20 @@ export default {
         query: {
             handler(query) {
                 this.fetch(query);
+                Vue.ls.set('query', this.query);
             },
             deep: true,
         },
+    },
+    created() {
+        this.query = Vue.ls.get('query', {});
+        UserSetting.get().then(obj => {
+            switch (obj.display_format) {
+            case 1:
+                [ this.viewMode, this.imageSize ] = [ 'album', 'large' ];
+                break;
+            }
+        });
     },
     mounted() {
         this.books = new Books(this.$notify);

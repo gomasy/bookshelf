@@ -11,6 +11,7 @@ use App\Http\Controllers\Controller;
 use App\Libs\ReCaptcha;
 use App\Bookshelf;
 use App\User;
+use App\UserSetting;
 
 class RegisterController extends Controller
 {
@@ -43,6 +44,18 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    protected function createRelatedRecord(User $user): void
+    {
+        UserSetting::create([
+            'id' => $user->id,
+        ]);
+
+        Bookshelf::create([
+            'user_id' => $user->id,
+            'name' => 'default',
+        ]);
     }
 
     /**
@@ -98,11 +111,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => \Hash::make($data['password']),
         ]);
-
-        Bookshelf::create([
-            'user_id' => $user->id,
-            'name' => 'default',
-        ]);
+        $this->createRelatedRecord($user);
 
         if (app()->isLocal()) {
             $user->email_verified_at = Carbon::now();

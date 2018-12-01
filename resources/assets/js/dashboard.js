@@ -1,7 +1,9 @@
 import Vue from 'vue';
+import Storage from 'vue-ls';
 import Notifications from 'vue-notification';
 import Datatable from 'vue2-datatable-component';
 
+Vue.use(Storage);
 Vue.use(Notifications);
 Vue.use(Datatable);
 

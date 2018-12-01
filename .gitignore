@@ -6,13 +6,9 @@
 /public/*.php
 /storage/*.key
 /vendor
-/.idea
-/.vscode
-/nbproject
-/.vagrant
 .env
-.phpunit.result.cache
 .php_cs.cache
+.phpunit.result.cache
 Homestead.json
 Homestead.yaml
 npm-debug.log

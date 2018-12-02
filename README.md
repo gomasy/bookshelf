@@ -1,6 +1,7 @@
 Books Manager
 ============
 [![Build Status](https://travis-ci.org/Gomasy/books-manager.svg?branch=master)](https://travis-ci.org/Gomasy/books-manager)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGomasy%2Fbooks-manager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGomasy%2Fbooks-manager?ref=badge_shield)
 [![Coverage Status](https://coveralls.io/repos/github/Gomasy/books-manager/badge.svg?branch=master)](https://coveralls.io/github/Gomasy/books-manager?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c07e881ac5b0fe7a7c2d/maintainability)](https://codeclimate.com/github/Gomasy/books-manager/maintainability)
 

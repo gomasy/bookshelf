@@ -19,6 +19,8 @@
 </template>
 
 <script>
+/* eslint "vue/no-unused-components":0 */
+
 import Vue from 'vue';
 import registerForm from './registerForm.vue';
 

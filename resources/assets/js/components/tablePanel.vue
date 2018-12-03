@@ -130,14 +130,14 @@ export default {
         query: {
             handler(query) {
                 this.fetch(query);
-                Vue.ls.set('query', this.query);
+                localStorage.setItem('query', JSON.stringify(this.query));
             },
             deep: true,
         },
     },
     created() {
         this.books = new Books(this.$notify);
-        this.query = Vue.ls.get('query', {});
+        this.query = JSON.parse(localStorage.getItem('query')) || {};
         UserSetting.get().then(obj => {
             switch (obj.display_format) {
             case 1:

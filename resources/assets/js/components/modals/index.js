@@ -1,5 +1,5 @@
-export { default as addConfirmBody } from './addConfirmBody.vue';
-export { default as cameraModal } from './cameraModal.vue';
-export { default as confirmModal } from './confirmModal.vue';
-export { default as editModal } from './editModal.vue';
-export { default as previewModal } from './previewModal.vue';
+export { default as addConfirmBody } from './addConfirmBody';
+export { default as cameraModal } from './cameraModal';
+export { default as confirmModal } from './confirmModal';
+export { default as editModal } from './editModal';
+export { default as previewModal } from './previewModal';

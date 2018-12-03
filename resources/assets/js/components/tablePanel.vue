@@ -22,7 +22,7 @@
 /* eslint "vue/no-unused-components":0 */
 
 import Vue from 'vue';
-import registerForm from './registerForm.vue';
+import registerForm from './registerForm';
 
 import { Books, UserSetting } from '../books/';
 import { tdImage, thFilter } from './tpanel/';

@@ -1,10 +1,18 @@
 import notify from './notify';
-import { headers } from './config';
+import { options } from './config';
 
 export default class {
     constructor(notifyVue) {
         this.notify = notifyVue;
-        this.headers = headers;
+        this.options = options;
+    }
+
+    postOptions(body) {
+        const postOptions = this.options;
+        postOptions['method'] = 'post';
+        postOptions['body'] = JSON.stringify(body);
+
+        return postOptions;
     }
 
     fetch(query, callback) {
@@ -13,7 +21,7 @@ export default class {
             Object.keys(query).map(k => url += k + '=' + query[k] + '&');
         }
 
-        fetch(url.substring(url.length - 1, -1), { headers: this.headers }).then(async response => {
+        fetch(url.substring(url.length - 1, -1), this.options).then(async response => {
             if (!response.ok) {
                 return Promise.reject(response);
             }
@@ -23,7 +31,7 @@ export default class {
     }
 
     before_create(code, callback) {
-        fetch('/fetch?code=' + code, { headers: this.headers }).then(async response => {
+        fetch('/fetch?code=' + code, this.options).then(async response => {
             if (!response.ok) {
                 return Promise.reject(response);
             }
@@ -33,11 +41,8 @@ export default class {
     }
 
     create(entry, reqId) {
-        return fetch('/create', {
-            method: 'post',
-            headers: this.headers,
-            body: JSON.stringify({ 'id': reqId }),
-        }).then(async response => {
+        const reqOptions = this.postOptions({ 'id': reqId });
+        return fetch('/create', reqOptions).then(async response => {
             notify(this.notify, await response);
 
             if (!response.ok) {
@@ -49,11 +54,8 @@ export default class {
     }
 
     delete(ids, callback) {
-        fetch('/delete', {
-            method: 'post',
-            headers: this.headers,
-            body: JSON.stringify({ ids: ids }),
-        }).then(response => {
+        const reqOptions = this.postOptions({ ids: ids });
+        fetch('/delete', reqOptions).then(response => {
             if (!response.ok) {
                 return Promise.reject(response);
             }
@@ -63,11 +65,8 @@ export default class {
     }
 
     edit(entry, callback) {
-        fetch('/edit', {
-            method: 'post',
-            headers: this.headers,
-            body: JSON.stringify(entry),
-        }).then(response => {
+        const reqOptions = this.postOptions(entry);
+        fetch('/edit', reqOptions).then(response => {
             if (!response.ok) {
                 return Promise.reject(response);
             }

@@ -1,8 +1,8 @@
-import { headers } from './config';
+import { options } from './config';
 
 export default class {
     static get() {
-        return fetch('/settings/display', { headers: headers }).then(async response => {
+        return fetch('/settings/display', options).then(async response => {
             return await response.json();
         });
     }

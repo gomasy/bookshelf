@@ -62,6 +62,15 @@
             }
         }
     }
+
+    .select-shelves {
+        display: inline-block;
+        padding: 0 12px;
+
+        @media(--pc) {
+            width: 180px;
+        }
+    }
 }
 
 .album {

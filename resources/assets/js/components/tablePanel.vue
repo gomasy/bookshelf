@@ -5,6 +5,9 @@
                 <datatable v-bind="$data">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" :disabled="selection.length != 1" @click="edit">編集</button>
                     <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
+                    <select class="form-control select-shelves" v-model="query.sid">
+                        <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
+                    </select>
                 </datatable>
             </div>
         </div>
@@ -24,7 +27,7 @@
 import Vue from 'vue';
 import registerForm from './registerForm';
 
-import { Books, UserSetting } from '../books/';
+import { Books, Shelves, UserSetting } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
@@ -40,6 +43,7 @@ export default {
     },
     data: () => ({
         books: null,
+        shelves: [],
         viewMode: '',
         imageSize: 'thumb',
         columns: [
@@ -83,7 +87,10 @@ export default {
             },
         ],
         data: [],
-        query: {},
+        query: {
+            limit: 20,
+            sid: null,
+        },
         selection: [],
         pageSizeOptions: [ 10, 20, 50, 100 ],
         supportBackup: true,
@@ -95,11 +102,12 @@ export default {
                 this.data = result.data;
                 this.total = result.total;
             });
+            localStorage.setItem('query', JSON.stringify(query));
         },
         before_create(callback, code, confirmed) {
             this.books.before_create(code, (entry, reqId) => {
                 if (confirmed) {
-                    this.books.create(entry, reqId);
+                    this.create(entry, reqId);
                     callback(entry, reqId);
                 } else {
                     this.$refs.confirm.open(callback, addConfirmBody, entry, reqId);
@@ -107,7 +115,7 @@ export default {
             });
         },
         create(entry, reqId) {
-            if (this.books.create(entry, reqId)) {
+            if (this.books.create(entry, reqId, this.query.sid)) {
                 this.data.push(entry);
                 this.total++;
             }
@@ -131,15 +139,22 @@ export default {
     watch: {
         query: {
             handler(query) {
-                this.fetch(query);
-                localStorage.setItem('query', JSON.stringify(this.query));
+                if (query.sid !== null) {
+                    this.fetch(this.query);
+                }
             },
             deep: true,
         },
     },
     created() {
         this.books = new Books(this.$notify);
-        this.query = JSON.parse(localStorage.getItem('query')) || {};
+        Shelves.get().then(obj => {
+            this.shelves = obj;
+            this.query = JSON.parse(localStorage.getItem('query')) || this.query;
+            if (this.query.sid === null) {
+                this.query.sid = obj.find(e => e.name === 'default').id;
+            }
+        });
         UserSetting.get().then(obj => {
             switch (obj.display_format) {
             case 1:

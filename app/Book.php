@@ -30,7 +30,7 @@ class Book extends Model
      */
     public $timestamps = false;
 
-    public function scopeShelves(Builder $query, ?int $sid)
+    public function scopeShelves(Builder $query, ?string $sid)
     {
         if ($sid === null) {
             $sid = Bookshelf::default()->id;

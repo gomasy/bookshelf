@@ -8,7 +8,7 @@ export default class {
     }
 
     postOptions(body) {
-        const postOptions = this.options;
+        const postOptions = Object.assign({}, this.options);
         postOptions['method'] = 'post';
         postOptions['body'] = JSON.stringify(body);
 
@@ -40,8 +40,8 @@ export default class {
         }).catch(async e => notify(this.notify, await e));
     }
 
-    create(entry, reqId) {
-        const reqOptions = this.postOptions({ 'id': reqId });
+    create(entry, reqId, sid) {
+        const reqOptions = this.postOptions({ 'id': reqId, 'sid': sid });
         return fetch('/create', reqOptions).then(async response => {
             notify(this.notify, await response);
 

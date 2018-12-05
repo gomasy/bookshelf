@@ -2,6 +2,7 @@
 /node_modules
 /public/hot
 /public/storage
+/public/vendor
 !/public/index.php
 /public/*.php
 /storage/*.key

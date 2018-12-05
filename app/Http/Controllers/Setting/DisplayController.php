@@ -22,20 +22,21 @@ class DisplayController extends Controller
     /**
      * 表示設定画面のビューを返す。
      *
-     * @param Request $request
      * @return View
      */
-    public function index(Request $request): object
+    public function index(): object
     {
         $setting = UserSetting::find(\Auth::id());
 
-        if ($request->ajax()) {
-            return response($setting);
-        } else {
-            return view('settings.display.index', compact('setting'));
-        }
+        return view('settings.display.index', compact('setting'));
     }
 
+    /**
+     * 表示設定を更新する
+     *
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function update(Request $request): object
     {
         $setting = UserSetting::find(\Auth::id());

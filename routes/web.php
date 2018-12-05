@@ -20,6 +20,7 @@ Route::post('/delete', 'BookController@delete');
 Route::get('/help', 'HomeController@help');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
+Route::get('/settings.json', 'SettingController@all');
 
 Route::group([ 'prefix' => 'contact' ], function () {
     Route::match([ 'get', 'post' ], '/', 'HomeController@contact');

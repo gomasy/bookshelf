@@ -27,7 +27,7 @@
 import Vue from 'vue';
 import registerForm from './registerForm';
 
-import { Books, Shelves, UserSetting } from '../books/';
+import { Books, Settings } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
@@ -148,15 +148,14 @@ export default {
     },
     created() {
         this.books = new Books(this.$notify);
-        Shelves.get().then(obj => {
-            this.shelves = obj;
+        Settings.get().then(obj => {
+            this.shelves = obj.shelves;
             this.query = JSON.parse(localStorage.getItem('query')) || this.query;
             if (this.query.sid === null) {
-                this.query.sid = obj.find(e => e.name === 'default').id;
+                this.query.sid = obj.shelves.find(e => e.name === 'default').id;
             }
-        });
-        UserSetting.get().then(obj => {
-            switch (obj.display_format) {
+
+            switch (obj.user_setting.display_format) {
             case 1:
                 [ this.viewMode, this.imageSize ] = [ 'album', 'large' ];
                 break;

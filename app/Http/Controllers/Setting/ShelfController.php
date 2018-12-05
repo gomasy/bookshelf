@@ -19,11 +19,15 @@ class ShelfController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request): object
+    /**
+     * 本棚の設定画面のビューを返す
+     *
+     * @return View
+     */
+    public function index(): object
     {
         $shelves = Bookshelf::get()->toArray();
 
-        return $request->ajax() ?
-            response($shelves) : view('settings.shelves.index', compact('shelves'));
+        return view('settings.shelves.index', compact('shelves'));
     }
 }

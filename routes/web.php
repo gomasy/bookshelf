@@ -20,7 +20,6 @@ Route::post('/delete', 'BookController@delete');
 Route::get('/help', 'HomeController@help');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
-Route::get('/settings.json', 'SettingController@all');
 
 Route::group([ 'prefix' => 'contact' ], function () {
     Route::match([ 'get', 'post' ], '/', 'HomeController@contact');
@@ -29,6 +28,7 @@ Route::group([ 'prefix' => 'contact' ], function () {
 
 Route::group([ 'prefix' => 'settings' ], function () {
     Route::redirect('/', '/settings/account');
+    Route::get('/all.json', 'SettingController@all');
 
     Route::group([ 'prefix' => 'account' ], function () {
         Route::get('/', 'Setting\AccountController@index');

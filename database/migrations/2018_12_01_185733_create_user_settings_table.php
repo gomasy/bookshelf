@@ -19,7 +19,6 @@ class CreateUserSettingsTable extends Migration
             $table->integer('id')->unsigned();
             $table->integer('display_format')->unsigned()->default(0);
             $table->integer('animation')->unsigned()->default(0);
-            $table->string('theme')->nullable();
             $table->timestamps();
             $table->foreign('id')
                   ->references('id')->on('users')

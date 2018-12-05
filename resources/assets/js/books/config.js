@@ -1,5 +1,5 @@
 export const options = {
-    credentials: 'include',
+    credentials: 'same-origin',
     headers: {
         'Content-Type': 'application/json',
         'X-Csrf-Token': document.head.querySelector('meta[name="csrf-token"]').content,

@@ -29,7 +29,7 @@ class SettingController extends Controller
     public function all(Request $request): array
     {
         $shelves = Bookshelf::get()->toArray();
-        $user_setting = UserSetting::get()->toArray();
+        $user_setting = UserSetting::find(\Auth::id())->toArray();
 
         return compact('shelves', 'user_setting');
     }

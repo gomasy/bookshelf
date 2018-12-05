@@ -50,8 +50,7 @@ class HomeController extends Controller
             return view('contact.index');
         }
 
-        return view('contact.confirm')
-            ->with('request', $request);
+        return view('contact.confirm', compact('request'));
     }
 
     public function contactSubmit(Request $request): object

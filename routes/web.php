@@ -21,10 +21,6 @@ Route::get('/help', 'HomeController@help');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');
 
-Route::group([ 'prefix' => 'shelves' ], function () {
-    Route::get('/list.json', 'BookshelfController@list');
-});
-
 Route::group([ 'prefix' => 'contact' ], function () {
     Route::match([ 'get', 'post' ], '/', 'HomeController@contact');
     Route::post('/submit', 'HomeController@contactSubmit');
@@ -38,6 +34,10 @@ Route::group([ 'prefix' => 'settings' ], function () {
         Route::post('/update', 'Setting\AccountController@update');
         Route::get('/delete', 'Setting\AccountController@delete');
         Route::post('/delete', 'Setting\AccountController@confirmDelete');
+    });
+
+    Route::group([ 'prefix' => 'shelves' ], function () {
+        Route::get('/', 'Setting\ShelfController@index');
     });
 
     Route::group([ 'prefix' => 'display' ], function () {

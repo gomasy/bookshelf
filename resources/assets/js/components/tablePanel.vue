@@ -140,7 +140,7 @@ export default {
         query: {
             handler(query) {
                 if (query.sid !== null) {
-                    this.fetch(this.query);
+                    this.fetch(query);
                 }
             },
             deep: true,

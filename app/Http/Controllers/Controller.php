@@ -8,20 +8,23 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 
+use App\Bookshelf;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * リクエストがAjaxによるものなのか検証する。
-     * 違う場合は404を返す。
+     * リクエストがあったリソースの取得権限があるか確認する。
      *
      * @return void
      */
-    protected function checkAjax(Request $request): void
+    protected function checkAuthorize(Request $request): void
     {
         if (!$request->ajax()) {
             abort(404);
+        } else if (isset($request->sid) && !Bookshelf::find($request->sid)) {
+            abort(401);
         }
     }
 }

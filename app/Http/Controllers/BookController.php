@@ -96,7 +96,7 @@ class BookController extends Controller
      */
     public function list(Request $request): array
     {
-        $this->checkAjax($request);
+        $this->checkAuthorize($request);
 
         list($books, $count) = $this->search($request, new Book);
         $books = $this->sort($request, $this->paginate($request, $books));
@@ -115,7 +115,7 @@ class BookController extends Controller
      */
     public function create(Request $request): object
     {
-        $this->checkAjax($request);
+        $this->checkAuthorize($request);
 
         $sid = $request->sid ?? Bookshelf::default()->id;
         $book = \Cache::get($request->id);
@@ -140,7 +140,7 @@ class BookController extends Controller
      */
     public function edit(EditRequest $request): object
     {
-        $this->checkAjax($request);
+        $this->checkAuthorize($request);
 
         $book = Book::find($request->id);
         $book->fill($request->all())->save();
@@ -158,7 +158,7 @@ class BookController extends Controller
      */
     public function fetch(FetchRequest $request): object
     {
-        $this->checkAjax($request);
+        $this->checkAuthorize($request);
 
         $book = new Book(\NDL::query($request->code));
         if ($book->title !== null) {
@@ -208,7 +208,7 @@ class BookController extends Controller
      */
     public function delete(DeleteRequest $request): object
     {
-        $this->checkAjax($request);
+        $this->checkAuthorize($request);
 
         \DB::beginTransaction();
         try {

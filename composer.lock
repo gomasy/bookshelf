@@ -3169,7 +3169,7 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.2.0",
+            "version": "v4.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
@@ -3946,16 +3946,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v1.0.8",
+            "version": "v1.0.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "502d400945b152155cc58792edef758717c2edec"
+                "reference": "0287613e09639dd0784de53ca587e665082b7618"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/502d400945b152155cc58792edef758717c2edec",
-                "reference": "502d400945b152155cc58792edef758717c2edec",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/0287613e09639dd0784de53ca587e665082b7618",
+                "reference": "0287613e09639dd0784de53ca587e665082b7618",
                 "shasum": ""
             },
             "require": {
@@ -4005,7 +4005,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2018-12-04T14:31:02+00:00"
+            "time": "2018-12-06T09:39:19+00:00"
         },
         {
             "name": "mockery/mockery",

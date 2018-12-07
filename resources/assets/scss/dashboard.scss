@@ -189,7 +189,7 @@
     display: flex;
     justify-content: center;
     transform: unset;
-    width: 0;
+    width: 375px;
 
     @media(--mobile) {
         margin: auto;
@@ -197,7 +197,6 @@
     }
 
     > img {
-        width: auto;
         height: 500px;
     }
 }

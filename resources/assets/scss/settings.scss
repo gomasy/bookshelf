@@ -1,6 +1,57 @@
 @import './media';
 @import './variables';
 
+.cp_ipcheck {
+    text-align: left;
+
+    > label {
+        display: block;
+        position: relative;
+        padding: 15px 0;
+        padding-right: 35px;
+        cursor: pointer;
+    }
+
+    > input[type='checkbox'] {
+        display: none;
+        position: absolute;
+        visibility: hidden !important;
+
+        & + label {
+            &:before, &:after {
+                position: absolute;
+                top: 50%;
+                box-sizing: border-box;
+                margin-top: -7.5px;
+                content: '';
+            }
+
+            &:before {
+                right: 0;
+                width: 30px;
+                height: 15px;
+                border: 1px solid #e4e3e1;
+                border-radius: 15px;
+                background: #ffffff;
+            }
+
+            &:after {
+                right: 15px;
+                width: 15px;
+                height: 15px;
+                transition: all 200ms ease-out;
+                border-radius: 50%;
+                background: #3b3b3b71;
+            }
+        }
+
+        &:checked + label:after {
+            right: 0;
+            background: #4caf50;
+        }
+    }
+}
+
 .setting-menu {
     @media(--pc) {
         padding-right: 10px;

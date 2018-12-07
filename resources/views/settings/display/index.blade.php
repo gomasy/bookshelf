@@ -12,6 +12,10 @@
                     <option value="1"{{ $setting->display_format === 1 ? ' selected' : '' }}>アルバム</option>
                 </select>
             </div>
+            <div class="form-group cp_ipcheck">
+                <input type="checkbox" name="animation" id="c_ch2"{{ $setting->animation ? ' checked' : '' }}>
+                <label for="c_ch2">アニメーションの有効化</label>
+            </div>
             {{ csrf_field() }}
             <button type="submit" class="btn btn-block btn-primary">更新</button>
         </form>

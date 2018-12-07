@@ -15,7 +15,7 @@
             <editModal ref="edit" :books="books" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
-            <previewModal ref="preview" />
+            <previewModal ref="preview" :settings="settings" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -43,6 +43,7 @@ export default {
     },
     data: () => ({
         books: null,
+        settings: null,
         shelves: [],
         viewMode: '',
         imageSize: 'thumb',
@@ -149,13 +150,15 @@ export default {
     created() {
         this.books = new Books(this.$notify);
         Settings.get().then(obj => {
+            this.settings = obj.user_setting;
             this.shelves = obj.shelves;
             this.query = JSON.parse(localStorage.getItem('query')) || this.query;
+
             if (this.query.sid === null) {
-                this.query.sid = obj.shelves.find(e => e.name === 'default').id;
+                this.query.sid = this.shelves.find(e => e.name === 'default').id;
             }
 
-            switch (obj.user_setting.display_format) {
+            switch (this.settings.display_format) {
             case 1:
                 [ this.viewMode, this.imageSize ] = [ 'album', 'large' ];
                 break;

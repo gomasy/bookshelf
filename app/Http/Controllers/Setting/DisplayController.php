@@ -41,6 +41,10 @@ class DisplayController extends Controller
     {
         $setting = UserSetting::find(\Auth::id());
         $setting->fill($request->all());
+
+        if ($setting->animation !== null) {
+            $setting->animation = $setting->animation !== 'on' ? 0 : 1;
+        }
         $setting->save();
 
         return redirect('/');

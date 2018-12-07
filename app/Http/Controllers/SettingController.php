@@ -28,6 +28,8 @@ class SettingController extends Controller
      */
     public function all(Request $request): array
     {
+        $this->checkAuthorize($request);
+
         $shelves = Bookshelf::get()->toArray();
         $user_setting = UserSetting::find(\Auth::id())->toArray();
 

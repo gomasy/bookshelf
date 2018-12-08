@@ -50,7 +50,7 @@ export default class {
             const resp = await this.request('/create', reqOptions);
             notify(this.notify, resp);
 
-            return resp.json();
+            return await resp.json();
         } catch (e) {
             notify(this.notify, e);
         }

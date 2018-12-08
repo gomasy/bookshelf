@@ -25,17 +25,18 @@
 </template>
 
 <script>
+import { Books } from '../../books/';
+
 export default {
-    props: [ 'books' ],
     data: () => ({
         items: {},
     }),
     methods: {
         open() {
-            this.items = Object.assign({}, this.$parent.selection[0]);
+            this.items = {...this.$parent.selection[0]};
         },
         submit() {
-            this.books.edit(this.items, () => {
+            (new Books()).edit(this.items).then(() => {
                 this.$parent.columns.map(col => {
                     this.$parent.selection[0][col.field] = this.items[col.field];
                 });

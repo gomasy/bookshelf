@@ -1,9 +1,9 @@
 import { options } from './config';
 
 export default class {
-    static get() {
-        return fetch('/settings/all.json', options).then(async response => {
-            return await response.json();
-        });
+    static async get() {
+        const resp = await fetch('/settings/all.json', options);
+
+        return await resp.json();
     }
 }

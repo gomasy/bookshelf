@@ -8,70 +8,59 @@ export default class {
     }
 
     postOptions(body) {
-        const postOptions = Object.assign({}, this.options);
+        const postOptions = {...this.options};
         postOptions['method'] = 'post';
         postOptions['body'] = JSON.stringify(body);
 
         return postOptions;
     }
 
-    fetch(query, callback) {
+    async request(path, options) {
+        const resp = await fetch(path, options);
+
+        if (!resp.ok) {
+            return Promise.reject(resp);
+        }
+
+        return resp;
+    }
+
+    async fetch(query) {
         let url = '/list.json?';
         if (query !== undefined) {
             Object.keys(query).map(k => url += k + '=' + query[k] + '&');
         }
+        const resp = await this.request(url.substring(url.length - 1, -1), this.options);
 
-        fetch(url.substring(url.length - 1, -1), this.options).then(async response => {
-            if (!response.ok) {
-                return Promise.reject(response);
-            }
-
-            return await response.json();
-        }).then(result => callback(result));
+        return await resp.json();
     }
 
-    before_create(code, callback) {
-        fetch('/fetch?code=' + code, this.options).then(async response => {
-            if (!response.ok) {
-                return Promise.reject(response);
-            }
-
-            callback(await response.json(), response.headers.get('X-Request-Id'));
-        }).catch(async e => notify(this.notify, await e));
+    async before_create(code, callback) {
+        try {
+            const resp = await this.request('/fetch?code=' + code, this.options);
+            callback(await resp.json(), resp.headers.get('X-Request-Id'));
+        } catch (e) {
+            notify(this.notify, e);
+        }
     }
 
-    create(entry, reqId, sid) {
-        const reqOptions = this.postOptions({ 'id': reqId, 'sid': sid });
-        return fetch('/create', reqOptions).then(async response => {
-            notify(this.notify, await response);
+    async create(entry, reqId, sid) {
+        try {
+            const reqOptions = this.postOptions({ 'id': reqId, 'sid': sid });
+            const resp = await this.request('/create', reqOptions);
+            notify(this.notify, resp);
 
-            if (!response.ok) {
-                return Promise.reject(response);
-            }
-
-            return await response.json();
-        });
+            return resp.json();
+        } catch (e) {
+            notify(this.notify, e);
+        }
     }
 
-    delete(ids, callback) {
-        const reqOptions = this.postOptions({ ids: ids });
-        fetch('/delete', reqOptions).then(response => {
-            if (!response.ok) {
-                return Promise.reject(response);
-            }
-
-            callback();
-        });
+    async delete(ids) {
+        return await this.request('/delete', this.postOptions({ ids: ids }));
     }
 
-    edit(entry, callback) {
-        const reqOptions = this.postOptions(entry);
-        fetch('/edit', reqOptions).then(response => {
-            if (!response.ok) {
-                return Promise.reject(response);
-            }
-
-            callback();
-        });
+    async edit(entry) {
+        return await this.request('/edit', this.postOptions(entry));
     }
 }

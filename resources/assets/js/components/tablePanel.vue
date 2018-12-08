@@ -12,7 +12,7 @@
             </div>
         </div>
         <div id="modal">
-            <editModal ref="edit" :books="books" />
+            <editModal ref="edit" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
             <previewModal ref="preview" :settings="settings" />
@@ -25,9 +25,10 @@
 /* eslint "vue/no-unused-components":0 */
 
 import Vue from 'vue';
+import { mapActions, mapState } from 'vuex';
 import registerForm from './registerForm';
 
-import { Books, Settings } from '../books/';
+import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
 
@@ -43,10 +44,6 @@ export default {
     },
     data: () => ({
         books: null,
-        settings: null,
-        shelves: [],
-        viewMode: '',
-        imageSize: 'thumb',
         columns: [
             {
                 field: 'images',
@@ -97,9 +94,20 @@ export default {
         supportBackup: true,
         total: 0,
     }),
+    computed: {
+        ...mapState({
+            settings: 'settings',
+            shelves: 'shelves',
+            viewMode: 'viewMode',
+            imageSize: 'imageSize',
+        }),
+    },
     methods: {
+        ...mapActions({
+            getSettings: 'getSettings',
+        }),
         fetch(query) {
-            this.books.fetch(query, result => {
+            this.books.fetch(query).then(result => {
                 this.data = result.data;
                 this.total = result.total;
             });
@@ -131,7 +139,7 @@ export default {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
             this.$refs.confirm.open(items => {
-                this.books.delete(items, () => this.fetch(this.query));
+                this.books.delete(items).then(() => this.fetch(this.query));
             }, {
                 template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
             }, ids);
@@ -149,18 +157,15 @@ export default {
     },
     created() {
         this.books = new Books(this.$notify);
-        Settings.get().then(obj => {
-            this.settings = obj.user_setting;
-            this.shelves = obj.shelves;
+        this.getSettings().then(() => {
             this.query = JSON.parse(localStorage.getItem('query')) || this.query;
-
-            if (this.query.sid === null) {
+            if (this.query.sid === undefined || this.query.sid === null) {
                 this.query.sid = this.shelves.find(e => e.name === 'default').id;
             }
 
             switch (this.settings.display_format) {
             case 1:
-                [ this.viewMode, this.imageSize ] = [ 'album', 'large' ];
+                this.$store.dispatch('setViewMode', { mode: 'album', size: 'large' });
                 break;
             }
         });

@@ -8,9 +8,11 @@ Vue.use(Datatable);
 
 import '../scss/dashboard.scss';
 import tablePanel from './components/tablePanel';
+import store from './store/';
 
 new Vue({
     el: '#content',
-    components: { tablePanel },
     template: '<tablePanel />',
+    components: { tablePanel },
+    store,
 });

@@ -1,0 +1,40 @@
+[
+    {
+        "field": "images",
+        "type": "hidden",
+        "tdComp": "tdImage",
+        "thStyle": "width: 52px"
+    },
+    {
+        "title": "タイトル",
+        "field": "title",
+        "sortable": true,
+        "thComp": "thFilter",
+        "thStyle": "width: 40%",
+        "required": true
+    },
+    {
+        "title": "巻号",
+        "field": "volume",
+        "thStyle": "width: 20%"
+    },
+    {
+        "title": "著者等",
+        "field": "authors",
+        "sortable": true,
+        "thComp": "thFilter",
+        "thStyle": "width: 15%",
+        "required": true
+    },
+    {
+        "title": "出版社",
+        "field": "publisher",
+        "hStyle": "width: 20%",
+        "visible": true
+    },
+    {
+        "title": "価格",
+        "field": "price",
+        "visible": false
+    }
+]

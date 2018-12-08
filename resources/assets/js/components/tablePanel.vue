@@ -26,11 +26,11 @@
 
 import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
-import registerForm from './registerForm';
-
 import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
+import registerForm from './registerForm';
+import columns from './columns.json';
 
 export default {
     components: {
@@ -44,46 +44,7 @@ export default {
     },
     data: () => ({
         books: null,
-        columns: [
-            {
-                field: 'images',
-                type: 'hidden',
-                tdComp: 'tdImage',
-                thStyle: 'width: 52px',
-            },
-            {
-                title: 'タイトル',
-                field: 'title',
-                sortable: true,
-                thComp: 'thFilter',
-                thStyle: 'width: 40%',
-                required: true,
-            },
-            {
-                title: '巻号',
-                field: 'volume',
-                thStyle: 'width: 20%',
-            },
-            {
-                title: '著者等',
-                field: 'authors',
-                sortable: true,
-                thComp: 'thFilter',
-                thStyle: 'width: 15%',
-                required: true,
-            },
-            {
-                title: '出版社',
-                field: 'publisher',
-                hStyle: 'width: 20%',
-                visible: true,
-            },
-            {
-                title: '価格',
-                field: 'price',
-                visible: false,
-            },
-        ],
+        columns: columns,
         data: [],
         query: {
             limit: 20,
@@ -173,8 +134,8 @@ export default {
     mounted() {
         new Vue({
             el: '#register',
-            components: { registerForm },
             template: '<registerForm :table="table" />',
+            components: { registerForm },
             data: () => ({
                 table: this,
             }),

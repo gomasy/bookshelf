@@ -33,8 +33,8 @@ export default {
             new Vue({
                 components: { confirmBody },
                 el: '#confirm-body',
-                template: '<confirmBody :book="book" />',
-                data: () => ({ book: items }),
+                template: '<confirmBody :items="items" />',
+                data: () => ({ items: items }),
             });
 
             $('#confirm-modal').modal('show');

@@ -88,7 +88,7 @@ class AccountController extends Controller
             return redirect('/');
         } else {
             return view('settings.account.delete')
-                ->withErrors([ 'password' => __('settings.account.incorrect') ]);
+                ->withErrors([ 'password' => 'パスワードが一致しません。' ]);
         }
     }
 }

@@ -123,6 +123,18 @@
     }
 }
 
+.unread {
+    background-color: $yellow;
+}
+
+.reading {
+    background-color: $blue;
+}
+
+.already-read {
+    background-color: $green;
+}
+
 .navbar-buttons {
     @media(--mobile) {
         display: flex;

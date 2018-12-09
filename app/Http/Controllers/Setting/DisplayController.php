@@ -42,8 +42,10 @@ class DisplayController extends Controller
         $setting = UserSetting::find(\Auth::id());
         $setting->fill($request->all());
 
-        if ($setting->animation !== null) {
-            $setting->animation = $setting->animation !== 'on' ? 0 : 1;
+        foreach ([ 'animation', 'status' ] as $field) {
+            if ($setting[$field] !== null) {
+                $setting[$field] = $setting[$field] !== 'on' ? 0 : 1;
+            }
         }
         $setting->save();
 

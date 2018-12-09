@@ -13,6 +13,14 @@
                                 <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required">
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">ステータス</label>
+                            <div class="col-sm-9">
+                                <select class="form-control" v-model="items.status_id">
+                                    <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
@@ -25,20 +33,27 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
 import { Books } from '../../books/';
 
 export default {
+    props: [ 'selection' ],
     data: () => ({
         items: {},
     }),
+    computed: {
+        ...mapState({
+            statuses: 'statuses',
+        }),
+    },
     methods: {
         open() {
-            this.items = { ...this.$parent.selection[0] };
+            this.items = { ...this.selection[0] };
         },
         submit() {
             (new Books()).edit(this.items).then(() => {
-                this.$parent.columns.map(col => {
-                    this.$parent.selection[0][col.field] = this.items[col.field];
+                Object.keys(this.selection[0]).map(key => {
+                    this.selection[0][key] = this.items[key];
                 });
                 $('#edit-modal').modal('hide');
             });

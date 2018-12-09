@@ -5442,9 +5442,9 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue2-datatable-component@^2.3.1:
+"vue2-datatable-component@https://github.com//vue2-datatable.git":
   version "2.3.1"
-  resolved "https://registry.yarnpkg.com/vue2-datatable-component/-/vue2-datatable-component-2.3.1.tgz#557346375dfb013ea2eeeaee14701a97458e1d28"
+  resolved "https://github.com//vue2-datatable.git#4bebed710a185195adaeec9fcf542cafbc40f118"
   dependencies:
     lodash "^4.17.4"
 

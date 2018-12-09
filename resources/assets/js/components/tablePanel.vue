@@ -12,7 +12,7 @@
             </div>
         </div>
         <div id="modal">
-            <editModal ref="edit" />
+            <editModal ref="edit" :selection="selection" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
             <previewModal ref="preview" />
@@ -43,6 +43,7 @@ export default {
         thFilter,
     },
     data: () => ({
+        'tbl-class': '',
         books: null,
         columns: columns,
         data: [],
@@ -67,8 +68,28 @@ export default {
         ...mapActions({
             getSettings: 'getSettings',
         }),
+        updateStatus(data) {
+            if (this.settings.status) {
+                data.map(e => {
+                    switch (e.status_id) {
+                    case 1:
+                        e.trClass = 'unread';
+                        break;
+                    case 2:
+                        e.trClass = 'reading';
+                        break;
+                    case 3:
+                        e.trClass = 'already-read';
+                        break;
+                    }
+                });
+            } else {
+                this['tbl-class'] = 'table-striped table-hover';
+            }
+        },
         fetch(query) {
             this.books.fetch(query).then(result => {
+                this.updateStatus(result.data);
                 this.data = result.data;
                 this.total = result.total;
             });
@@ -115,6 +136,12 @@ export default {
             },
             deep: true,
         },
+        selection: {
+            handler(data) {
+                this.updateStatus(data);
+            },
+            deep: true,
+        },
     },
     created() {
         this.books = new Books(this.$notify);
@@ -134,10 +161,10 @@ export default {
     mounted() {
         new Vue({
             el: '#register',
-            template: '<registerForm :reader="reader" />',
+            template: '<registerForm :table="table" />',
             components: { registerForm },
             data: () => ({
-                reader: this.reader,
+                table: this,
             }),
         });
     },

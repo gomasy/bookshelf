@@ -19,6 +19,7 @@ class CreateUserSettingsTable extends Migration
             $table->integer('id')->unsigned();
             $table->integer('display_format')->unsigned()->default(0);
             $table->integer('animation')->unsigned()->default(0);
+            $table->integer('status')->unsigned()->default(1);
             $table->timestamps();
             $table->foreign('id')
                   ->references('id')->on('users')

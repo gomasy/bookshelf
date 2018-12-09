@@ -2,6 +2,7 @@ import * as types from './mutation-types';
 
 export default {
     [types.SET_SETTINGS](state, payload) {
+        state.statuses = payload.statuses;
         state.settings = payload.user_setting;
         state.shelves = payload.shelves;
     },

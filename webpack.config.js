@@ -56,6 +56,10 @@ module.exports = {
             chunks: 'initial',
         },
     },
+    performance: {
+        maxEntrypointSize: 1024000,
+        maxAssetSize: 1024000,
+    },
     plugins: [
         new webpack.ProvidePlugin({
             $: 'jquery',

@@ -12,7 +12,7 @@ class UserSetting extends Model
      * @var array
      */
     protected $fillable = [
-        'id', 'display_format', 'animation',
+        'id', 'display_format', 'animation', 'status',
     ];
 
     /**

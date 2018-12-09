@@ -4,13 +4,13 @@
             <input class="form-control" id="code" type="text" placeholder="ISBN or JP番号" v-model="code" required>
             <button class="btn btn-info" type="submit">登録する</button>
         </form>
-        <button data-toggle="modal" data-target="#camera-modal" class="btn btn-warning" @click="reader()">読み取る</button>
+        <button data-toggle="modal" data-target="#camera-modal" class="btn btn-warning" @click="reader">読み取る</button>
     </div>
 </template>
 
 <script>
 export default {
-    props: [ 'reader' ],
+    props: [ 'table' ],
     data: () => ({
         code: '',
     }),
@@ -20,6 +20,9 @@ export default {
                 this.table.create(result, reqId);
                 this.code = '';
             }, this.code);
+        },
+        reader() {
+            this.table.reader();
         },
     },
 };

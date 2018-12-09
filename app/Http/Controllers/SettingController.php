@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Bookshelf;
 use App\UserSetting;
+use App\Status;
 
 class SettingController extends Controller
 {
@@ -30,9 +31,10 @@ class SettingController extends Controller
     {
         $this->checkAuthorize($request);
 
+        $statuses = Status::get()->toArray();
         $shelves = Bookshelf::get()->toArray();
         $user_setting = UserSetting::find(\Auth::id())->toArray();
 
-        return compact('shelves', 'user_setting');
+        return compact('statuses', 'shelves', 'user_setting');
     }
 }

@@ -33,7 +33,7 @@ export default {
     }),
     methods: {
         open() {
-            this.items = {...this.$parent.selection[0]};
+            this.items = { ...this.$parent.selection[0] };
         },
         submit() {
             (new Books()).edit(this.items).then(() => {

@@ -8,7 +8,7 @@ export default class {
     }
 
     postOptions(body) {
-        const postOptions = {...this.options};
+        const postOptions = { ...this.options };
         postOptions['method'] = 'post';
         postOptions['body'] = JSON.stringify(body);
 

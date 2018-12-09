@@ -15,7 +15,7 @@
             <editModal ref="edit" />
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
-            <previewModal ref="preview" :settings="settings" />
+            <previewModal ref="preview" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -90,7 +90,7 @@ export default {
                 this.total++;
             }
         },
-        readerProxy() {
+        reader() {
             this.$refs.camera.start();
         },
         edit() {
@@ -134,10 +134,10 @@ export default {
     mounted() {
         new Vue({
             el: '#register',
-            template: '<registerForm :table="table" />',
+            template: '<registerForm :reader="reader" />',
             components: { registerForm },
             data: () => ({
-                table: this,
+                reader: this.reader,
             }),
         });
     },

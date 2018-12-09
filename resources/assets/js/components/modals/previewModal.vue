@@ -7,12 +7,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
-    props: [ 'settings' ],
     data: () => ({
         image: null,
         animation: '',
     }),
+    computed: {
+        ...mapState({
+            'settings': 'settings',
+        }),
+    },
     methods: {
         open(image) {
             if (parseInt(this.settings.animation)) {

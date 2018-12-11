@@ -228,4 +228,6 @@ return [
 
     ],
 
+    'font' => env('APP_FONT', '/usr/share/fonts/OTF/ipag.ttf'),
+
 ];

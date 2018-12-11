@@ -22,8 +22,11 @@ after_success:
       tar cvf build.tar.gz .;
       curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy;
     fi
+sudo: false
 addons:
   apt:
+    packages:
+      - fonts-ipafont-gothic
     update: true
 branches:
   except:

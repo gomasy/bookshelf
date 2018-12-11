@@ -189,8 +189,8 @@ class BookController extends Controller
         $key = md5($request->path());
         $image = \Cache::store('file')->get($key);
         if ($image === null) {
-            $image = \AmazonImages::fetch($request->path());
-            \Cache::store('file')->put($key, $image, 1440);
+            $image = \AmazonImages::fetch($request->path(), $request->text);
+            \Cache::store('file')->put($key, $image, 10080);
         }
 
         return response($image)->withHeaders([

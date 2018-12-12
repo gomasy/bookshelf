@@ -104,7 +104,7 @@ class AmazonImages
     protected function getTextBoxSize(string $text, array $size): array
     {
         // テキストボックスの幅と高さを取得
-        $box = imagettfbbox($size[2], 0, env('APP_FONT'), $text);
+        $box = imagettfbbox($size[2], 0, config('app.font'), $text);
         $width = $box[2] - $box[6];
         $height = $box[3] - $box[7];
 
@@ -137,7 +137,7 @@ class AmazonImages
 
         // 文字を描画
         $xy = $this->getTextBoxSize($text, $size);
-        imagettftext($canvas, $size[2], 0, $xy[0], $xy[1], $text_color, env('APP_FONT'), $text);
+        imagettftext($canvas, $size[2], 0, $xy[0], $xy[1], $text_color, config('app.font'), $text);
 
         return $this->imageToJpeg($canvas, 100);
     }

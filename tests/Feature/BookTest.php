@@ -56,11 +56,11 @@ class BookTest extends TestCase
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
         $user = factory(User::class)->create();
-        factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
 
         // success
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=9784873115382', $headers)
+                   ->get("/fetch?sid={$shelf->id}&code=9784873115382", $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -70,7 +70,7 @@ class BookTest extends TestCase
 
         // success (isbn10)
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=4000801139', $headers)
+                   ->get("/fetch?sid={$shelf->id}&code=4000801139", $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -80,7 +80,7 @@ class BookTest extends TestCase
 
         // success (jpno)
         $id = $this->actingAs($user)
-                   ->get('/fetch?code=22222222', $headers)
+                   ->get("/fetch?sid={$shelf->id}&code=22222222", $headers)
                    ->headers->get('X-Request-Id');
 
         $this->actingAs($user)
@@ -90,21 +90,21 @@ class BookTest extends TestCase
 
         // dups
         $this->actingAs($user)
-             ->get('/fetch?code=4873115388', $headers)
+             ->get("/fetch?sid={$shelf->id}&code=4873115388", $headers)
              ->assertStatus(409);
 
         // not found
         $this->actingAs($user)
-             ->get('/fetch?code=1234567890128', $headers)
+             ->get("/fetch?sid={$shelf->id}&code=1234567890128", $headers)
              ->assertStatus(404);
 
         // invalid
         $this->actingAs($user)
-             ->get('/fetch?code=1234567890123', $headers)
+             ->get("/fetch?sid={$shelf->id}&code=1234567890123", $headers)
              ->assertSessionHasErrors('code');
 
         $this->actingAs($user)
-             ->get('/fetch?code=', $headers)
+             ->get("/fetch?sid={$shelf->id}&code=", $headers)
              ->assertSessionHasErrors('code');
 
         $this->actingAs($user)

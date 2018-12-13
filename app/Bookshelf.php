@@ -39,6 +39,6 @@ class Bookshelf extends Model
 
     public function scopeDefault(Builder $query)
     {
-        return $query->first();
+        return $query->where('name', 'default');
     }
 }

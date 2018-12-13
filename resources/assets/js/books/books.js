@@ -1,28 +1,10 @@
+import Request from './request';
 import notify from './notify';
 import { options } from './config';
 
 export default class {
     constructor(notifyVue) {
         this.notify = notifyVue;
-        this.options = options;
-    }
-
-    postOptions(body) {
-        const postOptions = { ...this.options };
-        postOptions['method'] = 'post';
-        postOptions['body'] = JSON.stringify(body);
-
-        return postOptions;
-    }
-
-    async request(path, options) {
-        const resp = await fetch(path, options);
-
-        if (!resp.ok) {
-            return Promise.reject(resp);
-        }
-
-        return resp;
     }
 
     async fetch(query) {
@@ -30,24 +12,24 @@ export default class {
         if (query !== undefined) {
             Object.keys(query).map(k => url += k + '=' + query[k] + '&');
         }
-        const resp = await this.request(url.substring(url.length - 1, -1), this.options);
+        const resp = await Request.exec(url.substring(url.length - 1, -1), options);
 
         return await resp.json();
     }
 
-    async before_create(code, callback) {
+    async before_create(sid, code, callback) {
         try {
-            const resp = await this.request('/fetch?code=' + code, this.options);
+            const resp = await Request.exec('/fetch?sid=' + sid + '&code=' + code, options);
             callback(await resp.json(), resp.headers.get('X-Request-Id'));
         } catch (e) {
             notify(this.notify, e);
         }
     }
 
-    async create(entry, reqId, sid) {
+    async create(entry, reqId) {
         try {
-            const reqOptions = this.postOptions({ 'id': reqId, 'sid': sid });
-            const resp = await this.request('/create', reqOptions);
+            const reqOptions = Request.postOptions({ 'id': reqId });
+            const resp = await Request.exec('/create', reqOptions);
             notify(this.notify, resp);
 
             return await resp.json();
@@ -57,10 +39,10 @@ export default class {
     }
 
     async delete(ids) {
-        return await this.request('/delete', this.postOptions({ ids: ids }));
+        return await Request.exec('/delete', Request.postOptions({ ids: ids }));
     }
 
     async edit(entry) {
-        return await this.request('/edit', this.postOptions(entry));
+        return await Request.exec('/edit', Request.postOptions(entry));
     }
 }

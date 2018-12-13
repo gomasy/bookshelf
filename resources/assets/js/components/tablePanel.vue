@@ -3,11 +3,13 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <datatable v-bind="$data">
-                    <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" :disabled="selection.length != 1" @click="edit">編集</button>
-                    <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
-                    <select class="form-control select-shelves" v-model="query.sid">
-                        <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
-                    </select>
+                    <div class="table-buttons">
+                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" :disabled="selection.length != 1" @click="edit">編集</button>
+                        <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
+                        <select class="form-control select-shelves" v-model="query.sid">
+                            <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
+                        </select>
+                    </div>
                 </datatable>
             </div>
         </div>
@@ -34,7 +36,6 @@ import columns from './columns.json';
 
 export default {
     components: {
-        addConfirmBody,
         cameraModal,
         confirmModal,
         editModal,
@@ -70,7 +71,7 @@ export default {
         }),
         updateStatus(data) {
             if (this.settings.status) {
-                data.map(e => {
+                (data || this.data).map(e => {
                     switch (e.status_id) {
                     case 1:
                         e.trClass = 'unread';
@@ -96,7 +97,7 @@ export default {
             localStorage.setItem('query', JSON.stringify(query));
         },
         before_create(callback, code, confirmed) {
-            this.books.before_create(code, (entry, reqId) => {
+            this.books.before_create(this.query.sid, code, (entry, reqId) => {
                 if (confirmed) {
                     this.create(entry, reqId);
                     callback(entry, reqId);
@@ -106,9 +107,10 @@ export default {
             });
         },
         create(entry, reqId) {
-            if (this.books.create(entry, reqId, this.query.sid)) {
+            if (this.books.create(entry, reqId)) {
                 this.data.push(entry);
                 this.total++;
+                this.updateStatus();
             }
         },
         reader() {

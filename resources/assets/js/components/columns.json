@@ -29,8 +29,8 @@
     {
         "title": "出版社",
         "field": "publisher",
-        "hStyle": "width: 20%",
-        "visible": true
+        "thComp": "thFilter",
+        "thStyle": "width: 20%"
     },
     {
         "title": "価格",

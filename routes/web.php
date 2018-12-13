@@ -39,6 +39,8 @@ Route::group([ 'prefix' => 'settings' ], function () {
 
     Route::group([ 'prefix' => 'shelves' ], function () {
         Route::get('/', 'Setting\ShelfController@index');
+        Route::post('/create', 'Setting\ShelfController@create');
+        Route::post('/delete', 'Setting\ShelfController@delete');
     });
 
     Route::group([ 'prefix' => 'display' ], function () {

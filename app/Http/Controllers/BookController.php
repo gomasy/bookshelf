@@ -37,6 +37,20 @@ class BookController extends Controller
     }
 
     /**
+     * 指定した本が既に登録されているか
+     *
+     * @param Request $request
+     * @param Book $book
+     * @return bool
+     */
+    protected function checkConflict(Request $request, Book $book): bool
+    {
+        return (bool)Book::shelves($request->sid)->where(function ($query) use ($book) {
+            $query->where('isbn', $book->isbn)->orWhere('jpno', $book->jpno);
+        })->count();
+    }
+
+    /**
      * 本の検索
      *
      * @param Request $request
@@ -162,10 +176,10 @@ class BookController extends Controller
 
         $book = new Book(\NDL::query($request->code));
         if ($book->title !== null) {
-            $count = Book::shelves($request->sid)->where(function ($query) use ($book) {
-                $query->where('isbn', $book->isbn)->orWhere('jpno', $book->jpno);
-            })->count();
-            if ($count) {
+            $book->bookshelf_id = (int)$request->sid;
+            $book->status_id = 1;
+
+            if ($this->checkConflict($request, $book)) {
                 return response($book, 409);
             }
 

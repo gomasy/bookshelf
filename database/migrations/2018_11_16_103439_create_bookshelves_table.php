@@ -20,6 +20,7 @@ class CreateBookshelvesTable extends Migration
                   ->references('id')->on('users')
                   ->onDelete('cascade');
             $table->string('name');
+            $table->unique([ 'user_id', 'name' ]);
         });
 
         Schema::table('books', function (Blueprint $table) {

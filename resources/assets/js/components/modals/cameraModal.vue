@@ -34,7 +34,7 @@ export default {
             locate: true,
             interval: null,
         },
-        isConfirm: false,
+        isConfirm: true,
         created: [],
     }),
     methods: {
@@ -87,7 +87,7 @@ export default {
         },
         create(code) {
             if (this.created.indexOf(code) < 0) {
-                if (!this.isConfirm) {
+                if (this.isConfirm) {
                     $('#camera-modal').modal('hide');
                     $('#app-navbar-collapse').collapse('toggle');
                     this.isCreate = true;

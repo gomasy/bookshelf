@@ -139,11 +139,11 @@ class BookController extends Controller
 
                 return response($book);
             } catch (QueryException $e) {
-                return response([], 500);
+                abort(500);
             }
         }
 
-        return response([], 400);
+        abort(400);
     }
 
     /**
@@ -189,7 +189,7 @@ class BookController extends Controller
             return response($book)->header('X-Request-Id', $cid);
         }
 
-        return response([], 404);
+        abort(404);
     }
 
     /**

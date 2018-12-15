@@ -23,7 +23,7 @@ class Controller extends BaseController
     {
         if (!$request->ajax()) {
             abort(404);
-        } else if (isset($request->sid) && !Bookshelf::find($request->sid)) {
+        } elseif (isset($request->sid) && !Bookshelf::find($request->sid)) {
             abort(401);
         }
     }

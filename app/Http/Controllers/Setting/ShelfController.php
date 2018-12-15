@@ -48,7 +48,7 @@ class ShelfController extends Controller
                 return response(null, 204);
             }
         } catch (QueryException $e) {
-            abort(409);
+            abort(403);
         }
 
         abort(400);

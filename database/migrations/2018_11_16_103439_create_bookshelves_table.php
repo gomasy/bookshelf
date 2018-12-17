@@ -28,7 +28,7 @@ class CreateBookshelvesTable extends Migration
                   ->nullable()->after('user_id');
             $table->foreign('bookshelf_id')
                   ->references('id')->on('bookshelves')
-                  ->onDelete('set null');
+                  ->onDelete('cascade');
         });
 
         foreach (\DB::table('users')->get() as $user) {

@@ -31,9 +31,13 @@ class BookController extends Controller
      *
      * @return array
      */
-    protected function appendHeader(array $book, int $sid): array
+    protected function appendHeader(array $book, int $sid): object
     {
-        return array_merge([ 'bookshelf_id' => $sid ], $book);
+        $book = new Book($book);
+        $book->bookshelf_id = $sid;
+        $book->status_id = 1;
+
+        return $book;
     }
 
     /**
@@ -127,23 +131,28 @@ class BookController extends Controller
      * @param Request $request
      * @param return Book|Response
      */
-    public function create(Request $request): object
+    public function create(Request $request): array
     {
         $this->checkAuthorize($request);
 
         $sid = $request->sid ?? Bookshelf::default()->id;
-        $book = \Cache::get($request->id);
-        if ($book) {
-            try {
-                Book::create($this->appendHeader($book, $sid));
+        $books = $request->toArray();
+        if (!count($books)) {
+            abort(400);
+        }
 
-                return response($book);
+        return \DB::transaction(function () use ($books, $sid) {
+            try {
+                for ($i = 0; $i < count($books); $i++) {
+                    $books[$i] = $this->appendHeader($books[$i], $sid);
+                    $books[$i]->save();
+                }
+
+                return $books;
             } catch (QueryException $e) {
                 abort(500);
             }
-        }
-
-        abort(400);
+        });
     }
 
     /**
@@ -173,20 +182,14 @@ class BookController extends Controller
     public function fetch(FetchRequest $request): object
     {
         $this->checkAuthorize($request);
+        $books = \NDL::query($request->code ?? $request->input, $request->type);
 
-        $book = new Book(\NDL::query($request->code));
-        if ($book->title !== null) {
-            $book->bookshelf_id = (int)$request->sid;
-            $book->status_id = 1;
-
-            if ($this->checkConflict($request, $book)) {
-                return response($book, 409);
+        if (count($books)) {
+            if (isset($request->code) && $this->checkConflict($request, $books[0])) {
+                return response($books, 409);
             }
 
-            $cid = md5($book->isbn . $book->jpno);
-            \Cache::put($cid, $book->toArray(), 5);
-
-            return response($book)->header('X-Request-Id', $cid);
+            return response($books);
         }
 
         abort(404);
@@ -224,15 +227,16 @@ class BookController extends Controller
     {
         $this->checkAuthorize($request);
 
-        \DB::beginTransaction();
-        try {
-            if (!Book::destroy($request->ids)) {
-                return response(\DB::rollback(), 400);
+        \DB::transaction(function () use ($request) {
+            try {
+                if (!Book::destroy($request->ids)) {
+                    abort(400);
+                }
+            } catch (QueryException $e) {
+                abort(500);
             }
+        });
 
-            return response(\DB::commit(), 204);
-        } catch (QueryException $e) {
-            return response(\DB::rollback(), 500);
-        }
+        return response(null, 204);
     }
 }

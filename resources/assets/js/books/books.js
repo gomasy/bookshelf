@@ -7,29 +7,31 @@ export default class {
         this.notify = notifyVue;
     }
 
+    getUrl(url, query) {
+        url += '?';
+        Object.keys(query).map(k => url += k + '=' + query[k] + '&');
+
+        return url.substring(url.length - 1, -1);
+    }
+
     async fetch(query) {
-        let url = '/list.json?';
-        if (query !== undefined) {
-            Object.keys(query).map(k => url += k + '=' + query[k] + '&');
-        }
-        const resp = await Request.exec(url.substring(url.length - 1, -1), options);
+        const resp = await Request.exec(this.getUrl('/list.json', query), options);
 
         return await resp.json();
     }
 
-    async before_create(sid, code, callback) {
+    async beforeCreate(query, callback) {
         try {
-            const resp = await Request.exec('/fetch?sid=' + sid + '&code=' + code, options);
-            callback(await resp.json(), resp.headers.get('X-Request-Id'));
+            const resp = await Request.exec(this.getUrl('/fetch', query), options);
+            callback(await resp.json());
         } catch (e) {
             notify(this.notify, e);
         }
     }
 
-    async create(entry, reqId) {
+    async create(entry) {
         try {
-            const reqOptions = Request.postOptions({ 'id': reqId });
-            const resp = await Request.exec('/create', reqOptions);
+            const resp = await Request.exec('/create', Request.postOptions(entry));
             notify(this.notify, resp);
 
             return await resp.json();

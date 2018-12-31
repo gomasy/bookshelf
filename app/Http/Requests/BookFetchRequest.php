@@ -29,9 +29,8 @@ class BookFetchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'code' => [
+            'input' => [
                 'required',
-                'regex:/^(.{8}|.{10}|.{13})$/',
                 new CorrectCheckDigit,
             ],
         ];

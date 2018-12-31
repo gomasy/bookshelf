@@ -18,6 +18,7 @@
             <cameraModal ref="camera" />
             <confirmModal ref="confirm" />
             <previewModal ref="preview" />
+            <selectorModal ref="selector" />
         </div>
         <notifications position="bottom right" />
     </main>
@@ -30,7 +31,7 @@ import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
 import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
-import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal } from './modals/';
+import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal, selectorModal } from './modals/';
 import registerForm from './registerForm';
 import columns from './columns.json';
 
@@ -40,19 +41,21 @@ export default {
         confirmModal,
         editModal,
         previewModal,
+        selectorModal,
         tdImage,
         thFilter,
     },
     data: () => ({
         'tbl-class': '',
         books: null,
+        register: null,
         columns: columns,
         data: [],
+        selection: [],
         query: {
             limit: 20,
             sid: null,
         },
-        selection: [],
         pageSizeOptions: [ 10, 20, 50, 100 ],
         supportBackup: true,
         total: 0,
@@ -96,22 +99,31 @@ export default {
             });
             localStorage.setItem('query', JSON.stringify(query));
         },
-        before_create(callback, code, confirmed) {
-            this.books.before_create(this.query.sid, code, (entry, reqId) => {
+        beforeCreate(callback, input, confirmed) {
+            const type = this.register.$children[0].type;
+            const query = { 'sid': this.query.sid, 'input': input, 'type': type };
+
+            this.books.beforeCreate(query, entry => {
                 if (confirmed) {
-                    this.create(entry, reqId);
-                    callback(entry, reqId);
+                    this.create(entry);
+                    callback(entry);
                 } else {
-                    this.$refs.confirm.open(callback, addConfirmBody, entry, reqId);
+                    if (entry.length > 1) {
+                        this.$refs.selector.open(callback, entry);
+                    } else {
+                        this.$refs.confirm.open(callback, addConfirmBody, entry);
+                    }
                 }
             });
         },
-        create(entry, reqId) {
-            if (this.books.create(entry, reqId)) {
-                this.data.push(entry);
-                this.total++;
+        create(entry) {
+            this.books.create(entry).then(result => {
+                result.map(e => {
+                    this.data.push(e);
+                    this.total++;
+                });
                 this.updateStatus();
-            }
+            });
         },
         reader() {
             this.$refs.camera.start();
@@ -161,7 +173,7 @@ export default {
         });
     },
     mounted() {
-        new Vue({
+        this.register = new Vue({
             el: '#register',
             template: '<registerForm :table="table" />',
             components: { registerForm },

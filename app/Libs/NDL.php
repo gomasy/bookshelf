@@ -5,6 +5,8 @@ namespace App\Libs;
 
 use \GuzzleHttp\Exception\ConnectException;
 
+use \App\Book;
+
 class NDL
 {
     protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
@@ -13,77 +15,85 @@ class NDL
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
     protected $client;
+    protected $type;
     protected $obj;
 
     public function __construct()
     {
         $this->client = new \GuzzleHttp\Client([
             'base_uri' => $this->endpoint,
-            'timeout' => 1,
         ]);
     }
 
-    public function query(string $code): array
+    public function query(string $input, string $type): array
     {
-        $this->obj = $this->getItem($code);
-        if ($this->obj === null) {
-            return [];
+        $items = [];
+        $this->type = $type;
+
+        foreach ($this->getItems($input) as $obj) {
+            $this->obj = $obj;
+
+            array_push($items, new Book([
+                'title'     => $this->getTitle(),
+                'volume'    => $this->getVolume(),
+                'authors'   => $this->getAuthors(),
+                'isbn'      => $this->getISBN(),
+                'jpno'      => $this->getJPNO(),
+                'publisher' => $this->getPublisher(),
+                'price'     => $this->getPrice(),
+                'ndl_url'   => $this->getBookUrl(),
+            ]));
         }
 
-        return [
-            'title'     => $this->getTitle(),
-            'volume'    => $this->getVolume(),
-            'authors'   => $this->getAuthors(),
-            'isbn'      => $this->getISBN(),
-            'jpno'      => $this->getJPNO(),
-            'publisher' => $this->getPublisher(),
-            'price'     => $this->getPrice(),
-            'ndl_url'   => $this->getBookUrl(),
-        ];
+        return $items;
     }
 
-    protected function getQueryString(string $code): string
+    protected function getQueryString(string $input): string
     {
-        return '?' . http_build_query([
-            $this->searchType($code) => $code,
-        ]);
+        if ($this->type === 'code') {
+            $this->type = $this->searchType($input);
+        }
+
+        return '?' . http_build_query([ $this->type => $input ]);
     }
 
-    protected function getChannel(string $path): ?object
+    protected function getContent(string $path): string
     {
-        $content = null;
         $retry = 0;
 
         while ($retry <= 3) {
             try {
-                $content = (string)$this->client->request('GET', $path)->getBody();
-                break;
+                return (string)$this->client
+                    ->request('GET', $path, [ 'timeout' => $this->type !== 'title' ? 1 : 30 ])
+                    ->getBody();
             } catch (ConnectException $e) {
                 $retry++;
             }
         }
 
-        if ($content !== null) {
-            $xml = preg_replace($this->regexp[0], '', $content);
-
-            return simplexml_load_string($xml)->channel;
-        } else {
-            throw new \Exception('Retry limit reached');
-        }
-
-        return null;
+        throw new \Exception('Retry limit reached');
     }
 
-    public function getItem(string $code): ?object
+    protected function getChannel(string $path): object
     {
-        $channel = $this->getChannel($this->getQueryString($code));
+        $content = $this->getContent($path);
+        $xml = preg_replace($this->regexp[0], '', $content);
+
+        return simplexml_load_string($xml)->channel;
+    }
+
+    public function getItems(string $input): array
+    {
+        $channel = $this->getChannel($this->getQueryString($input));
+        $items = [];
         for ($i = 0; $i < $channel->totalResults; $i++) {
-            if ((string)$channel->item[$i]->category !== '障害者向け資料' && isset($channel->item[$i]->pubDate)) {
-                return $channel->item[$i];
+            $item = $channel->item[$i];
+            if (isset($item->category) && (string)$item->category !== '障害者向け資料' && isset($item->pubDate)) {
+                array_push($items, $channel->item[$i]);
             }
         }
 
-        return null;
+        return $items;
     }
 
     public function getISBN(): ?string
@@ -154,8 +164,6 @@ class NDL
                 return 'isbn';
             case 13:
                 return 'isbn';
-            default:
-                return 'any';
         }
     }
 

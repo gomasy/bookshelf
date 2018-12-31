@@ -151,9 +151,6 @@ return [
         'password' => 'パスワード',
         'password-confirm' => 'パスワード確認',
 
-        // register book
-        'code' => '入力コード',
-
         // edit book
         'title' => 'タイトル',
         'volume' => '巻号',

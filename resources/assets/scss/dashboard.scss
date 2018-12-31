@@ -162,6 +162,11 @@
 
         height: 40px;
     }
+
+    > select {
+        height: 40px;
+        padding: 0 12px;
+    }
 }
 
 .add-inner {
@@ -226,6 +231,14 @@
 
     > img {
         height: 500px;
+    }
+}
+
+#selector-modal {
+    .modal-dialog {
+        @media(--pc) {
+            width: 750px;
+        }
     }
 }
 

@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 </div>
-                <component :is="body" :items="items" ref="body"></component>
+                <component :is="body" :items="items[0]" ref="body"></component>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
                     <button class="btn btn-info" type="button" @click="accept" ref="ok">OK</button>
@@ -17,8 +17,8 @@
 <script>
 export default {
     data: () => ({
+        items: [],
         callback: null,
-        items: null,
         options: null,
         body: null,
     }),

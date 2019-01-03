@@ -21,7 +21,7 @@ class CreateBooksTable extends Migration
                   ->onDelete('cascade');
             $table->string('title');
             $table->string('volume')->nullable();
-            $table->string('authors');
+            $table->string('authors')->nullable();
             $table->char('isbn', 13)->nullable();
             $table->char('jpno', 10)->nullable();
             $table->date('published_date');

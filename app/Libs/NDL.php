@@ -33,7 +33,7 @@ class NDL
         foreach ($this->getItems($input) as $obj) {
             $this->obj = $obj;
 
-            array_push($items, new Book([
+            array_push($items, [
                 'title'     => $this->getTitle(),
                 'volume'    => $this->getVolume(),
                 'authors'   => $this->getAuthors(),
@@ -42,7 +42,7 @@ class NDL
                 'publisher' => $this->getPublisher(),
                 'price'     => $this->getPrice(),
                 'ndl_url'   => $this->getBookUrl(),
-            ]));
+            ]);
         }
 
         return $items;

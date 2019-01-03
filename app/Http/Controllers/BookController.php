@@ -47,11 +47,20 @@ class BookController extends Controller
      * @param Book $book
      * @return bool
      */
-    protected function checkConflict(Request $request, Book $book): bool
+    protected function checkConflict(Request $request, array $books): array
     {
-        return (bool)Book::shelves($request->sid)->where(function ($query) use ($book) {
-            $query->where('isbn', $book->isbn)->orWhere('jpno', $book->jpno);
-        })->count();
+        $items = [];
+        foreach ($books as $book) {
+            $count = Book::shelves($request->sid)->where(function ($query) use ($book) {
+                $query->where('isbn', $book['isbn'])->orWhere('jpno', $book['jpno']);
+            })->count();
+
+            if ($count) {
+                array_push($items, $book);
+            }
+        }
+
+        return $items;
     }
 
     /**
@@ -138,7 +147,7 @@ class BookController extends Controller
         $sid = $request->sid ?? Bookshelf::default()->id;
         $books = $request->toArray();
         if (!count($books)) {
-            abort(400);
+            abort(400, 'Invalid request');
         }
 
         return \DB::transaction(function () use ($books, $sid) {
@@ -150,7 +159,7 @@ class BookController extends Controller
 
                 return $books;
             } catch (QueryException $e) {
-                abort(500);
+                abort(500, 'Query execution failed');
             }
         });
     }
@@ -182,17 +191,18 @@ class BookController extends Controller
     public function fetch(FetchRequest $request): object
     {
         $this->checkAuthorize($request);
-        $books = \NDL::query($request->code ?? $request->input, $request->type);
+        $books = \NDL::query($request->input, $request->type);
 
         if (count($books)) {
-            if (isset($request->code) && $this->checkConflict($request, $books[0])) {
-                return response($books, 409);
+            $items = $this->checkConflict($request, $books);
+            if (count($items)) {
+                return response($items, 409);
             }
 
             return response($books);
         }
 
-        abort(404);
+        abort(404, 'Book(s) not found');
     }
 
     /**
@@ -230,10 +240,10 @@ class BookController extends Controller
         \DB::transaction(function () use ($request) {
             try {
                 if (!Book::destroy($request->ids)) {
-                    abort(400);
+                    abort(400, 'Invalid request');
                 }
             } catch (QueryException $e) {
-                abort(500);
+                abort(500, 'Query execution failed');
             }
         });
 

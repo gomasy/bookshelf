@@ -59,57 +59,53 @@ class BookTest extends TestCase
         $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
 
         // success
-        $id = $this->actingAs($user)
-                   ->get("/fetch?sid={$shelf->id}&code=9784873115382", $headers)
-                   ->headers->get('X-Request-Id');
+        $books = $this->actingAs($user)
+                      ->get("/fetch?type=code&sid={$shelf->id}&input=9784873115382", $headers)
+                      ->original;
 
         $this->actingAs($user)
-             ->post('/create', [ 'id' => $id ], $headers)
+             ->post('/create', $books, $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $id = $this->actingAs($user)
-                   ->get("/fetch?sid={$shelf->id}&code=4000801139", $headers)
-                   ->headers->get('X-Request-Id');
+        $books = $this->actingAs($user)
+                      ->get("/fetch?type=code&sid={$shelf->id}&input=4000801139", $headers)
+                      ->original;
 
         $this->actingAs($user)
-             ->post('/create', [ 'id' => $id ], $headers)
+             ->post('/create', $books, $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // success (jpno)
-        $id = $this->actingAs($user)
-                   ->get("/fetch?sid={$shelf->id}&code=22222222", $headers)
-                   ->headers->get('X-Request-Id');
+        $books = $this->actingAs($user)
+                      ->get("/fetch?type=code&sid={$shelf->id}&input=22222222", $headers)
+                      ->original;
 
         $this->actingAs($user)
-             ->post('/create', [ 'id' => $id ], $headers)
+             ->post('/create', $books, $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'jpno' => '22222222' ]);
 
         // dups
         $this->actingAs($user)
-             ->get("/fetch?sid={$shelf->id}&code=4873115388", $headers)
+             ->get("/fetch?type=code&sid={$shelf->id}&input=4873115388", $headers)
              ->assertStatus(409);
 
         // not found
         $this->actingAs($user)
-             ->get("/fetch?sid={$shelf->id}&code=1234567890128", $headers)
+             ->get("/fetch?type=code&sid={$shelf->id}&input=1234567890128", $headers)
              ->assertStatus(404);
 
         // invalid
         $this->actingAs($user)
-             ->get("/fetch?sid={$shelf->id}&code=1234567890123", $headers)
-             ->assertSessionHasErrors('code');
+             ->get("/fetch?type=code&sid={$shelf->id}&input=1234567890123", $headers)
+             ->assertSessionHasErrors('input');
 
         $this->actingAs($user)
-             ->get("/fetch?sid={$shelf->id}&code=", $headers)
-             ->assertSessionHasErrors('code');
-
-        $this->actingAs($user)
-             ->post('/create', [ 'X-Request-Id' => '' ], $headers)
-             ->assertStatus(400);
+             ->get("/fetch?type=code&sid={$shelf->id}&input=", $headers)
+             ->assertSessionHasErrors('input');
     }
 
     public function testFetchImage()

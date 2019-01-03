@@ -17,9 +17,12 @@
 </template>
 
 <script>
+/* eslint "vue/no-unused-components":0 */
+
 import { tdImage } from '../tpanel/';
 
 export default {
+    components: { tdImage },
     data: () => ({
         callback: null,
         columns: [

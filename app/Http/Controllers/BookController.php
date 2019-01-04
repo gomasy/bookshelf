@@ -151,16 +151,12 @@ class BookController extends Controller
         }
 
         return \DB::transaction(function () use ($books, $sid) {
-            try {
-                for ($i = 0; $i < count($books); $i++) {
-                    $books[$i] = $this->appendHeader($books[$i], $sid);
-                    $books[$i]->save();
-                }
-
-                return $books;
-            } catch (QueryException $e) {
-                abort(500, 'Query execution failed');
+            for ($i = 0; $i < count($books); $i++) {
+                $books[$i] = $this->appendHeader($books[$i], $sid);
+                $books[$i]->save();
             }
+
+            return $books;
         });
     }
 
@@ -238,12 +234,8 @@ class BookController extends Controller
         $this->checkAuthorize($request);
 
         \DB::transaction(function () use ($request) {
-            try {
-                if (!Book::destroy($request->ids)) {
-                    abort(400, 'Invalid request');
-                }
-            } catch (QueryException $e) {
-                abort(500, 'Query execution failed');
+            if (!Book::destroy($request->ids)) {
+                abort(400, 'Invalid request');
             }
         });
 

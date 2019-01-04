@@ -60,7 +60,7 @@ class BookTest extends TestCase
 
         // success
         $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&input=9784873115382", $headers)
+                      ->get("/fetch?type=code&sid={$shelf->id}&context=9784873115382", $headers)
                       ->original;
 
         $this->actingAs($user)
@@ -70,7 +70,7 @@ class BookTest extends TestCase
 
         // success (isbn10)
         $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&input=4000801139", $headers)
+                      ->get("/fetch?type=code&sid={$shelf->id}&context=4000801139", $headers)
                       ->original;
 
         $this->actingAs($user)
@@ -80,7 +80,7 @@ class BookTest extends TestCase
 
         // success (jpno)
         $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&input=22222222", $headers)
+                      ->get("/fetch?type=code&sid={$shelf->id}&context=22222222", $headers)
                       ->original;
 
         $this->actingAs($user)
@@ -90,22 +90,22 @@ class BookTest extends TestCase
 
         // dups
         $this->actingAs($user)
-             ->get("/fetch?type=code&sid={$shelf->id}&input=4873115388", $headers)
+             ->get("/fetch?type=code&sid={$shelf->id}&context=4873115388", $headers)
              ->assertStatus(409);
 
         // not found
         $this->actingAs($user)
-             ->get("/fetch?type=code&sid={$shelf->id}&input=1234567890128", $headers)
+             ->get("/fetch?type=code&sid={$shelf->id}&context=1234567890128", $headers)
              ->assertStatus(404);
 
         // invalid
         $this->actingAs($user)
-             ->get("/fetch?type=code&sid={$shelf->id}&input=1234567890123", $headers)
-             ->assertSessionHasErrors('input');
+             ->get("/fetch?type=code&sid={$shelf->id}&context=1234567890123", $headers)
+             ->assertSessionHasErrors('context');
 
         $this->actingAs($user)
-             ->get("/fetch?type=code&sid={$shelf->id}&input=", $headers)
-             ->assertSessionHasErrors('input');
+             ->get("/fetch?type=code&sid={$shelf->id}&context=", $headers)
+             ->assertSessionHasErrors('context');
     }
 
     public function testFetchImage()

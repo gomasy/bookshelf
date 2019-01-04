@@ -191,7 +191,7 @@ class BookController extends Controller
     public function fetch(FetchRequest $request): object
     {
         $this->checkAuthorize($request);
-        $books = \NDL::query($request->input, $request->type);
+        $books = \NDL::query($request->context, $request->type);
 
         if (count($books)) {
             $items = $this->checkConflict($request, $books);

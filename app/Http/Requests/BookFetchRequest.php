@@ -7,6 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
+use App\Rules\CheckFetchType;
 use App\Rules\CorrectCheckDigit;
 
 class BookFetchRequest extends FormRequest
@@ -29,9 +30,14 @@ class BookFetchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'input' => [
+            'context' => [
                 'required',
+                new CheckFetchType($this->query->get('type')),
                 new CorrectCheckDigit,
+            ],
+            'type' => [
+                'required',
+                'in:code,title',
             ],
         ];
     }

@@ -99,9 +99,9 @@ export default {
             });
             localStorage.setItem('query', JSON.stringify(query));
         },
-        beforeCreate(callback, input, confirmed) {
+        beforeCreate(callback, context, confirmed) {
             const type = this.register.$children[0].type;
-            const query = { 'sid': this.query.sid, 'input': input, 'type': type };
+            const query = { 'sid': this.query.sid, 'context': context, 'type': type };
 
             this.books.beforeCreate(query, entry => {
                 if (confirmed) {

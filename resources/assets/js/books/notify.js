@@ -18,7 +18,7 @@ export default async function(observer, response) {
         observer({
             type: 'error',
             title: '登録済み',
-            text: 'その書籍は既に登録されています',
+            text: '該当する書籍はすべて登録されています',
         });
         break;
     case 422:

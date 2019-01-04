@@ -55,7 +55,7 @@ class BookController extends Controller
                 $query->where('isbn', $book['isbn'])->orWhere('jpno', $book['jpno']);
             })->count();
 
-            if ($count) {
+            if (!$count) {
                 array_push($items, $book);
             }
         }
@@ -195,11 +195,11 @@ class BookController extends Controller
 
         if (count($books)) {
             $items = $this->checkConflict($request, $books);
-            if (count($items)) {
-                return response($items, 409);
+            if (!count($items)) {
+                return response($books, 409);
             }
 
-            return response($books);
+            return response($items);
         }
 
         abort(404, 'Book(s) not found');

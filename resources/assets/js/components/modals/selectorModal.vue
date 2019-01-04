@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-body">
                     <datatable v-bind="$data">
-                        <p>{{ total }} 件見つかりました。登録したい本を選択して下さい。</p>
+                        <p>{{ total }} 件見つかりました（重複は除く）。登録したい本を選択して下さい。</p>
                     </datatable>
                 </div>
                 <div class="modal-footer">

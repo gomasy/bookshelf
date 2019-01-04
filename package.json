@@ -12,7 +12,7 @@
         "@babel/preset-env": "^7.2.3",
         "@fortawesome/fontawesome-free": "^5.6.3",
         "autoprefixer": "^9.4.4",
-        "babel-loader": "^8.0.4",
+        "babel-loader": "^8.0.5",
         "bootstrap-sass": "^3.4.0",
         "browser-sync": "^2.26.3",
         "browser-sync-webpack-plugin": "^2.2.2",

@@ -85,5 +85,6 @@ module.exports = {
             open: false,
             notify: false,
         }),
+        new (require('vue-loader/lib/plugin'))(),
     ],
 };

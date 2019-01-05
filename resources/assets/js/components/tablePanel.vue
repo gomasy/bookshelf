@@ -4,7 +4,7 @@
             <div class="panel-body">
                 <datatable v-bind="$data">
                     <div class="table-buttons">
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#edit-modal" :disabled="selection.length != 1" @click="edit">編集</button>
+                        <button class="btn btn-primary" :disabled="selection.length != 1" @click="edit">編集</button>
                         <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
                         <select class="form-control select-shelves" v-model="query.sid">
                             <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
@@ -13,13 +13,7 @@
                 </datatable>
             </div>
         </div>
-        <div id="modal">
-            <editModal ref="edit" :selection="selection" />
-            <cameraModal ref="camera" />
-            <confirmModal ref="confirm" />
-            <previewModal ref="preview" />
-            <selectorModal ref="selector" />
-        </div>
+        <component ref="modal" :is="currentModal" :selection="selection" />
         <notifications position="bottom right" />
     </main>
 </template>
@@ -49,6 +43,7 @@ export default {
         'tbl-class': '',
         books: null,
         register: null,
+        currentModal: null,
         columns: columns,
         data: [],
         selection: [],
@@ -108,11 +103,10 @@ export default {
                     this.create(entry);
                     callback(entry);
                 } else {
-                    if (entry.length > 1) {
-                        this.$refs.selector.open(callback, entry);
-                    } else {
-                        this.$refs.confirm.open(callback, addConfirmBody, entry);
-                    }
+                    this.currentModal = entry.length > 1 ? selectorModal : confirmModal;
+                    this.$nextTick(() => {
+                        this.$refs.modal.open(callback, entry, addConfirmBody);
+                    });
                 }
             });
         },
@@ -126,19 +120,24 @@ export default {
             });
         },
         reader() {
-            this.$refs.camera.start();
+            this.currentModal = cameraModal;
+            this.$nextTick(() => this.$refs.modal.start());
         },
         edit() {
-            this.$refs.edit.open();
+            this.currentModal = editModal;
+            this.$nextTick(() => this.$refs.modal.open());
         },
         remove() {
             const ids = [];
             this.selection.map(e => ids.push(e.id));
-            this.$refs.confirm.open(items => {
-                this.books.delete(items).then(() => this.fetch(this.query));
-            }, {
-                template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
-            }, ids);
+            this.currentModal = confirmModal;
+            this.$nextTick(() => {
+                this.$refs.modal.open(items => {
+                    this.books.delete(items).then(() => this.fetch(this.query));
+                }, ids, {
+                    template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
+                });
+            });
         },
     },
     watch: {

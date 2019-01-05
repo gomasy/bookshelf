@@ -49,6 +49,7 @@ export default {
     methods: {
         open() {
             this.items = { ...this.selection[0] };
+            $('#edit-modal').modal('show');
         },
         submit() {
             (new Books()).edit(this.items).then(() => {

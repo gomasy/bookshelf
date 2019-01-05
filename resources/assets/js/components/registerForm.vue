@@ -8,7 +8,7 @@
             <input class="form-control" type="text" :id="type" :placeholder="placeholder" v-model="input" required>
             <button class="btn btn-info" type="submit">{{ btnText }}</button>
         </form>
-        <button data-toggle="modal" data-target="#camera-modal" class="btn btn-warning" @click="reader">読み取る</button>
+        <button class="btn btn-warning" @click="reader">読み取る</button>
     </div>
 </template>
 

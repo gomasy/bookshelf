@@ -23,11 +23,11 @@ export default {
         body: null,
     }),
     methods: {
-        open(callback, confirmBody, items, options) {
-            this.items = items;
+        open(callback, items, confirmBody, options) {
             this.callback = callback;
-            this.options = options;
+            this.items = items;
             this.body = confirmBody;
+            this.options = options;
 
             $('#confirm-modal').modal('show');
             this.$refs.ok.focus();

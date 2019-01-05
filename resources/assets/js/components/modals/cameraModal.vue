@@ -39,6 +39,7 @@ export default {
     }),
     methods: {
         start() {
+            $('#camera-modal').modal('show');
             Quagga.init(this.qgParams, el => {
                 if (el) return;
 

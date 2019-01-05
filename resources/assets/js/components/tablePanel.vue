@@ -139,6 +139,10 @@ export default {
                 });
             });
         },
+        preview(url) {
+            this.currentModal = previewModal;
+            this.$nextTick(() => this.$refs.modal.open(url));
+        },
     },
     watch: {
         query: {

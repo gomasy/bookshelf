@@ -18,9 +18,20 @@
 }
 
 .dashboard {
-    td > img {
-        cursor: pointer;
-        width: 53px;
+    .panel {
+        td > img {
+            cursor: pointer;
+            width: 53px;
+        }
+
+        .select-shelves {
+            display: inline-block;
+            padding: 0 12px;
+
+            @media(--pc) {
+                width: 180px;
+            }
+        }
     }
 
     small {
@@ -76,15 +87,6 @@
                     }
                 }
             }
-        }
-    }
-
-    .select-shelves {
-        display: inline-block;
-        padding: 0 12px;
-
-        @media(--pc) {
-            width: 180px;
         }
     }
 }

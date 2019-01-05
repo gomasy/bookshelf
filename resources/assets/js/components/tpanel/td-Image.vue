@@ -12,7 +12,9 @@ export default {
     }),
     methods: {
         open() {
-            this.table.$refs.preview.open(this.value);
+            if (!$('#selector-modal').hasClass('in')) {
+                this.table.preview(this.value);
+            }
         },
         update() {
             this.images = this.value[this.size];

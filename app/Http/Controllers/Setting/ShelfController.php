@@ -48,10 +48,10 @@ class ShelfController extends Controller
                 return response(null, 204);
             }
         } catch (QueryException $e) {
-            abort(403);
+            abort(403, 'Duplicate or invalid name.');
         }
 
-        abort(400);
+        abort(400, 'Invalid request.');
     }
 
     /**
@@ -79,6 +79,6 @@ class ShelfController extends Controller
             }
         }
 
-        abort(400);
+        abort(400, 'Invalid request.');
     }
 }

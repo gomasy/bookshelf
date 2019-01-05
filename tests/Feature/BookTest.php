@@ -64,7 +64,7 @@ class BookTest extends TestCase
                       ->original;
 
         $this->actingAs($user)
-             ->post('/create', $books, $headers)
+             ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
@@ -74,7 +74,7 @@ class BookTest extends TestCase
                       ->original;
 
         $this->actingAs($user)
-             ->post('/create', $books, $headers)
+             ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
@@ -84,7 +84,7 @@ class BookTest extends TestCase
                       ->original;
 
         $this->actingAs($user)
-             ->post('/create', $books, $headers)
+             ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('books', [ 'jpno' => '22222222' ]);
 

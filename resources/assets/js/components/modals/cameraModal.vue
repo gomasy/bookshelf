@@ -35,7 +35,7 @@ export default {
             interval: null,
         },
         isConfirm: true,
-        created: [],
+        detectedCodes: [],
     }),
     methods: {
         start() {
@@ -49,16 +49,10 @@ export default {
 
                 this.interval = setInterval(() => {
                     if (!$('#camera-modal').hasClass('in')) {
-                        this.stop();
+                        Quagga.stop();
                     }
                 }, 100);
             });
-        },
-        stop() {
-            // :thinking_face:
-            clearInterval(this.interval);
-            Quagga.stop();
-            this.isCreate = false;
         },
         processed(result) {
             if (!result) return;
@@ -81,17 +75,21 @@ export default {
             }
         },
         detected(result) {
+            if (this.isConfirm) {
+                Quagga.stop();
+            }
+
             const isbn = result.codeResult.code;
             if (this.validation(isbn)) {
                 this.create(isbn);
+                this.detectedCodes.push(isbn);
             }
         },
         create(code) {
-            if (this.created.indexOf(code) < 0) {
+            if (this.detectedCodes.indexOf(code) < 0) {
                 if (this.isConfirm) {
                     $('#camera-modal').modal('hide');
                     $('#app-navbar-collapse').collapse('toggle');
-                    this.isCreate = true;
                 }
 
                 this.$parent.beforeCreate(r => {

@@ -64,7 +64,7 @@ class NDL
         while ($retry <= 3) {
             try {
                 return (string)$this->client
-                    ->request('GET', $path, [ 'timeout' => $this->type !== 'title' ? 1 : 30 ])
+                    ->request('GET', $path, [ 'timeout' => $this->type !== 'title' ? 1 : 10 ])
                     ->getBody();
             } catch (ConnectException $e) {
                 $retry++;

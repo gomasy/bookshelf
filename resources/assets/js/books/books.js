@@ -20,8 +20,9 @@ export default class {
         return await resp.json();
     }
 
-    async beforeCreate(query, callback) {
+    async beforeCreate(sid, type, payload, callback) {
         try {
+            const query = { 'sid': sid, 'type': type, 'p': payload };
             const resp = await Request.exec(this.getUrl('/fetch', query), options);
             callback(await resp.json());
         } catch (e) {
@@ -29,9 +30,10 @@ export default class {
         }
     }
 
-    async create(entry) {
+    async create(sid, payload) {
         try {
-            const resp = await Request.exec('/create', Request.postOptions(entry));
+            const body = { 'sid': sid, 'p': payload };
+            const resp = await Request.exec('/create', Request.postOptions(body));
             notify(this.notify, resp);
 
             return await resp.json();

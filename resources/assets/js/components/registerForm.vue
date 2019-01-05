@@ -5,7 +5,7 @@
                     <option value="code">番号</option>
                     <option value="title">タイトル</option>
                 </select>
-            <input class="form-control" type="text" :id="type" :placeholder="placeholder" v-model="input" required>
+            <input class="form-control" type="text" :id="type" :placeholder="placeholder" v-model="p" required>
             <button class="btn btn-info" type="submit">{{ btnText }}</button>
         </form>
         <button class="btn btn-warning" @click="reader">読み取る</button>
@@ -16,15 +16,15 @@
 export default {
     props: [ 'table' ],
     data: () => ({
-        input: '',
+        p: '',
         type: 'code',
     }),
     methods: {
         create() {
             this.table.beforeCreate(result => {
                 this.table.create(result);
-                this.input = '';
-            }, this.input);
+                this.p = '';
+            }, this.type, this.p);
         },
         reader() {
             this.table.reader();
@@ -38,5 +38,10 @@ export default {
             return this.type !== 'code' ? '検索したい本の名前' : 'ISBN or JP番号';
         },
     },
+    watch: {
+        type() {
+            this.p = '';
+        },
+    }
 };
 </script>

@@ -7,9 +7,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\BookCreateRequest as CreateRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookFetchRequest as FetchRequest;
+
 use App\Book;
 use App\Bookshelf;
 use App\User;
@@ -140,19 +142,14 @@ class BookController extends Controller
      * @param Request $request
      * @param return Book|Response
      */
-    public function create(Request $request): array
+    public function create(CreateRequest $request): array
     {
         $this->checkAuthorize($request);
 
-        $sid = $request->sid ?? Bookshelf::default()->id;
-        $books = $request->toArray();
-        if (!count($books)) {
-            abort(400, 'Invalid request');
-        }
-
-        return \DB::transaction(function () use ($books, $sid) {
+        return \DB::transaction(function () use ($request) {
+            $books = $request->p;
             for ($i = 0; $i < count($books); $i++) {
-                $books[$i] = $this->appendHeader($books[$i], $sid);
+                $books[$i] = $this->appendHeader($books[$i], $request->sid);
                 $books[$i]->save();
             }
 
@@ -187,7 +184,7 @@ class BookController extends Controller
     public function fetch(FetchRequest $request): object
     {
         $this->checkAuthorize($request);
-        $books = \NDL::query($request->context, $request->type);
+        $books = \NDL::query($request->p, $request->type);
 
         if (count($books)) {
             $items = $this->checkConflict($request, $books);

@@ -7,10 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\ValidationException;
 
-use App\Rules\CheckFetchType;
-use App\Rules\CorrectCheckDigit;
-
-class BookFetchRequest extends FormRequest
+class BookCreateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -30,15 +27,8 @@ class BookFetchRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'p' => [
-                'required',
-                new CheckFetchType($this->query->get('type')),
-                new CorrectCheckDigit,
-            ],
-            'type' => [
-                'required',
-                'in:code,title',
-            ],
+            'sid' => [ 'required', 'numeric' ],
+            'p' => [ 'required', 'array' ],
         ];
     }
 }

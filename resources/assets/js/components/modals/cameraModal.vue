@@ -94,8 +94,9 @@ export default {
                     this.isCreate = true;
                 }
 
-                this.$parent.before_create((r, id) => this.$parent.create(r, id), code, this.isConfirm);
-                this.created.push(code);
+                this.$parent.beforeCreate(r => {
+                    this.$parent.create(r);
+                }, 'code', code, !this.isConfirm);
             }
         },
         validation(code) {

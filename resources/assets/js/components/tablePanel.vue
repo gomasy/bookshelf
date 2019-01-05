@@ -94,11 +94,8 @@ export default {
             });
             localStorage.setItem('query', JSON.stringify(query));
         },
-        beforeCreate(callback, context, confirmed) {
-            const type = this.register.$children[0].type;
-            const query = { 'sid': this.query.sid, 'context': context, 'type': type };
-
-            this.books.beforeCreate(query, entry => {
+        beforeCreate(callback, type, payload, confirmed) {
+            this.books.beforeCreate(this.query.sid, type, payload, entry => {
                 if (confirmed) {
                     this.create(entry);
                     callback(entry);
@@ -111,7 +108,7 @@ export default {
             });
         },
         create(entry) {
-            this.books.create(entry).then(result => {
+            this.books.create(this.query.sid, entry).then(result => {
                 result.map(e => {
                     this.data.push(e);
                     this.total++;

@@ -14,6 +14,10 @@ class NDL
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
+    protected $timeout = [
+        'code' => 1,
+        'title' => 10,
+    ];
     protected $client;
     protected $type;
     protected $obj;
@@ -25,12 +29,12 @@ class NDL
         ]);
     }
 
-    public function query(string $input, string $type): array
+    public function query(string $payload, string $type): array
     {
         $items = [];
         $this->type = $type;
 
-        foreach ($this->getItems($input) as $obj) {
+        foreach ($this->getItems($payload) as $obj) {
             $this->obj = $obj;
 
             array_push($items, (new Book([
@@ -48,13 +52,14 @@ class NDL
         return $items;
     }
 
-    protected function getQueryString(string $input): string
+    protected function getQueryString(string $payload): string
     {
-        if ($this->type === 'code') {
-            $this->type = $this->searchType($input);
+        $type = $this->type;
+        if ($type === 'code') {
+            $type = $this->searchType($payload);
         }
 
-        return '?' . http_build_query([ $this->type => $input ]);
+        return '?' . http_build_query([ $type => $payload ]);
     }
 
     protected function getContent(string $path): string
@@ -64,7 +69,7 @@ class NDL
         while ($retry <= 3) {
             try {
                 return (string)$this->client
-                    ->request('GET', $path, [ 'timeout' => $this->type !== 'title' ? 1 : 10 ])
+                    ->request('GET', $path, [ 'timeout' => $this->timeout[$this->type] ])
                     ->getBody();
             } catch (ConnectException $e) {
                 $retry++;
@@ -82,9 +87,9 @@ class NDL
         return simplexml_load_string($xml)->channel;
     }
 
-    public function getItems(string $input): array
+    public function getItems(string $payload): array
     {
-        $channel = $this->getChannel($this->getQueryString($input));
+        $channel = $this->getChannel($this->getQueryString($payload));
         $items = [];
         for ($i = 0; $i < $channel->totalResults; $i++) {
             $item = $channel->item[$i];
@@ -157,13 +162,11 @@ class NDL
 
     protected function searchType(string $num): string
     {
-        switch (strlen($num)) {
-            case 8:
-                return 'jpno';
-            case 10:
-                return 'isbn';
-            case 13:
-                return 'isbn';
+        $len = strlen($num);
+        if ($len === 8) {
+            return 'jpno';
+        } elseif ($len === 10 || $len === 13) {
+            return 'isbn';
         }
     }
 
@@ -174,9 +177,9 @@ class NDL
                 return $this->getCheckDigit10($isbn) === $isbn[9];
             case 13:
                 return $this->getCheckDigit13($isbn) === $isbn[12];
+            default:
+                return true;
         }
-
-        return true;
     }
 
     public function getCheckDigit13(string $isbn13): string

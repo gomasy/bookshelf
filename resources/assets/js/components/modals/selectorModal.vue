@@ -29,17 +29,20 @@ export default {
             { field: 'images', tdComp: 'tdImage' },
             { field: 'title' },
         ],
+        entry: [],
         data: [],
         selection: [],
-        query: {},
+        query: { limit: 5 },
         total: 0,
         HeaderSettings: false,
+        pageSizeOptions: [ 5, 10, 20, 50 ],
     }),
     methods: {
         open(callback, entry) {
             this.callback = callback;
-            this.data = entry;
+            this.entry = entry;
             this.total = entry.length;
+            this.handleQueryChange();
 
             $('#selector-modal').modal('show');
         },
@@ -49,7 +52,18 @@ export default {
         },
         hide() {
             $('#selector-modal').modal('hide');
-        }
+        },
+        handleQueryChange() {
+            this.data = this.entry.slice(this.query.offset, this.query.offset + this.query.limit);
+        },
+    },
+    watch: {
+        query: {
+            handler() {
+                this.handleQueryChange();
+            },
+            deep: true,
+        },
     },
 };
 </script>

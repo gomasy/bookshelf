@@ -25,9 +25,9 @@ export default class {
             const query = { 'sid': sid, 'type': type, 'p': payload };
             const resp = await Request.exec(this.getUrl('/fetch', query), options);
             success(await resp.json());
-            complete();
         } catch (e) {
             notify(this.notify, e);
+        } finally {
             complete();
         }
     }

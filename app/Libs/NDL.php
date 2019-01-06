@@ -3,9 +3,11 @@ declare(strict_types=1);
 
 namespace App\Libs;
 
-use \GuzzleHttp\Exception\ConnectException;
+use GuzzleHttp\Exception\ConnectException;
 
-use \App\Book;
+use App\Book;
+
+use App\Exceptions\TimeoutException;
 
 class NDL
 {
@@ -76,7 +78,7 @@ class NDL
             }
         }
 
-        throw new \Exception('Retry limit reached');
+        throw new TimeoutException('Retry limit reached');
     }
 
     protected function getChannel(string $path): object

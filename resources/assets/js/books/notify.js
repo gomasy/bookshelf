@@ -14,6 +14,13 @@ export default async function(observer, response) {
             text: '該当する書籍が見つかりませんでした',
         });
         break;
+    case 408:
+        observer({
+            type: 'error',
+            title: 'タイムアウトしました',
+            text: '件数が多すぎるか、応答に時間がかかっています',
+        });
+        break;
     case 409:
         observer({
             type: 'error',

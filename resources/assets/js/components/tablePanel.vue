@@ -14,6 +14,7 @@
             </div>
         </div>
         <component ref="modal" :is="currentModal" :selection="selection" />
+        <loading ref="loading" />
         <notifications position="bottom right" />
     </main>
 </template>
@@ -27,17 +28,13 @@ import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
 import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal, selectorModal } from './modals/';
 import registerForm from './registerForm';
+import loading from './loading';
 import columns from './columns.json';
 
 export default {
     components: {
-        cameraModal,
-        confirmModal,
-        editModal,
-        previewModal,
-        selectorModal,
-        tdImage,
-        thFilter,
+        cameraModal, confirmModal, editModal, previewModal, selectorModal,
+        tdImage, thFilter, loading,
     },
     data: () => ({
         'tbl-class': '',
@@ -95,7 +92,9 @@ export default {
             localStorage.setItem('query', JSON.stringify(query));
         },
         beforeCreate(callback, type, payload, confirmed) {
+            this.$refs.loading.visible = true;
             this.books.beforeCreate(this.query.sid, type, payload, entry => {
+                this.$refs.loading.visible = false;
                 if (confirmed) {
                     this.create(entry);
                     callback(entry);

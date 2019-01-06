@@ -226,16 +226,23 @@ i, span {
 }
 
 .loading {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.3);
     position: absolute;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: 100;
     top: 0;
     left: 0;
     width: 100%;
+}
+
+.loading-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     height: 100vh;
+
+    @media(--pc) {
+        margin-left: 80px;
+    }
 }
 
 .loading-circle {
@@ -244,6 +251,7 @@ i, span {
     height: 50px;
     background-color: #03a9f4;
     border-radius: 50%;
+    box-shadow: 0 0 10px #888;
 
     &:after {
         position: absolute;
@@ -260,7 +268,8 @@ i, span {
 .loading-text {
     margin-top: 80px;
     font-weight: bold;
-    text-shadow: #fff 1px 1px 0;
+    text-shadow: 0px 0px 5px #000;
+    color: #fff;
 }
 
 @keyframes loading {

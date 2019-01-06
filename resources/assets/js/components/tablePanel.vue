@@ -92,9 +92,8 @@ export default {
             localStorage.setItem('query', JSON.stringify(query));
         },
         beforeCreate(callback, type, payload, confirmed) {
-            this.$refs.loading.visible = true;
+            this.$refs.loading.show('検索中・・・');
             this.books.beforeCreate(this.query.sid, type, payload, entry => {
-                this.$refs.loading.visible = false;
                 if (confirmed) {
                     this.create(entry);
                     callback(entry);
@@ -105,7 +104,7 @@ export default {
                     });
                 }
             }, () => {
-                this.$refs.loading.visible = false;
+                this.$refs.loading.hide();
             });
         },
         create(entry) {

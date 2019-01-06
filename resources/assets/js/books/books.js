@@ -20,13 +20,15 @@ export default class {
         return await resp.json();
     }
 
-    async beforeCreate(sid, type, payload, callback) {
+    async beforeCreate(sid, type, payload, success, complete) {
         try {
             const query = { 'sid': sid, 'type': type, 'p': payload };
             const resp = await Request.exec(this.getUrl('/fetch', query), options);
-            callback(await resp.json());
+            success(await resp.json());
+            complete();
         } catch (e) {
             notify(this.notify, e);
+            complete();
         }
     }
 

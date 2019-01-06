@@ -104,6 +104,8 @@ export default {
                         this.$refs.modal.open(callback, entry, addConfirmBody);
                     });
                 }
+            }, () => {
+                this.$refs.loading.visible = false;
             });
         },
         create(entry) {

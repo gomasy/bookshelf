@@ -34,11 +34,7 @@
         }
 
         @media(--mobile) {
-            th:nth-child(n + 5) {
-                display: none;
-            }
-
-            td:nth-child(n + 5) {
+            th:nth-child(n + 5), td:nth-child(n + 5) {
                 display: none;
             }
         }
@@ -117,17 +113,17 @@
                 display: block;
             }
 
-            > img.thumb {
+            > .thumb {
                 width: 53px;
                 padding: 1px;
             }
 
-            > img.medium {
+            > .medium {
                 width: 80px;
                 padding: 3px;
             }
 
-            > img.large {
+            > .large {
                 width: 106px;
                 padding: 5px;
             }

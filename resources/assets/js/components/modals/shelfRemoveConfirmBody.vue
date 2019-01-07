@@ -10,5 +10,18 @@ export default {
     data: () => ({
         checked: false,
     }),
+    methods: {
+        update() {
+            this.$parent.options = this.checked;
+        },
+    },
+    watch: {
+        checked() {
+            this.update();
+        },
+    },
+    created() {
+        this.update();
+    },
 };
 </script>

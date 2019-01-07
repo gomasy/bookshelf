@@ -17,7 +17,7 @@ export default {
     props: [ 'table' ],
     data: () => ({
         p: '',
-        type: 'code',
+        type: 'title',
     }),
     methods: {
         create() {
@@ -29,6 +29,18 @@ export default {
         reader() {
             this.table.reader();
         },
+        updateType(payload) {
+            if (isFinite(payload)) {
+                const len = String(payload).length;
+                if (len === 8 || len === 10 || len === 13) {
+                    this.type = 'code';
+                } else {
+                    this.type = 'title';
+                }
+            } else {
+                this.type = 'title';
+            }
+        },
     },
     computed: {
         btnText() {
@@ -39,8 +51,8 @@ export default {
         },
     },
     watch: {
-        type() {
-            this.p = '';
+        p(payload) {
+            this.updateType(payload);
         },
     }
 };

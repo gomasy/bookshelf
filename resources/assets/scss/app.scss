@@ -253,6 +253,7 @@ i, span {
     background-color: #03a9f4;
     border-radius: 50%;
     box-shadow: 0 0 10px #888;
+    margin-top: -40px;
 
     &:after {
         position: absolute;
@@ -267,7 +268,7 @@ i, span {
 }
 
 .loading-text {
-    margin-top: 130px;
+    margin-top: 50px;
     font-weight: bold;
     text-shadow: 0 0 5px #000;
     color: #fff;

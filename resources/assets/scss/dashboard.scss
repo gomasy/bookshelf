@@ -32,6 +32,16 @@
                 width: 180px;
             }
         }
+
+        @media(--mobile) {
+            th:nth-child(n + 5) {
+                display: none;
+            }
+
+            td:nth-child(n + 5) {
+                display: none;
+            }
+        }
     }
 
     small {

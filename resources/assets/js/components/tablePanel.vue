@@ -96,7 +96,10 @@ export default {
             localStorage.setItem('query', JSON.stringify(query));
         },
         beforeCreate(callback, type, payload, confirmed) {
-            this.$refs.loading.show('検索中・・・');
+            const controller = new AbortController();
+            const options = { signal: controller.signal };
+
+            this.$refs.loading.show('検索中・・・', controller);
             this.books.beforeCreate(this.query.sid, type, payload, entry => {
                 if (confirmed) {
                     this.create(entry);
@@ -109,7 +112,7 @@ export default {
                 }
             }, () => {
                 this.$refs.loading.hide();
-            });
+            }, options);
         },
         create(entry) {
             this.books.create(this.query.sid, entry).then(result => {

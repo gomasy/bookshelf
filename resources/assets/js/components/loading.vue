@@ -3,6 +3,7 @@
         <div class="loading-inner">
             <div class="loading-circle"></div>
             <span class="loading-text">{{ text }}</span>
+            <button class="btn loading-cancel-btn" @click="cancel">キャンセル</button>
         </div>
     </div>
 </template>
@@ -10,16 +11,22 @@
 <script>
 export default {
     data: () => ({
-        visible: false,
+        controller: null,
         text: '',
+        visible: false,
     }),
     methods: {
-        show(text) {
+        show(text, controller) {
+            this.controller = controller;
             this.text = text;
             this.visible = true;
         },
         hide() {
             this.visible = false;
+        },
+        cancel() {
+            this.controller.abort();
+            this.hide();
         },
     },
 };

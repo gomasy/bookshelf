@@ -20,10 +20,15 @@ export default class {
         return await resp.json();
     }
 
-    async beforeCreate(sid, type, payload, success, complete) {
+    async beforeCreate(sid, type, payload, success, complete, append) {
+        let opt = options;
+        if (typeof append !== 'undefined') {
+            opt = Object.assign(opt, append);
+        }
+
         try {
             const query = { 'sid': sid, 'type': type, 'p': payload };
-            const resp = await Request.exec(this.getUrl('/fetch', query), options);
+            const resp = await Request.exec(this.getUrl('/fetch', query), opt);
             success(await resp.json());
         } catch (e) {
             notify(this.notify, e);

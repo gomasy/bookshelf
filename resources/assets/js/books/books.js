@@ -23,7 +23,7 @@ export default class {
     async beforeCreate(sid, type, payload, success, complete, append) {
         let opt = options;
         if (typeof append !== 'undefined') {
-            opt = Object.assign(opt, append);
+            opt = { ...opt, ...append };
         }
 
         try {

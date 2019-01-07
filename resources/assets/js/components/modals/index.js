@@ -1,4 +1,5 @@
 export { default as addConfirmBody } from './addConfirmBody';
+export { default as deleteConfirmBody } from './deleteConfirmBody';
 export { default as cameraModal } from './cameraModal';
 export { default as confirmModal } from './confirmModal';
 export { default as editModal } from './editModal';

@@ -26,7 +26,11 @@ import Vue from 'vue';
 import { mapActions, mapState } from 'vuex';
 import { Books } from '../books/';
 import { tdImage, thFilter } from './tpanel/';
-import { addConfirmBody, cameraModal, confirmModal, editModal, previewModal, selectorModal } from './modals/';
+import {
+    addConfirmBody, deleteConfirmBody,
+    cameraModal,confirmModal, editModal, previewModal, selectorModal,
+} from './modals/';
+
 import registerForm from './registerForm';
 import loading from './loading';
 import columns from './columns.json';
@@ -131,9 +135,7 @@ export default {
             this.$nextTick(() => {
                 this.$refs.modal.open(items => {
                     this.books.delete(items).then(() => this.fetch(this.query));
-                }, ids, {
-                    template: '<div class="modal-body" id="confirm-body">本当に削除しますか？</div>',
-                });
+                }, ids, deleteConfirmBody);
             });
         },
         preview(url) {

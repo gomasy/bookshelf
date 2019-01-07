@@ -212,7 +212,7 @@ class BookController extends Controller
      */
     public function fetchImage(Request $request): object
     {
-        $key = md5($request->path());
+        $key = md5($request->fullUrl());
         $image = \Cache::store('file')->get($key);
         if ($image === null) {
             $image = \AmazonImages::fetch($request->path(), $request->text);

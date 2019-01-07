@@ -26,8 +26,9 @@ export default {
     data: () => ({
         callback: null,
         columns: [
-            { field: 'images', tdComp: 'tdImage' },
-            { field: 'title' },
+            { field: 'images', tdComp: 'tdImage', tdStyle: 'width: 53px' },
+            { field: 'title', title: 'タイトル' },
+            { field: 'volume', title: '巻号', tdStyle: 'width: 20%' },
         ],
         entry: [],
         data: [],

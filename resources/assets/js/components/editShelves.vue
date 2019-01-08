@@ -6,7 +6,7 @@
         <hr>
         <div class="form-group form-inline">
             <input class="form-control" placeholder="本棚の名前" v-model="shelfName">
-            <button class="btn btn-info" @click="create">追加</button>
+            <button class="btn btn-info" :disabled="!shelfName.length" @click="create">追加</button>
         </div>
     </div>
 </template>

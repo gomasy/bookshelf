@@ -25,7 +25,10 @@ export default {
             this.visible = false;
         },
         cancel() {
-            this.controller.abort();
+            if (typeof this.controller !== 'undefined') {
+                this.controller.abort();
+            }
+
             this.hide();
         },
     },

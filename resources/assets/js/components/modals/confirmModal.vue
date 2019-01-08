@@ -23,10 +23,10 @@ export default {
         body: null,
     }),
     methods: {
-        open(callback, items, confirmBody, options) {
+        open(callback, items, body, options) {
             this.callback = callback;
             this.items = items;
-            this.body = confirmBody;
+            this.body = body;
             this.options = options;
 
             $('#confirm-modal').modal('show');

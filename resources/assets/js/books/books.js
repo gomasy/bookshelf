@@ -23,9 +23,8 @@ export default class {
     static async detection(image, controller) {
         const headers = { 'Content-Type': 'image/png' };
         const resp = await Request.exec('/detect', Request.options(image, controller, headers, true));
-        const text = await resp.text();
 
-        return text.match(/(.+)\s\[.+\]/)[1];
+        return await resp.json();
     }
 
     async beforeCreate(sid, type, payload, success, complete, controller) {

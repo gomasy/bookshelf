@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div id="cameraWindow"></div>
                 <div class="modal-footer">
-                    <h4>バーコードを近づけて下さい</h4>
+                    <h4>{{ targetText }}を近づけて下さい</h4>
                     <input type="checkbox" v-model="isConfirm"> 確認する
                     <input type="checkbox" v-model="isDetection"> 画像を検出
                     <div v-if="isDetection">
@@ -42,10 +42,12 @@ export default {
         isConfirm: true,
         isDetection: false,
         detectedCodes: [],
+        targetText: '',
     }),
     methods: {
         open() {
             $('#camera-modal').modal('show');
+            this.updateTargetText();
             this.start();
         },
         start() {
@@ -74,7 +76,9 @@ export default {
                 this.$parent.$refs.loading.show('識別中・・・', controller);
 
                 video.srcObject.getTracks().map(t => t.stop());
-                Books.detection(blob, controller).then(title => {
+                Books.detection(blob, controller).then(obj => {
+                    const title = obj.result[0].match(/([^[\]]+)/)[1].trim();
+
                     this.$parent.beforeCreate(r => {
                         this.$parent.create(r);
                     }, 'title', title);
@@ -130,6 +134,14 @@ export default {
         hide() {
             $('#camera-modal').modal('hide');
             $('#app-navbar-collapse').collapse('toggle');
+        },
+        updateTargetText() {
+            this.targetText = this.isDetection ? '表紙' : 'バーコード';
+        }
+    },
+    watch: {
+        isDetection() {
+            this.updateTargetText();
         },
     },
 };

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
+use Google\Cloud\Vision\V1\ImageAnnotatorClient;
+
 use App\Http\Requests\BookCreateRequest as CreateRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
@@ -227,9 +229,16 @@ class BookController extends Controller
 
     public function detectImage(Request $request)
     {
-        $labels = \CloudVision::detection($request->getContent());
+        $response = (new ImageAnnotatorClient())
+            ->webDetection($request->getContent());
+        $web = $response->getWebDetection();
 
-        return $labels[0]->getLabel();
+        $labels = [];
+        foreach ($web->getBestGuessLabels() as $label) {
+            array_push($labels, $label->getLabel());
+        }
+
+        return [ 'result' => $labels ];
     }
 
     /**

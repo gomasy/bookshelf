@@ -225,9 +225,9 @@ class BookController extends Controller
         ]);
     }
 
-    public function detectImage()
+    public function detectImage(Request $request)
     {
-        $labels = \CloudVision::labelDetection(file_get_contents('php://input'));
+        $labels = \CloudVision::detection($request->getContent());
 
         return $labels[0]->getLabel();
     }

@@ -7,7 +7,7 @@ use Google\Cloud\Vision\V1\ImageAnnotatorClient;
 
 class CloudVision
 {
-    public function labelDetection($image)
+    public function detection($image)
     {
         $vision = new ImageAnnotatorClient();
         $response = $vision->webDetection($image);

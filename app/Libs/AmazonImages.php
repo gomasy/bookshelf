@@ -3,6 +3,9 @@ declare(strict_types=1);
 
 namespace App\Libs;
 
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
+
 use App\Book;
 
 class AmazonImages
@@ -59,11 +62,16 @@ class AmazonImages
         return "{$baseUri}{$book->isbn10}.{$this->countryCode}.{$this->types[$type]}{$query}";
     }
 
-    public function getImage(string $path): string
+    public function getImage(string $path): ?string
     {
-        $image = (string)(new \GuzzleHttp\Client())
-            ->request('GET', "{$this->endpoint}/{$path}")
-            ->getBody();
+        try {
+            $image = (string)(new Client())
+                ->request('GET', "{$this->endpoint}/{$path}")
+                ->getBody();
+
+        } catch (ClientException $e) {
+            $image = null;
+        }
 
         return $image;
     }
@@ -71,8 +79,11 @@ class AmazonImages
     public function getImageOrMissing(string $path, ?string $text): string
     {
         $image = $this->getImage($path);
-        $size = getimagesizefromstring($image);
-        if ($size[0] <= 1 || $size[1] <= 1) {
+        if ($image !== null) {
+            $size = getimagesizefromstring($image);
+        }
+
+        if (!isset($size) || ($size[0] <= 1 || $size[1] <= 1)) {
             $type = $this->regexp($path, '.+\.\d{2}\.(.+?)');
 
             return $this->missing($text, $this->sizes[array_search($type, $this->types)]);

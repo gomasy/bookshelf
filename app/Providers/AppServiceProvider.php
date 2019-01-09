@@ -13,6 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        putenv('GOOGLE_APPLICATION_CREDENTIALS=' . config('app.visionCredentials'));
+
         \Blade::directive('asset', function ($file) {
             $paths = glob(str_replace([ "'", '"' ], '', public_path($file)), GLOB_NOSORT);
             usort($paths, function ($a, $b) {

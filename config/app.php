@@ -224,10 +224,12 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'AmazonImages' => \Facades\App\Libs\AmazonImages::class,
+        'CloudVision' => \Facades\App\Libs\CloudVision::class,
         'NDL' => \Facades\App\Libs\NDL::class,
 
     ],
 
     'font' => env('APP_FONT', '/usr/share/fonts/OTF/ipag.ttf'),
+    'visionCredentials' => env('CLOUD_VISION_CREDENTIALS'),
 
 ];

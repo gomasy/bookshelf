@@ -1,6 +1,6 @@
 import Request from './request';
 import notify from './notify';
-import { options } from './config';
+import { config } from './config';
 
 export default class {
     constructor(notifyVue) {
@@ -15,20 +15,28 @@ export default class {
     }
 
     async fetch(query) {
-        const resp = await Request.exec(this.getUrl('/list.json', query), options);
+        const resp = await Request.exec(this.getUrl('/list.json', query), config);
 
         return await resp.json();
     }
 
-    async beforeCreate(sid, type, payload, success, complete, append) {
-        let opt = options;
-        if (typeof append !== 'undefined') {
-            opt = { ...opt, ...append };
+    static async detection(image, controller) {
+        const headers = { 'Content-Type': 'image/png' };
+        const resp = await Request.exec('/detect', Request.options(image, controller, headers, true));
+        const text = await resp.text();
+
+        return text.match(/(.+)\s\[.+\]/)[1];
+    }
+
+    async beforeCreate(sid, type, payload, success, complete, controller) {
+        let options = config;
+        if (typeof controller !== 'undefined') {
+            options = { ...config, ...{ signal: controller.signal }};
         }
 
         try {
             const query = { 'sid': sid, 'type': type, 'p': payload };
-            const resp = await Request.exec(this.getUrl('/fetch', query), opt);
+            const resp = await Request.exec(this.getUrl('/fetch', query), options);
             success(await resp.json());
         } catch (e) {
             notify(this.notify, e);
@@ -40,7 +48,7 @@ export default class {
     async create(sid, payload) {
         try {
             const body = { 'sid': sid, 'p': payload };
-            const resp = await Request.exec('/create', Request.postOptions(body));
+            const resp = await Request.exec('/create', Request.options(body));
             notify(this.notify, resp);
 
             return await resp.json();
@@ -50,10 +58,10 @@ export default class {
     }
 
     async delete(ids) {
-        return await Request.exec('/delete', Request.postOptions({ ids: ids }));
+        return await Request.exec('/delete', Request.options({ ids: ids }));
     }
 
     async edit(entry) {
-        return await Request.exec('/edit', Request.postOptions(entry));
+        return await Request.exec('/edit', Request.options(entry));
     }
 }

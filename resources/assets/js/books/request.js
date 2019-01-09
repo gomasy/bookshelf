@@ -1,12 +1,20 @@
-import { options } from './config';
+import { config } from './config';
 
 export default class {
-    static postOptions(body) {
-        const postOptions = { ...options };
-        postOptions['method'] = 'post';
-        postOptions['body'] = JSON.stringify(body);
+    static options(body, controller, headers, isBlob) {
+        const options = { ...config };
+        options['method'] = 'post';
+        options['body'] = isBlob ? body : JSON.stringify(body);
 
-        return postOptions;
+        if (controller) {
+            options['signal'] = controller.signal;
+        }
+
+        if (headers) {
+            options.headers = { ...options.headers, ...headers };
+        }
+
+        return options;
     }
 
     static async exec(path, options) {

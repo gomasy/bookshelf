@@ -97,7 +97,6 @@ export default {
         },
         beforeCreate(callback, type, payload, confirmed) {
             const controller = new AbortController();
-            const options = { signal: controller.signal };
 
             this.$refs.loading.show('検索中・・・', controller);
             this.books.beforeCreate(this.query.sid, type, payload, entry => {
@@ -112,7 +111,7 @@ export default {
                 }
             }, () => {
                 this.$refs.loading.hide();
-            }, options);
+            }, controller);
         },
         create(entry) {
             this.books.create(this.query.sid, entry).then(result => {
@@ -125,7 +124,7 @@ export default {
         },
         reader() {
             this.currentModal = cameraModal;
-            this.$nextTick(() => this.$refs.modal.start());
+            this.$nextTick(() => this.$refs.modal.open());
         },
         edit() {
             this.currentModal = editModal;

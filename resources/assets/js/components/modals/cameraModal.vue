@@ -6,6 +6,10 @@
                 <div class="modal-footer">
                     <h4>バーコードを近づけて下さい</h4>
                     <input type="checkbox" v-model="isConfirm"> 確認する
+                    <input type="checkbox" v-model="isDetection"> 画像を検出
+                    <div v-if="isDetection">
+                        <button class="btn" @click="capture">撮影</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -14,6 +18,7 @@
 
 <script>
 import Quagga from 'quagga';
+import { Books } from '../../books/';
 
 export default {
     data: () => ({
@@ -35,11 +40,15 @@ export default {
             interval: null,
         },
         isConfirm: true,
+        isDetection: false,
         detectedCodes: [],
     }),
     methods: {
-        start() {
+        open() {
             $('#camera-modal').modal('show');
+            this.start();
+        },
+        start() {
             Quagga.init(this.qgParams, el => {
                 if (el) return;
 
@@ -54,13 +63,35 @@ export default {
                 }, 100);
             });
         },
+        capture() {
+            const video = document.querySelector('video');
+            const canvas = document.querySelector('canvas');
+            const ctx = canvas.getContext('2d');
+            const controller = new AbortController();
+
+            ctx.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
+            canvas.toBlob(blob => {
+                video.srcObject.getTracks().map(t => {
+                    t.stop();
+                });
+
+                this.$parent.$refs.loading.show('識別中・・・', controller);
+                Books.detection(blob, controller).then(title => {
+                    this.$parent.beforeCreate(r => {
+                        this.$parent.create(r);
+                    }, 'title', title);
+                });
+
+                this.hide();
+            });
+        },
         processed(result) {
             if (!result) return;
 
             const ctx = Quagga.canvas.ctx.overlay;
             const canvas = Quagga.canvas.dom.overlay;
 
-            if (result.boxes) {
+            if (!this.isDetection && result.boxes) {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
 
                 const hasNotRead = box => box !== result.box;
@@ -75,12 +106,12 @@ export default {
             }
         },
         detected(result) {
-            if (this.isConfirm) {
-                Quagga.stop();
-            }
-
             const isbn = result.codeResult.code;
             if (this.validation(isbn)) {
+                if (this.isConfirm) {
+                    Quagga.stop();
+                }
+
                 this.create(isbn);
                 this.detectedCodes.push(isbn);
             }
@@ -88,8 +119,7 @@ export default {
         create(code) {
             if (this.detectedCodes.indexOf(code) < 0) {
                 if (this.isConfirm) {
-                    $('#camera-modal').modal('hide');
-                    $('#app-navbar-collapse').collapse('toggle');
+                    this.hide();
                 }
 
                 this.$parent.beforeCreate(r => {
@@ -99,6 +129,10 @@ export default {
         },
         validation(code) {
             return code.match(/^978/);
+        },
+        hide() {
+            $('#camera-modal').modal('hide');
+            $('#app-navbar-collapse').collapse('toggle');
         },
     },
 };

@@ -225,6 +225,13 @@ class BookController extends Controller
         ]);
     }
 
+    public function detectImage()
+    {
+        $labels = \CloudVision::labelDetection(file_get_contents('php://input'));
+
+        return $labels[0]->getLabel();
+    }
+
     /**
      * 登録されている本を削除する。
      * 削除に成功した場合は204、他のセッションで削除済みの場合は404を返す。

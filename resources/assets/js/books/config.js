@@ -1,4 +1,4 @@
-export const options = {
+export const config = {
     credentials: 'same-origin',
     headers: {
         'Content-Type': 'application/json',

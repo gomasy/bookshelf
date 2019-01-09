@@ -1,22 +1,18 @@
 import Request from './request';
-import { options } from './config';
+import { config } from './config';
 
 export default class {
     static async get() {
-        const resp = await fetch('/settings/all.json', options);
+        const resp = await fetch('/settings/all.json', config);
 
         return await resp.json();
     }
 
     static async createShelves(name) {
-        const reqOptions = Request.postOptions({ 'name': name });
-
-        return await fetch('/settings/shelves/create', reqOptions);
+        return await fetch('/settings/shelves/create', Request.options({ 'name': name }));
     }
 
     static async removeShelves(id, recursive) {
-        const reqOptions = Request.postOptions({ 'id': id, 'recursive': recursive });
-
-        return await fetch('/settings/shelves/delete', reqOptions);
+        return await fetch('/settings/shelves/delete', Request.options({ 'id': id, 'recursive': recursive }));
     }
 }

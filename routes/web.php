@@ -14,6 +14,7 @@
 Route::get('/', 'HomeController@index');
 Route::get('/list.json', 'BookController@list');
 Route::post('/create', 'BookController@create');
+Route::post('/detect', 'BookController@detectImage');
 Route::post('/edit', 'BookController@edit');
 Route::get('/fetch', 'BookController@fetch');
 Route::post('/delete', 'BookController@delete');

@@ -35,7 +35,9 @@ class BookController extends Controller
     /**
      * 本の登録に必要な書籍番号とユーザー情報を含んだデータを生成する。
      *
-     * @return array
+     * @param array $book
+     * @param int $sid
+     * @return Book
      */
     protected function appendHeader(array $book, int $sid): object
     {
@@ -50,8 +52,8 @@ class BookController extends Controller
      * 指定した本が既に登録されているか
      *
      * @param Request $request
-     * @param Book $book
-     * @return bool
+     * @param array $books
+     * @return array
      */
     protected function checkConflict(Request $request, array $books): array
     {
@@ -143,8 +145,8 @@ class BookController extends Controller
     /**
      * 本を登録する。
      *
-     * @param Request $request
-     * @param return Book|Response
+     * @param CreateRequest $request
+     * @param return array
      */
     public function create(CreateRequest $request): array
     {
@@ -227,7 +229,13 @@ class BookController extends Controller
         ]);
     }
 
-    public function detectImage(Request $request)
+    /**
+     * 表紙の画像からタイトルを取得
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function detectImage(Request $request): array
     {
         $response = (new ImageAnnotatorClient())
             ->webDetection($request->getContent());

@@ -137,7 +137,7 @@ export default {
         },
         updateTargetText() {
             this.targetText = this.isDetection ? '表紙' : 'バーコード';
-        }
+        },
     },
     watch: {
         isDetection() {

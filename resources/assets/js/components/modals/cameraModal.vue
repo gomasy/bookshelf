@@ -71,11 +71,9 @@ export default {
 
             ctx.drawImage(video, 0, 0, video.offsetWidth, video.offsetHeight);
             canvas.toBlob(blob => {
-                video.srcObject.getTracks().map(t => {
-                    t.stop();
-                });
-
                 this.$parent.$refs.loading.show('識別中・・・', controller);
+
+                video.srcObject.getTracks().map(t => t.stop());
                 Books.detection(blob, controller).then(title => {
                     this.$parent.beforeCreate(r => {
                         this.$parent.create(r);
@@ -90,10 +88,9 @@ export default {
 
             const ctx = Quagga.canvas.ctx.overlay;
             const canvas = Quagga.canvas.dom.overlay;
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
 
             if (!this.isDetection && result.boxes) {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
                 const hasNotRead = box => box !== result.box;
                 result.boxes.filter(hasNotRead).forEach(box => {
                     Quagga.ImageDebug.drawPath(box, { x: 0, y: 1 }, ctx, { color: 'green', lineWidth: 2 });

@@ -14,7 +14,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">ステータス</label>
+                            <label class="col-sm-2 control-label">ラベル</label>
                             <div class="col-sm-9">
                                 <select class="form-control" v-model="items.status_id">
                                     <option v-for="status in statuses" :key="status.id" :value="status.id">{{ status.name }}</option>

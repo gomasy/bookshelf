@@ -14,7 +14,7 @@
             </div>
             <div class="form-group cp_ipcheck">
                 <input type="checkbox" name="status" id="c_ch1"{{ $setting->status ? ' checked' : '' }}>
-                <label for="c_ch1">読書ステータスの表示</label>
+                <label for="c_ch1">ラベルの表示</label>
 
                 <input type="checkbox" name="animation" id="c_ch2"{{ $setting->animation ? ' checked' : '' }}>
                 <label for="c_ch2">アニメーションの有効化</label>

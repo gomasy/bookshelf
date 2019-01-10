@@ -73,7 +73,6 @@ export default {
             canvas.toBlob(blob => {
                 this.$parent.$refs.loading.show('識別中・・・', controller);
 
-                video.srcObject.getTracks().map(t => t.stop());
                 Books.detection(blob, controller).then(obj => {
                     const title = obj.result[0].match(/([^[\]]+)/)[1].trim();
 
@@ -82,6 +81,7 @@ export default {
                     }, 'title', title);
                 });
 
+                Quagga.stop();
                 this.hide();
             });
         },

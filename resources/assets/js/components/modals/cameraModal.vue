@@ -106,7 +106,7 @@ export default {
         },
         detected(result) {
             const isbn = result.codeResult.code;
-            if (this.validation(isbn)) {
+            if (!this.isDetection && this.validation(isbn)) {
                 if (this.isConfirm) {
                     Quagga.stop();
                 }

@@ -42,12 +42,10 @@ export default {
         isConfirm: true,
         isDetection: false,
         detectedCodes: [],
-        targetText: '',
     }),
     methods: {
         open() {
             $('#camera-modal').modal('show');
-            this.updateTargetText();
             this.start();
         },
         start() {
@@ -135,13 +133,10 @@ export default {
             $('#camera-modal').modal('hide');
             $('#app-navbar-collapse').collapse('toggle');
         },
-        updateTargetText() {
-            this.targetText = this.isDetection ? '表紙' : 'バーコード';
-        },
     },
-    watch: {
-        isDetection() {
-            this.updateTargetText();
+    computed: {
+        targetText() {
+            return this.isDetection ? '表紙': 'バーコード';
         },
     },
 };

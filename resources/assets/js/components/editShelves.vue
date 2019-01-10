@@ -20,10 +20,7 @@ import { confirmModal, shelfRemoveConfirmBody } from './modals';
 import { Settings } from '../books/';
 
 export default {
-    components: {
-        confirmModal,
-        tdModifyBtn,
-    },
+    components: { confirmModal, tdModifyBtn },
     data: () => ({
         shelfName: '',
         columns: [

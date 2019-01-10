@@ -36,10 +36,7 @@ import loading from './loading';
 import columns from './columns.json';
 
 export default {
-    components: {
-        cameraModal, confirmModal, editModal, previewModal, selectorModal,
-        tdImage, thFilter, loading,
-    },
+    components: { tdImage, thFilter, loading },
     data: () => ({
         'tbl-class': '',
         books: null,

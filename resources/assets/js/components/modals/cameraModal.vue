@@ -6,7 +6,7 @@
                 <div class="modal-footer">
                     <h4>{{ targetText }}を近づけて下さい</h4>
                     <input type="checkbox" v-model="isConfirm"> 確認する
-                    <input type="checkbox" v-model="isDetection"> 画像を検出
+                    <input type="checkbox" v-model="isDetection"> 画像から検索
                     <div v-if="isDetection">
                         <button class="btn" @click="capture">撮影</button>
                     </div>

@@ -140,6 +140,7 @@ class BookTest extends TestCase
             'title' => 'Example',
             'volume' => 'Example',
             'authors' => 'Example',
+            'status_id' => 2,
         ];
 
         // success

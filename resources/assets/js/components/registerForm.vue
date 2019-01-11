@@ -30,7 +30,7 @@ export default {
             this.table.reader();
         },
         updateType(payload) {
-            if (isFinite(payload)) {
+            if (isFinite(payload) || (payload.length >= 10 && payload[9] === 'X')) {
                 const len = String(payload).length;
                 if (len === 8 || len === 10 || len === 13) {
                     this.type = 'code';

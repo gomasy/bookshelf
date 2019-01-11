@@ -174,14 +174,16 @@ class NDL
 
     public function verifyCheckDigit(string $isbn): bool
     {
-        switch (strlen($isbn)) {
-            case 10:
-                return $this->getCheckDigit10($isbn) === $isbn[9];
-            case 13:
-                return $this->getCheckDigit13($isbn) === $isbn[12];
-            default:
-                return true;
+        if (ctype_digit($isbn) || (isset($isbn[9]) && $isbn[9] === 'X')) {
+            switch (strlen($isbn)) {
+                case 10:
+                    return $this->getCheckDigit10($isbn) === $isbn[9];
+                case 13:
+                    return $this->getCheckDigit13($isbn) === $isbn[12];
+            }
         }
+
+        return true;
     }
 
     public function getCheckDigit13(string $isbn13): string

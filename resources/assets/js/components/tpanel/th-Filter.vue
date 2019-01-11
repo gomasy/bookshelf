@@ -21,6 +21,12 @@ export default {
     data: () => ({
         keyword: '',
     }),
+    created() {
+        const keyword = this.query[this.field];
+        if (keyword) {
+            this.keyword = keyword;
+        }
+    },
     mounted() {
         $(this.$el).on('shown.bs.dropdown', () => this.$refs.input.focus());
     },

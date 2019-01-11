@@ -174,10 +174,14 @@ export default {
         },
     },
     created() {
+        const query = localStorage.getItem('query');
+        if (query) {
+            this.query = JSON.parse(query);
+        }
+
         this.books = new Books(this.$notify);
         this.getSettings().then(() => {
-            this.query = JSON.parse(localStorage.getItem('query')) || this.query;
-            if (this.query.sid === undefined || this.query.sid === null) {
+            if (this.query.sid === null) {
                 this.query.sid = this.shelves.find(e => e.name === 'default').id;
             }
 

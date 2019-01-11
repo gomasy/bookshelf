@@ -30,7 +30,10 @@ class BookEditRequest extends FormRequest
         return [
             'title' => [ 'required', 'max:255' ],
             'volume' => [ 'max:255' ],
-            'authors' => [ 'required', 'max:255' ],
+            'authors' => [ 'max:255' ],
+            'price' => [ 'max:255' ],
+            'publisher' => [ 'max:255' ],
+            'status_id' => [ 'required', 'numeric' ],
         ];
     }
 

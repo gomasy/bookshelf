@@ -31,12 +31,8 @@ export default {
         },
         updateType(payload) {
             if (isFinite(payload) || (payload.length >= 10 && payload[9] === 'X')) {
-                const len = String(payload).length;
-                if (len === 8 || len === 10 || len === 13) {
-                    this.type = 'code';
-                } else {
-                    this.type = 'title';
-                }
+                const len = [ 8, 10, 13 ];
+                this.type = len.indexOf(payload.length) >= 0 ? 'code' : 'title';
             } else {
                 this.type = 'title';
             }

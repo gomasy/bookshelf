@@ -2,7 +2,7 @@
     <main class="dashboard" :class="viewMode" id="content">
         <div class="panel panel-default">
             <div class="panel-body">
-                <datatable v-bind="$data">
+                <datatable class="main-table" v-bind="$data">
                     <div class="table-buttons">
                         <button class="btn btn-primary" :disabled="selection.length != 1" @click="edit">編集</button>
                         <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>

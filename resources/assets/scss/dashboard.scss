@@ -18,7 +18,7 @@
 }
 
 .dashboard {
-    .panel {
+    .main-table {
         td > img {
             cursor: pointer;
             width: 53px;
@@ -97,8 +97,8 @@
     }
 }
 
-.album {
-    colgroup, thead, td, .panel-body > div > .clearfix {
+.album .main-table {
+    colgroup, thead, td {
         display: none;
     }
 
@@ -109,8 +109,18 @@
         > tr > td {
             padding: 0;
 
-            &:nth-child(2) {
+            &:nth-child(-n + 2) {
                 display: block;
+            }
+
+            &:nth-child(1) {
+                position: relative;
+
+                > input {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                }
             }
 
             > .thumb {
@@ -132,15 +142,15 @@
 }
 
 .unread {
-    background-color: $yellow;
+    background: $yellow;
 }
 
 .reading {
-    background-color: $blue;
+    background: $blue;
 }
 
 .already-read {
-    background-color: $green;
+    background: $green;
 }
 
 .navbar-buttons {

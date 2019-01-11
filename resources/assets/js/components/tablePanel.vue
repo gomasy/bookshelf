@@ -143,7 +143,7 @@ export default {
             });
         },
         move() {
-            const options = { current: this.query.sid, next: '' };
+            const options = { current: this.query.sid, next: null };
 
             this.currentModal = confirmModal;
             this.$nextTick(() => {

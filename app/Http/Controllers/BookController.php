@@ -13,6 +13,7 @@ use App\Http\Requests\BookCreateRequest as CreateRequest;
 use App\Http\Requests\BookDeleteRequest as DeleteRequest;
 use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookFetchRequest as FetchRequest;
+use App\Http\Requests\BookMoveRequest as MoveRequest;
 
 use App\Book;
 use App\Bookshelf;
@@ -179,6 +180,46 @@ class BookController extends Controller
         return $book;
     }
 
+    /** 登録済みの本を別の本棚に移動する。
+     *
+     * @param MoveRequest $request
+     * @return Response
+     */
+    public function move(MoveRequest $request): object
+    {
+        $this->checkAuthorize($request);
+
+        \DB::transaction(function () use ($request) {
+            foreach ($request->ids as $id) {
+                $book = Book::find($id);
+                $book->bookshelf_id = $request->to_sid;
+                $book->save();
+            }
+        });
+
+        return response(null, 204);
+    }
+
+    /**
+     * 登録されている本を削除する。
+     * 削除に成功した場合は204、他のセッションで削除済みの場合は404を返す。
+     *
+     * @param DeleteRequest $request
+     * @return Response
+     */
+    public function delete(DeleteRequest $request): object
+    {
+        $this->checkAuthorize($request);
+
+        \DB::transaction(function () use ($request) {
+            if (!Book::destroy($request->ids)) {
+                abort(400, 'Invalid request');
+            }
+        });
+
+        return response(null, 204);
+    }
+
     /**
      * 本の情報を取得する
      * 取得した本が既に登録されていた場合は409、
@@ -247,25 +288,5 @@ class BookController extends Controller
         }
 
         return [ 'result' => $labels ];
-    }
-
-    /**
-     * 登録されている本を削除する。
-     * 削除に成功した場合は204、他のセッションで削除済みの場合は404を返す。
-     *
-     * @param DeleteRequest $request
-     * @return Response
-     */
-    public function delete(DeleteRequest $request): object
-    {
-        $this->checkAuthorize($request);
-
-        \DB::transaction(function () use ($request) {
-            if (!Book::destroy($request->ids)) {
-                abort(400, 'Invalid request');
-            }
-        });
-
-        return response(null, 204);
     }
 }

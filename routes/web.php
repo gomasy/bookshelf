@@ -18,6 +18,7 @@ Route::post('/detect', 'BookController@detectImage');
 Route::post('/edit', 'BookController@edit');
 Route::get('/fetch', 'BookController@fetch');
 Route::post('/delete', 'BookController@delete');
+Route::post('/move', 'BookController@move');
 Route::get('/help', 'HomeController@help');
 Route::get('/privacy-policy', 'HomeController@privacyPolicy');
 Route::get('/images/P/{path}', 'BookController@fetchImage');

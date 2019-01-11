@@ -3,11 +3,11 @@ import { config } from './config';
 export default class {
     static options(body, controller, headers, isBlob) {
         const options = { ...config };
-        options['method'] = 'post';
-        options['body'] = isBlob ? body : JSON.stringify(body);
+        options.method = 'post';
+        options.body = isBlob ? body : JSON.stringify(body);
 
         if (controller) {
-            options['signal'] = controller.signal;
+            options.signal = controller.signal;
         }
 
         if (headers) {

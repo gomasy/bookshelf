@@ -63,4 +63,8 @@ export default class {
     async edit(entry) {
         return await Request.exec('/edit', Request.options(entry));
     }
+
+    async move(ids, sid, to) {
+        return await Request.exec('/move', Request.options({ ids: ids, sid: sid, to_sid: to }));
+    }
 }

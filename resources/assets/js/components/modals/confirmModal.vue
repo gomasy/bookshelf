@@ -4,7 +4,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                 </div>
-                <component :is="body" :items="items"></component>
+                <component :is="body" :items="items" :options="options"></component>
                 <div class="modal-footer">
                     <button class="btn btn-default" type="button" data-dismiss="modal">キャンセル</button>
                     <button class="btn btn-info" type="button" @click="accept" ref="ok">OK</button>

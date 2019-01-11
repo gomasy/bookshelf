@@ -5,8 +5,8 @@
                 <datatable class="main-table" v-bind="$data">
                     <div class="table-buttons">
                         <button class="btn btn-primary" :disabled="selection.length != 1" @click="edit">編集</button>
-                        <button class="btn btn-danger" :disabled="selection.length == 0" @click="remove">削除</button>
-                        <button class="btn btn-warning" :disabled="selection.length == 0" @click="move">移動</button>
+                        <button class="btn btn-danger" :disabled="!selection.length" @click="remove">削除</button>
+                        <button class="btn btn-warning" :disabled="!selection.length" @click="move">移動</button>
                         <select class="form-control select-shelves" v-model="query.sid">
                             <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
                         </select>

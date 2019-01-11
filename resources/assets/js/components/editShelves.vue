@@ -59,10 +59,12 @@ export default {
             this.fetch();
         },
         remove(id) {
+            const options = { checked: false };
+
             this.$refs.confirm.open(async (items, options) => {
-                await Settings.removeShelves(id, options);
+                await Settings.removeShelves(id, options.checked);
                 this.fetch();
-            }, null, shelfRemoveConfirmBody);
+            }, null, shelfRemoveConfirmBody, options);
         },
     },
     created() {

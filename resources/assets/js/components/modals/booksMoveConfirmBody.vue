@@ -2,7 +2,7 @@
     <div class="modal-body" id="confirm-body">
         <div class="form-group">
             <p>{{ items.length }} 件移動します。移動先の本棚を指定してください。</p>
-            <select class="form-control" v-model="selected">
+            <select class="form-control" v-model="selection">
                 <option v-for="shelf in availShelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
             </select>
         </div>
@@ -15,7 +15,7 @@ import { mapState } from 'vuex';
 export default {
     props: [ 'items', 'options' ],
     data: () => ({
-        selected: null,
+        selection: null,
     }),
     computed: {
         ...mapState({
@@ -34,7 +34,7 @@ export default {
     },
     watch: {
         selected() {
-            this.$parent.options.next = this.selected;
+            this.$set(this.options, 'next', this.selection);
         },
     },
 };

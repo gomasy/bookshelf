@@ -40,8 +40,6 @@ export default {
     components: { tdImage, thFilter, loading },
     data: () => ({
         'tbl-class': '',
-        books: null,
-        register: null,
         currentModal: null,
         columns: columns,
         data: [],
@@ -66,6 +64,9 @@ export default {
             this.selection.map(e => ids.push(e.id));
 
             return ids;
+        },
+        books() {
+            return new Books(this.$notify);
         },
     },
     methods: {
@@ -179,7 +180,6 @@ export default {
             this.query = JSON.parse(query);
         }
 
-        this.books = new Books(this.$notify);
         this.getSettings().then(() => {
             if (this.query.sid === null) {
                 this.query.sid = this.shelves.find(e => e.name === 'default').id;
@@ -193,7 +193,7 @@ export default {
         });
     },
     mounted() {
-        this.register = new Vue({
+        new Vue({
             el: '#register',
             template: '<registerForm :table="table" />',
             components: { registerForm },

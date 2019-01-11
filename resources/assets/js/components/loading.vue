@@ -25,7 +25,7 @@ export default {
             this.visible = false;
         },
         cancel() {
-            if (typeof this.controller !== 'undefined') {
+            if (this.controller) {
                 this.controller.abort();
             }
 

@@ -33,9 +33,7 @@ export default {
             this.$refs.ok.focus();
         },
         accept() {
-            if (typeof this.callback === 'function') {
-                this.callback(this.items, this.options);
-            }
+            this.callback(this.items, this.options);
 
             $('#confirm-modal').modal('hide');
         },

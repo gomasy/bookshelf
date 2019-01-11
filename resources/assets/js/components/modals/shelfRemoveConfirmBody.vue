@@ -7,21 +7,17 @@
 
 <script>
 export default {
+    props: [ 'options' ],
     data: () => ({
-        checked: false,
+        checked: null,
     }),
-    methods: {
-        update() {
-            this.$parent.options = this.checked;
-        },
-    },
     watch: {
         checked() {
-            this.update();
+            this.$set(this.options, 'checked', this.checked);
         },
     },
     created() {
-        this.update();
+        this.checked = this.options.checked;
     },
 };
 </script>

@@ -29,7 +29,7 @@ export default class {
 
     async beforeCreate(sid, type, payload, success, complete, controller) {
         let options = config;
-        if (typeof controller !== 'undefined') {
+        if (controller) {
             options = { ...config, ...{ signal: controller.signal }};
         }
 

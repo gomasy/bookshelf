@@ -33,6 +33,10 @@ class CheckFetchType implements Rule
     public function passes($attribute, $value)
     {
         if ($this->type === 'code' && !ctype_digit($value)) {
+            if (isset($value[9]) && $value[9] === 'X') {
+                return true;
+            }
+
             return false;
         }
 

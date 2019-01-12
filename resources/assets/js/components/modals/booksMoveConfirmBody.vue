@@ -22,19 +22,21 @@ export default {
             shelves: 'shelves',
         }),
         availShelves() {
-            const shelves = [];
-            this.shelves.map(e => {
-                if (this.options.current !== e.id) {
-                    shelves.push(e);
-                }
-            });
-
-            return shelves;
+            return this.shelves.filter(e => e.id !== this.options.current);
         },
     },
-    watch: {
-        selected() {
+    methods: {
+        handleSelectionChange() {
             this.$set(this.options, 'next', this.selection);
+        },
+    },
+    created() {
+        this.selection = this.availShelves[0].id;
+        this.handleSelectionChange();
+    },
+    watch: {
+        selection() {
+            this.handleSelectionChange();
         },
     },
 };

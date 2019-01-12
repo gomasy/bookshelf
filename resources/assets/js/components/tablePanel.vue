@@ -4,9 +4,9 @@
             <div class="panel-body">
                 <datatable class="main-table" v-bind="$data">
                     <div class="table-buttons">
-                        <button class="btn btn-primary" :disabled="selection.length != 1" @click="edit">編集</button>
+                        <button class="btn btn-primary" :disabled="selection.length !== 1" @click="edit">編集</button>
                         <button class="btn btn-danger" :disabled="!selection.length" @click="remove">削除</button>
-                        <button class="btn btn-warning" :disabled="!selection.length" @click="move">移動</button>
+                        <button class="btn btn-warning" :disabled="!selection.length || shelves.length < 2" @click="move">移動</button>
                         <select class="form-control select-shelves" v-model="query.sid">
                             <option v-for="shelf in shelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
                         </select>
@@ -60,10 +60,7 @@ export default {
             imageSize: 'imageSize',
         }),
         ids() {
-            const ids = [];
-            this.selection.map(e => ids.push(e.id));
-
-            return ids;
+            return this.selection.map(e => e.id);
         },
         books() {
             return new Books(this.$notify);
@@ -139,7 +136,7 @@ export default {
             this.currentModal = confirmModal;
             this.$nextTick(() => {
                 this.$refs.modal.open(items => {
-                    this.books.delete(items).then(() => this.fetch(this.query));
+                    Books.delete(items).then(() => this.fetch(this.query));
                 }, this.ids, deleteConfirmBody);
             });
         },
@@ -149,7 +146,7 @@ export default {
             this.currentModal = confirmModal;
             this.$nextTick(() => {
                 this.$refs.modal.open((items, options) => {
-                    this.books.move(items, options.current, options.next).then(() => this.fetch(this.query));
+                    Books.move(items, options.current, options.next).then(() => this.fetch(this.query));
                 }, this.ids, booksMoveConfirmBody, options);
             });
         },

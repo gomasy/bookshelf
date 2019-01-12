@@ -52,7 +52,7 @@ export default {
             $('#edit-modal').modal('show');
         },
         submit() {
-            (new Books()).edit(this.items).then(() => {
+            Books.edit(this.items).then(() => {
                 Object.keys(this.selection[0]).map(key => {
                     this.selection[0][key] = this.items[key];
                 });

@@ -19,7 +19,7 @@ export default {
     data: () => ({
         items: [],
         callback: null,
-        options: null,
+        options: {},
         body: null,
     }),
     methods: {

@@ -56,15 +56,15 @@ export default class {
         }
     }
 
-    async delete(ids) {
+    static async delete(ids) {
         return await Request.exec('/delete', Request.options({ ids: ids }));
     }
 
-    async edit(entry) {
+    static async edit(entry) {
         return await Request.exec('/edit', Request.options(entry));
     }
 
-    async move(ids, sid, to) {
+    static async move(ids, sid, to) {
         return await Request.exec('/move', Request.options({ ids: ids, sid: sid, to_sid: to }));
     }
 }

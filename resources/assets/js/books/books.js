@@ -34,7 +34,7 @@ export default class {
         }
 
         try {
-            const query = { 'sid': sid, 'type': type, 'p': payload };
+            const query = { sid: sid, type: type, p: payload };
             const resp = await Request.exec(this.getUrl('/fetch', query), options);
             success(await resp.json());
         } catch (e) {
@@ -46,7 +46,7 @@ export default class {
 
     async create(sid, payload) {
         try {
-            const body = { 'sid': sid, 'p': payload };
+            const body = { sid: sid, p: payload };
             const resp = await Request.exec('/create', Request.options(body));
             notify(this.notify, resp);
 

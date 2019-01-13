@@ -170,12 +170,12 @@ export default {
         },
     },
     created() {
-        const query = localStorage.getItem('query');
-        if (query) {
-            this.query = JSON.parse(query);
-        }
-
         this.getSettings().then(() => {
+            const query = localStorage.getItem('query');
+            if (query) {
+                this.query = JSON.parse(query);
+            }
+
             if (this.query.sid === null) {
                 this.query.sid = this.shelves.find(e => e.name === 'default').id;
             }

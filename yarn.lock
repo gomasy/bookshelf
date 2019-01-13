@@ -5445,7 +5445,7 @@ vue-template-es2015-compiler@^1.6.0:
 
 "vue2-datatable-component@https://github.com/Gomasy/vue2-datatable.git":
   version "2.3.1"
-  resolved "https://github.com/Gomasy/vue2-datatable.git#4bebed710a185195adaeec9fcf542cafbc40f118"
+  resolved "https://github.com/Gomasy/vue2-datatable.git#b6d51b1b94e3d4416f51a817ebbafd8c96a54613"
   dependencies:
     lodash "^4.17.4"
 

@@ -224,19 +224,15 @@
     }
 }
 
-#preview-modal .modal-dialog {
+#preview-modal {
     display: flex;
+    align-items: center;
     justify-content: center;
-    transform: unset;
-    width: 375px;
-
-    @media(--mobile) {
-        margin: auto;
-        margin-top: 50px;
-    }
 
     > img {
-        height: 500px;
+        @media(--pc) {
+            min-height: 500px;
+        }
     }
 }
 

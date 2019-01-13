@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=390">
+        <meta name="viewport" content="width=400">
 @if (!App::isDownForMaintenance())
         <meta name="csrf-token" content="{{ csrf_token() }}">
 @endif

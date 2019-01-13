@@ -39,7 +39,7 @@ import columns from './columns.json';
 export default {
     components: { tdImage, thFilter, loading },
     data: () => ({
-        'tbl-class': '',
+        'tbl-class': null,
         currentModal: null,
         columns: columns,
         data: [],
@@ -56,6 +56,7 @@ export default {
         ...mapState({
             settings: 'settings',
             shelves: 'shelves',
+            statuses: 'statuses',
             viewMode: 'viewMode',
             imageSize: 'imageSize',
         }),
@@ -73,17 +74,7 @@ export default {
         updateStatus(data) {
             if (this.settings.status) {
                 (data || this.data).map(e => {
-                    switch (e.status_id) {
-                    case 1:
-                        e.trClass = 'unread';
-                        break;
-                    case 2:
-                        e.trClass = 'reading';
-                        break;
-                    case 3:
-                        e.trClass = 'already-read';
-                        break;
-                    }
+                    e.trStyle = 'background: ' + this.statuses[e.status_id - 1].color;
                 });
             } else {
                 this['tbl-class'] = 'table-striped table-hover';

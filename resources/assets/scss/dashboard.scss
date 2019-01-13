@@ -141,18 +141,6 @@
     }
 }
 
-.unread {
-    background: $yellow;
-}
-
-.reading {
-    background: $blue;
-}
-
-.already-read {
-    background: $green;
-}
-
 .navbar-buttons {
     @media(--mobile) {
         display: flex;

@@ -18,8 +18,8 @@ class CreateStatusesTable extends Migration
             $table->string('name');
         });
 
-        foreach ([ '未読', '読書中', '既読' ] as $status) {
-            \DB::table('statuses')->insert([ 'name' => $status ]);
+        foreach ([ '未読', '読書中', '既読' ] as $name) {
+            \DB::table('statuses')->insert([ 'name' => $name ]);
         }
 
         Schema::table('books', function (Blueprint $table) {

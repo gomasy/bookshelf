@@ -49,14 +49,14 @@ export default {
             });
         },
         async create() {
-            const resp = await Settings.createShelves(this.shelfName);
-            if (resp.status === 403) {
-                alert('重複しているか、使用できない名前です。');
-                return;
-            }
+            try {
+                await Settings.createShelves(this.shelfName);
 
-            this.shelfName = '';
-            this.fetch();
+                this.shelfName = '';
+                this.fetch();
+            } catch (e) {
+                alert('重複しているか、使用できない名前です。');
+            }
         },
         remove(id) {
             const options = { checked: false };

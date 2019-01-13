@@ -80,13 +80,20 @@ export default {
                 this['tbl-class'] = 'table-striped table-hover';
             }
         },
-        fetch(query) {
-            this.books.fetch(query).then(result => {
-                this.updateStatus(result.data);
-                this.data = result.data;
-                this.total = result.total;
-            });
-            localStorage.setItem('query', JSON.stringify(query));
+        async fetch(query) {
+            try {
+                await this.books.fetch(query).then(result => {
+                    this.updateStatus(result.data);
+                    this.data = result.data;
+                    this.total = result.total;
+                });
+                localStorage.setItem('query', JSON.stringify(query));
+            } catch (e) {
+                alert('一覧の読み込みに失敗しました。');
+                if (e.status === 401) {
+                    localStorage.removeItem('query');
+                }
+            }
         },
         beforeCreate(callback, type, payload, confirmed) {
             const controller = new AbortController();

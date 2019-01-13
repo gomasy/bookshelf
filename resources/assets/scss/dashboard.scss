@@ -139,6 +139,10 @@
             }
         }
     }
+
+    > .clearfix > .btn-group {
+        display: none;
+    }
 }
 
 .navbar-buttons {
@@ -178,16 +182,16 @@
 .add-inner {
     display: flex;
     align-items: flex-start;
+}
 
-    .add-text {
-        flex: 1;
-        margin-left: 20px;
-        font-size: 16px;
-        line-height: 24px;
+.add-text {
+    flex: 1;
+    margin-left: 20px;
+    font-size: 16px;
+    line-height: 24px;
 
-        > span {
-            display: block;
-        }
+    > span {
+        display: block;
     }
 }
 
@@ -196,10 +200,10 @@
         @media(--pc) {
             width: 680px;
         }
+    }
 
-        .modal-footer {
-            text-align: center;
-        }
+    .modal-footer {
+        text-align: center;
     }
 }
 
@@ -255,12 +259,12 @@
     }
 
     > span { display: block; }
+}
 
-    .notification {
-        padding: 20px 10px;
+.notification {
+    padding: 20px 10px;
+}
 
-        .notification-title, .notification-content {
-            font-size: 14px;
-        }
-    }
+.notification-title, .notification-content {
+    font-size: 14px;
 }

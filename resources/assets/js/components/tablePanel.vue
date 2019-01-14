@@ -180,11 +180,8 @@ export default {
                 this.query.sid = this.shelves.find(e => e.name === 'default').id;
             }
 
-            switch (this.settings.display_format) {
-            case 1:
-                this.$store.dispatch('setViewMode', { mode: 'album', size: 'large' });
-                break;
-            }
+            // set viewmode
+            this.$store.dispatch('setViewMode', this.settings.display_format);
         });
     },
     mounted() {

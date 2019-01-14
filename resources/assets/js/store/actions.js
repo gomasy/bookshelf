@@ -5,7 +5,7 @@ export default {
     async getSettings({ commit }) {
         commit(types.SET_SETTINGS, await Settings.get());
     },
-    setViewMode({ commit }, payload) {
-        commit(types.SET_VIEWMODE, payload);
+    setViewMode({ commit }, display_format) {
+        commit(types.SET_VIEWMODE, display_format);
     },
 };

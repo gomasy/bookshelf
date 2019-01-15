@@ -34,7 +34,7 @@
                         </div>
                         <div class="checkbox">
                             <label>
-                                <input type="checkbox"> ログイン状態を記憶
+                                <input type="checkbox" name="remember"> ログイン状態を記憶
                             </label>
                         </div>
                         {{ csrf_field() }}

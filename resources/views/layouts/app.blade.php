@@ -23,7 +23,7 @@
     <body>
         <nav class="sidebar">
             <div class="sidebar-header">
-                <h3>Books Manager</h3>
+                <h3>{{ config('app.name') }}</h3>
                 <strong><i class="fas fa-book" aria-hidden="true"></i></strong>
             </div>
 
@@ -99,7 +99,7 @@
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
                 <p>- 本サービスは<a href="http://iss.ndl.go.jp/information/outline/">国立国会図書館のAPI</a>を利用しています -</p>
-                <p>&copy; Books Manager 2017-{{ date('Y') }}</p>
+                <p>&copy; {{ config('app.name') }} 2017-{{ date('Y') }}</p>
             </footer>
         </div>
     </body>

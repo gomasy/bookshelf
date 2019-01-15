@@ -41,8 +41,14 @@
                             <label for="password-confirm">{{ __('validation.attributes.password-confirm') }}</label>
                             <input type="password" class="form-control" name="password_confirmation" required>
                         </div>
-                        {{ csrf_field() }}
                         <hr>
+                        <div class="form-group{{ $errors->has('agreement') ? ' has-error' : '' }}">
+                            <input type="checkbox" name="agreement"> <a href="/privacy-policy" target="_blank">プライバシーポリシー</a>に同意します
+                            <span class="help-block">
+                                <strong>{{ $errors->first('agreement') }}</strong>
+                            </span>
+                        </div>
+                        {{ csrf_field() }}
                         @include('elements/recaptcha')
                         <br>
                         <button type="submit" class="btn btn-block btn-primary">登録</button>

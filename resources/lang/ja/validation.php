@@ -150,6 +150,7 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'password-confirm' => 'パスワード確認',
+        'agreement' => '同意',
 
         // edit book
         'title' => 'タイトル',

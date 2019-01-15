@@ -14,7 +14,7 @@
                 </datatable>
             </div>
         </div>
-        <component ref="modal" :is="currentModal" :selection="selection" />
+        <component ref="modal" :is="currentModal" :columns="columns" :selection="selection" />
         <loading ref="loading" />
         <notifications position="bottom right" />
     </main>

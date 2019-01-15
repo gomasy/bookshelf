@@ -7,7 +7,7 @@
                 </div>
                 <form class="form-horizontal" @submit.prevent="submit">
                     <div class="modal-body">
-                        <div class="form-group" v-for="col in this.$parent.columns" :key="col.field">
+                        <div class="form-group" v-for="col in columns" :key="col.field">
                             <label class="col-sm-2 control-label" v-if="col.type !== 'hidden'">{{ col.title }}</label>
                             <div class="col-sm-9">
                                 <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required">
@@ -37,7 +37,7 @@ import { mapState } from 'vuex';
 import { Books } from '../../books/';
 
 export default {
-    props: [ 'selection' ],
+    props: [ 'columns', 'selection' ],
     data: () => ({
         items: {},
     }),
@@ -53,8 +53,8 @@ export default {
         },
         submit() {
             Books.edit(this.items).then(() => {
-                Object.keys(this.selection[0]).map(key => {
-                    this.selection[0][key] = this.items[key];
+                Object.keys(this.selection[0]).forEach(key => {
+                    this.$set(this.selection[0], key, this.items[key]);
                 });
                 $('#edit-modal').modal('hide');
             });

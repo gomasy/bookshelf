@@ -14,10 +14,10 @@
                         {{ session('status') }}
                     </div>
 @endif
-                    <form role="form" method="POST" action="/password/reset">
+                    <form role="form" method="post" action="/password/reset">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">{{ __('validation.attributes.email') }}</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
+                            <input type="email" class="form-control" name="email" value="{{ $email or old('email') }}" required autofocus>
 @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -26,7 +26,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password">{{ __('validation.attributes.password') }}</label>
-                            <input id="password" type="password" class="form-control" name="password" required>
+                            <input type="password" class="form-control" name="password" required>
 @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -35,7 +35,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
                             <label for="password-confirm">{{ __('validation.attributes.password-confirm') }}</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <input type="password" class="form-control" name="password_confirmation" required>
 @if ($errors->has('password_confirmation'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password_confirmation') }}</strong>

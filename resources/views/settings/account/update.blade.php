@@ -4,7 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">アカウント</div>
     <div class="panel-body">
-        <form role="form" method="POST" action="/settings/account/update">
+        <form role="form" method="post" action="/settings/account/update">
             <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email">{{ __('validation.attributes.email') }}</label>
                 <input class="form-control" type="email" name="email" value="{{ old('email', Auth::user()['email']) }}">

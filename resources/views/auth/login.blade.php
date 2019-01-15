@@ -13,10 +13,10 @@
             <div class="panel panel-info">
                 <div class="panel-heading">ログイン</div>
                 <div class="panel-body">
-                    <form id="login-form" role="form" method="POST" action="/login">
+                    <form role="form" id="login-form" method="post" action="/login">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">{{ __('validation.attributes.email') }}</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>
 @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -25,7 +25,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password">{{ __('validation.attributes.password') }}</label>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="●●●●●●●●" required>
+                            <input type="password" class="form-control" name="password" placeholder="●●●●●●●●" required>
 @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>

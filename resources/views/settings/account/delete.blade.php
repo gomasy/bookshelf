@@ -9,7 +9,7 @@
             <div class="panel panel-danger">
                 <div class="panel-heading">続行するにはパスワードを入力する必要があります</div>
                 <div class="panel-body">
-                    <form role="form" method="POST" action="/settings/account/delete">
+                    <form role="form" method="post" action="/settings/account/delete">
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password">{{ __('validation.attributes.password') }}</label>
                             <input class="form-control" type="password" name="password" required autofocus>

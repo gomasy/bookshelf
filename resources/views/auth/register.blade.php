@@ -9,10 +9,10 @@
             <div class="panel panel-success">
                 <div class="panel-heading">ユーザー登録</div>
                 <div class="panel-body">
-                    <form role="form" method="POST" action="/register">
+                    <form role="form" method="post" action="/register">
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name">{{ __('validation.attributes.name') }}</label>
-                            <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="foobar" required autofocus>
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="foobar" required autofocus>
 @if ($errors->has('name'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('name') }}</strong>
@@ -21,7 +21,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">{{ __('validation.attributes.email') }}</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required>
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required>
 @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -30,7 +30,7 @@
                         </div>
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password">{{ __('validation.attributes.password') }}</label>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="●●●●●●●●" required>
+                            <input type="password" class="form-control" name="password" placeholder="●●●●●●●●" required>
 @if ($errors->has('password'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('password') }}</strong>
@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="password-confirm">{{ __('validation.attributes.password-confirm') }}</label>
-                            <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            <input type="password" class="form-control" name="password_confirmation" required>
                         </div>
                         {{ csrf_field() }}
                         <hr>

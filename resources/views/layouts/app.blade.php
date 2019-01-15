@@ -38,7 +38,7 @@
                         <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
                         ログアウト
                     </a>
-                    <form id="logout-form" method="POST" action="/logout" style="display: none;">
+                    <form id="logout-form" method="post" action="/logout" style="display: none;">
                         {{ csrf_field() }}
                     </form>
                 </li>

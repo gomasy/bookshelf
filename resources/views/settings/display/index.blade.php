@@ -4,7 +4,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">表示</div>
     <div class="panel-body">
-        <form role="form" method="POST" action="/settings/display/update">
+        <form role="form" method="post" action="/settings/display/update">
             <div class="form-group">
                 <label class="control-label">表示形式</label>
                 <select class="form-control" name="display_format">

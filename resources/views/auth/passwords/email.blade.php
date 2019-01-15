@@ -14,10 +14,10 @@
                         {{ session('status') }}
                     </div>
 @endif
-                    <form  role="form" method="POST" action="/password/email">
+                    <form role="form" method="post" action="/password/email">
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email">{{ __('validation.attributes.email') }}</label>
-                            <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="example@example.com" required autofocus>
 @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>

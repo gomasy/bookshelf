@@ -10,7 +10,7 @@
             <div class="panel panel-warning">
                 <div class="panel-heading">送信内容の確認</div>
                 <div class="panel-body">
-                    <form action="/contact/submit" method="post">
+                    <form role="form" action="/contact/submit" method="post">
                         <div class="form-group">
                             <label class="control-label">お名前</label>
                             <input class="form-control" type="text" name="name" value="{{ $request->name }}" disabled>

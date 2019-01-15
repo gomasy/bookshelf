@@ -9,7 +9,7 @@
             <div class="panel panel-warning">
                 <div class="panel-heading">お問い合わせ</div>
                 <div class="panel-body">
-                    <form action="/contact" method="post">
+                    <form role="form" action="/contact" method="post">
                         <div class="form-group">
                             <label class="control-label">お名前</label>
                             <input class="form-control" type="text" name="name" required>

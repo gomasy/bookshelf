@@ -24,6 +24,7 @@ class RegisterTest extends TestCase
             'email' => 'example@example.com',
             'password' => 'testpasswd',
             'password_confirmation' => 'testpasswd',
+            'agreement' => true,
         ];
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
 

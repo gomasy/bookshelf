@@ -73,7 +73,7 @@ export default {
         }),
         updateStatus(data) {
             if (this.settings.status) {
-                (data || this.data).map(e => {
+                (data || this.data).forEach(e => {
                     e.trStyle = 'background: ' + this.statuses[e.status_id - 1].color;
                 });
             } else {
@@ -114,7 +114,7 @@ export default {
         },
         create(entry) {
             this.books.create(this.query.sid, entry).then(result => {
-                result.map(e => {
+                result.forEach(e => {
                     this.data.push(e);
                     this.total++;
                 });

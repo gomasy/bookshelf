@@ -9,7 +9,7 @@ export default class {
 
     getUrl(url, query) {
         url += '?';
-        Object.keys(query).map(k => url += k + '=' + query[k] + '&');
+        Object.keys(query).forEach(k => url += k + '=' + query[k] + '&');
 
         return url.substring(url.length - 1, -1);
     }

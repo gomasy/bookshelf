@@ -63,12 +63,14 @@ class ShelfController extends Controller
     public function delete(Request $request): object
     {
         $this->checkAuthorize($request);
+        $id = $request->id;
         $default = Bookshelf::default();
 
-        if ($request->id !== $default->id) {
+        if ($id !== $default->id) {
             if (!$request->recursive) {
-                $books = Book::where('bookshelf_id', $request->id);
-                foreach ($books->get() as $book) {
+                $books = Book::where('bookshelf_id', $id);
+
+                foreach ($this->checkConflict($books->get(), $id) as $book) {
                     $book->where('id', $book->id)
                         ->update([ 'bookshelf_id' => $default->id ]);
                 }

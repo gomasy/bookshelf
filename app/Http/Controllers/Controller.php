@@ -7,7 +7,9 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 
+use App\Book;
 use App\Bookshelf;
 
 class Controller extends BaseController
@@ -26,5 +28,28 @@ class Controller extends BaseController
         } elseif (isset($request->sid) && !Bookshelf::find($request->sid)) {
             abort(401);
         }
+    }
+
+    /**
+     * 指定した本が既に登録されているか
+     *
+     * @param Request $request
+     * @param array $books
+     * @return array
+     */
+    protected function checkConflict(Collection $books, int $sid): array
+    {
+        $items = [];
+        foreach ($books as $book) {
+            $count = Book::shelves($sid)->where(function ($query) use ($book) {
+                $query->where('isbn', $book['isbn'])->orWhere('jpno', $book['jpno']);
+            })->count();
+
+            if (!$count) {
+                array_push($items, $book);
+            }
+        }
+
+        return $items;
     }
 }

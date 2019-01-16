@@ -16,8 +16,6 @@ use App\Http\Requests\BookFetchRequest as FetchRequest;
 use App\Http\Requests\BookMoveRequest as MoveRequest;
 
 use App\Book;
-use App\Bookshelf;
-use App\User;
 
 use App\Exceptions\TimeoutException;
 
@@ -47,29 +45,6 @@ class BookController extends Controller
         $book->status_id = 1;
 
         return $book;
-    }
-
-    /**
-     * 指定した本が既に登録されているか
-     *
-     * @param Request $request
-     * @param array $books
-     * @return array
-     */
-    protected function checkConflict(Request $request, array $books): array
-    {
-        $items = [];
-        foreach ($books as $book) {
-            $count = Book::shelves($request->sid)->where(function ($query) use ($book) {
-                $query->where('isbn', $book['isbn'])->orWhere('jpno', $book['jpno']);
-            })->count();
-
-            if (!$count) {
-                array_push($items, $book);
-            }
-        }
-
-        return $items;
     }
 
     /**
@@ -190,9 +165,11 @@ class BookController extends Controller
         $this->checkAuthorize($request);
 
         \DB::transaction(function () use ($request) {
-            foreach ($request->ids as $id) {
-                $book = Book::find($id);
-                $book->bookshelf_id = $request->to_sid;
+            $books = Book::find($request->ids);
+            $sid = $request->to_sid;
+
+            foreach ($this->checkConflict($books, $sid) as $book) {
+                $book->bookshelf_id = $sid;
                 $book->save();
             }
         });
@@ -238,7 +215,7 @@ class BookController extends Controller
         }
 
         if (count($books)) {
-            $items = $this->checkConflict($request, $books);
+            $items = $this->checkConflict($books, (int)$request->sid);
             if (!count($items)) {
                 return response($books, 409);
             }

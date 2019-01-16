@@ -31,7 +31,7 @@ class NDL
         ]);
     }
 
-    public function query(string $payload, string $type): array
+    public function query(string $payload, string $type): object
     {
         $items = [];
         $this->type = $type;
@@ -51,7 +51,7 @@ class NDL
             ]))->toArray());
         }
 
-        return $items;
+        return collect($items);
     }
 
     protected function getQueryString(string $payload): string

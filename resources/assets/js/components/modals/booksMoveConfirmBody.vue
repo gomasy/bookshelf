@@ -1,7 +1,10 @@
 <template>
     <div class="modal-body" id="confirm-body">
         <div class="form-group">
-            <p>{{ items.length }} 件移動します。移動先の本棚を指定してください。</p>
+            <p>
+                {{ items.length }} 件移動します。移動先の本棚を指定してください。<br>
+                ※移動先に同じ本があった場合は<strong>処理されません。</strong>
+            </p>
             <select class="form-control" v-model="selection">
                 <option v-for="shelf in availShelves" :key="shelf.id" :value="shelf.id">{{ shelf.name }}</option>
             </select>

@@ -10,5 +10,11 @@
     <div class="panel-body">
         <div id="shelves"></div>
     </div>
+    <div class="panel-footer">
+        <p>
+            注: 本棚を中身ごと削除しなかった場合はデフォルトに移動されます。<br>
+            同じ本がある場合は<strong>マージされます（デフォルト優先）。</strong>
+        </p>
+    </div>
 </div>
 @endsection

@@ -220,7 +220,7 @@ class BookController extends Controller
                 return response($books, 409);
             }
 
-            return response($items);
+            return response(array_merge($items->toArray()));
         }
 
         abort(404, 'Book(s) not found');
@@ -256,14 +256,12 @@ class BookController extends Controller
     public function detectImage(Request $request): array
     {
         $response = (new ImageAnnotatorClient())
-            ->webDetection($request->getContent());
-        $web = $response->getWebDetection();
+            ->webDetection($request->getContent())
+            ->getWebDetection();
+        $labels = $response->getBestGuessLabels();
 
-        $labels = [];
-        foreach ($web->getBestGuessLabels() as $label) {
-            array_push($labels, $label->getLabel());
-        }
-
-        return [ 'result' => $labels ];
+        return [ 'result' => collect($labels)->map(function ($label) {
+            return $label->getLabel();
+        }) ];
     }
 }

@@ -37,19 +37,14 @@ class Controller extends BaseController
      * @param array $books
      * @return array
      */
-    protected function checkConflict(Collection $books, int $sid): array
+    protected function checkConflict(Collection $books, int $sid): object
     {
-        $items = [];
-        foreach ($books as $book) {
-            $count = Book::shelves($sid)->where(function ($query) use ($book) {
-                $query->where('isbn', $book['isbn'])->orWhere('jpno', $book['jpno']);
-            })->count();
-
-            if (!$count) {
-                array_push($items, $book);
-            }
-        }
-
-        return $items;
+        return $books->reject(function ($book) use ($sid) {
+            return (bool)Book::shelves($sid)
+                ->where(function ($query) use ($book) {
+                    $query->where('isbn', $book['isbn'])
+                          ->orWhere('jpno', $book['jpno']);
+                })->count();
+        });
     }
 }

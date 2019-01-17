@@ -22,6 +22,25 @@ class ShelfController extends Controller
     }
 
     /**
+     * 該当する本棚の全ての本をデフォルトに移動する
+     * 注: 重複は除く
+     *
+     * @param int $sid
+     */
+    protected function migrateDefault(int $sid): void
+    {
+        \DB::transaction(function () use ($sid) {
+            $books = Book::where('bookshelf_id', $sid)->get();
+            $default = Bookshelf::default();
+
+            foreach ($this->checkConflict($books, $default->id) as $book) {
+                $book->where('id', $book->id)
+                     ->update([ 'bookshelf_id' => $default->id ]);
+            }
+        });
+    }
+
+    /**
      * 本棚の設定画面のビューを返す
      *
      * @return View
@@ -63,17 +82,10 @@ class ShelfController extends Controller
     public function delete(Request $request): object
     {
         $this->checkAuthorize($request);
-        $id = $request->id;
-        $default = Bookshelf::default();
 
-        if ($id !== $default->id) {
+        if ($request->id !== Bookshelf::default()->id) {
             if (!$request->recursive) {
-                $books = Book::where('bookshelf_id', $id);
-
-                foreach ($this->checkConflict($books->get(), $id) as $book) {
-                    $book->where('id', $book->id)
-                        ->update([ 'bookshelf_id' => $default->id ]);
-                }
+                $this->migrateDefault($request->id);
             }
 
             if (Bookshelf::destroy($request->id)) {

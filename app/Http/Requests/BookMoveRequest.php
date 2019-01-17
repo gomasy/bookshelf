@@ -28,7 +28,7 @@ class BookMoveRequest extends FormRequest
         return [
             'ids' => [ 'required', 'array' ],
             'sid' => [ 'required', 'numeric' ],
-            'to_sid' => [ 'required', 'numeric' ],
+            'to_sid' => [ 'required', 'numeric', 'different:sid' ],
         ];
     }
 }

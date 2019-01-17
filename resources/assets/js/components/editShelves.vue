@@ -63,6 +63,7 @@ export default {
 
             this.$refs.confirm.open(async (items, options) => {
                 await Settings.removeShelves(id, options.checked);
+                localStorage.removeItem('query');
                 this.fetch();
             }, null, shelfRemoveConfirmBody, options);
         },

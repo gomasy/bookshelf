@@ -1,6 +1,6 @@
 <template>
     <div class="modal-body" id="confirm-body">
-        <p>一件見つかりました。本当に登録しますか？</p>
+        <p>1 件見つかりました。本当に登録しますか？</p>
         <div class="add-inner">
             <img width="112px" height="160px" :src="this.items[0].images.medium">
             <div class="add-text">

@@ -37,8 +37,8 @@ export default {
                 readers: [ 'ean_reader' ],
             },
             locate: true,
-            interval: null,
         },
+        interval: null,
         isConfirm: true,
         isDetection: false,
         detectedCodes: [],
@@ -132,6 +132,7 @@ export default {
         hide() {
             $('#camera-modal').modal('hide');
             $('#app-navbar-collapse').collapse('toggle');
+            clearInterval(this.interval);
         },
     },
     computed: {

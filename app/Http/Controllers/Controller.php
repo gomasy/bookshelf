@@ -23,10 +23,13 @@ class Controller extends BaseController
      */
     protected function checkAuthorize(Request $request): void
     {
+        $sid = $request->sid ?? ($request->bookshelf_id ?? null);
+        $to_sid = $request->to_sid ?? null;
+
         if (!$request->ajax()) {
             abort(404);
-        } elseif (isset($request->sid) && !Bookshelf::find($request->sid)) {
-            abort(401);
+        } elseif (($sid && !Bookshelf::find($sid)) || ($to_sid && !Bookshelf::find($to_sid))) {
+            abort(403, 'Access denied');
         }
     }
 

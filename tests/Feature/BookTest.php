@@ -163,10 +163,10 @@ class BookTest extends TestCase
              ->assertStatus(204);
         $this->assertDatabaseMissing('books', [ 'id' => $book->id ]);
 
-        // bad request
+        // access denied
         $this->actingAs($user)
              ->post('/delete', [ 'ids' => [ 0 ] ], $headers)
-             ->assertStatus(400);
+             ->assertStatus(403);
 
         // invalid
         $this->actingAs($user)

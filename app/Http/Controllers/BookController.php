@@ -145,14 +145,19 @@ class BookController extends Controller
      * @param EditRequest $request
      * @return Book
      */
-    public function edit(EditRequest $request): object
+    public function edit(EditRequest $request): array
     {
         $this->checkAuthorize($request);
+        $books = $request->data;
 
-        $book = Book::find($request->id);
-        $book->fill($request->all())->save();
+        \DB::transaction(function () use ($books) {
+            foreach ($books as $obj) {
+                $book = Book::find($obj['id']);
+                $book->fill($obj)->save();
+            }
+        });
 
-        return $book;
+        return $books;
     }
 
     /** 登録済みの本を別の本棚に移動する。

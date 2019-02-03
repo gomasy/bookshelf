@@ -135,19 +135,21 @@ class BookTest extends TestCase
         $user = factory(User::class)->create();
         $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
         $book = factory(Book::class)->create([ 'bookshelf_id' => $shelf->id ]);
-        $data = [
-            'id' => $book->id,
-            'title' => 'Example',
-            'volume' => 'Example',
-            'authors' => 'Example',
-            'status_id' => 2,
+        $payload = [
+            'data' => [[
+                'id' => $book->id,
+                'title' => 'Example',
+                'volume' => 'Example',
+                'authors' => 'Example',
+                'status_id' => 2,
+            ]],
         ];
 
         // success
         $this->actingAs($user)
-             ->post('/edit', $data, $headers)
+             ->post('/edit', $payload, $headers)
              ->assertSuccessful();
-        $this->assertDatabaseHas('books', $data);
+        $this->assertDatabaseHas('books', $payload['data'][0]);
     }
 
     public function testDelete()

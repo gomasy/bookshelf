@@ -61,7 +61,7 @@ export default class {
     }
 
     static async edit(entry) {
-        return await Request.exec('/edit', Request.options(entry));
+        return await Request.exec('/edit', Request.options({ data: entry }));
     }
 
     static async move(ids, sid, to) {

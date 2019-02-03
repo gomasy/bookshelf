@@ -25,23 +25,8 @@ class BookEditRequest extends FormRequest
      */
     public function rules(): array
     {
-        $this->sanitize();
-
         return [
-            'title' => [ 'required', 'max:255' ],
-            'volume' => [ 'max:255' ],
-            'authors' => [ 'max:255' ],
-            'price' => [ 'max:255' ],
-            'publisher' => [ 'max:255' ],
-            'status_id' => [ 'required', 'numeric' ],
+            'data' => [ 'array' ],
         ];
-    }
-
-    public function sanitize()
-    {
-        $input = $this->all();
-        $input['volume'] = $input['volume'] ?? '';
-
-        $this->replace($input);
     }
 }

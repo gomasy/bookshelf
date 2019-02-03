@@ -10,7 +10,7 @@
                         <div class="form-group" v-for="col in columns" :key="col.field">
                             <label class="col-sm-2 control-label" v-if="col.type !== 'hidden'">{{ col.title }}</label>
                             <div class="col-sm-9">
-                                <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required">
+                                <input class="form-control" v-model="items[col.field]" :type="col.type" :required="col.required" :disabled="total > 1">
                             </div>
                         </div>
                         <div class="form-group">
@@ -40,6 +40,7 @@ export default {
     props: [ 'columns', 'selection' ],
     data: () => ({
         items: {},
+        total: 0,
     }),
     computed: {
         ...mapState({
@@ -49,13 +50,20 @@ export default {
     methods: {
         open() {
             this.items = { ...this.selection[0] };
+            this.total = this.selection.length;
+
             $('#edit-modal').modal('show');
         },
         submit() {
-            Books.edit(this.items).then(() => {
-                Object.keys(this.selection[0]).forEach(key => {
-                    this.$set(this.selection[0], key, this.items[key]);
+            this.selection.forEach((obj, index) => {
+                Object.keys(obj).forEach(key => {
+                    if (this.total === 1 || key === 'status_id') {
+                        this.$set(this.selection[index], key, this.items[key]);
+                    }
                 });
+            });
+
+            Books.edit(this.selection).then(() => {
                 $('#edit-modal').modal('hide');
             });
         },

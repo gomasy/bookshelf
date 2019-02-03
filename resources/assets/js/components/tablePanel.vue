@@ -4,7 +4,7 @@
             <div class="panel-body">
                 <datatable class="main-table" v-bind="$data">
                     <div class="table-buttons">
-                        <button class="btn btn-primary" :disabled="selection.length !== 1" @click="edit">編集</button>
+                        <button class="btn btn-primary" :disabled="!selection.length" @click="edit">編集</button>
                         <button class="btn btn-danger" :disabled="!selection.length" @click="remove">削除</button>
                         <button class="btn btn-warning" :disabled="!selection.length || shelves.length < 2" @click="move">移動</button>
                         <select class="form-control select-shelves" v-model="query.sid">
@@ -14,7 +14,7 @@
                 </datatable>
             </div>
         </div>
-        <component ref="modal" :is="currentModal" :columns="columns" :selection="selection" />
+        <component ref="modal" :is="currentModal" v-bind="$data" />
         <loading ref="loading" />
         <notifications position="bottom right" />
     </main>

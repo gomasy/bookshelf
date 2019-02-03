@@ -42,7 +42,7 @@
                             <input type="password" class="form-control" name="password_confirmation" required>
                         </div>
                         <hr>
-                        <div class="form-group{{ $errors->has('agreement') ? ' has-error' : '' }}">
+                        <div class="form-group{{ $errors->has('agreement') ? ' has-error' : '' }} agreement">
                             <input type="checkbox" name="agreement"> <a href="/privacy-policy" target="_blank">プライバシーポリシー</a>に同意します
                             <span class="help-block">
                                 <strong>{{ $errors->first('agreement') }}</strong>

@@ -28,6 +28,10 @@ i, span {
     display: inline-block;
 }
 
+.agreement > a {
+    text-decoration: underline;
+}
+
 .sidebar {
     position: fixed;
     width: 80px;

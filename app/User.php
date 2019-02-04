@@ -29,4 +29,13 @@ class User extends Authenticatable implements MustVerifyEmailContract
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = [
+        'email_verified_at',
+    ];
 }

@@ -31,11 +31,11 @@ class User extends Authenticatable implements MustVerifyEmailContract
     ];
 
     /**
-     * The attributes that should be mutated to dates.
+     * The attributes that should be cast to native types.
      *
      * @var array
      */
-    protected $dates = [
-        'email_verified_at',
+    protected $casts = [
+        'email_verified_at' => 'datetime',
     ];
 }

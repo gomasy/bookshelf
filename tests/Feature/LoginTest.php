@@ -16,7 +16,7 @@ class LoginTest extends TestCase
     {
         $response = $this->get('/login');
         $response->assertViewIs('auth.login');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testLoggedIn()
@@ -26,7 +26,7 @@ class LoginTest extends TestCase
         // ok
         $response = $this->actingAs($user)->get('/');
         $response->assertViewIs('dashboard');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
 
         // redirect to the e-mail confirmation page
         $user->email_verified_at = null;

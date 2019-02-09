@@ -20,7 +20,7 @@ class SettingTest extends TestCase
         UserSetting::create([ 'id' => $user->id ]);
 
         $response = $this->actingAs($user)->get('/settings/all.json', $headers);
-        $response->assertStatus(200);
+        $response->assertSuccessful();
         $response->assertJsonFragment([ 'id' => $user->id ]);
     }
 
@@ -31,7 +31,7 @@ class SettingTest extends TestCase
 
         $this->actingAs($user)
              ->get('/settings/display')
-             ->assertStatus(200);
+             ->assertSuccessful();
     }
 
     public function testDisplayUpdate()
@@ -52,7 +52,7 @@ class SettingTest extends TestCase
 
         $this->actingAs($user)
              ->get('/settings/shelves')
-             ->assertStatus(200);
+             ->assertSuccessful();
     }
 
     public function testShelfCreate()

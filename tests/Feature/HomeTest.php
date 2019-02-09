@@ -16,28 +16,28 @@ class HomeTest extends TestCase
     {
         $response = $this->get('/');
         $response->assertViewIs('home');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testHelp()
     {
         $response = $this->get('/help');
         $response->assertViewIs('help');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testPrivacyPolicy()
     {
         $response = $this->get('/privacy-policy');
         $response->assertViewIs('privacy-policy');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testContact()
     {
         $response = $this->get('/contact');
         $response->assertViewIs('contact.index');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
 
         // confirm
         $response = $this->post('/contact', [
@@ -46,6 +46,6 @@ class HomeTest extends TestCase
             'inquiry' => 'Example',
         ]);
         $response->assertViewIs('contact.confirm');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 }

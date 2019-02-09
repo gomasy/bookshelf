@@ -119,17 +119,17 @@ class BookTest extends TestCase
         // normal
         $response = $this->actingAs($user)->get('/images/P/4774158798.09.LZZZZZZZ');
         $response->assertHeader('Content-Type', 'image/jpeg');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
 
         // missing (normal)
         $response = $this->actingAs($user)->get('/images/P/4840234884.09.LZZZZZZZ');
         $response->assertHeader('Content-Type', 'image/jpeg');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
 
         // missing
         $response = $this->actingAs($user)->get('/images/P/missing.large.jpg');
         $response->assertHeader('Content-Type', 'image/jpeg');
-        $response->assertStatus(200);
+        $response->assertSuccessful();
     }
 
     public function testEdit()

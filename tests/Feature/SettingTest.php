@@ -45,4 +45,24 @@ class SettingTest extends TestCase
              ->assertRedirect('/');
         $this->assertDatabaseHas('user_settings', [ 'animation' => 1 ]);
     }
+
+    public function testShelfIndex()
+    {
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+             ->get('/settings/shelves')
+             ->assertStatus(200);
+    }
+
+    public function testShelfCreate()
+    {
+        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $user = factory(User::class)->create();
+
+        $this->actingAs($user)
+             ->post('/settings/shelves/create', [ 'name' => 'test' ], $headers)
+             ->assertSuccessful();
+        $this->assertDatabaseHas('bookshelves', [ 'name' => 'test' ]);
+    }
 }

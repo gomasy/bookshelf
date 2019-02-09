@@ -152,6 +152,42 @@ class BookTest extends TestCase
         $this->assertDatabaseHas('books', $payload['data'][0]);
     }
 
+    public function testMove()
+    {
+        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $user = factory(User::class)->create();
+        $from = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $to = factory(Bookshelf::class)->create([
+            'user_id' => $user->id,
+            'name' => 'secondary',
+        ]);
+
+        $entries = $this->actingAs($user)
+                      ->get("/fetch?type=code&sid={$from->id}&p=9784873115382", $headers)
+                      ->original;
+
+        $books = $this->actingAs($user)
+                     ->post('/create', [ 'sid' => $from->id, 'p' => $entries ], $headers)
+                     ->original;
+
+        $this->actingAs($user)
+             ->post('/move', [
+                 'ids' => [ $books[0]->id ],
+                 'sid' => $from->id,
+                 'to_sid' => $to->id ], $headers)
+             ->assertSuccessful();
+
+        $this->assertDatabaseMissing('books', [
+            'bookshelf_id' => $from->id,
+            'isbn' => '9784873115382',
+        ]);
+
+        $this->assertDatabaseHas('books', [
+            'bookshelf_id' => $to->id,
+            'isbn' => '9784873115382',
+        ]);
+    }
+
     public function testDelete()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];

@@ -23,4 +23,26 @@ class SettingTest extends TestCase
         $response->assertStatus(200);
         $response->assertJsonFragment([ 'id' => $user->id ]);
     }
+
+    public function testDisplayIndex()
+    {
+        $user = factory(User::class)->create();
+        UserSetting::create([ 'id' => $user->id ]);
+
+        $this->actingAs($user)
+             ->get('/settings/display')
+             ->assertStatus(200);
+    }
+
+    public function testDisplayUpdate()
+    {
+        $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
+        $user = factory(User::class)->create();
+        UserSetting::create([ 'id' => $user->id ]);
+
+        $this->actingAs($user)
+             ->post('/settings/display/update', [ 'animation' => 'on' ], $headers)
+             ->assertRedirect('/');
+        $this->assertDatabaseHas('user_settings', [ 'animation' => 1 ]);
+    }
 }

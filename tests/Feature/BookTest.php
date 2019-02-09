@@ -59,9 +59,10 @@ class BookTest extends TestCase
         $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
 
         // success
-        $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&p=9784873115382", $headers)
-                      ->original;
+        $response = $this->actingAs($user)
+                      ->get("/fetch?type=code&sid={$shelf->id}&p=9784873115382", $headers);
+        $response->assertSuccessful();
+        $books = $response->original;
 
         $this->actingAs($user)
              ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)
@@ -69,9 +70,10 @@ class BookTest extends TestCase
         $this->assertDatabaseHas('books', [ 'isbn' => '9784873115382' ]);
 
         // success (isbn10)
-        $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&p=4000801139", $headers)
-                      ->original;
+        $response = $this->actingAs($user)
+                         ->get("/fetch?type=code&sid={$shelf->id}&p=4000801139", $headers);
+        $response->assertSuccessful();
+        $books = $response->original;
 
         $this->actingAs($user)
              ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)
@@ -79,9 +81,10 @@ class BookTest extends TestCase
         $this->assertDatabaseHas('books', [ 'isbn' => '9784000801133' ]);
 
         // success (jpno)
-        $books = $this->actingAs($user)
-                      ->get("/fetch?type=code&sid={$shelf->id}&p=22222222", $headers)
-                      ->original;
+        $response = $this->actingAs($user)
+                         ->get("/fetch?type=code&sid={$shelf->id}&p=22222222", $headers);
+        $response->assertSuccessful();
+        $books = $response->original;
 
         $this->actingAs($user)
              ->post('/create', [ 'sid' => $shelf->id, 'p' => $books ], $headers)

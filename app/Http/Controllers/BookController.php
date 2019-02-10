@@ -122,7 +122,7 @@ class BookController extends Controller
      * 本を登録する。
      *
      * @param CreateRequest $request
-     * @param return array
+     * @return array
      */
     public function create(CreateRequest $request): array
     {

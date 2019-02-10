@@ -70,8 +70,6 @@ class ShelfController extends Controller
         } catch (QueryException $e) {
             abort(403, 'Duplicate or invalid name.');
         }
-
-        abort(400, 'Invalid request.');
     }
 
     /**

@@ -193,20 +193,14 @@ class BookController extends Controller
     {
         $this->checkAuthorize($request);
 
-        \DB::transaction(function () use ($request) {
-            foreach ($request->ids as $id) {
-                $books = Book::shelves($request->sid)->where('id', $id);
-                if (!$books->count()) {
-                    abort(403, 'Access denied');
-                }
+        foreach ($request->ids as $id) {
+            $books = Book::shelves($request->sid)->where('id', $id);
+            if (!$books->count()) {
+                abort(403, 'Access denied');
             }
+        }
 
-            if (!Book::destroy($request->ids)) {
-                abort(400, 'Invalid request');
-            }
-        });
-
-        return response(null, 204);
+        return response(Book::destroy($request->ids), 204);
     }
 
     /**

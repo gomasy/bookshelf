@@ -64,5 +64,10 @@ class SettingTest extends TestCase
              ->post('/settings/shelves/create', [ 'name' => 'test' ], $headers)
              ->assertSuccessful();
         $this->assertDatabaseHas('bookshelves', [ 'name' => 'test' ]);
+
+        // fail (403)
+        $this->actingAs($user)
+             ->post('/settings/shelves/create', [ 'name' => 'test' ], $headers)
+             ->assertStatus(403);
     }
 }

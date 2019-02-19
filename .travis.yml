@@ -14,8 +14,8 @@ before_script:
 script:
   - yarn build
   - composer travis-test
-  - composer coveralls
 after_success:
+  - composer coveralls
   - if [[ $TRAVIS_PULL_REQUEST == 'false' && $TRAVIS_BRANCH == 'master' ]]; then
       rm -rf build node_modules vendor;
       rm -rf storage/framework/cache/facade-*.php storage/framework/cache/data/* storage/framework/views/*;

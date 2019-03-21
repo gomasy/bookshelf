@@ -10,7 +10,7 @@
         "@babel/core": "^7.4.0",
         "@babel/polyfill": "^7.4.0",
         "@babel/preset-env": "^7.4.1",
-        "@fortawesome/fontawesome-free": "^5.7.2",
+        "@fortawesome/fontawesome-free": "^5.8.0",
         "autoprefixer": "^9.5.0",
         "babel-loader": "^8.0.5",
         "bootstrap-sass": "^3.4.1",

@@ -7,7 +7,7 @@ RUN yum -y update && \
     rpm -Uvh remi-release-7.rpm && \
     rm -f remi-release-7.rpm && \
     curl -sL https://dl.yarnpkg.com/rpm/yarn.repo > /etc/yum.repos.d/yarn.repo && \
-    yum -y --enablerepo=remi-php72 install composer mariadb-server nginx php-fpm php-mysql yarn && \
+    yum -y --enablerepo=remi-php72 install composer git mariadb-server nginx php-fpm php-mysql yarn && \
     yum clean all && \
     sed -i "s/user = apache/user = nginx/" /etc/php-fpm.d/www.conf && \
     sed -i "s/group = apache/group = nginx/" /etc/php-fpm.d/www.conf

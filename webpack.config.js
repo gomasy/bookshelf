@@ -70,9 +70,12 @@ module.exports = {
                 require('child_process').exec('./artisan view:clear');
             }
         }),
-        new (require('clean-webpack-plugin'))([
-            path.join(__dirname, '/public/assets/*'),
-        ]),
+        new (require('clean-webpack-plugin'))({
+            cleanOnceBeforeBuildPatterns: [
+                'assets/*.{ttf,eot,woff*,js,css,jp*g,png,gif}',
+            ],
+            verbose: true,
+        }),
         new (require('browser-sync-webpack-plugin'))({
             proxy: process.env.PROXY_HOST || 'localhost',
             files: './public/assets/*',

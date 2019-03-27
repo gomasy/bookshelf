@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "54d868cb95d9474171d03506b69a28cd",
+    "content-hash": "e208832e11d524b9e483e4234d311664",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -692,16 +692,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.26.0",
+            "version": "v1.27.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "ea5ac30e4120b48a92494b1de2c5230926f8c171"
+                "reference": "549d2dd65a11ec6f7883fd2da3a82e204d53af57"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/ea5ac30e4120b48a92494b1de2c5230926f8c171",
-                "reference": "ea5ac30e4120b48a92494b1de2c5230926f8c171",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/549d2dd65a11ec6f7883fd2da3a82e204d53af57",
+                "reference": "549d2dd65a11ec6f7883fd2da3a82e204d53af57",
                 "shasum": ""
             },
             "require": {
@@ -716,7 +716,7 @@
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/gax": "^0.38.0",
+                "google/gax": "^1.0",
                 "opis/closure": "^3",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "^4.8|^5.0",
@@ -748,25 +748,25 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2019-02-06T21:40:58+00:00"
+            "time": "2019-03-27T22:13:43+00:00"
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.19.3",
+            "version": "v0.20.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "61f40528c07157433f8f0ec4ad00189d7964efb2"
+                "reference": "24cca22fbc491e68850e51831133aa347be6139a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/61f40528c07157433f8f0ec4ad00189d7964efb2",
-                "reference": "61f40528c07157433f8f0ec4ad00189d7964efb2",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/24cca22fbc491e68850e51831133aa347be6139a",
+                "reference": "24cca22fbc491e68850e51831133aa347be6139a",
                 "shasum": ""
             },
             "require": {
                 "google/cloud-core": "^1.26",
-                "google/gax": "^0.38.0"
+                "google/gax": "^1.0"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
@@ -800,20 +800,20 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-03-07T21:37:15+00:00"
+            "time": "2019-03-27T22:13:43+00:00"
         },
         {
             "name": "google/common-protos",
-            "version": "0.1.0",
+            "version": "1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/common-protos-php.git",
-                "reference": "0bc3c17350a37423da29391fa3d0e6082dd896b5"
+                "reference": "13daea6a4f257f3448fbf4450860e659462e0ad5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/0bc3c17350a37423da29391fa3d0e6082dd896b5",
-                "reference": "0bc3c17350a37423da29391fa3d0e6082dd896b5",
+                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/13daea6a4f257f3448fbf4450860e659462e0ad5",
+                "reference": "13daea6a4f257f3448fbf4450860e659462e0ad5",
                 "shasum": ""
             },
             "require": {
@@ -839,31 +839,34 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-11-05T20:09:01+00:00"
+            "time": "2019-03-14T19:01:14+00:00"
         },
         {
             "name": "google/gax",
-            "version": "0.38.0",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "ba141d49c58f949a31b9cfb31f6da876adc2919d"
+                "reference": "b25ecc9d5debad5713a66e79f491fbe5244bcc73"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/ba141d49c58f949a31b9cfb31f6da876adc2919d",
-                "reference": "ba141d49c58f949a31b9cfb31f6da876adc2919d",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/b25ecc9d5debad5713a66e79f491fbe5244bcc73",
+                "reference": "b25ecc9d5debad5713a66e79f491fbe5244bcc73",
                 "shasum": ""
             },
             "require": {
                 "google/auth": "^1.2.0",
-                "google/common-protos": "^0.1",
+                "google/common-protos": "^1.0",
                 "google/grpc-gcp": "^0.1.0",
-                "google/protobuf": "^3.6.1",
+                "google/protobuf": "^3.7.1",
                 "grpc/grpc": "^1.4",
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.2",
                 "php": ">=5.5"
+            },
+            "conflict": {
+                "ext-protobuf": "<3.7.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36",
@@ -886,7 +889,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2018-12-17T16:37:25+00:00"
+            "time": "2019-03-27T14:49:53+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -929,16 +932,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.7.0",
+            "version": "v3.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "ee8f63b02861d88f6cc3955788e97f1912741992"
+                "reference": "0657d28864692480c3d8506ba4fc90e8813deae5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/ee8f63b02861d88f6cc3955788e97f1912741992",
-                "reference": "ee8f63b02861d88f6cc3955788e97f1912741992",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/0657d28864692480c3d8506ba4fc90e8813deae5",
+                "reference": "0657d28864692480c3d8506ba4fc90e8813deae5",
                 "shasum": ""
             },
             "require": {
@@ -966,7 +969,7 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2019-02-26T18:27:49+00:00"
+            "time": "2019-03-26T18:06:41+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -3391,7 +3394,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "BackEndTea@gmail.com"
+                    "email": "backendtea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",

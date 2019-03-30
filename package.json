@@ -24,7 +24,7 @@
         "file-loader": "^3.0.1",
         "jquery": "^3.3.1",
         "node-sass": "^4.11.0",
-        "postcss-custom-media": "^7.0.7",
+        "postcss-custom-media": "^7.0.8",
         "postcss-loader": "^3.0.0",
         "quagga": "^0.12.1",
         "sass-loader": "^7.1.0",

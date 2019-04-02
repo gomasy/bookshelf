@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "e208832e11d524b9e483e4234d311664",
+    "content-hash": "6e64709b3a94e5e9bbdb544b25233c70",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -752,16 +752,16 @@
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.20.0",
+            "version": "v0.21.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "24cca22fbc491e68850e51831133aa347be6139a"
+                "reference": "51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/24cca22fbc491e68850e51831133aa347be6139a",
-                "reference": "24cca22fbc491e68850e51831133aa347be6139a",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82",
+                "reference": "51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-03-27T22:13:43+00:00"
+            "time": "2019-04-02T21:07:18+00:00"
         },
         {
             "name": "google/common-protos",

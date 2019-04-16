@@ -645,16 +645,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.4.0",
+            "version": "v1.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "196237248e636a3554a7d9e4dfddeb97f450ab5c"
+                "reference": "0f75e20e7392e863f5550ed2c2d3d50af21710fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/196237248e636a3554a7d9e4dfddeb97f450ab5c",
-                "reference": "196237248e636a3554a7d9e4dfddeb97f450ab5c",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/0f75e20e7392e863f5550ed2c2d3d50af21710fb",
+                "reference": "0f75e20e7392e863f5550ed2c2d3d50af21710fb",
                 "shasum": ""
             },
             "require": {
@@ -668,8 +668,12 @@
             "require-dev": {
                 "friendsofphp/php-cs-fixer": "^1.11",
                 "guzzlehttp/promises": "0.1.1|^1.3",
+                "phpseclib/phpseclib": "^2",
                 "phpunit/phpunit": "^4.8.36|^5.7",
                 "sebastian/comparator": ">=1.2.3"
+            },
+            "suggest": {
+                "phpseclib/phpseclib": "May be used in place of OpenSSL for signing strings. Please require version ^2."
             },
             "type": "library",
             "autoload": {
@@ -688,24 +692,24 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2018-09-17T20:29:21+00:00"
+            "time": "2019-04-16T18:48:28+00:00"
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.27.0",
+            "version": "v1.28.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "549d2dd65a11ec6f7883fd2da3a82e204d53af57"
+                "reference": "d32db261499d28268f9ed97834e7aca829df5b53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/549d2dd65a11ec6f7883fd2da3a82e204d53af57",
-                "reference": "549d2dd65a11ec6f7883fd2da3a82e204d53af57",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/d32db261499d28268f9ed97834e7aca829df5b53",
+                "reference": "d32db261499d28268f9ed97834e7aca829df5b53",
                 "shasum": ""
             },
             "require": {
-                "google/auth": "^1.2",
+                "google/auth": "^1.5.1",
                 "guzzlehttp/guzzle": "^5.3|^6.0",
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.2",
@@ -748,29 +752,29 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2019-03-27T22:13:43+00:00"
+            "time": "2019-04-16T20:44:33+00:00"
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.21.0",
+            "version": "v0.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82"
+                "reference": "2efde036edef85f96114b781a39e906936696936"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82",
-                "reference": "51e325a2cf0c1ca17c22ea9c8426b0a69aa9fb82",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/2efde036edef85f96114b781a39e906936696936",
+                "reference": "2efde036edef85f96114b781a39e906936696936",
                 "shasum": ""
             },
             "require": {
-                "google/cloud-core": "^1.26",
+                "google/cloud-core": "^1.28",
                 "google/gax": "^1.0"
             },
             "require-dev": {
                 "erusev/parsedown": "^1.6",
-                "google/cloud-storage": "^1.3",
+                "google/cloud-storage": "^1.12",
                 "phpdocumentor/reflection": "^3.0",
                 "phpunit/phpunit": "^4.8|^5.0",
                 "squizlabs/php_codesniffer": "2.*"
@@ -800,7 +804,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-04-02T21:07:18+00:00"
+            "time": "2019-04-16T20:44:33+00:00"
         },
         {
             "name": "google/common-protos",
@@ -843,16 +847,16 @@
         },
         {
             "name": "google/gax",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "b25ecc9d5debad5713a66e79f491fbe5244bcc73"
+                "reference": "d346b7a3f2b31bc9f0b226faa3d32bd721111b82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/b25ecc9d5debad5713a66e79f491fbe5244bcc73",
-                "reference": "b25ecc9d5debad5713a66e79f491fbe5244bcc73",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/d346b7a3f2b31bc9f0b226faa3d32bd721111b82",
+                "reference": "d346b7a3f2b31bc9f0b226faa3d32bd721111b82",
                 "shasum": ""
             },
             "require": {
@@ -866,7 +870,7 @@
                 "php": ">=5.5"
             },
             "conflict": {
-                "ext-protobuf": "<3.7.1"
+                "ext-protobuf": "<3.7.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36",
@@ -889,7 +893,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-03-27T14:49:53+00:00"
+            "time": "2019-04-04T23:03:23+00:00"
         },
         {
             "name": "google/grpc-gcp",

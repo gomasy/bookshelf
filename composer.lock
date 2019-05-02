@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6e64709b3a94e5e9bbdb544b25233c70",
+    "content-hash": "8725c0eec4eca3804167b6b6372f094e",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -756,16 +756,16 @@
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.21.1",
+            "version": "v0.22.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "2efde036edef85f96114b781a39e906936696936"
+                "reference": "a0cc478bfc87b3d9b5c4a805ae4101fdda0d9db7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/2efde036edef85f96114b781a39e906936696936",
-                "reference": "2efde036edef85f96114b781a39e906936696936",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/a0cc478bfc87b3d9b5c4a805ae4101fdda0d9db7",
+                "reference": "a0cc478bfc87b3d9b5c4a805ae4101fdda0d9db7",
                 "shasum": ""
             },
             "require": {
@@ -804,7 +804,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-04-16T20:44:33+00:00"
+            "time": "2019-05-02T16:40:15+00:00"
         },
         {
             "name": "google/common-protos",
@@ -847,16 +847,16 @@
         },
         {
             "name": "google/gax",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "d346b7a3f2b31bc9f0b226faa3d32bd721111b82"
+                "reference": "48387fb818c6882296710a2302a0aa973b99afb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/d346b7a3f2b31bc9f0b226faa3d32bd721111b82",
-                "reference": "d346b7a3f2b31bc9f0b226faa3d32bd721111b82",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/48387fb818c6882296710a2302a0aa973b99afb2",
+                "reference": "48387fb818c6882296710a2302a0aa973b99afb2",
                 "shasum": ""
             },
             "require": {
@@ -893,7 +893,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2019-04-04T23:03:23+00:00"
+            "time": "2019-04-23T22:57:39+00:00"
         },
         {
             "name": "google/grpc-gcp",

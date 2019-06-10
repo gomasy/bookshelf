@@ -701,16 +701,16 @@
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.28.1",
+            "version": "v1.28.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "1663b311f93f7b0421c3426e6f6bab68dd7738f9"
+                "reference": "cec23ca6273ea8a455012eb6e12d526d5344e527"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/1663b311f93f7b0421c3426e6f6bab68dd7738f9",
-                "reference": "1663b311f93f7b0421c3426e6f6bab68dd7738f9",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/cec23ca6273ea8a455012eb6e12d526d5344e527",
+                "reference": "cec23ca6273ea8a455012eb6e12d526d5344e527",
                 "shasum": ""
             },
             "require": {
@@ -758,20 +758,20 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2019-06-03T20:07:05+00:00"
+            "time": "2019-06-10T19:08:31+00:00"
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.22.4",
+            "version": "v0.22.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "cfddf0aba76ed8228b2a78249f138656b763c437"
+                "reference": "34c84962e346ce9bae33228aeb1c4cfd7a3b2a56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/cfddf0aba76ed8228b2a78249f138656b763c437",
-                "reference": "cfddf0aba76ed8228b2a78249f138656b763c437",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/34c84962e346ce9bae33228aeb1c4cfd7a3b2a56",
+                "reference": "34c84962e346ce9bae33228aeb1c4cfd7a3b2a56",
                 "shasum": ""
             },
             "require": {
@@ -810,7 +810,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-06-03T20:07:05+00:00"
+            "time": "2019-06-10T19:08:31+00:00"
         },
         {
             "name": "google/common-protos",

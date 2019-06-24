@@ -36,6 +36,6 @@
         "vue2-datatable-component": "https://github.com/Gomasy/vue2-datatable.git",
         "vuex": "^3.1.1",
         "webpack": "^4.35.0",
-        "webpack-cli": "^3.3.4"
+        "webpack-cli": "^3.3.5"
     }
 }

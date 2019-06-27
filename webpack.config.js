@@ -2,6 +2,8 @@ const webpack = require('webpack');
 const path = require('path');
 const entries = {};
 
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+
 require('glob').sync('./resources/assets/js/*.js').map(entry => {
     const name = entry.match('^.+/(.+?)\\.js$')[1];
     entries[name] = entry;
@@ -70,7 +72,7 @@ module.exports = {
                 require('child_process').exec('./artisan view:clear');
             }
         }),
-        new (require('clean-webpack-plugin'))({
+        new CleanWebpackPlugin({
             cleanOnceBeforeBuildPatterns: [
                 'assets/*.{ttf,eot,woff*,js,css,jp*g,png,gif}',
             ],

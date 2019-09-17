@@ -75,7 +75,7 @@
                             <li class="nav-item sm">
                                 <a class="button" href="/">ホーム</a>
                                 <a class="button" href="/settings">設定</a>
-                                <a class="button" href="/help">ヘルプ</a>
+                                <!-- <a class="button" href="/help">ヘルプ</a> -->
                                 <a class="button" href="/logout" onclick="event.preventDefault();document.getElementById('logout-form').submit();">ログアウト</a>
                             </li>
 @endauth

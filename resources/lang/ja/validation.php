@@ -40,6 +40,7 @@ return [
     'dimensions' => ':attributeが正しい画像サイズではありません。',
     'distinct' => ':attributeの値が重複しています。',
     'email' => ':attributeは正しいメールアドレスでなければなりません。',
+    'ends_with' => ':attributeは :values のいずれかで終了する必要があります。',
     'exists' => ':attributeは正しくありません。',
     'file' => ':attributeはファイルでなければなりません。',
     'filled' => ':attributeは値を持たなければなりません。',

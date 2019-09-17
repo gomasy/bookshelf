@@ -1,7 +1,7 @@
 @extends('settings.index')
 
 @section('head')
-<script src="@asset('assets/shelves.*.js')"></script>
+<script defer src="@asset('assets/shelves.*.js')"></script>
 @endsection
 
 @section('setting-content')

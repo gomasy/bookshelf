@@ -12,7 +12,7 @@
         <link href="@asset('assets/icon.png')" rel="icon" type="image/png">
         <script src="https://www.google.com/recaptcha/api.js"></script>
         <script src="@asset('assets/vendor.*.js')"></script>
-        <script defer src="@asset('assets/app.*.js')"></script>
+        <script src="@asset('assets/app.*.js')"></script>
         @yield('head')
 
         <!-- ogp -->

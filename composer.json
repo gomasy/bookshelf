@@ -18,7 +18,6 @@
         "laravel/tinker": "^2.0"
     },
     "require-dev": {
-        "facade/ignition": "^1.4",
         "friendsofphp/php-cs-fixer": "^2.11",
         "fzaninotto/faker": "^1.9.1",
         "laravel/telescope": "^3.0",

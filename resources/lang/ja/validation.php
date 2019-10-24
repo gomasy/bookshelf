@@ -93,6 +93,7 @@ return [
     'not_in' => ':attributeは正しくありません。',
     'not_regex' => ':attributeのフォーマットが不正です。',
     'numeric' => ':attributeは数字でなければなりません。',
+    'password' => 'パスワードは正しくありません。',
     'present' => ':attributeは存在しなければなりません。',
     'regex' => ':attributeのフォーマットが不正です。',
     'required' => ':attributeは必須です。',

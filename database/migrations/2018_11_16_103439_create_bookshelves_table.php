@@ -14,7 +14,7 @@ class CreateBookshelvesTable extends Migration
     public function up()
     {
         Schema::create('bookshelves', function (Blueprint $table) {
-            $table->increments('id')->unsigned();
+            $table->id()->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('user_id')
                   ->references('id')->on('users')

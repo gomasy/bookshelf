@@ -35,7 +35,5 @@ class RemoveNextIdAndRenumber extends Migration
             $table->renameColumn('new_id', 'id');
             $table->primary('id');
         });
-
-        \DB::statement('ALTER TABLE `books` CHANGE `id` `id` INT UNSIGNED AUTO_INCREMENT NOT NULL;');
     }
 }

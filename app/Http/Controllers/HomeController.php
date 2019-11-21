@@ -29,9 +29,9 @@ class HomeController extends Controller
             } else {
                 return redirect('email/verify');
             }
-        } else {
-            return view('home');
         }
+
+        return view('home');
     }
 
     public function help(): object

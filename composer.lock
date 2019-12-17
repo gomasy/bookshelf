@@ -790,16 +790,16 @@
         },
         {
             "name": "google/cloud-vision",
-            "version": "v0.24.0",
+            "version": "v0.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244"
+                "reference": "40f5133f5396af35257b9dfcea9b4c57792be6d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
-                "reference": "416e2cbc0b5f00b6b64ab295bc9580f1c4c1e244",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/40f5133f5396af35257b9dfcea9b4c57792be6d9",
+                "reference": "40f5133f5396af35257b9dfcea9b4c57792be6d9",
                 "shasum": ""
             },
             "require": {
@@ -838,7 +838,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2019-09-16T21:17:30+00:00"
+            "time": "2019-12-17T22:51:23+00:00"
         },
         {
             "name": "google/common-protos",
@@ -970,16 +970,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.11.1",
+            "version": "v3.11.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "418f1b96c2020918a11dcd3709b7b6d01dbf025a"
+                "reference": "0864882396746542ead01fc002e1644b9490dbe8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/418f1b96c2020918a11dcd3709b7b6d01dbf025a",
-                "reference": "418f1b96c2020918a11dcd3709b7b6d01dbf025a",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/0864882396746542ead01fc002e1644b9490dbe8",
+                "reference": "0864882396746542ead01fc002e1644b9490dbe8",
                 "shasum": ""
             },
             "require": {
@@ -1007,7 +1007,7 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2019-12-03T06:32:14+00:00"
+            "time": "2019-12-14T00:45:36+00:00"
         },
         {
             "name": "google/recaptcha",

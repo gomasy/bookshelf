@@ -27,7 +27,7 @@
         "postcss-custom-media": "^7.0.8",
         "postcss-loader": "^3.0.0",
         "quagga": "^0.12.1",
-        "sass-loader": "^8.0.0",
+        "sass-loader": "^8.0.1",
         "style-loader": "^1.1.2",
         "vue": "^2.6.11",
         "vue-loader": "^15.8.3",

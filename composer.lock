@@ -1011,16 +1011,16 @@
         },
         {
             "name": "grpc/grpc",
-            "version": "1.26.1",
+            "version": "1.26.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "6b22409ff46a1c245a28efd16867870b13c3cbcc"
+                "reference": "342b5fba4d6fb742cdef30d84624d9a3d80c7dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/6b22409ff46a1c245a28efd16867870b13c3cbcc",
-                "reference": "6b22409ff46a1c245a28efd16867870b13c3cbcc",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/342b5fba4d6fb742cdef30d84624d9a3d80c7dfb",
+                "reference": "342b5fba4d6fb742cdef30d84624d9a3d80c7dfb",
                 "shasum": ""
             },
             "require": {
@@ -1048,7 +1048,7 @@
             "keywords": [
                 "rpc"
             ],
-            "time": "2019-12-21T02:28:51+00:00"
+            "time": "2020-01-14T06:21:20+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

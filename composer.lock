@@ -4429,16 +4429,16 @@
         },
         {
             "name": "facade/ignition",
-            "version": "1.14.0",
+            "version": "1.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/facade/ignition.git",
-                "reference": "c6d36683b40e005cd395ddff1bbfbf0aa0fcd3c5"
+                "reference": "c3cb2e85cf65917c50e519d64d879c5634336715"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/facade/ignition/zipball/c6d36683b40e005cd395ddff1bbfbf0aa0fcd3c5",
-                "reference": "c6d36683b40e005cd395ddff1bbfbf0aa0fcd3c5",
+                "url": "https://api.github.com/repos/facade/ignition/zipball/c3cb2e85cf65917c50e519d64d879c5634336715",
+                "reference": "c3cb2e85cf65917c50e519d64d879c5634336715",
                 "shasum": ""
             },
             "require": {
@@ -4496,7 +4496,7 @@
                 "laravel",
                 "page"
             ],
-            "time": "2020-01-06T09:32:42+00:00"
+            "time": "2020-01-21T07:56:45+00:00"
         },
         {
             "name": "facade/ignition-contracts",
@@ -4544,16 +4544,16 @@
         },
         {
             "name": "filp/whoops",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/filp/whoops.git",
-                "reference": "4c97f814aa2f0dd4d5bedc89181c10ef12c004c5"
+                "reference": "fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/filp/whoops/zipball/4c97f814aa2f0dd4d5bedc89181c10ef12c004c5",
-                "reference": "4c97f814aa2f0dd4d5bedc89181c10ef12c004c5",
+                "url": "https://api.github.com/repos/filp/whoops/zipball/fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130",
+                "reference": "fff6f1e4f36be0e0d0b84d66b413d9dcb0c49130",
                 "shasum": ""
             },
             "require": {
@@ -4601,7 +4601,7 @@
                 "throwable",
                 "whoops"
             ],
-            "time": "2019-12-29T10:00:00+00:00"
+            "time": "2020-01-15T10:00:00+00:00"
         },
         {
             "name": "friendsofphp/php-cs-fixer",

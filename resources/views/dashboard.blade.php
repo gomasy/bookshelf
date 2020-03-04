@@ -2,7 +2,7 @@
 
 @section('title', 'ダッシュボード')
 
-@section('head')
+@section('script')
 <script defer src="@asset('assets/dashboard.*.js')"></script>
 @endsection
 

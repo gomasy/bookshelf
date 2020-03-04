@@ -1,6 +1,6 @@
 @extends('settings.index')
 
-@section('head')
+@section('script')
 <script defer src="@asset('assets/shelves.*.js')"></script>
 @endsection
 

@@ -2,7 +2,7 @@
 
 @section('title', 'ログイン')
 
-@section('head')
+@section('script')
 <script>function onSubmit() { document.getElementById('login-form').submit(); }</script>
 @endsection
 

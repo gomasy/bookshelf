@@ -10,10 +10,6 @@
         <meta property="description" content="手持ちの書籍をISBNコードなどで管理し、ブラウザ上で簡単に表示・検索できるサービスです">
         <title>{{ config('app.name') }} - @yield('title')</title>
         <link href="@asset('assets/icon.png')" rel="icon" type="image/png">
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-        <script src="@asset('assets/vendor.*.js')"></script>
-        <script defer src="@asset('assets/app.*.js')"></script>
-        @yield('head')
 
         <!-- ogp -->
         <meta property="og:type" content="{{ Request::path() === '/' ? 'website' : 'article' }}">
@@ -102,5 +98,9 @@
                 <p>&copy; {{ config('app.name') }} 2017-{{ date('Y') }}</p>
             </footer>
         </div>
+        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="@asset('assets/vendor.*.js')"></script>
+        <script defer src="@asset('assets/app.*.js')"></script>
+        @yield('script')
     </body>
 </html>

@@ -1,7 +1,6 @@
 {
     "presets": [
         [ "@babel/env", {
-            "modules": false,
             "targets": {
                 "browsers": [
                     "last 2 versions",
@@ -10,7 +9,9 @@
                     "not android <= 4.4.4"
                 ]
             },
-            "useBuiltIns": "usage"
+            "useBuiltIns": "usage",
+            "corejs": 3,
+            "modules": false
         }]
     ]
 }

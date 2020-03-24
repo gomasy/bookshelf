@@ -11,7 +11,7 @@
         "@babel/polyfill": "^7.8.7",
         "@babel/preset-env": "^7.9.0",
         "@fortawesome/fontawesome-free": "^5.13.0",
-        "autoprefixer": "^9.7.4",
+        "autoprefixer": "^9.7.5",
         "babel-loader": "^8.1.0",
         "bootstrap-sass": "^3.4.1",
         "browser-sync": "^2.26.7",

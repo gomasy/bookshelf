@@ -23,7 +23,7 @@ after_success:
       rm -rf storage/framework/cache/facade-*.php storage/framework/cache/data/* storage/framework/views/*;
       composer install --no-dev;
       tar cvf build.tar.gz .;
-      curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/deploy;
+      curl -H "X-Token:$_token" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/api/v1/github/push;
     fi
 addons:
   apt:

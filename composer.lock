@@ -4052,16 +4052,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v5.0.7",
+            "version": "v5.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "f74a126acd701392eef2492a17228d42552c86b5"
+                "reference": "09de28632f16f81058a85fcf318397218272a07b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/f74a126acd701392eef2492a17228d42552c86b5",
-                "reference": "f74a126acd701392eef2492a17228d42552c86b5",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/09de28632f16f81058a85fcf318397218272a07b",
+                "reference": "09de28632f16f81058a85fcf318397218272a07b",
                 "shasum": ""
             },
             "require": {
@@ -4123,7 +4123,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2020-03-27T16:56:45+00:00"
+            "time": "2020-04-12T16:45:47+00:00"
         },
         {
             "name": "tijsverkoyen/css-to-inline-styles",
@@ -4940,16 +4940,16 @@
         },
         {
             "name": "laravel/telescope",
-            "version": "v3.3.0",
+            "version": "v3.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/telescope.git",
-                "reference": "503242109c4756af6f23c63a59294a76ef9a774f"
+                "reference": "7ee2149122c6a58d5e6d9b3f2eb0d63511413c01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/telescope/zipball/503242109c4756af6f23c63a59294a76ef9a774f",
-                "reference": "503242109c4756af6f23c63a59294a76ef9a774f",
+                "url": "https://api.github.com/repos/laravel/telescope/zipball/7ee2149122c6a58d5e6d9b3f2eb0d63511413c01",
+                "reference": "7ee2149122c6a58d5e6d9b3f2eb0d63511413c01",
                 "shasum": ""
             },
             "require": {
@@ -4999,7 +4999,7 @@
                 "laravel",
                 "monitoring"
             ],
-            "time": "2020-04-28T16:03:44+00:00"
+            "time": "2020-05-05T18:48:12+00:00"
         },
         {
             "name": "mockery/mockery",

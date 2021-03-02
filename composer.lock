@@ -783,16 +783,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v5.2.0",
+            "version": "v5.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "feb0e820b8436873675fd3aca04f3728eb2185cb"
+                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/feb0e820b8436873675fd3aca04f3728eb2185cb",
-                "reference": "feb0e820b8436873675fd3aca04f3728eb2185cb",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
+                "reference": "f42c9110abe98dd6cfe9053c49bc86acc70b2d23",
                 "shasum": ""
             },
             "require": {
@@ -829,7 +829,7 @@
                 "jwt",
                 "php"
             ],
-            "time": "2020-03-25T18:49:23+00:00"
+            "time": "2021-02-12T00:02:00+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -1019,16 +1019,16 @@
         },
         {
             "name": "google/cloud-vision",
-            "version": "v1.3.0",
+            "version": "v1.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "771b0f734dbdebceb91bb6869b3e6bce513748fb"
+                "reference": "fb066f337235887448e66658ed62150330c02d14"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/771b0f734dbdebceb91bb6869b3e6bce513748fb",
-                "reference": "771b0f734dbdebceb91bb6869b3e6bce513748fb",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/fb066f337235887448e66658ed62150330c02d14",
+                "reference": "fb066f337235887448e66658ed62150330c02d14",
                 "shasum": ""
             },
             "require": {
@@ -1067,7 +1067,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2021-02-11T16:53:33+00:00"
+            "time": "2021-03-02T00:45:14+00:00"
         },
         {
             "name": "google/common-protos",
@@ -1200,16 +1200,16 @@
         },
         {
             "name": "google/protobuf",
-            "version": "v3.14.0",
+            "version": "v3.15.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "03f132a66f09f96064309e81c5fac8d35b7474e1"
+                "reference": "f22e60e5deb972ded0115c620a99b3f1ac2f4824"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/03f132a66f09f96064309e81c5fac8d35b7474e1",
-                "reference": "03f132a66f09f96064309e81c5fac8d35b7474e1",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/f22e60e5deb972ded0115c620a99b3f1ac2f4824",
+                "reference": "f22e60e5deb972ded0115c620a99b3f1ac2f4824",
                 "shasum": ""
             },
             "require": {
@@ -1237,7 +1237,7 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2020-11-13T23:41:35+00:00"
+            "time": "2021-02-25T23:39:41+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -1288,16 +1288,16 @@
         },
         {
             "name": "grpc/grpc",
-            "version": "1.35.0",
+            "version": "1.36.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/grpc/grpc-php.git",
-                "reference": "cf75367acfcf154331f97d1525f9f46383b7891d"
+                "reference": "6145dd917d340b579f0b663940b17cc93172b79a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/cf75367acfcf154331f97d1525f9f46383b7891d",
-                "reference": "cf75367acfcf154331f97d1525f9f46383b7891d",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/6145dd917d340b579f0b663940b17cc93172b79a",
+                "reference": "6145dd917d340b579f0b663940b17cc93172b79a",
                 "shasum": ""
             },
             "require": {
@@ -1325,7 +1325,7 @@
             "keywords": [
                 "rpc"
             ],
-            "time": "2021-01-20T20:15:34+00:00"
+            "time": "2021-03-01T21:52:11+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -3026,28 +3026,28 @@
         },
         {
             "name": "rize/uri-template",
-            "version": "0.3.2",
+            "version": "0.3.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/rize/UriTemplate.git",
-                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca"
+                "reference": "6e0b97e00e0f36c652dd3c37b194ef07de669b82"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
-                "reference": "9e5fdd5c47147aa5adf7f760002ee591ed37b9ca",
+                "url": "https://api.github.com/repos/rize/UriTemplate/zipball/6e0b97e00e0f36c652dd3c37b194ef07de669b82",
+                "reference": "6e0b97e00e0f36c652dd3c37b194ef07de669b82",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.0.0"
+                "phpunit/phpunit": "~4.8.36"
             },
             "type": "library",
             "autoload": {
-                "psr-0": {
-                    "Rize\\UriTemplate": "src/"
+                "psr-4": {
+                    "Rize\\": "src/Rize"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -3066,7 +3066,7 @@
                 "template",
                 "uri"
             ],
-            "time": "2017-06-14T03:57:53+00:00"
+            "time": "2021-02-22T15:03:38+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",

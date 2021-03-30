@@ -58,11 +58,13 @@ return [
             'prefix_indexes' => true,
             'strict' => true,
             'engine' => 'InnoDB ROW_FORMAT=DYNAMIC',
-            'options' => extension_loaded('pdo_mysql') ? [
+            'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CERT => env('MYSQL_ATTR_SSL_CERT'),
                 PDO::MYSQL_ATTR_SSL_KEY => env('MYSQL_ATTR_SSL_KEY'),
-                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT', true),
-            ] : [],
+                PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => env('MYSQL_ATTR_SSL_VERIFY_SERVER_CERT'),
+            ], function ($val) {
+                return !is_null($val);
+            }) : [],
         ],
 
         'pgsql' => [

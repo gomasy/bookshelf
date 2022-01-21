@@ -1,0 +1,54 @@
+name: CD workflow
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_ROOT_PASSWORD: ''
+          MYSQL_DATABASE: 'forge'
+          MYSQL_USER: 'root'
+          MYSQL_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        options: >-
+          --health-cmd 'mysqladmin ping'
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Prepare environment
+      run: |
+        sudo apt install -y fonts-ipafont-gothic
+        ln -s .env.travis .env
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'yarn'
+    - name: Install dependencies (composer)
+      run: composer install --prefer-dist --no-progress
+    - name: Install dependencies (yarn)
+      run: yarn install --pure-lockfile
+    - name: Build
+      run: yarn build
+    - name: Test
+      run: comoser travis-test
+    - name: Sending Coverage to Coveralls
+      run: composer coveralls

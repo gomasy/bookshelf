@@ -23,7 +23,8 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Prepare environment
       run: |
         sudo apt install -y fonts-ipafont-gothic
@@ -32,7 +33,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
-    - name: Cache Composer packages
+    - name: Cache composer packages
       id: composer-cache
       uses: actions/cache@v2
       with:
@@ -58,12 +59,13 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout repository
+      uses: actions/checkout@v2
     - name: Use PHP 7.4
       uses: shivammathur/setup-php@v2
       with:
         php-version: '7.4'
-    - name: Cache Composer packages
+    - name: Cache composer packages
       id: composer-cache
       uses: actions/cache@v2
       with:

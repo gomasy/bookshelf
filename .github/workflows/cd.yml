@@ -54,7 +54,7 @@ jobs:
     - name: Run test
       run: composer test
   deploy:
-    if: success()
+    needs: test
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2

@@ -15,7 +15,8 @@ jobs:
         env:
           MYSQL_DATABASE: 'forge'
           MYSQL_USER: 'root'
-          MYSQL_PASSWORD: 'passwd'
+          MYSQL_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
         options: >-
           --health-cmd "mysqladmin ping"
           --health-interval 10s

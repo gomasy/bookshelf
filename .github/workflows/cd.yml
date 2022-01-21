@@ -49,9 +49,9 @@ jobs:
       run: composer install --prefer-dist --no-progress
     - name: Install dependencies (yarn)
       run: yarn install --pure-lockfile
-    - name: Build
+    - name: Run build
       run: yarn build
-    - name: Test
-      run: comoser travis-test
-    - name: Sending Coverage to Coveralls
+    - name: Run test
+      run: composer travis-test
+    - name: Send coverage to Coveralls
       run: composer coveralls

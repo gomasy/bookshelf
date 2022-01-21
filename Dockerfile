@@ -10,8 +10,8 @@ RUN echo "Asia/Tokyo" > /etc/localtime && \
     npm install -g yarn && \
     rm -rf /var/www/html && \
     cd /var/www && \
-    curl -sL https://github.com/Gomasy/books-manager/archive/master.tar.gz | tar xvfz - && \
-    mv books-manager-master html && \
+    curl -sL https://github.com/Gomasy/bookshelf/archive/master.tar.gz | tar xvfz - && \
+    mv bookshelf-master html && \
     chown -R www-data. . && \
     cd html && \
     composer install --no-dev && \

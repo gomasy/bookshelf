@@ -1,9 +1,8 @@
 Books Manager
 ============
-[![Build Status](https://travis-ci.org/Gomasy/books-manager.svg?branch=master)](https://travis-ci.org/Gomasy/books-manager)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGomasy%2Fbooks-manager.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGomasy%2Fbooks-manager?ref=badge_shield)
-[![Coverage Status](https://coveralls.io/repos/github/Gomasy/books-manager/badge.svg?branch=master)](https://coveralls.io/github/Gomasy/books-manager?branch=master)
-[![Maintainability](https://api.codeclimate.com/v1/badges/c07e881ac5b0fe7a7c2d/maintainability)](https://codeclimate.com/github/Gomasy/books-manager/maintainability)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGomasy%2Fbookshelf.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGomasy%2Fbookshelf?ref=badge_shield)
+[![Coverage Status](https://coveralls.io/repos/github/Gomasy/bookshelf/badge.svg?branch=master)](https://coveralls.io/github/Gomasy/bookshelf?branch=master)
+[![Maintainability](https://api.codeclimate.com/v1/badges/c07e881ac5b0fe7a7c2d/maintainability)](https://codeclimate.com/github/Gomasy/bookshelf/maintainability)
 
 ## これなに？
 シンプルな蔵書管理ツール
@@ -16,7 +15,7 @@ Books Manager
 * MTA (なくてもいいけど一部機能が動作しません)
 
 ## 素でデプロイ
-    $ git clone https://github.com/Gomasy/books-manager.git .
+    $ git clone https://github.com/Gomasy/bookshelf.git .
 
     // Install php packages.
     $ composer install --no-dev
@@ -29,9 +28,6 @@ Books Manager
     $ cp .env.sample .env
     $ php artisan key:generate
     $ php artisan migrate
-
-## Docker を利用してデプロイ
-    $ docker run -d -p 80:80 gomasy/books-manager
 
 ## サンプル
 * https://books.gomasy.jp/

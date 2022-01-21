@@ -28,6 +28,10 @@ jobs:
       run: |
         sudo apt install -y fonts-ipafont-gothic
         ln -s .env.travis .env
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
     - name: Cache Composer packages
       id: composer-cache
       uses: actions/cache@v2

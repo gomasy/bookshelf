@@ -56,6 +56,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
     steps:
     - uses: actions/checkout@v2
     - name: Use PHP 7.4
@@ -82,7 +83,6 @@ jobs:
     - name: Run build
       run: yarn build
     - name: Run deploy
-      if: github.ref == 'refs/heads/master'
       env:
         _TOKEN: ${{ secrets._TOKEN }}
       run: |

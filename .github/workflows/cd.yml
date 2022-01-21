@@ -56,4 +56,16 @@ jobs:
     - name: Send coverage to Coveralls
       env:
         COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        COVERALLS_PARALLEL: true
       run: composer coveralls
+      continue-on-error: true
+  post-test:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Coveralls finish
+      run: |
+        curl --header "Content-Type: application/json" \
+          --request POST \
+          --data '{"repo_token":"${{ secrets.COVERALLS_TOKEN }}","repo_name":"Gomasy/books-manager", "payload": {"build_num": "${{ github.sha }}", "status": "done"}}' \
+          https://coveralls.io/webhook

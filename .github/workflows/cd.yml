@@ -1,0 +1,90 @@
+name: CD workflow
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: 'forge'
+          MYSQL_USER: 'forge'
+          MYSQL_PASSWORD: ''
+          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+        options: >-
+          --health-cmd "mysqladmin ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    steps:
+    - uses: actions/checkout@v2
+    - name: Prepare environment
+      run: |
+        sudo apt install -y fonts-ipafont-gothic
+        ln -s .env.travis .env
+    - name: Use PHP 7.4
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'yarn'
+    - name: Install dependencies (composer)
+      run: composer install --prefer-dist --no-progress
+    - name: Install dependencies (yarn)
+      run: yarn install --pure-lockfile
+    - name: Run build
+      run: yarn build
+    - name: Run test
+      run: composer test
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Use PHP 7.4
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '7.4'
+    - name: Cache Composer packages
+      id: composer-cache
+      uses: actions/cache@v2
+      with:
+        path: vendor
+        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-php-
+    - name: Use Node.js 14.x
+      uses: actions/setup-node@v2
+      with:
+        node-version: 14.x
+        cache: 'yarn'
+    - name: Install dependencies (composer)
+      run: composer install --prefer-dist --no-progress --no-dev
+    - name: Install dependencies (yarn)
+      run: yarn install --pure-lockfile
+    - name: Run build
+      run: yarn build
+    - name: Run deploy
+      if: github.ref == 'refs/heads/master'
+      env:
+        _TOKEN: ${{ secrets._TOKEN }}
+      run: |
+        tar --exclude node_modules -cvf build.tar.gz .
+        curl -H "X-Token:$_TOKEN" -H "X-Repo:books" -F build=@build.tar.gz https://gomasy.jp/api/v1/github/push

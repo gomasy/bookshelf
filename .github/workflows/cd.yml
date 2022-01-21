@@ -47,7 +47,7 @@ jobs:
         node-version: 14.x
         cache: 'yarn'
     - name: Install dependencies (composer)
-      run: composer install --prefer-dist --no-progress
+      run: composer install --prefer-dist
     - name: Install dependencies (yarn)
       run: yarn install --pure-lockfile
     - name: Run build
@@ -79,7 +79,7 @@ jobs:
         node-version: 14.x
         cache: 'yarn'
     - name: Install dependencies (composer)
-      run: composer install --prefer-dist --no-progress --no-dev
+      run: composer install --prefer-dist --no-dev
     - name: Install dependencies (yarn)
       run: yarn install --pure-lockfile
     - name: Run build

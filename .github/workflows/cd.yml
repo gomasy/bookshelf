@@ -54,4 +54,8 @@ jobs:
     - name: Run test
       run: composer travis-test
     - name: Send coverage to Coveralls
+      env:
+        GITHUB_RUN_ID: ${{ github.job }}
+        GITHUB_EVENT_NAME: ${{ github.event_name }}
+        COVERALLS_REPO_TOKEN: ${{ secrets.coveralls_token }}
       run: composer coveralls

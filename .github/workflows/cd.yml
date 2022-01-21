@@ -13,13 +13,11 @@ jobs:
         ports:
           - 3306:3306
         env:
-          MYSQL_ROOT_PASSWORD: ''
           MYSQL_DATABASE: 'forge'
           MYSQL_USER: 'root'
-          MYSQL_PASSWORD: ''
-          MYSQL_ALLOW_EMPTY_PASSWORD: 'yes'
+          MYSQL_PASSWORD: 'passwd'
         options: >-
-          --health-cmd "mysqladmin ping -h localhost"
+          --health-cmd "mysqladmin ping"
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5

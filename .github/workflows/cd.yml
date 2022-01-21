@@ -64,8 +64,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Coveralls finish
+      env:
+        COVERALLS_TOKEN: ${{ secrets.COVERALLS_TOKEN }}
+        BUILD_NUM: ${{ github.sha }}
       run: |
         curl --header "Content-Type: application/json" \
           --request POST \
-          --data '{"repo_token":"${{ secrets.COVERALLS_TOKEN }}","repo_name":"Gomasy/books-manager", "payload": {"build_num": "${{ github.sha }}", "status": "done"}}' \
+          --data '{"repo_token":"$COVERALLS_TOKEN","repo_name":"Gomasy/books-manager", "payload": {"build_num": "$BUILD_NUM", "status": "done"}}' \
           https://coveralls.io/webhook

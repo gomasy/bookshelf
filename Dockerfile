@@ -46,9 +46,12 @@ RUN set -ex; \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -rt apt-mark manual; \
-	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
+	pecl install apcu; \
+	docker-php-ext-enable \
+		apcu \
+		opcache \
+	; \
 	\
-	docker-php-ext-enable opcache; \
 	{ \
 		echo 'opcache.memory_consumption=128'; \
 		echo 'opcache.interned_strings_buffer=8'; \
@@ -87,24 +90,24 @@ RUN set -ex; \
 	cd bookshelf-master; \
 	\
 	{ \
-    	echo 'RewriteEngine On'; \
-    	echo 'RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]'; \
-    	echo 'RewriteBase /'; \
-    	echo 'RewriteRule ^index\.php$ - [L]'; \
-    	echo 'RewriteCond %{REQUEST_FILENAME} !-f'; \
-    	echo 'RewriteCond %{REQUEST_FILENAME} !-d'; \
-    	echo 'RewriteRule . /index.php [L]'; \
+		echo 'RewriteEngine On'; \
+		echo 'RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]'; \
+		echo 'RewriteBase /'; \
+		echo 'RewriteRule ^index\.php$ - [L]'; \
+		echo 'RewriteCond %{REQUEST_FILENAME} !-f'; \
+		echo 'RewriteCond %{REQUEST_FILENAME} !-d'; \
+		echo 'RewriteRule . /index.php [L]'; \
 	} > .htaccess; \
 	\
 	curl -s https://getcomposer.org/installer | php; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \
 	yarn build; \
-	ln -s public html; \
 	rm -rf composer.phar node_modules; \
+	ln -s public html; \
 	chown -R www-data. .; \
 	\
-	apt purge -y --auto-remove \
+	apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 		git \
 		gnupg2 \
 		nodejs \

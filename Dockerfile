@@ -1,19 +1,19 @@
 FROM php:7.4-apache
 
 RUN set -ex; \
-	apt update; \
-	apt install -y --no-install-recommends gnupg2; \
+	apt-get update; \
+	apt-get install -y --no-install-recommends gnupg2; \
 	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -; \
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list; \
-	apt update; \
-	apt install -y --no-install-recommends \
+	apt-get update; \
+	apt-get install -y --no-install-recommends \
 		git \
 		nodejs \
 		yarn \
 	; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
-	apt install -y --no-install-recommends \
+	apt-get install -y --no-install-recommends \
 		libfreetype6-dev \
 		libjpeg-dev \
 		libicu-dev \
@@ -107,7 +107,7 @@ RUN set -ex; \
 	ln -s public html; \
 	chown -R www-data. .; \
 	\
-	apt purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
+	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 		git \
 		gnupg2 \
 		nodejs \

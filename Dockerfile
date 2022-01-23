@@ -11,10 +11,8 @@ RUN set -ex; \
 		nodejs \
 		yarn \
 	; \
-	rm -rf /var/lib/apt/lists/*; \
 	\
 	savedAptMark="$(apt-mark showmanual)"; \
-	apt update; \
 	apt install -y --no-install-recommends \
 		libfreetype6-dev \
 		libjpeg-dev \
@@ -48,9 +46,7 @@ RUN set -ex; \
 		| cut -d: -f1 \
 		| sort -u \
 		| xargs -rt apt-mark manual; \
-	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \
-	rm -rf /var/lib/apt/lists/*; \
 	\
 	docker-php-ext-enable opcache; \
 	{ \
@@ -89,6 +85,7 @@ RUN set -ex; \
 	cd /usr/src; \
 	curl -L https://github.com/Gomasy/bookshelf/archive/refs/heads/master.tar.gz | tar xfz -; \
 	cd bookshelf-master; \
+	\
 	{ \
     	echo 'RewriteEngine On'; \
     	echo 'RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]'; \
@@ -98,11 +95,12 @@ RUN set -ex; \
     	echo 'RewriteCond %{REQUEST_FILENAME} !-d'; \
     	echo 'RewriteRule . /index.php [L]'; \
 	} > .htaccess; \
-	ln -s public html; \
+	\
 	curl -s https://getcomposer.org/installer | php; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \
 	yarn build; \
+	ln -s public html; \
 	rm -rf composer.phar node_modules; \
 	chown -R www-data. .; \
 	\

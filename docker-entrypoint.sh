@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -Eeuo pipefail
+cd ..
 
 if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 	uid="$(id -u)"
@@ -29,7 +29,6 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 		echo >&2 "Bookshelf not found in $PWD - copying now..."
 		shopt -s dotglob
 
-		cd /var/www
 		rm -rf *
 		cp -r /usr/src/bookshelf-master/* .
 
@@ -40,6 +39,10 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 
 		chown -R www-data. .
 	fi
+
+	php artisan migrate
+	php artisan view:clear
 fi
 
+cd html
 exec "$@"

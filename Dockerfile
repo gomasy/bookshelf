@@ -88,17 +88,6 @@ RUN set -ex; \
 	cd /usr/src; \
 	curl -L https://github.com/Gomasy/bookshelf/archive/refs/heads/master.tar.gz | tar xfz -; \
 	cd bookshelf-master; \
-	\
-	{ \
-		echo 'RewriteEngine On'; \
-		echo 'RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]'; \
-		echo 'RewriteBase /'; \
-		echo 'RewriteRule ^index\.php$ - [L]'; \
-		echo 'RewriteCond %{REQUEST_FILENAME} !-f'; \
-		echo 'RewriteCond %{REQUEST_FILENAME} !-d'; \
-		echo 'RewriteRule . /index.php [L]'; \
-	} > .htaccess; \
-	\
 	curl -s https://getcomposer.org/installer | php; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \

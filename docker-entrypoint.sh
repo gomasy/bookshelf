@@ -25,7 +25,7 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 		group="$gid"
 	fi
 
-	if [ ! -e index.php ]; then
+	if [ ! -e html/index.php ]; then
 		echo >&2 "Bookshelf not found in $PWD - copying now..."
 		shopt -s dotglob
 

@@ -27,8 +27,8 @@ jobs:
       uses: actions/checkout@v2
     - name: Prepare environment
       run: |
-        sudo apt install -y fonts-ipafont-gothic
-        ln -s .env.travis .env
+        sudo apt-get install -y --no-install-recommends fonts-ipafont-gothic
+        ln -s .env.gh .env
     - name: Use PHP 7.4
       uses: shivammathur/setup-php@v2
       with:

@@ -7,6 +7,7 @@ RUN set -ex; \
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
+		fonts-ipafont-gothic \
 		git \
 		nodejs \
 		yarn \

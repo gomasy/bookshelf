@@ -99,7 +99,6 @@
                     <li><a href="/privacy-policy">プライバシーポリシー</a></li>
                 </ul>
                 <p>- 本サービスは<a href="http://iss.ndl.go.jp/information/outline/">国立国会図書館のAPI</a>を利用しています -</p>
-                <p>&copy; {{ config('app.name') }} 2017-{{ date('Y') }}</p>
             </footer>
         </div>
     </body>

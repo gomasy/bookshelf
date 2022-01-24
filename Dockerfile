@@ -27,7 +27,6 @@ RUN set -ex; \
 	; \
 	docker-php-ext-install -j "$(nproc)" \
 		gd \
-		iconv \
 		intl \
 		pdo_mysql \
 		zip \

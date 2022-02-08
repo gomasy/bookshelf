@@ -9,19 +9,13 @@
     "@jridgewell/trace-mapping" "^0.2.2"
     sourcemap-codec "1.4.8"
 
-"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.14.5.tgz#23b08d740e83f49c5e59945fbf1b43e80bbf4edb"
-  dependencies:
-    "@babel/highlight" "^7.14.5"
-
-"@babel/code-frame@^7.16.7":
+"@babel/code-frame@^7.0.0", "@babel/code-frame@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.16.7.tgz#44416b6bd7624b998f5b1af5d470856c40138789"
   dependencies:
     "@babel/highlight" "^7.16.7"
 
-"@babel/compat-data@^7.13.11", "@babel/compat-data@^7.14.5":
+"@babel/compat-data@^7.13.11":
   version "7.14.7"
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.14.7.tgz#7b047d7a3a89a67d2258dc61f604f098f1bc7e08"
 
@@ -29,16 +23,16 @@
   version "7.17.0"
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.17.0.tgz#86850b8597ea6962089770952075dcaabb8dba34"
 
-"@babel/core@^7.17.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.17.0.tgz#16b8772b0a567f215839f689c5ded6bb20e864d5"
+"@babel/core@^7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.17.2.tgz#2c77fc430e95139d816d39b113b31bf40fb22337"
   dependencies:
     "@ampproject/remapping" "^2.0.0"
     "@babel/code-frame" "^7.16.7"
     "@babel/generator" "^7.17.0"
     "@babel/helper-compilation-targets" "^7.16.7"
     "@babel/helper-module-transforms" "^7.16.7"
-    "@babel/helpers" "^7.17.0"
+    "@babel/helpers" "^7.17.2"
     "@babel/parser" "^7.17.0"
     "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.17.0"
@@ -48,14 +42,6 @@
     gensync "^1.0.0-beta.2"
     json5 "^2.1.2"
     semver "^6.3.0"
-
-"@babel/generator@^7.14.8":
-  version "7.14.8"
-  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.14.8.tgz#bf86fd6af96cf3b74395a8ca409515f89423e070"
-  dependencies:
-    "@babel/types" "^7.14.8"
-    jsesc "^2.5.1"
-    source-map "^0.5.0"
 
 "@babel/generator@^7.17.0":
   version "7.17.0"
@@ -84,16 +70,7 @@
     "@babel/helper-explode-assignable-expression" "^7.16.7"
     "@babel/types" "^7.16.7"
 
-"@babel/helper-compilation-targets@^7.13.0":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-compilation-targets/-/helper-compilation-targets-7.14.5.tgz#7a99c5d0967911e972fe2c3411f7d5b498498ecf"
-  dependencies:
-    "@babel/compat-data" "^7.14.5"
-    "@babel/helper-validator-option" "^7.14.5"
-    browserslist "^4.16.6"
-    semver "^6.3.0"
-
-"@babel/helper-compilation-targets@^7.16.7":
+"@babel/helper-compilation-targets@^7.13.0", "@babel/helper-compilation-targets@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-compilation-targets/-/helper-compilation-targets-7.16.7.tgz#06e66c5f299601e6c7da350049315e83209d551b"
   dependencies:
@@ -153,14 +130,6 @@
   dependencies:
     "@babel/types" "^7.16.7"
 
-"@babel/helper-function-name@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-function-name/-/helper-function-name-7.14.5.tgz#89e2c474972f15d8e233b52ee8c480e2cfcd50c4"
-  dependencies:
-    "@babel/helper-get-function-arity" "^7.14.5"
-    "@babel/template" "^7.14.5"
-    "@babel/types" "^7.14.5"
-
 "@babel/helper-function-name@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-function-name/-/helper-function-name-7.16.7.tgz#f1ec51551fb1c8956bc8dd95f38523b6cf375f8f"
@@ -169,23 +138,11 @@
     "@babel/template" "^7.16.7"
     "@babel/types" "^7.16.7"
 
-"@babel/helper-get-function-arity@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-get-function-arity/-/helper-get-function-arity-7.14.5.tgz#25fbfa579b0937eee1f3b805ece4ce398c431815"
-  dependencies:
-    "@babel/types" "^7.14.5"
-
 "@babel/helper-get-function-arity@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-get-function-arity/-/helper-get-function-arity-7.16.7.tgz#ea08ac753117a669f1508ba06ebcc49156387419"
   dependencies:
     "@babel/types" "^7.16.7"
-
-"@babel/helper-hoist-variables@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-hoist-variables/-/helper-hoist-variables-7.14.5.tgz#e0dd27c33a78e577d7c8884916a3e7ef1f7c7f8d"
-  dependencies:
-    "@babel/types" "^7.14.5"
 
 "@babel/helper-hoist-variables@^7.16.7":
   version "7.16.7"
@@ -268,29 +225,15 @@
   dependencies:
     "@babel/types" "^7.16.0"
 
-"@babel/helper-split-export-declaration@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.14.5.tgz#22b23a54ef51c2b7605d851930c1976dd0bc693a"
-  dependencies:
-    "@babel/types" "^7.14.5"
-
 "@babel/helper-split-export-declaration@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-split-export-declaration/-/helper-split-export-declaration-7.16.7.tgz#0b648c0c42da9d3920d85ad585f2778620b8726b"
   dependencies:
     "@babel/types" "^7.16.7"
 
-"@babel/helper-validator-identifier@^7.14.5", "@babel/helper-validator-identifier@^7.14.8":
-  version "7.14.8"
-  resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.14.8.tgz#32be33a756f29e278a0d644fa08a2c9e0f88a34c"
-
 "@babel/helper-validator-identifier@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/helper-validator-identifier/-/helper-validator-identifier-7.16.7.tgz#e8c602438c4a8195751243da9031d1607d247cad"
-
-"@babel/helper-validator-option@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/helper-validator-option/-/helper-validator-option-7.14.5.tgz#6e72a1fff18d5dfcb878e1e62f1a021c4b72d5a3"
 
 "@babel/helper-validator-option@^7.16.7":
   version "7.16.7"
@@ -305,21 +248,13 @@
     "@babel/traverse" "^7.16.8"
     "@babel/types" "^7.16.8"
 
-"@babel/helpers@^7.17.0":
-  version "7.17.0"
-  resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.17.0.tgz#79cdf6c66a579f3a7b5e739371bc63ca0306886b"
+"@babel/helpers@^7.17.2":
+  version "7.17.2"
+  resolved "https://registry.yarnpkg.com/@babel/helpers/-/helpers-7.17.2.tgz#23f0a0746c8e287773ccd27c14be428891f63417"
   dependencies:
     "@babel/template" "^7.16.7"
     "@babel/traverse" "^7.17.0"
     "@babel/types" "^7.17.0"
-
-"@babel/highlight@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/highlight/-/highlight-7.14.5.tgz#6861a52f03966405001f6aa534a01a24d99e8cd9"
-  dependencies:
-    "@babel/helper-validator-identifier" "^7.14.5"
-    chalk "^2.0.0"
-    js-tokens "^4.0.0"
 
 "@babel/highlight@^7.16.7":
   version "7.16.10"
@@ -328,10 +263,6 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     chalk "^2.0.0"
     js-tokens "^4.0.0"
-
-"@babel/parser@^7.14.5", "@babel/parser@^7.14.8":
-  version "7.14.8"
-  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.14.8.tgz#66fd41666b2d7b840bd5ace7f7416d5ac60208d4"
 
 "@babel/parser@^7.16.7", "@babel/parser@^7.17.0":
   version "7.17.0"
@@ -882,14 +813,6 @@
   dependencies:
     regenerator-runtime "^0.13.4"
 
-"@babel/template@^7.14.5":
-  version "7.14.5"
-  resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.14.5.tgz#a9bc9d8b33354ff6e55a9c60d1109200a68974f4"
-  dependencies:
-    "@babel/code-frame" "^7.14.5"
-    "@babel/parser" "^7.14.5"
-    "@babel/types" "^7.14.5"
-
 "@babel/template@^7.16.7":
   version "7.16.7"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.16.7.tgz#8d126c8701fde4d66b264b3eba3d96f07666d155"
@@ -898,21 +821,7 @@
     "@babel/parser" "^7.16.7"
     "@babel/types" "^7.16.7"
 
-"@babel/traverse@^7.13.0":
-  version "7.14.8"
-  resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.14.8.tgz#c0253f02677c5de1a8ff9df6b0aacbec7da1a8ce"
-  dependencies:
-    "@babel/code-frame" "^7.14.5"
-    "@babel/generator" "^7.14.8"
-    "@babel/helper-function-name" "^7.14.5"
-    "@babel/helper-hoist-variables" "^7.14.5"
-    "@babel/helper-split-export-declaration" "^7.14.5"
-    "@babel/parser" "^7.14.8"
-    "@babel/types" "^7.14.8"
-    debug "^4.1.0"
-    globals "^11.1.0"
-
-"@babel/traverse@^7.16.7", "@babel/traverse@^7.16.8", "@babel/traverse@^7.17.0":
+"@babel/traverse@^7.13.0", "@babel/traverse@^7.16.7", "@babel/traverse@^7.16.8", "@babel/traverse@^7.17.0":
   version "7.17.0"
   resolved "https://registry.yarnpkg.com/@babel/traverse/-/traverse-7.17.0.tgz#3143e5066796408ccc880a33ecd3184f3e75cd30"
   dependencies:
@@ -927,14 +836,7 @@
     debug "^4.1.0"
     globals "^11.1.0"
 
-"@babel/types@^7.12.13", "@babel/types@^7.14.5", "@babel/types@^7.14.8", "@babel/types@^7.4.4":
-  version "7.14.8"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.14.8.tgz#38109de8fcadc06415fbd9b74df0065d4d41c728"
-  dependencies:
-    "@babel/helper-validator-identifier" "^7.14.8"
-    to-fast-properties "^2.0.0"
-
-"@babel/types@^7.16.0", "@babel/types@^7.16.7", "@babel/types@^7.16.8", "@babel/types@^7.17.0":
+"@babel/types@^7.12.13", "@babel/types@^7.14.5", "@babel/types@^7.16.0", "@babel/types@^7.16.7", "@babel/types@^7.16.8", "@babel/types@^7.17.0", "@babel/types@^7.4.4":
   version "7.17.0"
   resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.17.0.tgz#a826e368bccb6b3d84acd76acad5c0d87342390b"
   dependencies:
@@ -1667,7 +1569,7 @@ browserify-zlib@^0.2.0:
   dependencies:
     pako "~1.0.5"
 
-browserslist@^4.12.0, browserslist@^4.16.6:
+browserslist@^4.12.0:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.6.tgz#d7901277a5a88e554ed305b183ec9b0c08f66fa2"
   dependencies:

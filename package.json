@@ -13,7 +13,7 @@
         "@fortawesome/fontawesome-free": "^5.15.4",
         "autoprefixer": "^9.8.8",
         "babel-loader": "^8.2.3",
-        "bootstrap-sass": "^3.4.1",
+        "bootstrap-sass": "^3.4.3",
         "browser-sync": "^2.27.7",
         "browser-sync-webpack-plugin": "^2.3.0",
         "clean-webpack-plugin": "^3.0.0",

@@ -746,16 +746,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.2.0",
+            "version": "v6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "d28e6df83830252650da4623c78aaaf98fb385f3"
+                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/d28e6df83830252650da4623c78aaaf98fb385f3",
-                "reference": "d28e6df83830252650da4623c78aaaf98fb385f3",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
+                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "jwt",
                 "php"
             ],
-            "time": "2022-05-13T20:54:50+00:00"
+            "time": "2022-07-15T16:48:45+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -879,16 +879,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.21.0",
+            "version": "v1.21.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "73392bad2eb6852eea9084b6bbdec752515cb849"
+                "reference": "aa3b9ca29258ac6347ce3c8937a2418c5d78f840"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/73392bad2eb6852eea9084b6bbdec752515cb849",
-                "reference": "73392bad2eb6852eea9084b6bbdec752515cb849",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/aa3b9ca29258ac6347ce3c8937a2418c5d78f840",
+                "reference": "aa3b9ca29258ac6347ce3c8937a2418c5d78f840",
                 "shasum": ""
             },
             "require": {
@@ -928,29 +928,29 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2022-04-13T20:35:52+00:00"
+            "time": "2022-05-16T19:34:15+00:00"
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.46.0",
+            "version": "v1.47.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "784a1d361c7dbc5de133feac590f549798c80f5e"
+                "reference": "14d856517d18b14754b364896b28210df2738df0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/784a1d361c7dbc5de133feac590f549798c80f5e",
-                "reference": "784a1d361c7dbc5de133feac590f549798c80f5e",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/14d856517d18b14754b364896b28210df2738df0",
+                "reference": "14d856517d18b14754b364896b28210df2738df0",
                 "shasum": ""
             },
             "require": {
                 "google/auth": "^1.18",
-                "guzzlehttp/guzzle": "^5.3|^6.5.6|^7.4.3",
+                "guzzlehttp/guzzle": "^5.3|^6.5.7|^7.4.4",
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.7|^2.0",
                 "monolog/monolog": "^1.1|^2.0",
-                "php": ">=5.5",
+                "php": ">=5.6",
                 "psr/http-message": "1.0.*",
                 "rize/uri-template": "~0.3"
             },
@@ -990,20 +990,20 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2022-06-02T21:53:43+00:00"
+            "time": "2022-08-05T00:41:21+00:00"
         },
         {
             "name": "google/cloud-vision",
-            "version": "v1.5.7",
+            "version": "v1.5.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "4aff2237fa218074f45b1e12773f575408ab064e"
+                "reference": "328cf374283b087e7cd049600f3d34e0a359113f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/4aff2237fa218074f45b1e12773f575408ab064e",
-                "reference": "4aff2237fa218074f45b1e12773f575408ab064e",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/328cf374283b087e7cd049600f3d34e0a359113f",
+                "reference": "328cf374283b087e7cd049600f3d34e0a359113f",
                 "shasum": ""
             },
             "require": {
@@ -1043,24 +1043,24 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2022-06-02T21:53:43+00:00"
+            "time": "2022-07-29T00:07:49+00:00"
         },
         {
             "name": "google/common-protos",
-            "version": "2.1.0",
+            "version": "v3.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/common-protos-php.git",
-                "reference": "4bad82f73a10f8ea4e6d078da93406a16c996044"
+                "reference": "168393c1d19297fde8d5c875a540ba92c5aa970c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/4bad82f73a10f8ea4e6d078da93406a16c996044",
-                "reference": "4bad82f73a10f8ea4e6d078da93406a16c996044",
+                "url": "https://api.github.com/repos/googleapis/common-protos-php/zipball/168393c1d19297fde8d5c875a540ba92c5aa970c",
+                "reference": "168393c1d19297fde8d5c875a540ba92c5aa970c",
                 "shasum": ""
             },
             "require": {
-                "google/protobuf": "^3.6.1, !=3.20.0"
+                "google/protobuf": "^3.6.1"
             },
             "require-dev": {
                 "phpunit/phpunit": "^4.8.36||^8.5",
@@ -1082,38 +1082,40 @@
             "keywords": [
                 "google"
             ],
-            "time": "2022-05-13T21:07:15+00:00"
+            "time": "2022-07-29T20:50:18+00:00"
         },
         {
             "name": "google/gax",
-            "version": "v1.12.2",
+            "version": "v1.16.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "38ea1c12e7d24caeb3abbcac44a6a3536a8ef2a7"
+                "reference": "42dc3a688e358c610b41c5d0495c5db35249f0bf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/38ea1c12e7d24caeb3abbcac44a6a3536a8ef2a7",
-                "reference": "38ea1c12e7d24caeb3abbcac44a6a3536a8ef2a7",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/42dc3a688e358c610b41c5d0495c5db35249f0bf",
+                "reference": "42dc3a688e358c610b41c5d0495c5db35249f0bf",
                 "shasum": ""
             },
             "require": {
                 "google/auth": "^1.18.0",
-                "google/common-protos": "^1.0||^2.0",
+                "google/common-protos": "^1.3.1||^2.0||^3.0",
                 "google/grpc-gcp": "^0.2",
-                "google/protobuf": "^3.12.2",
+                "google/longrunning": "^0.2",
+                "google/protobuf": "^3.21.4",
                 "grpc/grpc": "^1.13",
                 "guzzlehttp/promises": "^1.3",
                 "guzzlehttp/psr7": "^1.7.0||^2",
-                "php": ">=5.5"
+                "php": ">=7.0"
             },
             "conflict": {
                 "ext-protobuf": "<3.7.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^4.8.36",
-                "squizlabs/php_codesniffer": "3.*"
+                "phpunit/phpunit": "^5.5||^8.5",
+                "squizlabs/php_codesniffer": "3.*",
+                "yoast/phpunit-polyfills": "^1.0"
             },
             "type": "library",
             "autoload": {
@@ -1131,7 +1133,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2022-05-17T03:48:18+00:00"
+            "time": "2022-08-17T15:09:42+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -1175,17 +1177,58 @@
             "time": "2021-09-27T22:57:18+00:00"
         },
         {
-            "name": "google/protobuf",
-            "version": "v3.21.1",
+            "name": "google/longrunning",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "68f71264d8816f001177d68ce99d25b28e212d4c"
+                "url": "https://github.com/googleapis/php-longrunning.git",
+                "reference": "5b7500eede9d6b18ef038bef0b5449cbf085e1d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/68f71264d8816f001177d68ce99d25b28e212d4c",
-                "reference": "68f71264d8816f001177d68ce99d25b28e212d4c",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/5b7500eede9d6b18ef038bef0b5449cbf085e1d6",
+                "reference": "5b7500eede9d6b18ef038bef0b5449cbf085e1d6",
+                "shasum": ""
+            },
+            "require-dev": {
+                "google/gax": "^1.13.0",
+                "phpunit/phpunit": "^4.8|^5.0|^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "component": {
+                    "id": "longrunning",
+                    "path": "LongRunning",
+                    "entry": null,
+                    "target": "googleapis/php-longrunning"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Google\\LongRunning\\": "src/LongRunning",
+                    "Google\\ApiCore\\LongRunning\\": "src/ApiCore/LongRunning",
+                    "GPBMetadata\\Google\\Longrunning\\": "metadata/Longrunning"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Google LongRunning Client for PHP",
+            "time": "2022-08-05T00:41:21+00:00"
+        },
+        {
+            "name": "google/protobuf",
+            "version": "v3.21.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/protocolbuffers/protobuf-php.git",
+                "reference": "70649d33d2b6e8fd0db6d9b6fffc7f46f01f1438"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/70649d33d2b6e8fd0db6d9b6fffc7f46f01f1438",
+                "reference": "70649d33d2b6e8fd0db6d9b6fffc7f46f01f1438",
                 "shasum": ""
             },
             "require": {
@@ -1213,7 +1256,7 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2022-05-27T22:57:31+00:00"
+            "time": "2022-08-09T19:53:56+00:00"
         },
         {
             "name": "google/recaptcha",
@@ -2118,16 +2161,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "2.7.0",
+            "version": "2.8.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524"
+                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/5579edf28aee1190a798bfa5be8bc16c563bd524",
-                "reference": "5579edf28aee1190a798bfa5be8bc16c563bd524",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/720488632c590286b88b80e62aa3d3d551ad4a50",
+                "reference": "720488632c590286b88b80e62aa3d3d551ad4a50",
                 "shasum": ""
             },
             "require": {
@@ -2147,11 +2190,10 @@
                 "guzzlehttp/psr7": "^2.2",
                 "mongodb/mongodb": "^1.8",
                 "php-amqplib/php-amqplib": "~2.4 || ^3",
-                "php-console/php-console": "^3.1.3",
                 "phpspec/prophecy": "^1.15",
                 "phpstan/phpstan": "^0.12.91",
                 "phpunit/phpunit": "^8.5.14",
-                "predis/predis": "^1.1",
+                "predis/predis": "^1.1 || ^2.0",
                 "rollbar/rollbar": "^1.3 || ^2 || ^3",
                 "ruflin/elastica": "^7",
                 "swiftmailer/swiftmailer": "^5.3|^6.0",
@@ -2171,7 +2213,6 @@
                 "graylog2/gelf-php": "Allow sending log messages to a GrayLog2 server",
                 "mongodb/mongodb": "Allow sending log messages to a MongoDB server (via library)",
                 "php-amqplib/php-amqplib": "Allow sending log messages to an AMQP server using php-amqplib",
-                "php-console/php-console": "Allow sending log messages to Google Chrome",
                 "rollbar/rollbar": "Allow sending log messages to Rollbar",
                 "ruflin/elastica": "Allow sending log messages to an Elastic Search server"
             },
@@ -2214,7 +2255,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2022-06-09T08:59:12+00:00"
+            "time": "2022-07-24T11:55:47+00:00"
         },
         {
             "name": "nesbot/carbon",

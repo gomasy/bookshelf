@@ -746,16 +746,16 @@
         },
         {
             "name": "firebase/php-jwt",
-            "version": "v6.3.0",
+            "version": "v6.3.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/firebase/php-jwt.git",
-                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8"
+                "reference": "ddfaddcb520488b42bca3a75e17e9dd53c3667da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
-                "reference": "018dfc4e1da92ad8a1b90adc4893f476a3b41cb8",
+                "url": "https://api.github.com/repos/firebase/php-jwt/zipball/ddfaddcb520488b42bca3a75e17e9dd53c3667da",
+                "reference": "ddfaddcb520488b42bca3a75e17e9dd53c3667da",
                 "shasum": ""
             },
             "require": {
@@ -800,7 +800,7 @@
                 "jwt",
                 "php"
             ],
-            "time": "2022-07-15T16:48:45+00:00"
+            "time": "2022-11-01T21:20:08+00:00"
         },
         {
             "name": "fruitcake/laravel-cors",
@@ -879,16 +879,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.23.1",
+            "version": "v1.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17"
+                "reference": "1f8cff5aa324700d041efd2df1a0855112a2e7ae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
-                "reference": "cb43cb8ccde76ace65ec40130a9e9c2a15ecfe17",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/1f8cff5aa324700d041efd2df1a0855112a2e7ae",
+                "reference": "1f8cff5aa324700d041efd2df1a0855112a2e7ae",
                 "shasum": ""
             },
             "require": {
@@ -903,8 +903,8 @@
                 "guzzlehttp/promises": "0.1.1|^1.3",
                 "kelvinmo/simplejwt": "^0.2.5|^0.5.1",
                 "phpseclib/phpseclib": "^2.0.31",
-                "phpspec/prophecy-phpunit": "^1.1",
-                "phpunit/phpunit": "^7.5||^8.5",
+                "phpspec/prophecy-phpunit": "^1.1||^2.0",
+                "phpunit/phpunit": "^7.5||^9.0.0",
                 "sebastian/comparator": ">=1.2.3",
                 "squizlabs/php_codesniffer": "^3.5"
             },
@@ -928,20 +928,20 @@
                 "google",
                 "oauth2"
             ],
-            "time": "2022-10-26T20:30:45+00:00"
+            "time": "2022-11-28T18:29:23+00:00"
         },
         {
             "name": "google/cloud-core",
-            "version": "v1.47.4",
+            "version": "v1.48.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-core.git",
-                "reference": "3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2"
+                "reference": "83d1c896ab481ae647d536d017f4a5374f1bf094"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2",
-                "reference": "3a00a21e2af5a07a77cd01a7dcbc664d459c8fa2",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-core/zipball/83d1c896ab481ae647d536d017f4a5374f1bf094",
+                "reference": "83d1c896ab481ae647d536d017f4a5374f1bf094",
                 "shasum": ""
             },
             "require": {
@@ -991,20 +991,20 @@
                 "Apache-2.0"
             ],
             "description": "Google Cloud PHP shared dependency, providing functionality useful to all components.",
-            "time": "2022-11-01T20:21:07+00:00"
+            "time": "2022-12-07T23:19:22+00:00"
         },
         {
             "name": "google/cloud-vision",
-            "version": "v1.6.0",
+            "version": "v1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-cloud-php-vision.git",
-                "reference": "ec2fd5bf522920f8db42b931d70173e6d057545d"
+                "reference": "7d93740457d4ac0c56c176bd475493ca98827cb3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/ec2fd5bf522920f8db42b931d70173e6d057545d",
-                "reference": "ec2fd5bf522920f8db42b931d70173e6d057545d",
+                "url": "https://api.github.com/repos/googleapis/google-cloud-php-vision/zipball/7d93740457d4ac0c56c176bd475493ca98827cb3",
+                "reference": "7d93740457d4ac0c56c176bd475493ca98827cb3",
                 "shasum": ""
             },
             "require": {
@@ -1045,7 +1045,7 @@
                 "Apache-2.0"
             ],
             "description": "Cloud Vision Client for PHP",
-            "time": "2022-11-01T20:21:07+00:00"
+            "time": "2022-12-07T23:19:22+00:00"
         },
         {
             "name": "google/common-protos",
@@ -1097,16 +1097,16 @@
         },
         {
             "name": "google/gax",
-            "version": "v1.17.0",
+            "version": "v1.18.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/gax-php.git",
-                "reference": "bb8d95187dcfebe04a40d2de916951fa4942fc35"
+                "reference": "45e01473b7215d593a58a72c89225f110e9d2ce0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/bb8d95187dcfebe04a40d2de916951fa4942fc35",
-                "reference": "bb8d95187dcfebe04a40d2de916951fa4942fc35",
+                "url": "https://api.github.com/repos/googleapis/gax-php/zipball/45e01473b7215d593a58a72c89225f110e9d2ce0",
+                "reference": "45e01473b7215d593a58a72c89225f110e9d2ce0",
                 "shasum": ""
             },
             "require": {
@@ -1145,7 +1145,7 @@
             "keywords": [
                 "google"
             ],
-            "time": "2022-09-12T15:22:54+00:00"
+            "time": "2022-12-06T22:02:34+00:00"
         },
         {
             "name": "google/grpc-gcp",
@@ -1190,16 +1190,16 @@
         },
         {
             "name": "google/longrunning",
-            "version": "v0.2.0",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/php-longrunning.git",
-                "reference": "5b7500eede9d6b18ef038bef0b5449cbf085e1d6"
+                "reference": "3bdea7559f0e9ff65b826b07c942cd430eabaf38"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/5b7500eede9d6b18ef038bef0b5449cbf085e1d6",
-                "reference": "5b7500eede9d6b18ef038bef0b5449cbf085e1d6",
+                "url": "https://api.github.com/repos/googleapis/php-longrunning/zipball/3bdea7559f0e9ff65b826b07c942cd430eabaf38",
+                "reference": "3bdea7559f0e9ff65b826b07c942cd430eabaf38",
                 "shasum": ""
             },
             "require-dev": {
@@ -1227,20 +1227,20 @@
                 "Apache-2.0"
             ],
             "description": "Google LongRunning Client for PHP",
-            "time": "2022-08-05T00:41:21+00:00"
+            "time": "2022-12-07T23:19:22+00:00"
         },
         {
             "name": "google/protobuf",
-            "version": "v3.21.9",
+            "version": "v3.21.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/protocolbuffers/protobuf-php.git",
-                "reference": "1bf02c57f260c5eea5e75a35c1a943fe943a188a"
+                "reference": "8f8dc48540aed2c96eb3febcc4816f1321f66b85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/1bf02c57f260c5eea5e75a35c1a943fe943a188a",
-                "reference": "1bf02c57f260c5eea5e75a35c1a943fe943a188a",
+                "url": "https://api.github.com/repos/protocolbuffers/protobuf-php/zipball/8f8dc48540aed2c96eb3febcc4816f1321f66b85",
+                "reference": "8f8dc48540aed2c96eb3febcc4816f1321f66b85",
                 "shasum": ""
             },
             "require": {
@@ -1268,7 +1268,7 @@
             "keywords": [
                 "proto"
             ],
-            "time": "2022-10-26T20:30:45+00:00"
+            "time": "2022-12-08T06:36:59+00:00"
         },
         {
             "name": "google/recaptcha",

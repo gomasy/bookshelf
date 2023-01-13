@@ -25,16 +25,19 @@ if [[ "$1" == apache2* ]] || [ "$1" = 'php-fpm' ]; then
 		group="$gid"
 	fi
 
-	if [ ! -e html/index.php ]; then
+	if [ ! -e server.php ]; then
 		echo >&2 "Bookshelf not found in $PWD - copying now..."
 		shopt -s dotglob
 
+		rm -r html
 		cp -r /usr/src/bookshelf-master/* .
+
 		if [ ! -e .env ]; then
 			cp .env.example .env
 			php artisan key:generate
 		fi
 
+		ln -s public html
 		chown -R www-data. storage
 	fi
 

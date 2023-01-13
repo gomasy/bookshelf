@@ -104,8 +104,6 @@ RUN set -ex; \
 	; \
 	rm -rf /var/lib/apt/lists/*
 
-VOLUME /var/www
-
 COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]

@@ -10,7 +10,7 @@ use App\Book;
 
 class AmazonImages
 {
-    protected $endpoint = 'http://images-jp.amazon.com';
+    protected $endpoint = 'http://images.amazon.com';
     protected $path = 'images/P/';
     protected $countryCode = '09';
     protected $types = [

@@ -23,7 +23,7 @@
         "eslint-loader": "^4.0.2",
         "eslint-plugin-vue": "^6.2.2",
         "file-loader": "^6.2.0",
-        "jquery": "^3.6.3",
+        "jquery": "^3.6.4",
         "postcss-custom-media": "^7.0.8",
         "postcss-loader": "^3.0.0",
         "quagga": "^0.12.1",

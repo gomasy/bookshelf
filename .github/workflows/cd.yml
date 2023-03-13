@@ -69,6 +69,5 @@ jobs:
       - uses: docker/build-push-action@v4
         name: Build and push
         with:
-          context: .
           push: true
           tags: gomasy/bookshelf:latest

@@ -41,10 +41,10 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-    - name: Use Node.js 14.x
+    - name: Use Node.js 16.x
       uses: actions/setup-node@v3
       with:
-        node-version: 14.x
+        node-version: 16.x
         cache: 'yarn'
     - name: Install dependencies (composer)
       run: composer install --prefer-dist

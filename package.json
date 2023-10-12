@@ -7,7 +7,7 @@
         "dev:start": "webpack -d --progress --watch"
     },
     "devDependencies": {
-        "@babel/core": "^7.23.0",
+        "@babel/core": "^7.23.2",
         "@babel/polyfill": "^7.12.1",
         "@babel/preset-env": "^7.22.20",
         "@fortawesome/fontawesome-free": "^5.15.4",

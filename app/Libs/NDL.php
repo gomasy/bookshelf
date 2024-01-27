@@ -107,7 +107,7 @@ class NDL
     {
         foreach ($this->obj->identifier as $obj) {
             if ((string)$obj['type'] === 'ISBN') {
-                $isbn = (string)$obj;
+                $isbn = str_replace('-', '', (string)$obj);
                 if (strlen($isbn) === 10) {
                     return $this->toISBN13($isbn);
                 }

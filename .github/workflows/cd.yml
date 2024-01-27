@@ -24,7 +24,7 @@ jobs:
           --health-retries 5
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
     - name: Prepare environment
       run: |
         sudo apt-get install -y --no-install-recommends fonts-ipafont-gothic
@@ -35,14 +35,14 @@ jobs:
         php-version: '7.4'
     - name: Cache composer packages
       id: composer-cache
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
     - name: Use Node.js 16.x
-      uses: actions/setup-node@v3
+      uses: actions/setup-node@v4
       with:
         node-version: 16.x
         cache: 'yarn'
@@ -59,15 +59,15 @@ jobs:
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/master'
     steps:
-      - uses: docker/setup-buildx-action@v2
+      - uses: docker/setup-buildx-action@v3
         name: Set up Docker Buildx
-      - uses: docker/login-action@v2
+      - uses: docker/login-action@v3
         name: Log in to the Github Container registry
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - uses: docker/build-push-action@v4
+      - uses: docker/build-push-action@v5
         name: Build and push
         with:
           push: true

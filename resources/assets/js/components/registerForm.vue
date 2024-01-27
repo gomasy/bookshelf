@@ -43,7 +43,7 @@ export default {
             return this.type !== 'code' ? '検索する' : '登録する';
         },
         placeholder() {
-            return this.type !== 'code' ? '検索したい本の名前' : 'ISBN or JP番号';
+            return this.type !== 'code' ? '検索したい本の名前' : 'ISBN (10/13桁)';
         },
     },
     watch: {

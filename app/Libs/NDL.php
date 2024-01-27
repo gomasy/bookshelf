@@ -58,7 +58,7 @@ class NDL
     {
         $type = $this->type;
         if ($type === 'code') {
-            $type = $this->searchType($payload);
+            $type = 'isbn';
         }
 
         return '?' . http_build_query([ $type => $payload ]);
@@ -160,16 +160,6 @@ class NDL
     public function getBookUrl(): string
     {
         return (string)$this->obj->link;
-    }
-
-    protected function searchType(string $num): string
-    {
-        $len = strlen($num);
-        if ($len === 8) {
-            return 'jpno';
-        } elseif ($len === 10 || $len === 13) {
-            return 'isbn';
-        }
     }
 
     public function verifyCheckDigit(string $isbn): bool

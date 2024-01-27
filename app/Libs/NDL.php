@@ -11,7 +11,7 @@ use App\Exceptions\TimeoutException;
 
 class NDL
 {
-    protected $endpoint = 'http://iss.ndl.go.jp/api/opensearch';
+    protected $endpoint = 'https://ndlsearch.ndl.go.jp/api/opensearch';
     protected $regexp = [
         '/(dc((ndl)?|(terms)?)|rdfs?|xsi|openSearch):/',
         '/(.+?) \[?(著?|共著?)\]?/',

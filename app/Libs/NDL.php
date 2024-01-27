@@ -17,7 +17,7 @@ class NDL
         '/(.+?) \[?(著?|共著?)\]?/',
     ];
     protected $timeout = [
-        'code' => 1,
+        'code' => 10,
         'title' => 10,
     ];
     protected $client;

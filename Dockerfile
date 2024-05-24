@@ -93,7 +93,7 @@ RUN set -ex; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \
 	yarn build; \
-	rm -rf composer.phar node_modules; \
+	rm -rf $HOME/.composer composer.phar node_modules; \
 	ln -s public html; \
 	chown -R www-data. .; \
 	\

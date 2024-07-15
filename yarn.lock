@@ -20,31 +20,31 @@
   version "7.24.8"
   resolved "https://registry.yarnpkg.com/@babel/compat-data/-/compat-data-7.24.8.tgz#f9196455334c38d059ac8b1a16a51decda9d30d3"
 
-"@babel/core@^7.24.8":
-  version "7.24.8"
-  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.24.8.tgz#c24f83985214f599cee5fc26d393d9ab320342f4"
+"@babel/core@^7.24.9":
+  version "7.24.9"
+  resolved "https://registry.yarnpkg.com/@babel/core/-/core-7.24.9.tgz#dc07c9d307162c97fa9484ea997ade65841c7c82"
   dependencies:
     "@ampproject/remapping" "^2.2.0"
     "@babel/code-frame" "^7.24.7"
-    "@babel/generator" "^7.24.8"
+    "@babel/generator" "^7.24.9"
     "@babel/helper-compilation-targets" "^7.24.8"
-    "@babel/helper-module-transforms" "^7.24.8"
+    "@babel/helper-module-transforms" "^7.24.9"
     "@babel/helpers" "^7.24.8"
     "@babel/parser" "^7.24.8"
     "@babel/template" "^7.24.7"
     "@babel/traverse" "^7.24.8"
-    "@babel/types" "^7.24.8"
+    "@babel/types" "^7.24.9"
     convert-source-map "^2.0.0"
     debug "^4.1.0"
     gensync "^1.0.0-beta.2"
     json5 "^2.2.3"
     semver "^6.3.1"
 
-"@babel/generator@^7.24.8":
-  version "7.24.8"
-  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.24.8.tgz#1802d6ac4d77a9199c75ae3eb6a08336e5d1d39a"
+"@babel/generator@^7.24.8", "@babel/generator@^7.24.9":
+  version "7.24.9"
+  resolved "https://registry.yarnpkg.com/@babel/generator/-/generator-7.24.9.tgz#5c2575a1070e661bbbc9df82a853989c9a656f12"
   dependencies:
-    "@babel/types" "^7.24.8"
+    "@babel/types" "^7.24.9"
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.25"
     jsesc "^2.5.1"
@@ -150,9 +150,9 @@
     "@babel/traverse" "^7.24.7"
     "@babel/types" "^7.24.7"
 
-"@babel/helper-module-transforms@^7.24.7", "@babel/helper-module-transforms@^7.24.8":
-  version "7.24.8"
-  resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.24.8.tgz#b1f2df4f96f3465b0d035b697ec86cb51ff348fe"
+"@babel/helper-module-transforms@^7.24.7", "@babel/helper-module-transforms@^7.24.8", "@babel/helper-module-transforms@^7.24.9":
+  version "7.24.9"
+  resolved "https://registry.yarnpkg.com/@babel/helper-module-transforms/-/helper-module-transforms-7.24.9.tgz#e13d26306b89eea569180868e652e7f514de9d29"
   dependencies:
     "@babel/helper-environment-visitor" "^7.24.7"
     "@babel/helper-module-imports" "^7.24.7"
@@ -861,9 +861,9 @@
     debug "^4.3.1"
     globals "^11.1.0"
 
-"@babel/types@^7.18.6", "@babel/types@^7.24.7", "@babel/types@^7.24.8", "@babel/types@^7.4.4":
-  version "7.24.8"
-  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.24.8.tgz#d51ffa9043b17d36622efa44e861a49e69e130a8"
+"@babel/types@^7.18.6", "@babel/types@^7.24.7", "@babel/types@^7.24.8", "@babel/types@^7.24.9", "@babel/types@^7.4.4":
+  version "7.24.9"
+  resolved "https://registry.yarnpkg.com/@babel/types/-/types-7.24.9.tgz#228ce953d7b0d16646e755acf204f4cf3d08cc73"
   dependencies:
     "@babel/helper-string-parser" "^7.24.8"
     "@babel/helper-validator-identifier" "^7.24.7"

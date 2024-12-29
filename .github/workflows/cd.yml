@@ -42,16 +42,18 @@ jobs:
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
-    - name: Use Node.js 16.x
+    - name: Use Node.js 22.x
       uses: actions/setup-node@v4
       with:
-        node-version: 16.x
+        node-version: 22.x
         cache: 'yarn'
     - name: Install dependencies (composer)
       run: composer install --prefer-dist
     - name: Install dependencies (yarn)
       run: yarn install --pure-lockfile
     - name: Run build
+      env:
+        NODE_OPTIONS: --openssl-legacy-provider
       run: yarn build
     - name: Run test
       run: composer test

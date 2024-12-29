@@ -3,7 +3,7 @@ FROM php:7.4-apache
 RUN set -ex; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends gnupg2; \
-	curl -sSL https://deb.nodesource.com/setup_16.x | sh -; \
+	curl -sSL https://deb.nodesource.com/setup_22.x | sh -; \
 	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -; \
 	echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list; \
 	apt-get update; \
@@ -92,7 +92,7 @@ RUN set -ex; \
 	curl -s https://getcomposer.org/installer | php; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \
-	yarn build; \
+	NODE_OPTIONS="--openssl-legacy-provider" yarn build; \
 	rm -rf $HOME/.composer composer.phar node_modules; \
 	ln -s public html; \
 	chown -R www-data. .; \

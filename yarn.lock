@@ -202,9 +202,15 @@
     "@babel/template" "^7.27.1"
     "@babel/types" "^7.27.1"
 
-"@babel/parser@^7.23.5", "@babel/parser@^7.27.1":
+"@babel/parser@^7.27.1":
   version "7.27.1"
   resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.27.1.tgz#c55d5bed74449d1223701f1869b9ee345cc94cc9"
+  dependencies:
+    "@babel/types" "^7.27.1"
+
+"@babel/parser@^7.27.2":
+  version "7.27.2"
+  resolved "https://registry.yarnpkg.com/@babel/parser/-/parser-7.27.2.tgz#577518bedb17a2ce4212afd052e01f7df0941127"
   dependencies:
     "@babel/types" "^7.27.1"
 
@@ -761,6 +767,10 @@
   version "1.4.15"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.4.15.tgz#d7c6e6755c78567a951e04ab52ef0fd26de59f32"
 
+"@jridgewell/sourcemap-codec@^1.5.0":
+  version "1.5.0"
+  resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz#3188bcb273a414b0d215fd22a58540b989b9409a"
+
 "@jridgewell/trace-mapping@^0.3.24", "@jridgewell/trace-mapping@^0.3.25":
   version "0.3.25"
   resolved "https://registry.yarnpkg.com/@jridgewell/trace-mapping/-/trace-mapping-0.3.25.tgz#15f190e98895f3fc23276ee14bc76b675c2e50f0"
@@ -925,15 +935,43 @@
     "@types/webpack-sources" "*"
     source-map "^0.6.0"
 
-"@vue/compiler-sfc@2.7.16":
-  version "2.7.16"
-  resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-2.7.16.tgz#ff81711a0fac9c68683d8bb00b63f857de77dc83"
+"@vue/compiler-core@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-core/-/compiler-core-3.5.15.tgz#7cbda69429490f4ec0f68126dd0d6eae050dd01c"
   dependencies:
-    "@babel/parser" "^7.23.5"
-    postcss "^8.4.14"
-    source-map "^0.6.1"
-  optionalDependencies:
-    prettier "^1.18.2 || ^2.0.0"
+    "@babel/parser" "^7.27.2"
+    "@vue/shared" "3.5.15"
+    entities "^4.5.0"
+    estree-walker "^2.0.2"
+    source-map-js "^1.2.1"
+
+"@vue/compiler-dom@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-dom/-/compiler-dom-3.5.15.tgz#2de7fec1a685c236585a4a1fb12cc586d7f0ffef"
+  dependencies:
+    "@vue/compiler-core" "3.5.15"
+    "@vue/shared" "3.5.15"
+
+"@vue/compiler-sfc@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-sfc/-/compiler-sfc-3.5.15.tgz#d45a5c5171d8823c59725d31af406693c8816195"
+  dependencies:
+    "@babel/parser" "^7.27.2"
+    "@vue/compiler-core" "3.5.15"
+    "@vue/compiler-dom" "3.5.15"
+    "@vue/compiler-ssr" "3.5.15"
+    "@vue/shared" "3.5.15"
+    estree-walker "^2.0.2"
+    magic-string "^0.30.17"
+    postcss "^8.5.3"
+    source-map-js "^1.2.1"
+
+"@vue/compiler-ssr@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/compiler-ssr/-/compiler-ssr-3.5.15.tgz#b6ffbb19ff7126fc0e60cbf9c4ca34d9a9ce9fb2"
+  dependencies:
+    "@vue/compiler-dom" "3.5.15"
+    "@vue/shared" "3.5.15"
 
 "@vue/component-compiler-utils@^3.1.0":
   version "3.2.0"
@@ -949,6 +987,39 @@
     vue-template-es2015-compiler "^1.9.0"
   optionalDependencies:
     prettier "^1.18.2"
+
+"@vue/reactivity@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/reactivity/-/reactivity-3.5.15.tgz#18d00ae922e8b0dc09afe952bd47510c6e4305e9"
+  dependencies:
+    "@vue/shared" "3.5.15"
+
+"@vue/runtime-core@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/runtime-core/-/runtime-core-3.5.15.tgz#0accac4b441bb4aa00f58ba353b6f61e83f45202"
+  dependencies:
+    "@vue/reactivity" "3.5.15"
+    "@vue/shared" "3.5.15"
+
+"@vue/runtime-dom@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/runtime-dom/-/runtime-dom-3.5.15.tgz#048b725069f6d3fe5002e53eba118466d1fbec84"
+  dependencies:
+    "@vue/reactivity" "3.5.15"
+    "@vue/runtime-core" "3.5.15"
+    "@vue/shared" "3.5.15"
+    csstype "^3.1.3"
+
+"@vue/server-renderer@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/server-renderer/-/server-renderer-3.5.15.tgz#c1e8597e4bec8ea0b323c32dc032aa5c1f2983f4"
+  dependencies:
+    "@vue/compiler-ssr" "3.5.15"
+    "@vue/shared" "3.5.15"
+
+"@vue/shared@3.5.15":
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/@vue/shared/-/shared-3.5.15.tgz#4c633a0e66f38119e38eecf340b4a65b0bad7192"
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -2013,9 +2084,9 @@ cssesc@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/cssesc/-/cssesc-3.0.0.tgz#37741919903b868565e1c09ea747445cd18983ee"
 
-csstype@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.0.tgz#4ddcac3718d787cf9df0d1b7d15033925c8f29f2"
+csstype@^3.1.3:
+  version "3.1.3"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-3.1.3.tgz#d80ff294d114fb0e6ac500fbf85b60137d7eff81"
 
 cwise-compiler@^1.1.2:
   version "1.1.3"
@@ -2276,6 +2347,10 @@ enhanced-resolve@^4.1.1, enhanced-resolve@^4.5.0:
     memory-fs "^0.5.0"
     tapable "^1.0.0"
 
+entities@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.yarnpkg.com/entities/-/entities-4.5.0.tgz#5d268ea5e7113ec74c4d033b79ea5a35a488fb48"
+
 errno@^0.1.3, errno@~0.1.7:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/errno/-/errno-0.1.7.tgz#4684d71779ad39af177e3f007996f7c67c852618"
@@ -2423,6 +2498,10 @@ estraverse@^4.1.1:
 estraverse@^5.1.0, estraverse@^5.2.0:
   version "5.2.0"
   resolved "https://registry.yarnpkg.com/estraverse/-/estraverse-5.2.0.tgz#307df42547e6cc7324d3cf03c155d5cdb8c53880"
+
+estree-walker@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/estree-walker/-/estree-walker-2.0.2.tgz#52f010178c2a4c117a7757cfe942adb7d2da4cac"
 
 esutils@^2.0.2:
   version "2.0.3"
@@ -3487,6 +3566,12 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+magic-string@^0.30.17:
+  version "0.30.17"
+  resolved "https://registry.yarnpkg.com/magic-string/-/magic-string-0.30.17.tgz#450a449673d2460e5bbcfba9a61916a1714c7453"
+  dependencies:
+    "@jridgewell/sourcemap-codec" "^1.5.0"
+
 make-dir@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/make-dir/-/make-dir-2.1.0.tgz#5f0310e18b8be898cc07009295a30ae41e91e6f5"
@@ -3672,9 +3757,9 @@ nan@^2.12.1:
   version "2.14.2"
   resolved "https://registry.yarnpkg.com/nan/-/nan-2.14.2.tgz#f5376400695168f4cc694ac9393d0c9585eeea19"
 
-nanoid@^3.3.4:
-  version "3.3.8"
-  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.8.tgz#b1be3030bee36aaff18bacb375e5cce521684baf"
+nanoid@^3.3.8:
+  version "3.3.11"
+  resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.11.tgz#4f4f112cefbe303202f2199838128936266d185b"
 
 nanomatch@^1.2.9:
   version "1.2.13"
@@ -4012,10 +4097,6 @@ picocolors@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-0.2.1.tgz#570670f793646851d1ba135996962abad587859f"
 
-picocolors@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.0.tgz#cb5bdc74ff3f51892236eaf79d68bc44564ab81c"
-
 picocolors@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/picocolors/-/picocolors-1.0.1.tgz#a8ad579b571952f0e5d25892de5445bcfe25aaa1"
@@ -4149,13 +4230,13 @@ postcss@^7.0.0, postcss@^7.0.14, postcss@^7.0.32, postcss@^7.0.5, postcss@^7.0.6
     source-map "^0.6.1"
     supports-color "^6.1.0"
 
-postcss@^8.4.14:
-  version "8.4.16"
-  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.4.16.tgz#33a1d675fac39941f5f445db0de4db2b6e01d43c"
+postcss@^8.5.3:
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/postcss/-/postcss-8.5.3.tgz#1463b6f1c7fb16fe258736cba29a2de35237eafb"
   dependencies:
-    nanoid "^3.3.4"
-    picocolors "^1.0.0"
-    source-map-js "^1.0.2"
+    nanoid "^3.3.8"
+    picocolors "^1.1.1"
+    source-map-js "^1.2.1"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
@@ -4164,10 +4245,6 @@ prelude-ls@~1.1.2:
 prettier@^1.18.2:
   version "1.19.1"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.19.1.tgz#f7d7f5ff8a9cd872a7be4ca142095956a60797cb"
-
-"prettier@^1.18.2 || ^2.0.0":
-  version "2.8.8"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.8.8.tgz#e8c5d7e98a4305ffe3de2e1fc4aca1a71c28b1da"
 
 process-nextick-args@~2.0.0:
   version "2.0.1"
@@ -4803,9 +4880,13 @@ source-list-map@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/source-list-map/-/source-list-map-2.0.1.tgz#3993bd873bfc48479cca9ea3a547835c7c154b34"
 
-"source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2:
+"source-map-js@>=0.6.2 <2.0.0":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.0.2.tgz#adbc361d9c62df380125e7f161f71c826f1e490c"
+
+source-map-js@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/source-map-js/-/source-map-js-1.2.1.tgz#1ce5650fddd87abc099eda37dcff024c2667ae46"
 
 source-map-resolve@^0.5.0:
   version "0.5.3"
@@ -5351,12 +5432,15 @@ vue-template-es2015-compiler@^1.9.0:
   dependencies:
     lodash "^4.17.4"
 
-vue@^2.7.16:
-  version "2.7.16"
-  resolved "https://registry.yarnpkg.com/vue/-/vue-2.7.16.tgz#98c60de9def99c0e3da8dae59b304ead43b967c9"
+vue@^3.5.15:
+  version "3.5.15"
+  resolved "https://registry.yarnpkg.com/vue/-/vue-3.5.15.tgz#5896569a33a1bcafd764c6b27e4e6f8cb55f4bee"
   dependencies:
-    "@vue/compiler-sfc" "2.7.16"
-    csstype "^3.1.0"
+    "@vue/compiler-dom" "3.5.15"
+    "@vue/compiler-sfc" "3.5.15"
+    "@vue/runtime-dom" "3.5.15"
+    "@vue/server-renderer" "3.5.15"
+    "@vue/shared" "3.5.15"
 
 vuex@^3.6.2:
   version "3.6.2"

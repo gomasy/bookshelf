@@ -25,7 +25,7 @@ jobs:
           --health-retries 5
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v5
+      uses: actions/checkout@v6
     - name: Prepare environment
       run: |
         sudo apt-get install -y --no-install-recommends fonts-ipafont-gothic
@@ -36,14 +36,14 @@ jobs:
         php-version: '7.4'
     - name: Cache composer packages
       id: composer-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: vendor
         key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
         restore-keys: |
           ${{ runner.os }}-php-
     - name: Use Node.js 22.x
-      uses: actions/setup-node@v5
+      uses: actions/setup-node@v6
       with:
         node-version: 22.x
         cache: 'yarn'

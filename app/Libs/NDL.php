@@ -5,7 +5,7 @@ namespace App\Libs;
 
 use GuzzleHttp\Exception\ConnectException;
 
-use App\Book;
+use App\Models\Book;
 
 use App\Exceptions\TimeoutException;
 

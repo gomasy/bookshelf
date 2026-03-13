@@ -6,7 +6,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\User;
+use App\Models\User;
 
 class AccountTest extends TestCase
 {
@@ -20,7 +20,7 @@ class AccountTest extends TestCase
 
     public function testLoggedIn()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $response = $this->actingAs($user)->get('/settings/account');
         $response->assertViewIs('settings.account.update');
@@ -33,7 +33,7 @@ class AccountTest extends TestCase
 
     public function testRedirect()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->actingAs($user)->get('/login')->assertRedirect('/');
     }
 
@@ -48,7 +48,7 @@ class AccountTest extends TestCase
         ];
 
         // success
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->actingAs($user)
              ->post('/settings/account/update', $data)
              ->assertRedirect('/');
@@ -65,14 +65,14 @@ class AccountTest extends TestCase
         $password = 'testpasswd';
 
         // success
-        $user = factory(User::class)->create([ 'password' => bcrypt($password) ]);
+        $user = User::factory()->create([ 'password' => bcrypt($password) ]);
         $this->actingAs($user)
              ->post('/settings/account/delete', [ 'password' => $password ])
              ->assertRedirect('/');
         $this->assertDatabaseMissing('users', [ 'id' => 1 ]);
 
         // fail
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $this->actingAs($user)
              ->post('/settings/account/delete', [ 'password' => $password ])
              ->assertSuccessful();

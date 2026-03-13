@@ -1,11 +1,10 @@
-FROM php:7.4-apache
+FROM php:8.4-apache
 
 RUN set -ex; \
 	apt-get update; \
-	apt-get install -y --no-install-recommends gnupg2; \
 	curl -sSL https://deb.nodesource.com/setup_22.x | sh -; \
-	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -; \
-	echo "deb https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list; \
+	curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor -o /usr/share/keyrings/yarn-archive-keyring.gpg; \
+	echo "deb [signed-by=/usr/share/keyrings/yarn-archive-keyring.gpg] https://dl.yarnpkg.com/debian/ stable main" > /etc/apt/sources.list.d/yarn.list; \
 	apt-get update; \
 	apt-get install -y --no-install-recommends \
 		fonts-ipafont-gothic \
@@ -58,7 +57,6 @@ RUN set -ex; \
 		echo 'opcache.interned_strings_buffer=8'; \
 		echo 'opcache.max_accelerated_files=4000'; \
 		echo 'opcache.revalidate_freq=2'; \
-		echo 'opcache.fast_shutdown=1'; \
 	} > /usr/local/etc/php/conf.d/opcache-recommended.ini; \
 	\
 	{ \
@@ -92,14 +90,13 @@ RUN set -ex; \
 	curl -s https://getcomposer.org/installer | php; \
 	php composer.phar install --prefer-dist --no-dev; \
 	yarn install --pure-lockfile; \
-	NODE_OPTIONS="--openssl-legacy-provider" yarn build; \
+	yarn build; \
 	rm -rf $HOME/.composer composer.phar node_modules; \
 	ln -s public html; \
 	chown -R www-data. .; \
 	\
 	apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false \
 		git \
-		gnupg2 \
 		nodejs \
 		yarn \
 	; \

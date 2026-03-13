@@ -1,28 +1,25 @@
 <?php
 
-use Faker\Generator as Faker;
+namespace Database\Factories;
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| This directory should contain each of the model factory definitions for
-| your application. Factories provide a convenient way to generate new
-| model instances for testing / seeding your application's database.
-|
-*/
+use App\Models\Book;
+use App\Models\Bookshelf;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(\App\Book::class, function (Faker $faker) {
-    return [
-        'bookshelf_id' => function () {
-            return factory(\App\Bookshelf::class)->create();
-        },
-        'title'        => $faker->title,
-        'volume'       => $faker->randomDigit,
-        'authors'      => $faker->name,
-        'isbn'         => $faker->isbn13(),
-        'jpno'         => $faker->ean8(),
-        'ndl_url'      => $faker->url,
-    ];
-});
+class BookFactory extends Factory
+{
+    protected $model = Book::class;
+
+    public function definition(): array
+    {
+        return [
+            'bookshelf_id' => Bookshelf::factory(),
+            'title'        => fake()->title(),
+            'volume'       => fake()->randomDigit(),
+            'authors'      => fake()->name(),
+            'isbn'         => fake()->isbn13(),
+            'jpno'         => fake()->ean8(),
+            'ndl_url'      => fake()->url(),
+        ];
+    }
+}

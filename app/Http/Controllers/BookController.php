@@ -15,7 +15,7 @@ use App\Http\Requests\BookEditRequest as EditRequest;
 use App\Http\Requests\BookFetchRequest as FetchRequest;
 use App\Http\Requests\BookMoveRequest as MoveRequest;
 
-use App\Book;
+use App\Models\Book;
 
 use App\Exceptions\TimeoutException;
 

@@ -2,9 +2,10 @@
 
 namespace App\Rules;
 
-use Illuminate\Contracts\Validation\Rule;
+use Closure;
+use Illuminate\Contracts\Validation\ValidationRule;
 
-class CheckFetchType implements Rule
+class CheckFetchType implements ValidationRule
 {
     /**
      * Fetch type
@@ -24,32 +25,16 @@ class CheckFetchType implements Rule
     }
 
     /**
-     * Determine if the validation rule passes.
-     *
-     * @param  string  $attribute
-     * @param  mixed  $value
-     * @return bool
+     * Run the validation rule.
      */
-    public function passes($attribute, $value)
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if ($this->type === 'code' && !ctype_digit($value)) {
             if (isset($value[9]) && $value[9] === 'X') {
-                return true;
+                return;
             }
 
-            return false;
+            $fail('検索タイプが不正です。');
         }
-
-        return true;
-    }
-
-    /**
-     * Get the validation error message.
-     *
-     * @return string
-     */
-    public function message()
-    {
-        return '検索タイプが不正です。';
     }
 }

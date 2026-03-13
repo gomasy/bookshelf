@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Bookshelf;
-use App\UserSetting;
-use App\Status;
+use App\Models\Bookshelf;
+use App\Models\UserSetting;
+use App\Models\Status;
 
 class SettingController extends Controller
 {

@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 
-use App\Book;
-use App\Bookshelf;
+use App\Models\Book;
+use App\Models\Bookshelf;
 
 class Controller extends BaseController
 {

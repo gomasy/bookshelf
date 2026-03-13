@@ -6,9 +6,9 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\Book;
-use App\Bookshelf;
-use App\User;
+use App\Models\Book;
+use App\Models\Bookshelf;
+use App\Models\User;
 
 class BookTest extends TestCase
 {
@@ -17,7 +17,7 @@ class BookTest extends TestCase
     public function testIndex()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         $shelf = Bookshelf::create([ 'user_id' => $user->id, 'name' => 'default' ]);
 
         for ($i = 1; $i <= 50; $i++) {
@@ -27,7 +27,7 @@ class BookTest extends TestCase
             ];
             $data = array_merge($data, [ 'title' => ($i <= 25 ? 'foo' : 'bar') ]);
 
-            factory(Book::class)->create($data);
+            Book::factory()->create($data);
         }
 
         // all
@@ -55,8 +55,8 @@ class BookTest extends TestCase
     public function testCreate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
-        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $user = User::factory()->create();
+        $shelf = Bookshelf::factory()->create([ 'user_id' => $user->id ]);
 
         // success (isbn13)
         $response = $this->actingAs($user)
@@ -102,8 +102,8 @@ class BookTest extends TestCase
 
     public function testFetchImage()
     {
-        $user = factory(User::class)->create();
-        factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
+        $user = User::factory()->create();
+        Bookshelf::factory()->create([ 'user_id' => $user->id ]);
 
         // normal
         $response = $this->actingAs($user)->get('/images/P/4774158798.09.LZZZZZZZ');
@@ -124,9 +124,9 @@ class BookTest extends TestCase
     public function testEdit()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
-        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
-        $book = factory(Book::class)->create([ 'bookshelf_id' => $shelf->id ]);
+        $user = User::factory()->create();
+        $shelf = Bookshelf::factory()->create([ 'user_id' => $user->id ]);
+        $book = Book::factory()->create([ 'bookshelf_id' => $shelf->id ]);
         $payload = [
             'data' => [[
                 'id' => $book->id,
@@ -147,9 +147,9 @@ class BookTest extends TestCase
     public function testMove()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
-        $from = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
-        $to = factory(Bookshelf::class)->create([
+        $user = User::factory()->create();
+        $from = Bookshelf::factory()->create([ 'user_id' => $user->id ]);
+        $to = Bookshelf::factory()->create([
             'user_id' => $user->id,
             'name' => 'secondary',
         ]);
@@ -183,9 +183,9 @@ class BookTest extends TestCase
     public function testDelete()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
-        $shelf = factory(Bookshelf::class)->create([ 'user_id' => $user->id ]);
-        $book = factory(Book::class)->create([ 'bookshelf_id' => $shelf->id ]);
+        $user = User::factory()->create();
+        $shelf = Bookshelf::factory()->create([ 'user_id' => $user->id ]);
+        $book = Book::factory()->create([ 'bookshelf_id' => $shelf->id ]);
 
         // success
         $this->actingAs($user)

@@ -10,9 +10,9 @@ use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Libs\ReCaptcha;
-use App\Bookshelf;
-use App\User;
-use App\UserSetting;
+use App\Models\Bookshelf;
+use App\Models\User;
+use App\Models\UserSetting;
 
 class RegisterController extends Controller
 {
@@ -104,7 +104,7 @@ class RegisterController extends Controller
      * Create a new user instance after a valid registration.
      *
      * @param  array  $data
-     * @return \App\User
+     * @return \App\Models\User
      */
     protected function create(array $data): object
     {

@@ -63,7 +63,7 @@ class HomeController extends Controller
             $message->from($request->email)
                 ->to(config('mail.from.address'))
                 ->subject('お問い合わせ')
-                ->setBody($request->inquiry);
+                ->text($request->inquiry);
         });
 
         return redirect('/');

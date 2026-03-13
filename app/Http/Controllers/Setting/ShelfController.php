@@ -7,8 +7,8 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\Book;
-use App\Bookshelf;
+use App\Models\Book;
+use App\Models\Bookshelf;
 
 class ShelfController extends Controller
 {

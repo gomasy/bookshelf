@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AccountDeleteRequest as DeleteRequest;
 use App\Http\Requests\AccountUpdateRequest as UpdateRequest;
-use App\User;
+use App\Models\User;
 
 class AccountController extends Controller
 {

@@ -6,8 +6,8 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-use App\User;
-use App\UserSetting;
+use App\Models\User;
+use App\Models\UserSetting;
 
 class SettingTest extends TestCase
 {
@@ -16,7 +16,7 @@ class SettingTest extends TestCase
     public function testAll()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         UserSetting::create([ 'id' => $user->id ]);
 
         $response = $this->actingAs($user)->get('/settings/all.json', $headers);
@@ -26,7 +26,7 @@ class SettingTest extends TestCase
 
     public function testDisplayIndex()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         UserSetting::create([ 'id' => $user->id ]);
 
         $this->actingAs($user)
@@ -37,7 +37,7 @@ class SettingTest extends TestCase
     public function testDisplayUpdate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
         UserSetting::create([ 'id' => $user->id ]);
 
         $this->actingAs($user)
@@ -48,7 +48,7 @@ class SettingTest extends TestCase
 
     public function testShelfIndex()
     {
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
              ->get('/settings/shelves')
@@ -58,7 +58,7 @@ class SettingTest extends TestCase
     public function testShelfCreate()
     {
         $headers = [ 'X-Requested-With' => 'XMLHttpRequest' ];
-        $user = factory(User::class)->create();
+        $user = User::factory()->create();
 
         $this->actingAs($user)
              ->post('/settings/shelves/create', [ 'name' => 'test' ], $headers)

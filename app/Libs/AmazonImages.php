@@ -6,7 +6,7 @@ namespace App\Libs;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ClientException;
 
-use App\Book;
+use App\Models\Book;
 
 class AmazonImages
 {

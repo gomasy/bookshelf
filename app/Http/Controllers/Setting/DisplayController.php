@@ -6,7 +6,7 @@ namespace App\Http\Controllers\Setting;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use App\UserSetting;
+use App\Models\UserSetting;
 
 class DisplayController extends Controller
 {

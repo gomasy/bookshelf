@@ -1,4 +1,4 @@
-FROM php:7.4-apache
+FROM ghcr.io/mpyw/php-eol-cve-2026-109618-109619:7.4-apache
 
 RUN set -ex; \
 	apt-get update; \
